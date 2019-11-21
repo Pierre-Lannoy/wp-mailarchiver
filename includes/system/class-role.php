@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
 /**
  * Define the roles functionality.
@@ -69,13 +69,13 @@ class Role {
 		}
 		if ( is_multisite() ) {
 			$super_admins = get_super_admins();
-			if ( is_array( $super_admins ) && in_array( $user->user_login, $super_admins ) ) {
+			if ( is_array( $super_admins ) && in_array( $user->user_login, $super_admins, true ) ) {
 				return self::SUPER_ADMIN;
-			} elseif ( in_array( 'administrator', $user->roles ) ) {
+			} elseif ( in_array( 'administrator', $user->roles, true ) ) {
 				return self::LOCAL_ADMIN;
 			}
 		} else {
-			if ( in_array( 'administrator', $user->roles ) ) {
+			if ( in_array( 'administrator', $user->roles, true ) ) {
 				return self::SINGLE_ADMIN;
 			}
 		}

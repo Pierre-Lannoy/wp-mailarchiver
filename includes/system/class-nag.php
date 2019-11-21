@@ -11,7 +11,7 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
 /**
  * Define the nag functionality.
@@ -29,7 +29,6 @@ class Nag {
 	 * The nags list.
 	 *
 	 * @since  1.0.0
-	 * @access private
 	 * @var    array    $nags    The nags list.
 	 */
 	private static $nags = [];
@@ -38,7 +37,6 @@ class Nag {
 	 * Indicates whether nags are allowed or not.
 	 *
 	 * @since  1.0.0
-	 * @access private
 	 * @var    boolean    $allowed    Is nags allowed?
 	 */
 	private static $allowed = true;
@@ -53,10 +51,10 @@ class Nag {
 			self::$allowed = ! DISABLE_NAG_NOTICES;
 		}
 		if ( self::$allowed ) {
-			self::$allowed = Option::site_get( 'display_nag' );
+			self::$allowed = Option::network_get( 'display_nag' );
 		}
 		if ( self::$allowed ) {
-			self::$nags = Option::site_get( 'nags' );
+			self::$nags = Option::network_get( 'nags' );
 		}
 	}
 
@@ -73,7 +71,7 @@ class Nag {
 			'type'  => $type,
 			'value' => $value,
 		];
-		Option::site_set( 'nags', self::$nags );
+		Option::network_set( 'nags', self::$nags );
 	}
 
 	/**
@@ -85,7 +83,7 @@ class Nag {
 	public static function delete( $id ) {
 		if ( array_key_exists( $id, self::$nags ) ) {
 			unset( self::$nags[ $id ] );
-			Option::site_set( 'nags', self::$nags );
+			Option::network_set( 'nags', self::$nags );
 		}
 	}
 
@@ -108,7 +106,7 @@ class Nag {
 				$nonce_action = sanitize_key( $key );
 				$nonce_name   = str_replace( [ '-', '_' ], '', $nonce_action );
 				$nonce        = wp_nonce_field( $nonce_action, $nonce_name, false, false );
-				$div_id       = 'wppb-' . $nonce_name;
+				$div_id       = 'mailarchiver-' . $nonce_name;
 				$div_class    = 'notice notice-' . $nag['type'] . ' is-dismissible';
 				$text         = wp_kses(
 					$nag['value'],
@@ -122,7 +120,7 @@ class Nag {
 					]
 				);
 				$html         = '<div id="' . $div_id . '" class="' . $div_class . '">' . $nonce . '<p>' . $text . '</p></div>';
-				$js           = '<script>jQuery(document).ready(function($){$("#' . $div_id . '").on("click", ".notice-dismiss", function(event){$.post(ajaxurl,{action: "hide_wppb_nag",' . $nonce_name . ': $("#' . $nonce_name . '").val()});});});</script>';
+				$js           = '<script>jQuery(document).ready(function($){$("#' . $div_id . '").on("click", ".notice-dismiss", function(event){$.post(ajaxurl,{action: "hide_mailarchiver_nag",' . $nonce_name . ': $("#' . $nonce_name . '").val()});});});</script>';
 				// phpcs:ignore
 				print( $html . $js );
 			}

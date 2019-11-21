@@ -6,10 +6,10 @@
  *
  * @package System
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since   1.0.0
+ * @since   1.4.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
 /**
  * Define the comments functionality.
@@ -18,7 +18,7 @@ namespace WPPluginBoilerplate\System;
  *
  * @package System
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since   1.0.0
+ * @since   1.4.0
  */
 class Comment {
 
@@ -35,7 +35,7 @@ class Comment {
 	 *
 	 * @param   mixed $id         Optional. The comment id or WP_comment instance.
 	 * @return  string  The comment pseudo name if detected.
-	 * @since   1.0.0
+	 * @since   1.4.0
 	 */
 	public static function get_full_comment_name( $id ) {
 		$comment = null;

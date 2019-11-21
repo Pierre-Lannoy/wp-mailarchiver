@@ -1,0 +1,1572 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: MailArchiver\n"
+"POT-Creation-Date: 2019-11-20 15:37+0100\n"
+"PO-Revision-Date: 2019-07-08 14:07+0200\n"
+"Last-Translator: Pierre Lannoy <pierre@lannoy.fr>\n"
+"Language-Team: Pierre Lannoy <pierre@lannoy.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: mailarchiver.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#. translators: as in the sentence "MailArchiver Settings" or "WordPress Settings"
+#: admin/class-mailarchiver-admin.php:117
+#: admin/partials/mailarchiver-admin-settings-main.php:19
+#, php-format
+msgid "%s Settings"
+msgstr ""
+
+#. translators: as in the sentence "MailArchiver Viewer"
+#: admin/class-mailarchiver-admin.php:125
+#: admin/partials/mailarchiver-admin-view-events.php:20
+#, php-format
+msgid "%s Viewer"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:165 admin/class-mailarchiver-admin.php:182
+msgid "Events log"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:193
+msgid "Loggers options"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:194
+msgid "Plugin options"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:200
+msgid "Privacy options"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:201 includes/features/class-loggers.php:237
+msgid "Reported details"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:217
+msgid "Settings"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:219
+msgid "Events Logs"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:234
+msgid "Support"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:235 includes/features/class-events.php:701
+msgid "Site"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:236
+#: includes/features/class-inlinehelp.php:97
+msgid "GitHub repository"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:292 admin/class-mailarchiver-admin.php:706
+msgid "New logger"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:340
+#, php-format
+msgid "Logger %s has started."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:353
+#, php-format
+msgid "Logger %s has been paused."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:379
+#, php-format
+msgid "Test messages have been sent to logger %s."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:384
+#, php-format
+msgid ""
+"Test messages have not been sent to logger %s. Please check the logger's "
+"settings."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:442
+msgid "Listeners settings have been saved."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:447
+msgid "Listeners settings have not been saved. Please try again."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:464
+msgid "Listeners settings have been reset to defaults."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:469
+msgid "Listeners settings have not been reset to defaults. Please try again."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:491
+msgid "Plugin settings have been saved."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:496
+msgid "Plugin settings have not been saved. Please try again."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:513
+msgid "Plugin settings have been reset to defaults."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:518
+msgid "Plugin settings have not been reset to defaults. Please try again."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:570
+#, php-format
+msgid "Logger %s has been saved."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:576
+#, php-format
+msgid "Logger %s has not been saved. Please try again."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:600
+#, php-format
+msgid "Logger %s has been removed."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:606
+#, php-format
+msgid "Logger %s has not been removed. Please try again."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:623
+msgid "Activate"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:629
+msgid "Selected listeners"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:630
+msgid "All available listeners (recommended)"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:634
+msgid "Automatically or selectively choose which sources to listen."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:668
+msgid "Standard listeners"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:669
+msgid "Plugin listeners"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:670
+msgid "Theme listeners"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:711
+msgid "Auto-start"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:714
+msgid "If checked, when a new logger is added it automatically starts."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:722
+msgid "Events messages"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:727
+msgid "Respect privacy"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:730
+msgid ""
+"If checked, MailArchiver will try to obfuscate personal information in events "
+"messages."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:738
+msgid "Rules"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:743
+msgid "Respect WP_DEBUG"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:746
+msgid ""
+"If checked, the value of WP_DEBUG will override each logger's settings for "
+"minimal level of logging."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:763
+msgid "Resources"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:768
+msgid "Use public CDN"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:771
+msgid "Use CDN (jsDelivr) to serve MailArchiver scripts and stylesheets."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:779
+msgid "Plugin updates"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:784
+msgid "Automatic (recommended)"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:787
+msgid ""
+"If checked, MailArchiver will update itself as soon as a new version is "
+"available."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:795
+msgid "Admin notices"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:800
+msgid "Display"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:803
+msgid ""
+"Allows MailArchiver to display admin notices throughout the admin dashboard."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:803
+msgid "Note: MailArchiver respects DISABLE_NAG_NOTICES flag."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:824 admin/class-mailarchiver-admin.php:868
+msgid "Name"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:831
+msgid "Used only in admin dashboard."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:839 admin/class-mailarchiver-admin.php:883
+#: includes/features/class-loggers.php:236
+msgid "Minimal level"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:847
+msgid ""
+"Minimal reported level. May be overridden by the \"respect WP_DEBUG "
+"directive\" option."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:909
+msgid "Log file"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:916
+msgid "Value set in php.ini file."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:930
+msgid "Enabled"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:964
+msgid "Remote IPs"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:969
+msgid "Obfuscation"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:972
+msgid "If checked, log fields will contain hashes instead of real IPs."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:972 admin/class-mailarchiver-admin.php:988
+msgid "Note: it concerns all fields except events messages."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:980
+msgid "Users"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:985
+msgid "Pseudonymisation"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:988
+msgid ""
+"If checked, log fields will contain hashes instead of user IDs & names."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:1006 includes/features/class-loggers.php:207
+msgid "Standard"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:1011 admin/class-mailarchiver-admin.php:1030
+msgid "Included"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:1014
+msgid "Allows to log standard MailArchiver information."
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-about.php:20
+#, php-format
+msgid ""
+"This version of %s is not production-ready. It is a development preview. "
+"Use it at your own risk!"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-about.php:24
+#, php-format
+msgid ""
+"This version of %s is a release candidate. Although ready for production, "
+"this version is not officially supported in production environments."
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-about.php:27
+#, php-format
+msgid ""
+"%1$s is a free and open source plugin for WordPress. It integrates other "
+"free and open source works (as-is or modified) like: %2$s."
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-about.php:28
+msgid ""
+"All brands, icons and graphic illustrations are registered trademarks of "
+"their respective owners."
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-about.php:30
+#, php-format
+msgid ""
+"This plugin is not an official software from %s and, as such, is not "
+"endorsed or supported by these companies."
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-about.php:37
+msgid "Disclaimer"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-about.php:41
+msgid "Changelog"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-listeners.php:33
+#: admin/partials/mailarchiver-admin-settings-options.php:31
+msgid "Reset to Defaults"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-logger-choose.php:20
+msgid "Please, select the type of logger you want to add"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-logger-delete.php:32
+msgid "Are you sure you want to permanently remove this logger?"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-logger-delete.php:33
+msgid "Abort"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-logger-delete.php:33
+msgid "Remove Permanently"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-logger-edit.php:36
+msgid "Cancel"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-loggers.php:17
+msgid "Add a Logger"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-main.php:35
+msgid "Loggers"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-main.php:48
+msgid "Listeners"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-main.php:61
+msgid "Options"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-settings-main.php:74
+msgid "About"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-view-events-bottom.php:15
+msgid "Number of lines to display"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-view-events-bottom.php:21
+#: admin/partials/mailarchiver-admin-view-events-top.php:21
+#: includes/features/class-events.php:664
+msgid "Apply"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-view-events-top.php:15
+msgid "Choose events log to display"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-view-events-top.php:18
+msgid "running"
+msgstr ""
+
+#: admin/partials/mailarchiver-admin-view-events-top.php:18
+msgid "paused"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:47
+#: includes/features/class-classtypes.php:52
+msgid "Unknown"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:48
+msgid "Command Line Interface"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:49
+msgid "Cron Job"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:50
+msgid "Ajax Request"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:51
+msgid "XML-RPC Request"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:52
+msgid "Rest API Request"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:53
+msgid "Atom/RDF/RSS Feed"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:54
+msgid "Site Backend"
+msgstr ""
+
+#: includes/features/class-channeltypes.php:55
+msgid "Site Frontend"
+msgstr ""
+
+#: includes/features/class-classtypes.php:47
+msgid "Core"
+msgstr ""
+
+#: includes/features/class-classtypes.php:48
+msgid "Plugin"
+msgstr ""
+
+#: includes/features/class-classtypes.php:49
+msgid "Theme"
+msgstr ""
+
+#: includes/features/class-classtypes.php:50
+#: includes/listeners/class-databaselistener.php:36
+msgid "Database"
+msgstr ""
+
+#: includes/features/class-classtypes.php:51
+msgid "PHP"
+msgstr ""
+
+#. translators: as in the sentence "Error code 501" or "Alert code 0"
+#: includes/features/class-events.php:159
+#, php-format
+msgid "%1$s code %2$s"
+msgstr ""
+
+#: includes/features/class-events.php:200
+#, php-format
+msgid "Site ID %s"
+msgstr ""
+
+#: includes/features/class-events.php:214
+#: includes/features/class-eventviewer.php:350
+msgid "Anonymous user"
+msgstr ""
+
+#: includes/features/class-events.php:218
+#: includes/features/class-eventviewer.php:354
+msgid "Pseudonymized user"
+msgstr ""
+
+#: includes/features/class-events.php:221
+#: includes/features/class-eventviewer.php:357
+#, php-format
+msgid "User ID %s"
+msgstr ""
+
+#: includes/features/class-events.php:237
+msgid "Obfuscated"
+msgstr ""
+
+#: includes/features/class-events.php:325
+msgid "Remove this filter"
+msgstr ""
+
+#: includes/features/class-events.php:331
+msgid "Add as filter"
+msgstr ""
+
+#: includes/features/class-events.php:433
+msgid "All"
+msgstr ""
+
+#: includes/features/class-events.php:435
+msgid "Notices & beyond"
+msgstr ""
+
+#: includes/features/class-events.php:437
+msgid "Errors & beyond"
+msgstr ""
+
+#: includes/features/class-events.php:489
+#, php-format
+msgid "Show %d lines per page"
+msgstr ""
+
+#: includes/features/class-events.php:658
+msgid "Extra columns"
+msgstr ""
+
+#: includes/features/class-events.php:696
+#: includes/features/class-eventviewer.php:249
+#: includes/features/class-inlinehelp.php:351
+msgid "Event"
+msgstr ""
+
+#: includes/features/class-events.php:697
+msgid "Time"
+msgstr ""
+
+#: includes/features/class-events.php:698
+msgid "Message"
+msgstr ""
+
+#: includes/features/class-events.php:700
+msgid "Source"
+msgstr ""
+
+#: includes/features/class-events.php:702
+msgid "User"
+msgstr ""
+
+#: includes/features/class-events.php:703
+msgid "Remote IP"
+msgstr ""
+
+#. translators: definition of an event typed 'UNKNOWN'
+#: includes/features/class-eventtypes.php:128
+msgid "The event is not typed, this can't be a good news."
+msgstr ""
+
+#. translators: definition of an event typed 'DEBUG', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:130
+msgid ""
+"An information for developers and testers. Only used for events related to "
+"application/system debugging."
+msgstr ""
+
+#. translators: definition of an event typed 'INFO', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:132
+msgid "A standard information, just for you to know… and forget!"
+msgstr ""
+
+#. translators: definition of an event typed 'NOTICE', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:134
+msgid "A normal but significant condition. Now you know!"
+msgstr ""
+
+#. translators: definition of an event typed 'WARNING', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:136
+msgid ""
+"A significant condition indicating a situation that may lead to an error "
+"if recurring or if no action is taken. Does not usually affect the "
+"operations."
+msgstr ""
+
+#. translators: definition of an event typed 'ERROR', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:138
+msgid ""
+"A minor operating error that may affects the operations. It requires "
+"investigation and preventive treatment."
+msgstr ""
+
+#. translators: definition of an event typed 'CRITICAL', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:140
+msgid ""
+"An operating error that undoubtedly affects the operations. It requires "
+"investigation and corrective treatment."
+msgstr ""
+
+#. translators: definition of an event typed 'ALERT', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:142
+msgid ""
+"A major operating error that undoubtedly affects the operations. It "
+"requires immediate investigation and corrective treatment."
+msgstr ""
+
+#. translators: definition of an event typed 'EMERGENCY', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details
+#: includes/features/class-eventtypes.php:144
+msgid "A panic condition. WordPress is unusable."
+msgstr ""
+
+#: includes/features/class-eventviewer.php:134
+msgid "Boxes"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:209
+msgid "Forbidden"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:211
+msgid "The event or events log you tried to access is out of your scope."
+msgstr ""
+
+#: includes/features/class-eventviewer.php:212
+msgid ""
+"If you think this is an error, please contact the network administrator "
+"with these details:"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:215
+#, php-format
+msgid "Events log: %s"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:217
+#, php-format
+msgid "Event: %s"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:250
+#: includes/features/class-inlinehelp.php:352
+msgid "Content"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:252
+#: includes/features/class-inlinehelp.php:354
+#: includes/features/class-processortypes.php:64
+msgid "HTTP request"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:253
+#: includes/features/class-inlinehelp.php:355
+#: includes/features/class-processortypes.php:51
+msgid "PHP introspection"
+msgstr ""
+
+#. translators: like in the sentence "PHP backtrace" or "WordPress backtrace"
+#: includes/features/class-eventviewer.php:256
+#: includes/features/class-eventviewer.php:258
+#: includes/features/class-inlinehelp.php:357
+#, php-format
+msgid "%s backtrace"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:378
+msgid "obfuscated IP"
+msgstr ""
+
+#: includes/features/class-eventviewer.php:381
+#, php-format
+msgid "from %s."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:47
+msgid "Blackhole"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:48
+msgid "Any record it can handle will be thrown away."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:60
+msgid "Browser console"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:61
+msgid ""
+"An events log sent to browser's javascript console with no browser "
+"extension required."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:79
+msgid "ChromePHP"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:80
+msgid ""
+"An events log sent to the ChromePHP extension (http://www.chromephp.com/)."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:98
+msgid "Fluentd"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:99
+msgid "An events log sent to a Fluentd collector."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:106
+msgid "Connection string"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:107
+msgid ""
+"Connection string to Fluentd. Can be something like "
+"\"tcp://127.0.0.1:24224\" or something like \"unix:///var/run/td-agent/td-"
+"agent.sock\"."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:118
+#: includes/features/class-handlertypes.php:186
+#: includes/features/class-handlertypes.php:356
+msgid "Socket timeout"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:119
+#: includes/features/class-handlertypes.php:187
+#: includes/features/class-handlertypes.php:357
+msgid "Max number of milliseconds to wait for the socket."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:153
+msgid "Logentries & insightOps"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:154
+msgid "An events log sent to Logentries & insightOps service."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:161
+msgid "Log endpoint region"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:162
+msgid "The region of remote host receiving messages."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:168
+msgid "Europe"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:168
+msgid "USA"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:174
+msgid "Log token"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:175
+msgid "The token of the Logentries/insightOps log."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:221
+msgid "Loggly"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:222
+msgid "An events log sent to Solawinds Loggly service."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:229
+#: includes/features/class-handlertypes.php:320
+msgid "Application token"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:230
+msgid "The token of the Solawinds Loggly application."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:253
+msgid "Mail"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:254
+msgid "Events alerts sent by WordPress via mail."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:261
+msgid "Recipients"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:262
+msgid "The recipients mail address, in coma separated list."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:289
+msgid "PHP error log"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:290
+msgid ""
+"An events log stored in the standard PHP error log, as with the "
+"error_log() function."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:312
+msgid "Pushover"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:313
+msgid "Events alerts sent via Pushover service."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:321
+msgid "The token of the Pushover application."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:332
+msgid "Recipient"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:333
+msgid "The recipient key. It can be a \"user key\" or a \"group key\"."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:344
+msgid "Message title"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:345
+msgid "The title of the message which will be sent."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:395
+msgid "Rotating files"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:396
+msgid ""
+"An events log sent to files that are rotated every day and a limited "
+"number of files are kept."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:403
+msgid "File"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:404
+msgid "The full absolute path and filename, like \"/path/to/file\"."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:415
+msgid "Maximum"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:416
+msgid "The maximal number of files to keep (0 means unlimited)."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:450
+msgid "Slack"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:451
+msgid "Events alerts sent through Slack Webhooks."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:458
+msgid "Webhook URL"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:459
+msgid "The Webhook URL set in the Slack application."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:470
+msgid "Short attachment"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:471
+msgid "Use a shortened version for attachments sent in channel."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:482
+msgid "Full data"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:483
+msgid "Whether the attachments should include context and extra data."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:534
+msgid "Syslog"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:535
+msgid "An events log sent to a remote syslogd server."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:542
+msgid "Host"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:543
+msgid "The remote host receiving syslog messages."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:554
+msgid "Protocol"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:555
+msgid "The used syslog protocol."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:566
+msgid "Port"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:567
+msgid "The opened port on remote host to receive syslog messages."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:581
+msgid "Facility"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:582
+msgid "The syslog facility for messages sent by MailArchiver."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:593
+msgid "Identifier"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:594
+msgid "The program identifier for messages sent by MailArchiver."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:605
+msgid "Time format"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:606
+msgid "The time format standard to use."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:651
+msgid "WordPress events log"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:652
+msgid ""
+"An events log stored in your WordPress database and available right in "
+"your admin dashboard."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:659
+msgid "Events"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:660
+msgid "Maximum number of events stored in this events log (0 for no limit)."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:674
+msgid "Days"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:675
+msgid "Maximum age of events stored in this events log (0 for no limit)."
+msgstr ""
+
+#: includes/features/class-handlertypes.php:689
+msgid "Multisite partitioning"
+msgstr ""
+
+#: includes/features/class-handlertypes.php:690
+msgid "Local administrators can view events that relate to their site."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:93
+msgid "For more help:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:94
+msgid "User support"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:95
+msgid "See also:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:108
+#, php-format
+msgid ""
+"The severity of an event is indicated by a \"level\". %s uses the "
+"following levels classification:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:142
+msgid ""
+"Because your site takes part in a sites network, admin ability to view and "
+"configure events logs differ as follows:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:143
+msgctxt "WordPress multisite"
+msgid "Network Admin"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:143
+msgid "Can set loggers, can view all events in all WordPress events log."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:143
+#: includes/features/class-inlinehelp.php:144
+msgid "That's your current role."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:144
+msgctxt "WordPress multisite"
+msgid "Sites Admin"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:144
+msgid ""
+"Can't set loggers, can only view events regarding their own sites in all "
+"authorized WordPress events log."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:157
+#, php-format
+msgid "This screen allows you to set the %s loggers."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:158
+msgid ""
+"A logger is a recorder of events. It can filter them (accept or refuse to "
+"record the event based on settings) then store them or send them to "
+"logging/alerting services."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:159
+msgid ""
+"You can set as many loggers as you want. All the set loggers will receive "
+"all events and, regarding their own settings, will enrich them and record "
+"them or not."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:160
+msgid ""
+"Loggers are classified in three main categories: alerting, debugging and "
+"logging. You can find details on these categories on the corresponding "
+"tabs of this help."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:162
+#: includes/features/class-inlinehelp.php:219
+#: includes/features/class-inlinehelp.php:252
+#: includes/features/class-inlinehelp.php:310
+#: includes/features/class-inlinehelp.php:359
+msgid "Overview"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:167
+msgid "These loggers allow you to send alerts:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:169
+msgid "Alerting"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:174
+msgid "These loggers can help you to debug your site:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:176
+msgid "Debugging"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:181
+msgid ""
+"These loggers send events to logging services. It may be local or SaaS, "
+"free or paid services."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:183
+msgid "Logging"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:190
+#: includes/features/class-inlinehelp.php:226
+#: includes/features/class-inlinehelp.php:259
+#: includes/features/class-inlinehelp.php:325
+msgid "Admin rights"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:197
+#: includes/features/class-inlinehelp.php:332
+#: includes/features/class-inlinehelp.php:375
+msgid "Events levels"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:215
+#, php-format
+msgid "This screen allows you to set the way %s uses listeners."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:216
+msgid ""
+"A listener, as its name suggests, listen to a specific component (a "
+"\"source\") of your WordPress instance."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:217
+#, php-format
+msgid ""
+"You can choose to tell %s to activate all the available listeners, or you "
+"can manually select the sources to listen."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:245
+#, php-format
+msgid "This screen allows you to set misc options of %s."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:247
+msgid ""
+"Note these options are global. They are set for all loggers, for all sites "
+"in your network."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:249
+msgid "Note these options are global. They are set for all loggers."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:303
+msgid ""
+"This screen displays the list of events belonging to a specific WordPress "
+"logger. This list is sorted with the most recent event at the top."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:304
+msgid ""
+"To move forward or backward in time, use the navigation buttons at the top "
+"or bottom right of this list."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:305
+msgid ""
+"You can restrict the display of events according to their severity levels. "
+"To do so, use the three links at the top left of the list."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:306
+msgid ""
+"You can change the events log being viewed (if you have set more than one "
+"WordPress logger) with the selector at the top left of the list (don't "
+"forget to click on the \"apply\" button)."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:307
+msgid ""
+"To filter the displayed events, use the small blue funnel next to the "
+"filterable items. These filters are cumulative, you can activate "
+"simultaneously several filters."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:308
+msgid ""
+"Note these filters are effective even on pseudonymized or obfuscated "
+"fields."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:315
+#: includes/features/class-inlinehelp.php:364
+msgid ""
+"You can use the following controls to arrange the screen to suit your "
+"usage preferences:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:316
+#: includes/features/class-inlinehelp.php:365
+msgid "Screen Options"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:316
+msgid "Use the Screen Options tab to choose which extra columns to show."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:318
+#: includes/features/class-inlinehelp.php:369
+msgid "Layout"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:350
+msgid "This screen displays the details of a specific event."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:350
+msgid ""
+"It consists of four to six boxes, depending on your settings, which give "
+"specific details of the event:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:351
+msgid "General information about the event."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:352
+msgid "Event code and message."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:353
+msgid "User and site where the event occurs."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:354
+msgid "The detail of the request that led to this event."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:355
+msgid "The code location where this event was generated."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:357
+msgid ""
+"Two different views of the same informations: the backtrace of the call "
+"that led to this event."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:365
+msgid "Use the Screen Options tab to choose which boxes to show."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:366
+msgid "Drag and Drop"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:366
+msgid ""
+"To rearrange the boxes, drag and drop by clicking on the title bar of the "
+"selected box and releasing when you see a gray dotted-line rectangle "
+"appear in the location you want to place the box."
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:367
+msgid "Box Controls"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:367
+msgid "Click the title bar of the box to expand or collapse it."
+msgstr ""
+
+#: includes/features/class-loggerfactory.php:203
+msgid "Unnamed logger"
+msgstr ""
+
+#: includes/features/class-loggers.php:171
+msgid "Edit"
+msgstr ""
+
+#: includes/features/class-loggers.php:172
+msgid "Remove"
+msgstr ""
+
+#: includes/features/class-loggers.php:174
+msgid "Pause"
+msgstr ""
+
+#: includes/features/class-loggers.php:176
+msgid "Start"
+msgstr ""
+
+#: includes/features/class-loggers.php:179
+msgid "View"
+msgstr ""
+
+#: includes/features/class-loggers.php:182
+msgid "Send Test"
+msgstr ""
+
+#: includes/features/class-loggers.php:195
+msgid "Running"
+msgstr ""
+
+#: includes/features/class-loggers.php:195
+msgid "Paused"
+msgstr ""
+
+#: includes/features/class-loggers.php:234
+msgid "Logger"
+msgstr ""
+
+#: includes/features/class-loggers.php:235
+msgid "Status"
+msgstr ""
+
+#: includes/features/class-processortypes.php:42
+msgid "Backtrace"
+msgstr ""
+
+#: includes/features/class-processortypes.php:43
+msgid "Allows to log the full PHP and WordPress call stack."
+msgstr ""
+
+#: includes/features/class-processortypes.php:52
+msgid "Allows to log line, file, class and function generating the event."
+msgstr ""
+
+#: includes/features/class-processortypes.php:65
+msgid ""
+"Allows to log url, method, referrer and remote IP of the current web "
+"request."
+msgstr ""
+
+#: includes/features/class-processortypes.php:84
+msgid "WordPress "
+msgstr ""
+
+#: includes/features/class-processortypes.php:85
+msgid "Allows to log site, user and remote IP of the current request."
+msgstr ""
+
+#: includes/libraries/class-libraries.php:65
+#: includes/libraries/class-libraries.php:76
+#: includes/libraries/class-libraries.php:98
+#, php-format
+msgid "%s & contributors"
+msgstr ""
+
+#: includes/libraries/class-libraries.php:147
+msgid "MIT license"
+msgstr ""
+
+#: includes/libraries/class-libraries.php:150
+msgid "Apache license, version 2.0"
+msgstr ""
+
+#: includes/libraries/class-libraries.php:153
+msgid "GPL-2.0 license"
+msgstr ""
+
+#: includes/libraries/class-libraries.php:156
+msgid "GPL-3.0 license"
+msgstr ""
+
+#: includes/libraries/class-libraries.php:159
+msgid "unknown license"
+msgstr ""
+
+#. translators: as in the sentence "Product W version X by author Y (license Z)"
+#: includes/libraries/class-libraries.php:211
+#, php-format
+msgid "<a href=\"%1$s\">%2$s %3$s</a>%4$s by %5$s (%6$s)"
+msgstr ""
+
+#: includes/listeners/class-corelistener.php:39
+msgid "WordPress core"
+msgstr ""
+
+#: includes/listeners/class-psrlistener.php:32
+msgid "PSR-3 compliant listeners"
+msgstr ""
+
+#: includes/listeners/class-wpmulistener.php:36
+msgid "WordPress MU"
+msgstr ""
+
+#: includes/plugin/class-updater.php:44
+#, php-format
+msgid "%1$s has been correctly installed."
+msgstr ""
+
+#: includes/plugin/class-updater.php:48
+#, php-format
+msgid "%1$s has been correctly updated from version %2$s to version %3$s."
+msgstr ""
+
+#: includes/plugin/class-updater.php:52
+#, php-format
+msgid "See <a href=\"%s\">what's new</a>."
+msgstr ""
+
+#: includes/plugin/class-updater.php:153
+msgid "Sorry, unable to find or read changelog file."
+msgstr ""
+
+#: includes/system/class-conversion.php:46
+msgctxt "Abbreviation - Stands for \"thousand\"."
+msgid "K"
+msgstr ""
+
+#: includes/system/class-conversion.php:47
+msgctxt "Abbreviation - Stands for \"million\"."
+msgid "M"
+msgstr ""
+
+#: includes/system/class-conversion.php:48
+msgctxt "Abbreviation - Stands for \"billion\"."
+msgid "B"
+msgstr ""
+
+#: includes/system/class-conversion.php:49
+msgctxt "Abbreviation - Stands for \"trillion\"."
+msgid "T"
+msgstr ""
+
+#: includes/system/class-conversion.php:50
+msgctxt "Abbreviation - Stands for \"quadrillion\"."
+msgid "Qa"
+msgstr ""
+
+#: includes/system/class-conversion.php:51
+msgctxt "Abbreviation - Stands for \"quintillion\"."
+msgid "Qi"
+msgstr ""
+
+#: includes/system/class-conversion.php:82
+msgctxt "Abbreviation - Stands for \"byte\"."
+msgid "B"
+msgstr ""
+
+#: includes/system/class-conversion.php:83
+msgctxt "Abbreviation - Stands for \"kilobytes\"."
+msgid "KB"
+msgstr ""
+
+#: includes/system/class-conversion.php:84
+msgctxt "Abbreviation - Stands for \"megabytes\"."
+msgid "MB"
+msgstr ""
+
+#: includes/system/class-conversion.php:85
+msgctxt "Abbreviation - Stands for \"gigabytes\"."
+msgid "GB"
+msgstr ""
+
+#: includes/system/class-conversion.php:86
+msgctxt "Abbreviation - Stands for \"terabytes\"."
+msgid "TB"
+msgstr ""
+
+#: includes/system/class-conversion.php:87
+msgctxt "Abbreviation - Stands for \"petabytes\"."
+msgid "PB"
+msgstr ""
+
+#: includes/system/class-conversion.php:88
+msgctxt "Abbreviation - Stands for \"exabytes\"."
+msgid "EB"
+msgstr ""
+
+#: includes/system/class-date.php:57 includes/system/class-date.php:73
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: includes/system/class-date.php:60
+msgid "currently"
+msgstr ""
+
+#: includes/system/class-date.php:76
+#, php-format
+msgid "in %s"
+msgstr ""
+
+#: includes/system/class-date.php:92
+msgctxt "Unit abbreviation - Stands for \"second\"."
+msgid "sec"
+msgstr ""
+
+#: includes/system/class-date.php:93
+msgctxt "Unit abbreviation - Stands for \"minute\"."
+msgid "min"
+msgstr ""
+
+#: includes/system/class-date.php:94
+msgctxt "Unit abbreviation - Stands for \"hour\"."
+msgid "hr"
+msgstr ""
+
+#: includes/system/class-date.php:98
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/system/class-date.php:99
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/system/class-date.php:100
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/system/class-environment.php:204
+msgid "log"
+msgstr ""
+
+#: includes/system/class-environment.php:209
+msgid "display"
+msgstr ""
+
+#: includes/system/class-environment.php:215
+msgid "Debug enabled"
+msgstr ""
+
+#: includes/system/class-environment.php:215
+msgid "Debug disabled"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "MailArchiver"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/Pierre-Lannoy/wp-mailarchiver"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Capture and log events on your site. View them in your dashboard and send "
+"them to logging services."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Pierre Lannoy"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://pierre.lannoy.fr"
+msgstr ""

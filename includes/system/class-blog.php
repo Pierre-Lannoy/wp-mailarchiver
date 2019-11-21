@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
 /**
  * Define the Blog (site) functionality.
@@ -121,14 +121,14 @@ class Blog {
 	/**
 	 * Get the current blog id.
 	 *
-	 * @param   mixed $default    Optional. Default value to return if blog is not detected.
+	 * @param   mixed   $default    Optional. Default value to return if blog is not detected.
 	 * @return  mixed|integer The blog id if detected, null otherwise.
 	 * @since   1.0.0
 	 */
-	public static function get_current_blog_id( $default = null ) {
+	public static function get_current_blog_id($default = null) {
 		$blog_id = $default;
-		$id      = get_current_blog_id();
-		if ( $id && is_numeric( $id ) && $id > 0 ) {
+		$id = get_current_blog_id();
+		if ( $id && is_numeric($id) && $id >0) {
 			$blog_id = $id;
 		}
 		return $blog_id;
@@ -137,11 +137,11 @@ class Blog {
 	/**
 	 * Get the current blog name.
 	 *
-	 * @param   string $default    Optional. Default value to return if blog is not detected.
+	 * @param   string  $default    Optional. Default value to return if blog is not detected.
 	 * @return  string  The current blog name if detected, "anonymous" otherwise.
 	 * @since   1.0.0
 	 */
-	public static function get_current_blog_name( $default = 'unknown' ) {
+	public static function get_current_blog_name($default = 'unknown' ) {
 		return self::get_blog_name( self::get_current_blog_id(), $default );
 	}
 

@@ -7,10 +7,10 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\Plugin;
+namespace Decalog\Plugin;
 
 /**
- * Fired after 'plugins_loaded' hook.
+ * Fired after 'init' hook.
  *
  * This class defines all code necessary to run during the plugin's initialization.
  *
@@ -35,7 +35,7 @@ class Initializer {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
-
+		add_filter( 'set-screen-option', [ 'Decalog\Plugin\Feature\Events', 'save_screen_option' ], 100, 3 );
 	}
 
 }

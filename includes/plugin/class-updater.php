@@ -7,14 +7,15 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\Plugin;
+namespace Decalog\Plugin;
 
+use Decalog\Plugin\Feature\Log;
+use Decalog\Plugin\Feature\LoggerMaintainer;
 use Parsedown;
-use WPPluginBoilerplate\System\Nag;
-use WPPluginBoilerplate\System\Option;
-use WPPluginBoilerplate\System\Role;
-use WPPluginBoilerplate\System\Logger;
-use WPPluginBoilerplate\System\Environment;
+use Decalog\System\Nag;
+use Decalog\System\Option;
+use Decalog\System\Environment;
+use Decalog\System\Role;
 use Exception;
 
 /**
@@ -36,21 +37,22 @@ class Updater {
 	 */
 	public function __construct() {
 		$old = Option::network_get( 'version' );
-		if ( TRAFFIC_VERSION !== $old ) {
+		if ( MAILARCHIVER_VERSION !== $old ) {
 			if ( '0.0.0' === $old ) {
 				$this->install();
 				// phpcs:ignore
-				$message = sprintf( esc_html__( '%1$s has been correctly installed.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME );
+				$message = sprintf( esc_html__( '%1$s has been correctly installed.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME );
 			} else {
 				$this->update( $old );
 				// phpcs:ignore
-				$message  = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
-				Logger::notice( $message );
+				$message = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME, $old, MAILARCHIVER_VERSION );
+				$logger  = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
+				$logger->notice( $message );
 				// phpcs:ignore
-				$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'wp-plugin-boilerplate' ), admin_url( 'options-general.php?page=wp-plugin-boilerplate-settings&tab=about' ) );
+				$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'mailarchiver' ), admin_url( 'options-general.php?page=mailarchiver-settings&tab=about' ) );
 			}
 			Nag::add( 'update', 'info', $message );
-			Option::network_set( 'version', TRAFFIC_VERSION );
+			Option::network_set( 'version', MAILARCHIVER_VERSION );
 		}
 	}
 
@@ -70,7 +72,21 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	private function update( $from ) {
-
+		// Starting 1.3.x, PushoverHandler is replaced by PshHandler.
+		$loggers = Option::network_get( 'loggers', null );
+		if ( isset( $loggers ) ) {
+			foreach ( $loggers as &$logger ) {
+				if ( array_key_exists( 'handler', $logger ) ) {
+					if ( 'PushoverHandler' === $logger['handler'] ) {
+						$logger['handler'] = 'PshHandler';
+					}
+				}
+			}
+			Option::network_set( 'loggers', $loggers );
+		}
+		// MailArchiver handlers auto updating.
+		$maintainer = new LoggerMaintainer();
+		$maintainer->update( $from );
 	}
 
 	/**
@@ -96,7 +112,7 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function is_autoupdatable() {
-		return ( $this->is_updatable() && Option::site_get( 'auto_update' ) );
+		return ( $this->is_updatable() && Option::network_get( 'auto_update' ) );
 	}
 
 	/**
@@ -109,7 +125,7 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function auto_update_plugin( $update, $item ) {
-		if ( ( WPPB_SLUG === $item->slug ) && $this->is_autoupdatable() ) {
+		if ( ( MAILARCHIVER_SLUG === $item->slug ) && $this->is_autoupdatable() ) {
 			return true;
 		} else {
 			return $update;
@@ -134,9 +150,9 @@ class Updater {
 		);
 		$style       = $_attributes['style'];
 		$mode        = $_attributes['mode'];
-		$error       = esc_html__( 'Sorry, unable to find or read changelog file.', 'wp-plugin-boilerplate' );
+		$error       = esc_html__( 'Sorry, unable to find or read changelog file.', 'mailarchiver' );
 		$result      = esc_html( $error );
-		$changelog   = WPPB_PLUGIN_DIR . 'CHANGELOG.md';
+		$changelog   = MAILARCHIVER_PLUGIN_DIR . 'CHANGELOG.md';
 		if ( file_exists( $changelog ) ) {
 			try {
 				// phpcs:ignore
@@ -152,7 +168,6 @@ class Updater {
 				}
 			} catch ( Exception $e ) {
 				$result = esc_html( $error );
-				Logger::warning( $result );
 			}
 		}
 		return $result;

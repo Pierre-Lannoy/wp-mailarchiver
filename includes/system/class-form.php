@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
 /**
  * Define the forms functionality.
@@ -254,28 +254,6 @@ class Form {
 	 */
 	public function echo_field_checkbox( $args ) {
 		echo $this->field_checkbox( $args['text'], $args['id'], $args['checked'], $args['description'], $args['full_width'], $args['enabled'] );
-	}
-
-	/**
-	 * Get a simple text in form field.
-	 *
-	 * @param   string $text   The text.
-	 * @return  string  The HTML string ready to print.
-	 * @since   1.0.0
-	 */
-	public function field_simple_text( $text ) {
-		$html = $text;
-		return $html;
-	}
-
-	/**
-	 * Echoes a simple text in form field.
-	 *
-	 * @param   array $args   The call arguments.
-	 * @since   1.0.0
-	 */
-	public function echo_field_simple_text( $args ) {
-		echo $this->field_simple_text( $args['text'] );
 	}
 
 }

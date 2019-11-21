@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
 /**
  * Define the date functionality.
@@ -54,10 +54,10 @@ class Date {
 	 */
 	public static function get_positive_time_diff_from_mysql_utc($from) {
 		if (strtotime($from) < time()) {
-			return sprintf( esc_html__('%s ago', 'wp-plugin-boilerplate'), human_time_diff(strtotime($from)));
+			return sprintf( esc_html__('%s ago', 'mailarchiver'), human_time_diff(strtotime($from)));
 		}
 		else {
-			return esc_html__('currently', 'wp-plugin-boilerplate');
+			return esc_html__('currently', 'mailarchiver');
 		}
 	}
 
@@ -70,10 +70,10 @@ class Date {
 	 */
 	public static function get_time_diff_from_mysql_utc($from) {
 		if (strtotime($from) < time()) {
-			return sprintf( esc_html__('%s ago', 'wp-plugin-boilerplate'), human_time_diff(strtotime($from)));
+			return sprintf( esc_html__('%s ago', 'mailarchiver'), human_time_diff(strtotime($from)));
 		}
 		else {
-			return sprintf( esc_html__('in %s', 'wp-plugin-boilerplate'), human_time_diff(strtotime($from)));
+			return sprintf( esc_html__('in %s', 'mailarchiver'), human_time_diff(strtotime($from)));
 		}
 	}
 
@@ -89,15 +89,15 @@ class Date {
 	public static function get_age_array_from_seconds( $age, $legend = false, $abbrev = false ) {
 		if ( $abbrev ) {
 			$intervals = [
-				[ 60, _x( 'sec', 'Unit abbreviation - Stands for "second".', 'wp-plugin-boilerplate' ), _x( 'sec', 'Unit abbreviation - Stands for "second".', 'wp-plugin-boilerplate' ) ],
-				[ 60, _x( 'min', 'Unit abbreviation - Stands for "minute".', 'wp-plugin-boilerplate' ), _x( 'min', 'Unit abbreviation - Stands for "minute".', 'wp-plugin-boilerplate' ) ],
-				[ 100000, _x( 'hr', 'Unit abbreviation - Stands for "hour".', 'wp-plugin-boilerplate' ), _x( 'hr', 'Unit abbreviation - Stands for "hour".', 'wp-plugin-boilerplate' ) ],
+				[ 60, _x( 'sec', 'Unit abbreviation - Stands for "second".', 'mailarchiver' ), _x( 'sec', 'Unit abbreviation - Stands for "second".', 'mailarchiver' ) ],
+				[ 60, _x( 'min', 'Unit abbreviation - Stands for "minute".', 'mailarchiver' ), _x( 'min', 'Unit abbreviation - Stands for "minute".', 'mailarchiver' ) ],
+				[ 100000, _x( 'hr', 'Unit abbreviation - Stands for "hour".', 'mailarchiver' ), _x( 'hr', 'Unit abbreviation - Stands for "hour".', 'mailarchiver' ) ],
 			];
 		} else {
 			$intervals = [
-				[ 60, _n( 'second', 'seconds', 1, 'wp-plugin-boilerplate' ), _n( 'second', 'seconds', 2, 'wp-plugin-boilerplate' ) ],
-				[ 60, _n( 'minute', 'minutes', 1, 'wp-plugin-boilerplate' ), _n( 'minute', 'minutes', 2, 'wp-plugin-boilerplate' ) ],
-				[ 100000, _n( 'hour', 'hours', 1, 'wp-plugin-boilerplate' ), _n( 'hour', 'hours', 2, 'wp-plugin-boilerplate' ) ],
+				[ 60, _n( 'second', 'seconds', 1, 'mailarchiver' ), _n( 'second', 'seconds', 2, 'mailarchiver' ) ],
+				[ 60, _n( 'minute', 'minutes', 1, 'mailarchiver' ), _n( 'minute', 'minutes', 2, 'mailarchiver' ) ],
+				[ 100000, _n( 'hour', 'hours', 1, 'mailarchiver' ), _n( 'hour', 'hours', 2, 'mailarchiver' ) ],
 			];
 		}
 		$value = [];

@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
-use WPPluginBoilerplate\System\Logger;
+use Decalog\Logger;
 
 /**
  * Define the favicons functionality.
@@ -49,9 +49,10 @@ class Favicon {
 	 * @since   1.0.0
 	 */
 	public static function get_raw( $name = 'wordpress.org', $force_download = false ) {
-		if ( ! Option::site_get( 'download_favicons' ) ) {
+		if ( ! Option::network_get( 'download_favicons' ) ) {
 			return self::get_default();
 		}
+		$logger   = new Logger( 'plugin', MAILARCHIVER_PRODUCT_NAME, MAILARCHIVER_VERSION );
 		$dir      = WP_CONTENT_DIR . '/cache/site-favicons/';
 		$name     = strtolower( $name );
 		$filename = $dir . sanitize_file_name( $name ) . '.png';
@@ -61,9 +62,9 @@ class Favicon {
 		if ( ! file_exists( $dir ) ) {
 			try {
 				mkdir( $dir, 0755, true );
-				Logger::info( 'Created: "' . $dir . '" favicons cache directory.' );
+				$logger->info( 'Created: "' . $dir . '" favicons cache directory.' );
 			} catch ( \Exception $ex ) {
-				Logger::error( 'Unable to create "' . $dir . '" favicons cache directory.' );
+				$logger->error( 'Unable to create "' . $dir . '" favicons cache directory.' );
 				return self::get_default();
 			}
 		}
@@ -73,11 +74,11 @@ class Favicon {
 			}
 			$response = wp_remote_get( 'https://www.google.com/s2/favicons?domain=' . esc_url_raw( $name ) );
 			if ( is_wp_error( $response ) ) {
-				Logger::error( 'Unable to download "' . $name . '" favicon: ' . $response->get_error_message(), $response->get_error_code() );
+				$logger->error( 'Unable to download "' . $name . '" favicon: ' . $response->get_error_message(), $response->get_error_code() );
 				return self::get_default();
 			}
 			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-				Logger::error( 'Unable to download "' . $name . '" favicon.', wp_remote_retrieve_response_code( $response ) );
+				$logger->error( 'Unable to download "' . $name . '" favicon.', wp_remote_retrieve_response_code( $response ) );
 				return self::get_default();
 			}
 			global $wp_filesystem;
@@ -92,11 +93,11 @@ class Favicon {
 			);
 			if ( $wp_filesystem->errors->has_errors() ) {
 				foreach ( $wp_filesystem->errors->get_error_messages() as $message ) {
-					Logger::error( 'Unable to download "' . $name . '" favicon: ' . $message );
+					$logger->error( 'Unable to download "' . $name . '" favicon: ' . $message );
 				}
 				return self::get_default();
 			}
-			Logger::debug( 'Favicon downloaded for "' . $name . '".' );
+			$logger->debug( 'Favicon downloaded for "' . $name . '".' );
 		}
 		// phpcs:ignore
 		self::$icons[ $name ] = file_get_contents( $filename );

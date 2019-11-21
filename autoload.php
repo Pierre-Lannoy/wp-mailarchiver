@@ -1,6 +1,6 @@
 <?php
 /**
- * Autoload for WordPress plugin boilerplate.
+ * Autoload for MailArchiver.
  *
  * @package Bootstrap
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -11,27 +11,39 @@ spl_autoload_register(
 	function ( $class ) {
 		$classname = $class;
 		$filepath  = __DIR__ . '/';
-		if ( strpos( $classname, 'WPPluginBoilerplate\\' ) === 0 ) {
+		if ( strpos( $classname, 'Decalog\\' ) === 0 ) {
 			while ( strpos( $classname, '\\' ) !== false ) {
 				$classname = substr( $classname, strpos( $classname, '\\' ) + 1, 1000 );
 			}
 			$filename = 'class-' . str_replace( '_', '-', strtolower( $classname ) ) . '.php';
-			if ( strpos( $class, 'WPPluginBoilerplate\System\\' ) === 0 ) {
-				$filepath = WPPB_INCLUDES_DIR . 'system/';
-			}
-			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\Feature\\' ) === 0 ) {
-				$filepath = WPPB_INCLUDES_DIR . 'features/';
-			} elseif ( strpos( $class, 'WPPluginBoilerplate\Plugin\\' ) === 0 ) {
-				$filepath = WPPB_INCLUDES_DIR . 'plugin/';
-			}
-			if ( strpos( $class, 'WPPluginBoilerplate\Library\\' ) === 0 ) {
-				$filepath = WPPB_VENDOR_DIR;
+			if ( strpos( $class, 'Decalog\System\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'system/';
+			} elseif ( strpos( $class, 'Decalog\Plugin\Feature\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'features/';
+			} elseif ( strpos( $class, 'Decalog\Plugin\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'plugin/';
+			} elseif ( strpos( $class, 'Decalog\Processor\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'processors/';
+			} elseif ( strpos( $class, 'Decalog\Handler\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'handlers/';
+			} elseif ( strpos( $class, 'Decalog\Formatter\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'formatters/';
+			} elseif ( strpos( $class, 'Decalog\Listener\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'listeners/';
+			} elseif ( strpos( $class, 'Decalog\Library\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_VENDOR_DIR;
+			} elseif ( strpos( $class, 'Decalog\Integration\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'integrations/';
+			} elseif ( strpos( $class, 'Decalog\API\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'api/';
+			} elseif ( strpos( $class, 'Decalog\\' ) === 0 ) {
+				$filepath = MAILARCHIVER_INCLUDES_DIR . 'api/';
 			}
 			if ( strpos( $filename, '-public' ) !== false ) {
-				$filepath = WPPB_PUBLIC_DIR;
+				$filepath = MAILARCHIVER_PUBLIC_DIR;
 			}
 			if ( strpos( $filename, '-admin' ) !== false ) {
-				$filepath = WPPB_ADMIN_DIR;
+				$filepath = MAILARCHIVER_ADMIN_DIR;
 			}
 			$file = $filepath . $filename;
 			if ( file_exists( $file ) ) {

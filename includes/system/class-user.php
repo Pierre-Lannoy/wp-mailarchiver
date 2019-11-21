@@ -9,7 +9,9 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
+
+use Decalog\System\Hash;
 
 /**
  * Define the user functionality.
@@ -39,7 +41,7 @@ class User {
 	 * @since   1.0.0
 	 */
 	public static function get_user_name( $id = null, $default = 'anonymous' ) {
-		if ( $id && is_numeric( $id ) && $id > 0 ) {
+		if ( $id && is_numeric($id) && $id >0) {
 			$user_info = get_userdata( $id );
 			return $user_info->display_name;
 
@@ -49,16 +51,39 @@ class User {
 	}
 
 	/**
+	 * Get a user string representation.
+	 *
+	 * @param   integer $id         Optional. The user id.
+	 * @param   boolean $pseudonymize   Optional. Has this user to be pseudonymized.
+	 * @return  string  The user string representation, ready to be inserted in a log.
+	 * @since   1.0.0
+	 */
+	public static function get_user_string( $id = null, $pseudonymize = false) {
+		if ( $id && is_numeric($id) && $id >0 && !$pseudonymize) {
+			$user_info = get_userdata( $id );
+			$name = $user_info->display_name;
+		} else {
+			if ($pseudonymize) {
+				$name = 'pseudonymized user';
+				$id = Hash::simple_hash( (string)$id );
+			} else {
+				return 'anonymous user';
+			}
+		}
+		return sprintf( '%s (user ID %s)', $name, $id);
+	}
+
+	/**
 	 * Get the current user id.
 	 *
-	 * @param   mixed $default    Optional. Default value to return if user is not detected.
+	 * @param   mixed   $default    Optional. Default value to return if user is not detected.
 	 * @return  mixed|integer The user id if detected, null otherwise.
 	 * @since   1.0.0
 	 */
-	public static function get_current_user_id( $default = null ) {
+	public static function get_current_user_id($default = null) {
 		$user_id = $default;
-		$id      = get_current_user_id();
-		if ( $id && is_numeric( $id ) && $id > 0 ) {
+		$id = get_current_user_id();
+		if ( $id && is_numeric($id) && $id > 0 ) {
 			$user_id = $id;
 		}
 		return $user_id;
@@ -67,11 +92,11 @@ class User {
 	/**
 	 * Get the current user nice name.
 	 *
-	 * @param   string $default    Optional. Default value to return if user is not detected.
+	 * @param   string  $default    Optional. Default value to return if user is not detected.
 	 * @return  string  The current user nice name if detected, "anonymous" otherwise.
 	 * @since   1.0.0
 	 */
-	public static function get_current_user_name( $default = 'anonymous' ) {
+	public static function get_current_user_name($default = 'anonymous' ) {
 		return self::get_user_name( self::get_current_user_id(), $default );
 	}
 
@@ -89,7 +114,7 @@ class User {
 			$userid = self::get_current_user_id();
 		}
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'usermeta';
+		$table_name = $wpdb->base_prefix . 'usermeta';
 		$sql        = 'DELETE FROM ' . $table_name . ' WHERE meta_key LIKE "%\_' . $key . '%" AND user_id=' . $userid . ';';
 		// phpcs:ignore
 		return $wpdb->query( $sql );
@@ -103,8 +128,8 @@ class User {
 	 */
 	public static function delete_all_meta() {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'usermeta';
-		$sql        = 'DELETE FROM ' . $table_name . ' WHERE meta_key LIKE "%\_decalog-%";';
+		$table_name = $wpdb->base_prefix . 'usermeta';
+		$sql        = 'DELETE FROM ' . $table_name . ' WHERE meta_key LIKE "%\_mailarchiver-%";';
 		// phpcs:ignore
 		return $wpdb->query( $sql );
 	}

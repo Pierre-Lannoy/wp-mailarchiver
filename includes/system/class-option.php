@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
 /**
  * Define the options functionality.
@@ -26,7 +26,6 @@ class Option {
 	 * The list of defaults options.
 	 *
 	 * @since  1.0.0
-	 * @access private
 	 * @var    array    $defaults    The $defaults list.
 	 */
 	private static $defaults = [];
@@ -40,10 +39,16 @@ class Option {
 		self::$defaults['use_cdn']           = false;
 		self::$defaults['download_favicons'] = false;
 		self::$defaults['script_in_footer']  = false;
-		self::$defaults['auto_update']       = true;
-		self::$defaults['display_nag']       = true;
+		self::$defaults['auto_update']       = true;  // In plugin settings.
+		self::$defaults['display_nag']       = true;  // In plugin settings.
 		self::$defaults['nags']              = [];
 		self::$defaults['version']           = '0.0.0';
+		self::$defaults['loggers']           = [];
+		self::$defaults['respect_wp_debug']  = false; // In plugin settings.
+		self::$defaults['logger_autostart']  = true;  // In plugin settings.
+		self::$defaults['autolisteners']     = true;  // In plugin settings.
+		self::$defaults['listeners']         = [];    // In plugin settings.
+		self::$defaults['pseudonymization']  = false; // In plugin settings.
 	}
 
 	/**
@@ -60,7 +65,7 @@ class Option {
 		if ( array_key_exists( $option, self::$defaults ) ) {
 			$default = self::$defaults[ $option ];
 		}
-		return get_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, $default );
+		return get_option( MAILARCHIVER_PRODUCT_ABBREVIATION . '_' . $option, $default );
 	}
 
 	/**
@@ -77,7 +82,7 @@ class Option {
 		if ( array_key_exists( $option, self::$defaults ) ) {
 			$default = self::$defaults[ $option ];
 		}
-		return get_site_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, $default );
+		return get_site_option( MAILARCHIVER_PRODUCT_ABBREVIATION . '_' . $option, $default );
 	}
 
 	/**
@@ -88,7 +93,7 @@ class Option {
 	 * @since 1.0.0
 	 */
 	public static function site_exists( $option ) {
-		return 'non_existent_option' !== get_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, 'non_existent_option' );
+		return 'non_existent_option' !== get_option( MAILARCHIVER_PRODUCT_ABBREVIATION . '_' . $option, 'non_existent_option' );
 	}
 
 	/**
@@ -99,7 +104,7 @@ class Option {
 	 * @since 1.0.0
 	 */
 	public static function network_exists( $option ) {
-		return 'non_existent_option' !== get_site_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, 'non_existent_option' );
+		return 'non_existent_option' !== get_site_option( MAILARCHIVER_PRODUCT_ABBREVIATION . '_' . $option, 'non_existent_option' );
 	}
 
 	/**
@@ -115,7 +120,7 @@ class Option {
 	 * @since 1.0.0
 	 */
 	public static function site_set( $option, $value, $autoload = null ) {
-		return update_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, $value, $autoload );
+		return update_option( MAILARCHIVER_PRODUCT_ABBREVIATION . '_' . $option, $value, $autoload );
 	}
 
 	/**
@@ -127,7 +132,7 @@ class Option {
 	 * @since 1.0.0
 	 */
 	public static function network_set( $option, $value ) {
-		return update_site_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, $value );
+		return update_site_option( MAILARCHIVER_PRODUCT_ABBREVIATION . '_' . $option, $value );
 	}
 
 	/**
@@ -140,13 +145,30 @@ class Option {
 		global $wpdb;
 		$result = 0;
 		// phpcs:ignore
-		$delete = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '" . WPPB_PRODUCT_ABBREVIATION . '_%' . "';" );
+		$delete = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '" . MAILARCHIVER_PRODUCT_ABBREVIATION . '_%' . "';" );
 		foreach ( $delete as $option ) {
 			if ( delete_option( $option ) ) {
 				++$result;
 			}
 		}
 		return $result;
+	}
+
+	/**
+	 * Reset some options to their defaults.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function reset_to_defaults() {
+		self::network_set( 'use_cdn', self::$defaults['use_cdn'] );
+		self::network_set( 'download_favicons', self::$defaults['download_favicons'] );
+		self::network_set( 'script_in_footer', self::$defaults['script_in_footer'] );
+		self::network_set( 'auto_update', self::$defaults['auto_update'] );
+		self::network_set( 'display_nag', self::$defaults['display_nag'] );
+		self::network_set( 'respect_wp_debug', self::$defaults['respect_wp_debug'] );
+		self::network_set( 'logger_autostart', self::$defaults['logger_autostart'] );
+		self::network_set( 'autolisteners', self::$defaults['autolisteners'] );
+		self::network_set( 'pseudonymization', self::$defaults['pseudonymization'] );
 	}
 
 	/**

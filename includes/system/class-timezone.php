@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\System;
+namespace Decalog\System;
 
-use WPPluginBoilerplate\System\Environment;
+use Decalog\System\Environment;
 
 /**
  * Define the timezone functionality.

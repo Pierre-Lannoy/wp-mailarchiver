@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\Library;
+namespace Decalog\Library;
 
-use WPPluginBoilerplate\System\L10n;
+use Decalog\System\L10n;
 
 /**
  * Define the libraries functionality.
@@ -28,7 +28,6 @@ class Libraries {
 	 * The array of PSR-4 libraries used by the plugin.
 	 *
 	 * @since  1.0.0
-	 * @access private
 	 * @var    array    $libraries    The PSR-4 libraries used by the plugin.
 	 */
 	private static $psr4_libraries;
@@ -37,7 +36,6 @@ class Libraries {
 	 * The array of mono libraries used by the plugin.
 	 *
 	 * @since  1.0.0
-	 * @access private
 	 * @var    array    $libraries    The mono libraries used by the plugin.
 	 */
 	private static $mono_libraries;
@@ -58,14 +56,35 @@ class Libraries {
 	 */
 	public static function init() {
 		self::$psr4_libraries              = [];
+		self::$psr4_libraries['monolog']   = [
+			'name'    => 'Monolog',
+			'prefix'  => 'Monolog',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'monolog/',
+			'version' => '2.0.1',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Jordi Boggiano' ),
+			'url'     => 'https://github.com/Seldaek/monolog',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
 		self::$psr4_libraries['feather']   = [
 			'name'    => 'Feather',
 			'prefix'  => 'Feather',
-			'base'    => WPPB_VENDOR_DIR . 'feather/',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'feather/',
 			'version' => '4.24.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Cole Bemis' ),
+			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Cole Bemis' ),
 			'url'     => 'https://feathericons.com',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['psr-3']     = [
+			'name'    => 'PSR-3',
+			'prefix'  => 'Psr\\Log',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'psr/log/',
+			'version' => '',
+			'author'  => 'PHP Framework Interop Group',
+			'url'     => 'https://www.php-fig.org/',
 			'license' => 'mit',
 			'langs'   => 'en',
 		];
@@ -73,10 +92,10 @@ class Libraries {
 		self::$mono_libraries['parsedown'] = [
 			'name'    => 'Parsedown',
 			'detect'  => 'Parsedown',
-			'base'    => WPPB_VENDOR_DIR . 'parsedown/',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'parsedown/',
 			'version' => '1.8.0-beta-7',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'wp-plugin-boilerplate' ), 'Emanuil Rusev' ),
+			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Emanuil Rusev' ),
 			'url'     => 'https://parsedown.org',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -104,6 +123,18 @@ class Libraries {
 	}
 
 	/**
+	 * Compare two items based on name field.
+	 *
+	 * @param  array $a     The first element.
+	 * @param  array $b     The second element.
+	 * @return  boolean     True if $a>$b, false otherwise.
+	 * @since 1.0.0
+	 */
+	public function reorder_list( $a, $b ) {
+		return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );
+	}
+
+	/**
 	 * Get the full license name.
 	 *
 	 * @param  string $license     The license id.
@@ -113,19 +144,19 @@ class Libraries {
 	private function license_name( $license ) {
 		switch ( $license ) {
 			case 'mit':
-				$result = esc_html__( 'MIT license', 'wp-plugin-boilerplate' );
+				$result = esc_html__( 'MIT license', 'mailarchiver' );
 				break;
 			case 'apl2':
-				$result = esc_html__( 'Apache license, version 2.0', 'wp-plugin-boilerplate' );
+				$result = esc_html__( 'Apache license, version 2.0', 'mailarchiver' );
 				break;
 			case 'gpl2':
-				$result = esc_html__( 'GPL-2.0 license', 'wp-plugin-boilerplate' );
+				$result = esc_html__( 'GPL-2.0 license', 'mailarchiver' );
 				break;
 			case 'gpl3':
-				$result = esc_html__( 'GPL-3.0 license', 'wp-plugin-boilerplate' );
+				$result = esc_html__( 'GPL-3.0 license', 'mailarchiver' );
 				break;
 			default:
-				$result = esc_html__( 'unknown license', 'wp-plugin-boilerplate' );
+				$result = esc_html__( 'unknown license', 'mailarchiver' );
 				break;
 		}
 		return $result;
@@ -162,16 +193,22 @@ class Libraries {
 		$item['name']    = 'Plugin Boilerplate';
 		$item['version'] = '';
 		$item['author']  = 'Pierre Lannoy';
+		// phpcs:ignore
 		$item['url']     = 'https://github.com/Pierre-Lannoy/wp-' . 'plugin-' . 'boilerplate';
 		$item['license'] = $this->license_name( 'gpl3' );
 		$item['langs']   = L10n::get_language_markup( [ 'en' ] );
 		$list[]          = $item;
-		usort( $list, function ( $a, $b ) { return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );} );
+		usort(
+			$list,
+			function ( $a, $b ) {
+				return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );
+			}
+		);
 		if ( 'html' === $style ) {
 			$items = [];
 			foreach ( $list as $library ) {
 				/* translators: as in the sentence "Product W version X by author Y (license Z)" */
-				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s (%6$s)', 'wp-plugin-boilerplate' ), $library['url'], $library['name'], $library['version'], $library['langs'], $library['author'], $library['license'] );
+				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s (%6$s)', 'mailarchiver' ), $library['url'], $library['name'], $library['version'], $library['langs'], $library['author'], $library['license'] );
 			}
 			$result = implode( ', ', $items );
 		}
