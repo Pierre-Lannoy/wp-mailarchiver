@@ -7,9 +7,9 @@
  * @since   1.6.0
  */
 
-namespace Decalog\Integration;
+namespace Mailarchiver\Integration;
 
-use Decalog\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DLogger;
 
 /**
  * WooCommerce integration class.
@@ -26,7 +26,7 @@ class WCLogger extends \WC_Log_Handler {
 	 * The "true" DLogger instance.
 	 *
 	 * @since  1.6.0
-	 * @var    \Decalog\API\DLogger    $logger    Maintains the internal DLogger instance.
+	 * @var    \Mailarchiver\API\DLogger    $logger    Maintains the internal DLogger instance.
 	 */
 	private $logger = null;
 

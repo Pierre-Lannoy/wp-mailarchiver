@@ -2,22 +2,22 @@
 /**
  * Web records processing
  *
- * Extends Decalog\Processor\WebProcessor to respect privacy settings.
+ * Extends Mailarchiver\Processor\WebProcessor to respect privacy settings.
  *
  * @package Processors
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
 
-namespace Decalog\Processor;
+namespace Mailarchiver\Processor;
 
-use Decalog\System\Hash;
+use Mailarchiver\System\Hash;
 use Monolog\Processor\WebProcessor;
 
 /**
  * Define the WWW processor functionality.
  *
- * Extends Decalog\Processor\WebProcessor to respect privacy settings.
+ * Extends Mailarchiver\Processor\WebProcessor to respect privacy settings.
  *
  * @package Processors
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.

@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\System\Option;
+use Mailarchiver\System\Option;
 
 /**
  * Define the logger maintenance functionality.
@@ -59,7 +59,7 @@ class LoggerMaintainer {
 	 */
 	public function cron_clean() {
 		foreach ( Option::network_get( 'loggers' ) as $key => $logger ) {
-			$classname = 'Decalog\Plugin\Feature\\' . $logger['handler'];
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $logger['handler'];
 			if ( class_exists( $classname ) ) {
 				$logger['uuid'] = $key;
 				$instance       = $this->create_instance( $classname );
@@ -76,7 +76,7 @@ class LoggerMaintainer {
 	 */
 	public function update( $from ) {
 		foreach ( Option::network_get( 'loggers' ) as $key => $logger ) {
-			$classname = 'Decalog\Plugin\Feature\\' . $logger['handler'];
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $logger['handler'];
 			if ( class_exists( $classname ) ) {
 				$logger['uuid'] = $key;
 				$instance       = $this->create_instance( $classname );

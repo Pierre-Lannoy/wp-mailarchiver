@@ -9,7 +9,7 @@
  * @since   1.3.0
  */
 
-namespace Decalog\Handler;
+namespace Mailarchiver\Handler;
 
 use Monolog\Logger;
 use Monolog\Handler\PushoverHandler;

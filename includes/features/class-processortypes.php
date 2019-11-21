@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
 /**
  * Define the processor types functionality.
@@ -38,7 +38,7 @@ class ProcessorTypes {
 	public function __construct() {
 		$this->processors[] = [
 			'id'        => 'BacktraceProcessor',
-			'namespace' => 'Decalog\\Processor',
+			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'Backtrace', 'mailarchiver' ),
 			'help'      => esc_html__( 'Allows to log the full PHP and WordPress call stack.', 'mailarchiver' ),
 			'init'      => [
@@ -54,13 +54,13 @@ class ProcessorTypes {
 				[ 'type' => 'level' ],
 				[
 					'type'  => 'literal',
-					'value' => [ 'Decalog\\' ],
+					'value' => [ 'Mailarchiver\\' ],
 				],
 			],
 		];
 		$this->processors[] = [
 			'id'        => 'WWWProcessor',
-			'namespace' => 'Decalog\\Processor',
+			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'HTTP request', 'mailarchiver' ),
 			'help'      => esc_html__( 'Allows to log url, method, referrer and remote IP of the current web request.', 'mailarchiver' ),
 			'init'      => [
@@ -80,7 +80,7 @@ class ProcessorTypes {
 		];
 		$this->processors[] = [
 			'id'        => 'WordpressProcessor',
-			'namespace' => 'Decalog\\Processor',
+			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'WordPress ', 'mailarchiver' ),
 			'help'      => esc_html__( 'Allows to log site, user and remote IP of the current request.', 'mailarchiver' ),
 			'init'      => [

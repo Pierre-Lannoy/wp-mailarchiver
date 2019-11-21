@@ -9,10 +9,10 @@
  * @since   1.6.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\Logger;
-use Decalog\System\Post;
+use Mailarchiver\Logger;
+use Mailarchiver\System\Post;
 
 /**
  * W3 Total Cache listener for MailArchiver.

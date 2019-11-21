@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Processor;
+namespace Mailarchiver\Processor;
 
 use Monolog\Logger;
 use Monolog\Processor\ProcessorInterface;
@@ -93,7 +93,7 @@ class BacktraceProcessor implements ProcessorInterface {
 		$trace = [];
 		// phpcs:ignore
 		foreach ( array_reverse( debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ) ) as $t ) {
-			if ( array_key_exists( 'class', $t ) && 0 === strpos( $t['class'], 'Decalog\\' ) ) {
+			if ( array_key_exists( 'class', $t ) && 0 === strpos( $t['class'], 'Mailarchiver\\' ) ) {
 				break;
 			}
 			$trace[] = $t;
@@ -101,7 +101,7 @@ class BacktraceProcessor implements ProcessorInterface {
 		$wptrace = [];
 		// phpcs:ignore
 		foreach ( array_reverse( wp_debug_backtrace_summary( null, 0, false ) ) as $t ) {
-			if ( 0 === strpos( $t, 'Decalog\\' ) ) {
+			if ( 0 === strpos( $t, 'Mailarchiver\\' ) ) {
 				break;
 			}
 			$wptrace[] = $t;

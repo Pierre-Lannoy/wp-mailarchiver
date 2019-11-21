@@ -46,7 +46,7 @@ The simplest way to generate an ___event___ from your code is to use MailArchive
 ```php
     
     // Initializes the events logger
-    $event_logger = new Decalog\Logger( 'plugin', 'My Plugin', '1.2.3' );
+    $event_logger = new Mailarchiver\Logger( 'plugin', 'My Plugin', '1.2.3' );
     
     // Logs a debug message
     $event_logger->debug( 'Test message.' );
@@ -77,7 +77,7 @@ Before writing a ___listener___ your plugin or theme must define actions hooks w
     do_action( 'myplugin_delete_content', $content_id );     
 ```
 
-Once done, you can write your ___listener___ by extending the class `Decalog\Listener\AbstractListener` and put your file in `./wp-content/plugins/mailarchiver/includes/listeners/`. Your ___listener___ class must implement the three following abstract methods:
+Once done, you can write your ___listener___ by extending the class `Mailarchiver\Listener\AbstractListener` and put your file in `./wp-content/plugins/mailarchiver/includes/listeners/`. Your ___listener___ class must implement the three following abstract methods:
 - `init()` to set the class parameters;
 - `is_available()` to verify if your plugin or theme is installed and activated;
 - `launch()` to "launch" the listener.

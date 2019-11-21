@@ -9,12 +9,12 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\System\Date;
-use Decalog\System\Option;
-use Decalog\System\Role;
-use Decalog\System\Timezone;
+use Mailarchiver\System\Date;
+use Mailarchiver\System\Option;
+use Mailarchiver\System\Role;
+use Mailarchiver\System\Timezone;
 use Feather\Icons;
 
 

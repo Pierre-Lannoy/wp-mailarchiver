@@ -9,12 +9,12 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\System\Date;
-use Decalog\System\Timezone;
+use Mailarchiver\System\Date;
+use Mailarchiver\System\Timezone;
 use Feather;
-use Decalog\System\Database;
+use Mailarchiver\System\Database;
 
 /**
  * Define the event viewer functionality.

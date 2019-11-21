@@ -7,9 +7,9 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin;
+namespace Mailarchiver\Plugin;
 
-use Decalog\System\Assets;
+use Mailarchiver\System\Assets;
 
 /**
  * The class responsible for the public-facing functionality of the plugin.
@@ -18,7 +18,7 @@ use Decalog\System\Assets;
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
-class Decalog_Public {
+class Mailarchiver_Public {
 
 
 	/**

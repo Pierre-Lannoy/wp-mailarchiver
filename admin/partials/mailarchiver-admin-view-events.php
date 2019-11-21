@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-use Decalog\Plugin\Feature\Events;
+use Mailarchiver\Plugin\Feature\Events;
 
 $eventListTable = new Events();
 $eventListTable->prepare_items();

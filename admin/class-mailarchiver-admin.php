@@ -7,21 +7,21 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin;
+namespace Mailarchiver\Plugin;
 
-use Decalog\Plugin\Feature\Log;
-use Decalog\Plugin\Feature\EventViewer;
-use Decalog\Plugin\Feature\HandlerTypes;
-use Decalog\Plugin\Feature\ProcessorTypes;
-use Decalog\Plugin\Feature\LoggerFactory;
-use Decalog\Plugin\Feature\Events;
-use Decalog\Plugin\Feature\InlineHelp;
-use Decalog\Listener\ListenerFactory;
-use Decalog\System\Assets;
-use Decalog\System\UUID;
-use Decalog\System\Option;
-use Decalog\System\Form;
-use Decalog\System\Role;
+use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\Plugin\Feature\EventViewer;
+use Mailarchiver\Plugin\Feature\HandlerTypes;
+use Mailarchiver\Plugin\Feature\ProcessorTypes;
+use Mailarchiver\Plugin\Feature\LoggerFactory;
+use Mailarchiver\Plugin\Feature\Events;
+use Mailarchiver\Plugin\Feature\InlineHelp;
+use Mailarchiver\Listener\ListenerFactory;
+use Mailarchiver\System\Assets;
+use Mailarchiver\System\UUID;
+use Mailarchiver\System\Option;
+use Mailarchiver\System\Form;
+use Mailarchiver\System\Role;
 use Monolog\Logger;
 
 /**
@@ -31,7 +31,7 @@ use Monolog\Logger;
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
-class Decalog_Admin {
+class Mailarchiver_Admin {
 
 	/**
 	 * The assets manager that's responsible for handling all assets of the plugin.
@@ -137,11 +137,11 @@ class Decalog_Admin {
 					add_action( 'admin_footer-' . $name, [ $this->current_view, 'add_footer' ] );
 					add_filter( 'screen_settings', [ $this->current_view, 'display_screen_settings' ], 10, 2 );
 				} else {
-					add_action( 'load-' . $name, [ 'Decalog\Plugin\Feature\Events', 'add_column_options' ] );
+					add_action( 'load-' . $name, [ 'Mailarchiver\Plugin\Feature\Events', 'add_column_options' ] );
 					add_filter(
 						'screen_settings',
 						[
-							'Decalog\Plugin\Feature\Events',
+							'Mailarchiver\Plugin\Feature\Events',
 							'display_screen_settings',
 						],
 						10,

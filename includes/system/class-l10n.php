@@ -9,10 +9,10 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 use WP_User;
-use Decalog\System\I18n;
+use Mailarchiver\System\I18n;
 
 /**
  * Define the localization functionality.

@@ -9,9 +9,9 @@
  * @since   1.6.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\System\Option;
+use Mailarchiver\System\Option;
 
 /**
  * Jetpack listener for MailArchiver.

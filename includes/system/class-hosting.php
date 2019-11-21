@@ -7,7 +7,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 /**
  * The class responsible to manage and detect hosting environment.

@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
-use Decalog\Logger;
+use Mailarchiver\Logger;
 
 /**
  * Define the favicons functionality.

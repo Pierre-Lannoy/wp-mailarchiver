@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
 /**
  * Pseudo PSR-3 listener for MailArchiver.

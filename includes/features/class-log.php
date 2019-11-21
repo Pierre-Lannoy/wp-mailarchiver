@@ -7,11 +7,11 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DLogger;
 use Monolog\Logger;
-use Decalog\Plugin\Feature\EventTypes;
+use Mailarchiver\Plugin\Feature\EventTypes;
 
 
 /**
@@ -36,7 +36,7 @@ class Log {
 	/**
 	 * Get a new logger instance.
 	 *
-	 * @param   string $class The class identifier, see Decalog\API\DLogger::$classes.
+	 * @param   string $class The class identifier, see Mailarchiver\API\DLogger::$classes.
 	 * @param   string $name Optional. The name of the component.
 	 * @param   string $version Optional. The version of the component.
 	 * @param   string $test Optional. The handler to bootstrap if specified..

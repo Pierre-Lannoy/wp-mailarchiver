@@ -10,9 +10,9 @@
  * @since   1.2.1
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DLogger;
 
 /**
  * Watchdog for MailArchiver.

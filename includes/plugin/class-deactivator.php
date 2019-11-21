@@ -7,7 +7,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin;
+namespace Mailarchiver\Plugin;
 
 /**
  * Fired during plugin deactivation.

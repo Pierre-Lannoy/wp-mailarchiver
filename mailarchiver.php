@@ -39,7 +39,7 @@ require_once __DIR__ . '/includes/features/class-watchdog.php';
  * @since 1.0.0
  */
 function mailarchiver_activate() {
-	Decalog\Plugin\Activator::activate();
+	Mailarchiver\Plugin\Activator::activate();
 }
 
 /**
@@ -48,7 +48,7 @@ function mailarchiver_activate() {
  * @since 1.0.0
  */
 function mailarchiver_deactivate() {
-	Decalog\Plugin\Deactivator::deactivate();
+	Mailarchiver\Plugin\Deactivator::deactivate();
 }
 
 /**
@@ -57,7 +57,7 @@ function mailarchiver_deactivate() {
  * @since 1.0.0
  */
 function mailarchiver_uninstall() {
-	Decalog\Plugin\Uninstaller::uninstall();
+	Mailarchiver\Plugin\Uninstaller::uninstall();
 }
 
 /**
@@ -66,8 +66,9 @@ function mailarchiver_uninstall() {
  * @since 1.0.0
  */
 function mailarchiver_run() {
-	Decalog\System\Cache::init();
-	$plugin = new Decalog\Plugin\Core();
+	Mailarchiver\System\Logger::init();
+	Mailarchiver\System\Cache::init();
+	$plugin = new Mailarchiver\Plugin\Core();
 	$plugin->run();
 }
 

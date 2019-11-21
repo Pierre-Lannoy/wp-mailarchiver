@@ -8,7 +8,7 @@
  * @noinspection PhpCSValidationInspection
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 /**
  * The class responsible to handle cache management.

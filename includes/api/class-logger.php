@@ -7,9 +7,9 @@
  * @since   1.3.0
  */
 
-namespace Decalog;
+namespace Mailarchiver;
 
-use Decalog\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DLogger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -28,7 +28,7 @@ class Logger implements LoggerInterface {
 	 * The "true" DLogger instance.
 	 *
 	 * @since  1.3.0
-	 * @var    \Decalog\API\DLogger    $logger    Maintains the internal DLogger instance.
+	 * @var    \Mailarchiver\API\DLogger    $logger    Maintains the internal DLogger instance.
 	 */
 	private $logger = null;
 

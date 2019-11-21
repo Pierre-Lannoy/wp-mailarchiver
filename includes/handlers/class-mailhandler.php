@@ -9,13 +9,13 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Handler;
+namespace Mailarchiver\Handler;
 
-use Decalog\Plugin\Feature\EventTypes;
+use Mailarchiver\Plugin\Feature\EventTypes;
 use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Formatter\FormatterInterface;
-use Decalog\Formatter\NewlineFormatter;
+use Mailarchiver\Formatter\NewlineFormatter;
 
 /**
  * Define the Monolog WordPress mail handler.

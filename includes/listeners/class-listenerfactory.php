@@ -9,10 +9,10 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\Plugin\Feature\Log;
-use Decalog\System\Option;
+use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\System\Option;
 
 /**
  * Define the listeners handling functionality.
@@ -130,7 +130,7 @@ class ListenerFactory {
 	 * @since    1.0.0
 	 */
 	private function create_listener_instance( $class_name ) {
-		$class_name = 'Decalog\Listener\\' . $class_name;
+		$class_name = 'Mailarchiver\Listener\\' . $class_name;
 		if ( class_exists( $class_name ) ) {
 			try {
 				$reflection = new \ReflectionClass( $class_name );

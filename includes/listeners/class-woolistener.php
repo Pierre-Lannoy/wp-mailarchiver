@@ -9,7 +9,7 @@
  * @since   1.6.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
 /**
  * WooCommerce listener for MailArchiver.
@@ -67,7 +67,7 @@ class WooListener extends AbstractListener {
 	 * @since    1.6.0
 	 */
 	public function woocommerce_register_log_handlers( $handlers ) {
-		array_push( $handlers, new \Decalog\Integration\WCLogger( $this->class, $this->name, $this->version ) );
+		array_push( $handlers, new \Mailarchiver\Integration\WCLogger( $this->class, $this->name, $this->version ) );
 		return $handlers;
 
 	}

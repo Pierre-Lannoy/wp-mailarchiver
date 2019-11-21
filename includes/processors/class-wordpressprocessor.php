@@ -9,12 +9,12 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Processor;
+namespace Mailarchiver\Processor;
 
 use Monolog\Processor\ProcessorInterface;
-use Decalog\System\Blog;
-use Decalog\System\Hash;
-use Decalog\System\User;
+use Mailarchiver\System\Blog;
+use Mailarchiver\System\Hash;
+use Mailarchiver\System\User;
 
 /**
  * Define the WordPress processor functionality.

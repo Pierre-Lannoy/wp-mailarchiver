@@ -9,11 +9,11 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Formatter;
+namespace Mailarchiver\Formatter;
 
-use Decalog\Plugin\Feature\ClassTypes;
-use Decalog\Plugin\Feature\EventTypes;
-use Decalog\System\Http;
+use Mailarchiver\Plugin\Feature\ClassTypes;
+use Mailarchiver\Plugin\Feature\EventTypes;
+use Mailarchiver\System\Http;
 use Monolog\Formatter\FormatterInterface;
 
 /**

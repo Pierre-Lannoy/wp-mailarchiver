@@ -9,7 +9,7 @@
  * @since   1.4.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 /**
  * Define the comments functionality.

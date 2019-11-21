@@ -9,13 +9,13 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Handler;
+namespace Mailarchiver\Handler;
 
 use Monolog\Logger;
-use Decalog\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DLogger;
 use Monolog\Handler\SocketHandler;
 use Monolog\Formatter\FormatterInterface;
-use Decalog\Formatter\FluentFormatter;
+use Mailarchiver\Formatter\FluentFormatter;
 
 /**
  * Define the Monolog Fluentd handler.

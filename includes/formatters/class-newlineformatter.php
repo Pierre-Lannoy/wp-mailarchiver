@@ -9,11 +9,11 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Formatter;
+namespace Mailarchiver\Formatter;
 
-use Decalog\Plugin\Feature\ClassTypes;
-use Decalog\System\Http;
-use Decalog\Formatter\WordpressFormatter;
+use Mailarchiver\Plugin\Feature\ClassTypes;
+use Mailarchiver\System\Http;
+use Mailarchiver\Formatter\WordpressFormatter;
 use Monolog\Logger;
 
 /**

@@ -9,9 +9,9 @@
  * @since   1.6.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\Logger;
+use Mailarchiver\Logger;
 
 /**
  * WPSEO listener for MailArchiver.

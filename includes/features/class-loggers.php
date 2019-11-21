@@ -9,10 +9,10 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\System\Option;
-use Decalog\Plugin\Feature\Log;
+use Mailarchiver\System\Option;
+use Mailarchiver\Plugin\Feature\Log;
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';

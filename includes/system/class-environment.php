@@ -7,7 +7,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 use Exception;
 

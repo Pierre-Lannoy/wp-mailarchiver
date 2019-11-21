@@ -9,10 +9,10 @@
  * @since   1.3.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\System\Environment;
-use Decalog\System\Option;
+use Mailarchiver\System\Environment;
+use Mailarchiver\System\Option;
 
 /**
  * htaccess Server-Info & Server-Status listener for MailArchiver.

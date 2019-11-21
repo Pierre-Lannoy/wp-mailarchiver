@@ -11,7 +11,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 /**
  * Define the nag functionality.

@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
-use Decalog\System\Hash;
+use Mailarchiver\System\Hash;
 
 /**
  * Define the user functionality.

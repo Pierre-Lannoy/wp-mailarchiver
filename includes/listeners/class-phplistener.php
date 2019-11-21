@@ -9,11 +9,11 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\Plugin\Feature\DLogger;
-use Decalog\System\Environment;
-use Decalog\System\Option;
+use Mailarchiver\Plugin\Feature\DLogger;
+use Mailarchiver\System\Environment;
+use Mailarchiver\System\Option;
 use Monolog\Logger;
 use Monolog\Utils;
 

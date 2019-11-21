@@ -9,7 +9,7 @@
  * @since   1.3.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 /**
  * Define the plugin statistics functionality.

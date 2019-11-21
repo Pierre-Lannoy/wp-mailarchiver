@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
 use Monolog\Logger;
 
@@ -164,7 +164,7 @@ class LoggerFactory {
 			$logger = $this->configuration_check( $logger, $handler['configuration'] );
 		}
 		if ( $init_handler && array_key_exists( 'uuid', $logger ) ) {
-			$classname = 'Decalog\Plugin\Feature\\' . $logger['handler'];
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $logger['handler'];
 			if ( class_exists( $classname ) ) {
 				$instance = $this->create_instance( $classname );
 				$instance->set_logger( $logger );
@@ -182,7 +182,7 @@ class LoggerFactory {
 	 */
 	public function clean( $logger ) {
 		if ( array_key_exists( 'uuid', $logger ) ) {
-			$classname = 'Decalog\Plugin\Feature\\' . $logger['handler'];
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $logger['handler'];
 			if ( class_exists( $classname ) ) {
 				$instance = $this->create_instance( $classname );
 				$instance->set_logger( $logger );

@@ -7,17 +7,17 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\Plugin\Feature\HandlerTypes;
+use Mailarchiver\Plugin\Feature\HandlerTypes;
 use Monolog\Logger;
-use Decalog\System\Environment;
-use Decalog\System\Option;
-use Decalog\System\Timezone;
-use Decalog\Plugin\Feature\LoggerFactory;
-use Decalog\Plugin\Feature\ClassTypes;
-use Decalog\Plugin\Feature\ChannelTypes;
-use Decalog\Plugin\Feature\HandlerDiagnosis;
+use Mailarchiver\System\Environment;
+use Mailarchiver\System\Option;
+use Mailarchiver\System\Timezone;
+use Mailarchiver\Plugin\Feature\LoggerFactory;
+use Mailarchiver\Plugin\Feature\ClassTypes;
+use Mailarchiver\Plugin\Feature\ChannelTypes;
+use Mailarchiver\Plugin\Feature\HandlerDiagnosis;
 
 /**
  * Main MailArchiver logger class.

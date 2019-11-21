@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
 use Monolog\Logger;
 use Feather;

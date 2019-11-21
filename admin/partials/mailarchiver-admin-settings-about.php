@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-use Decalog\System\Environment;
+use Mailarchiver\System\Environment;
 
 wp_enqueue_style( MAILARCHIVER_ASSETS_ID );
 wp_enqueue_script( MAILARCHIVER_ASSETS_ID );
@@ -23,7 +23,7 @@ if ( Environment::is_plugin_in_rc_mode() ) {
 	$icon     = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'alert-triangle', 'none', '#FF8C00' ) . '" />&nbsp;';
 	$warning .= '<p>' . $icon . sprintf( esc_html__( 'This version of %s is a release candidate. Although ready for production, this version is not officially supported in production environments.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ) . '</p>';
 }
-$icon       = '<img class="mailarchiver-about-logo" style="opacity:0;" src="' . Decalog\Plugin\Core::get_base64_logo() . '" />';
+$icon       = '<img class="mailarchiver-about-logo" style="opacity:0;" src="' . Mailarchiver\Plugin\Core::get_base64_logo() . '" />';
 $intro      = sprintf( esc_html__( '%1$s is a free and open source plugin for WordPress. It integrates other free and open source works (as-is or modified) like: %2$s.', 'mailarchiver' ), '<em>' . MAILARCHIVER_PRODUCT_NAME . '</em>', do_shortcode( '[mailarchiver-libraries]' ) );
 $trademarks = esc_html__( 'All brands, icons and graphic illustrations are registered trademarks of their respective owners.', 'mailarchiver' );
 $brands     = array( 'Automattic', 'Fluentd Project', 'Google', 'Pushover', 'Slack' );

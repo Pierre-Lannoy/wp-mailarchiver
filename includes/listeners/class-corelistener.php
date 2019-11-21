@@ -10,12 +10,12 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\System\Environment;
-use Decalog\System\Option;
-use Decalog\System\Http;
-use Decalog\System\Comment;
+use Mailarchiver\System\Environment;
+use Mailarchiver\System\Option;
+use Mailarchiver\System\Http;
+use Mailarchiver\System\Comment;
 
 /**
  * WP core listener for MailArchiver.
@@ -141,7 +141,7 @@ class CoreListener extends AbstractListener {
 	}
 
 	function modify_mailer_callback(\PHPMailer $phpmailer) {
-		$phpmailer->action_function = '\Decalog\Listener\CoreListener::send_callback';
+		$phpmailer->action_function = '\Mailarchiver\Listener\CoreListener::send_callback';
 		$this->logger->emergency( 'modify_mailer_callback done!' );
 		error_log('----------------------------------------------------------------------');
 		error_log('----------------------------------------------------------------------');

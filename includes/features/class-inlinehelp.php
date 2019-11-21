@@ -9,11 +9,11 @@
  * @since   1.2.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\System\Environment;
-use Decalog\System\L10n;
-use Decalog\System\Role;
+use Mailarchiver\System\Environment;
+use Mailarchiver\System\L10n;
+use Mailarchiver\System\Role;
 
 /**
  * Define the inline help functionality.

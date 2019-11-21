@@ -10,16 +10,16 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin;
+namespace Mailarchiver\Plugin;
 
-use Decalog\System\Loader;
-use Decalog\Plugin\Initializer;
-use Decalog\System\I18n;
-use Decalog\System\Assets;
-use Decalog\Library\Libraries;
-use Decalog\System\Nag;
-use Decalog\Plugin\Feature\LoggerMaintainer;
-use Decalog\Listener\ListenerFactory;
+use Mailarchiver\System\Loader;
+use Mailarchiver\Plugin\Initializer;
+use Mailarchiver\System\I18n;
+use Mailarchiver\System\Assets;
+use Mailarchiver\Library\Libraries;
+use Mailarchiver\System\Nag;
+use Mailarchiver\Plugin\Feature\LoggerMaintainer;
+use Mailarchiver\Listener\ListenerFactory;
 
 /**
  * The core plugin class.
@@ -90,7 +90,7 @@ class Core {
 		$this->loader->add_action( 'auto_update_plugin', $updater, 'auto_update_plugin', 10, 2 );
 		add_shortcode( 'mailarchiver-changelog', [ $updater, 'sc_get_changelog' ] );
 		add_shortcode( 'mailarchiver-libraries', [ $libraries, 'sc_get_list' ] );
-		add_shortcode( 'mailarchiver-statistics', [ 'Decalog\System\Statistics', 'sc_get_raw' ] );
+		add_shortcode( 'mailarchiver-statistics', [ 'Mailarchiver\System\Statistics', 'sc_get_raw' ] );
 		if ( ! wp_next_scheduled( MAILARCHIVER_CRON_NAME ) ) {
 			wp_schedule_event( time(), 'twicedaily', MAILARCHIVER_CRON_NAME );
 		}
@@ -105,7 +105,7 @@ class Core {
 	 * @since  1.0.0
 	 */
 	private function define_admin_hooks() {
-		$plugin_admin = new Decalog_Admin();
+		$plugin_admin = new Mailarchiver_Admin();
 		$nag          = new Nag();
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'register_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'register_scripts' );
@@ -126,7 +126,7 @@ class Core {
 	 * @since  1.0.0
 	 */
 	private function define_public_hooks() {
-		$plugin_public = new Decalog_Public();
+		$plugin_public = new Mailarchiver_Public();
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 	}

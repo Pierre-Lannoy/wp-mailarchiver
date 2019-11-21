@@ -7,7 +7,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
 /**
  * Register all actions and filters for the plugin.

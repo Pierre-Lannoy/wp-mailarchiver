@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
 use Monolog\Logger;
 
@@ -92,7 +92,7 @@ class HandlerTypes {
 		$this->handlers[] = [
 			'id'            => 'FluentHandler',
 			'ancestor'      => 'SocketHandler',
-			'namespace'     => 'Decalog\\Handler',
+			'namespace'     => 'Mailarchiver\\Handler',
 			'class'         => 'logging',
 			'minimal'       => Logger::DEBUG,
 			'name'          => esc_html__( 'Fluentd', 'mailarchiver' ),
@@ -147,7 +147,7 @@ class HandlerTypes {
 		$this->handlers[] = [
 			'id'            => 'LogentriesHandler',
 			'ancestor'      => 'SocketHandler',
-			'namespace'     => 'Decalog\\Handler',
+			'namespace'     => 'Mailarchiver\\Handler',
 			'class'         => 'logging',
 			'minimal'       => Logger::DEBUG,
 			'name'          => esc_html__( 'Logentries & insightOps', 'mailarchiver' ),
@@ -247,7 +247,7 @@ class HandlerTypes {
 		$this->handlers[] = [
 			'id'            => 'MailHandler',
 			'ancestor'      => 'MailHandler',
-			'namespace'     => 'Decalog\\Handler',
+			'namespace'     => 'Mailarchiver\\Handler',
 			'class'         => 'alerting',
 			'minimal'       => Logger::WARNING,
 			'name'          => esc_html__( 'Mail', 'mailarchiver' ),
@@ -306,7 +306,7 @@ class HandlerTypes {
 		$this->handlers[] = [
 			'id'            => 'PshHandler',
 			'ancestor'      => 'SocketHandler',
-			'namespace'     => 'Decalog\\Handler',
+			'namespace'     => 'Mailarchiver\\Handler',
 			'class'         => 'alerting',
 			'minimal'       => Logger::WARNING,
 			'name'          => esc_html__( 'Pushover', 'mailarchiver' ),
@@ -645,7 +645,7 @@ class HandlerTypes {
 		$this->handlers[] = [
 			'id'            => 'WordpressHandler',
 			'ancestor'      => 'WordpressHandler',
-			'namespace'     => 'Decalog\Handler',
+			'namespace'     => 'Mailarchiver\Handler',
 			'class'         => 'logging',
 			'minimal'       => Logger::DEBUG,
 			'name'          => esc_html__( 'WordPress events log', 'mailarchiver' ),

@@ -9,11 +9,11 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\Plugin\Feature\Log;
-use Decalog\System\Option;
-use Decalog\System\User;
+use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\System\Option;
+use Mailarchiver\System\User;
 use WP_User;
 
 /**
@@ -99,7 +99,7 @@ abstract class AbstractListener {
 					$launch = true;
 				}
 			}
-			if ( $launch && $this->launch() && ! ( 'Decalog\Listener\SelfListener' === get_class( $this ) ) ) {
+			if ( $launch && $this->launch() && ! ( 'Mailarchiver\Listener\SelfListener' === get_class( $this ) ) ) {
 				$this->logger = Log::bootstrap( $this->class, $this->product, $this->version );
 				$this->logger->debug( 'Listener launched and operational.' );
 				if ( isset( $this->log ) ) {

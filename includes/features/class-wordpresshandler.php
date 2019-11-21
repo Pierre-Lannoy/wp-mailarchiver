@@ -9,12 +9,12 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin\Feature;
+namespace Mailarchiver\Plugin\Feature;
 
-use Decalog\Plugin\Feature\DLogger;
-use Decalog\Plugin\Feature\Log;
-use Decalog\System\Database;
-use Decalog\System\Http;
+use Mailarchiver\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\System\Database;
+use Mailarchiver\System\Http;
 
 /**
  * Define the WordPress handler functionality.

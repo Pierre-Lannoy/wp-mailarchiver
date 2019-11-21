@@ -7,7 +7,7 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin;
+namespace Mailarchiver\Plugin;
 
 /**
  * Fired after 'init' hook.
@@ -35,7 +35,7 @@ class Initializer {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
-		add_filter( 'set-screen-option', [ 'Decalog\Plugin\Feature\Events', 'save_screen_option' ], 100, 3 );
+		add_filter( 'set-screen-option', [ 'Mailarchiver\Plugin\Feature\Events', 'save_screen_option' ], 100, 3 );
 	}
 
 }

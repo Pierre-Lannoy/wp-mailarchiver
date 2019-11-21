@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-use Decalog\Plugin\Feature\Loggers;
+use Mailarchiver\Plugin\Feature\Loggers;
 
 $loggers = new Loggers();
 $loggers->prepare_items();

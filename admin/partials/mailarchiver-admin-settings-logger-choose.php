@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-use Decalog\Plugin\Feature\HandlerTypes;
+use Mailarchiver\Plugin\Feature\HandlerTypes;
 
 $logger_types = new HandlerTypes();
 

@@ -7,15 +7,15 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin;
+namespace Mailarchiver\Plugin;
 
-use Decalog\Plugin\Feature\Log;
-use Decalog\Plugin\Feature\LoggerMaintainer;
+use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\Plugin\Feature\LoggerMaintainer;
 use Parsedown;
-use Decalog\System\Nag;
-use Decalog\System\Option;
-use Decalog\System\Environment;
-use Decalog\System\Role;
+use Mailarchiver\System\Nag;
+use Mailarchiver\System\Option;
+use Mailarchiver\System\Environment;
+use Mailarchiver\System\Role;
 use Exception;
 
 /**

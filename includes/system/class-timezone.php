@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace Decalog\System;
+namespace Mailarchiver\System;
 
-use Decalog\System\Environment;
+use Mailarchiver\System\Environment;
 
 /**
  * Define the timezone functionality.

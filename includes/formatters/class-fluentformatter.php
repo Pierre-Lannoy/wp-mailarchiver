@@ -9,10 +9,10 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Formatter;
+namespace Mailarchiver\Formatter;
 
 use Monolog\Formatter\FormatterInterface;
-use Decalog\Plugin\Feature\EventTypes;
+use Mailarchiver\Plugin\Feature\EventTypes;
 
 /**
  * Define the Monolog Fluentd formatter.

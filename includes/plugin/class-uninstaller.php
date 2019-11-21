@@ -7,10 +7,10 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Plugin;
+namespace Mailarchiver\Plugin;
 
-use Decalog\System\Option;
-use Decalog\System\User;
+use Mailarchiver\System\Option;
+use Mailarchiver\System\User;
 
 /**
  * Fired during plugin deletion.

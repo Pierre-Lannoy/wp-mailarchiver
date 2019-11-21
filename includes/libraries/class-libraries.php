@@ -9,9 +9,9 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Library;
+namespace Mailarchiver\Library;
 
-use Decalog\System\L10n;
+use Mailarchiver\System\L10n;
 
 /**
  * Define the libraries functionality.

@@ -9,10 +9,10 @@
  * @since   1.6.0
  */
 
-namespace Decalog\Listener;
+namespace Mailarchiver\Listener;
 
-use Decalog\System\Option;
-use Decalog\Plugin\Feature\EventTypes;
+use Mailarchiver\System\Option;
+use Mailarchiver\Plugin\Feature\EventTypes;
 
 /**
  * WP Security Audit Log listener for MailArchiver.

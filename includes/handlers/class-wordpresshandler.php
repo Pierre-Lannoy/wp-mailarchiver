@@ -9,12 +9,12 @@
  * @since   1.0.0
  */
 
-namespace Decalog\Handler;
+namespace Mailarchiver\Handler;
 
 use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Formatter\FormatterInterface;
-use Decalog\Formatter\WordpressFormatter;
+use Mailarchiver\Formatter\WordpressFormatter;
 
 /**
  * Define the Monolog WordPress handler.
