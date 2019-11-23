@@ -12,6 +12,7 @@
 namespace Mailarchiver\Listener;
 
 use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\System\Logger;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\User;
 use WP_User;
@@ -26,14 +27,6 @@ use WP_User;
  * @since   1.0.0
  */
 abstract class AbstractListener {
-
-	/**
-	 * An instance of DArchiver to log internal events.
-	 *
-	 * @since  1.0.0
-	 * @var    DArchiver    $log    An instance of DArchiver to log internal events.
-	 */
-	protected $log = null;
 
 	/**
 	 * An instance of DArchiver to log listener events.
@@ -89,8 +82,7 @@ abstract class AbstractListener {
 	 * @param    DArchiver $internal_archiver    An instance of DArchiver to log internal events.
 	 * @since    1.0.0
 	 */
-	public function __construct( $internal_archiver ) {
-		$this->log = $internal_archiver;
+	public function __construct() {
 		$this->init();
 		if ( $this->is_available() ) {
 			$launch = Option::network_get( 'autolisteners' );
@@ -100,11 +92,7 @@ abstract class AbstractListener {
 				}
 			}
 			if ( $launch && $this->launch() && ! ( 'Mailarchiver\Listener\SelfListener' === get_class( $this ) ) ) {
-				$this->archiver = Log::bootstrap( $this->class, $this->product, $this->version );
-				$this->archiver->debug( 'Listener launched and operational.' );
-				if ( isset( $this->log ) ) {
-					$this->log->debug( sprintf( 'Listener for %s is launched.', $this->name ) );
-				}
+				Logger::debug( sprintf( 'Listener for %s is launched.', $this->name ) );
 			}
 		}
 	}

@@ -13,6 +13,7 @@ namespace Mailarchiver\Listener;
 
 use Mailarchiver\Plugin\Feature\Log;
 use Mailarchiver\System\Option;
+use Mailarchiver\System\Logger;
 
 /**
  * Define the listeners handling functionality.
@@ -24,14 +25,6 @@ use Mailarchiver\System\Option;
  * @since   1.0.0
  */
 class ListenerFactory {
-
-	/**
-	 * An instance of DArchiver to log internal events.
-	 *
-	 * @since  1.0.0
-	 * @var    DArchiver    $log    An instance of DArchiver to log internal events.
-	 */
-	private $log = null;
 
 	/**
 	 * Excluded files from listeners auto loading.
@@ -69,7 +62,6 @@ class ListenerFactory {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		$this->log = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
 	}
 
 	/**
@@ -89,7 +81,7 @@ class ListenerFactory {
 				if ( $instance ) {
 					self::$infos[] = $instance->get_info();
 				} else {
-					$this->log->error( sprintf( 'Unable to load "%s".', $classname ) );
+					Logger::error( sprintf( 'Unable to load "%s".', $classname ) );
 				}
 			}
 		}
@@ -111,7 +103,7 @@ class ListenerFactory {
 				if ( $instance ) {
 					self::$infos[] = $instance->get_info();
 				} else {
-					$this->log->error( sprintf( 'Unable to load "%s".', $classname ) );
+					Logger::error( sprintf( 'Unable to load "%s".', $classname ) );
 				}
 			}
 		}
@@ -129,7 +121,7 @@ class ListenerFactory {
 		if ( class_exists( $class_name ) ) {
 			try {
 				$reflection = new \ReflectionClass( $class_name );
-				return $reflection->newInstanceArgs( [ $this->log ] );
+				return $reflection->newInstanceArgs();
 			} catch ( Exception $e ) {
 				return false;
 			}

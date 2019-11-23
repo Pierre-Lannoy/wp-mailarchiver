@@ -264,22 +264,6 @@ class DArchiver {
 	}
 
 	/**
-	 * Verify if DEBUG is allowed.
-	 *
-	 * @return  boolean True if DEBUG message are allowed, false otherwise.
-	 * @since 1.0.0
-	 */
-	private function is_debug_allowed() {
-		if ( ! Option::network_get( 'respect_wp_debug' ) ) {
-			return true;
-		}
-		if ( defined( 'WP_DEBUG' ) ) {
-			return WP_DEBUG;
-		}
-		return true;
-	}
-
-	/**
 	 * Adds a log record at a specific level.
 	 *
 	 * @param mixed   $level The log level.
@@ -320,26 +304,24 @@ class DArchiver {
 	 * @since 1.0.0
 	 */
 	public function debug( $message, $code = 0 ) {
-		if ( $this->is_debug_allowed() && $this->allowed ) {
-			try {
-				$context = [
-					'class'     => (string) $this->class,
-					'component' => (string) $this->name,
-					'version'   => (string) $this->version,
-					'code'      => (int) $code,
-				];
-				$channel = $this->current_channel_tag();
-				if ( $this->archiver->getName() !== $channel ) {
-					$this->archiver = $this->archiver->withName( $channel );
-				}
-				$this->archiver->debug( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-				$result = true;
-			} catch ( \Throwable $t ) {
-				$this->integrity_check();
-				$result = false;
-			} finally {
-				return $result;
+		try {
+			$context = [
+				'class'     => (string) $this->class,
+				'component' => (string) $this->name,
+				'version'   => (string) $this->version,
+				'code'      => (int) $code,
+			];
+			$channel = $this->current_channel_tag();
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
+			$this->archiver->debug( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$result = true;
+		} catch ( \Throwable $t ) {
+			$this->integrity_check();
+			$result = false;
+		} finally {
+			return $result;
 		}
 	}
 

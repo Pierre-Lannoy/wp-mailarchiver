@@ -37,28 +37,6 @@ class ProcessorTypes {
 	 */
 	public function __construct() {
 		$this->processors[] = [
-			'id'        => 'BacktraceProcessor',
-			'namespace' => 'Mailarchiver\\Processor',
-			'name'      => esc_html__( 'Backtrace', 'mailarchiver' ),
-			'help'      => esc_html__( 'Allows to log the full PHP and WordPress call stack.', 'mailarchiver' ),
-			'init'      => [
-				[ 'type' => 'level' ],
-			],
-		];
-		$this->processors[] = [
-			'id'        => 'IntrospectionProcessor',
-			'namespace' => 'Monolog\\Processor',
-			'name'      => esc_html__( 'PHP introspection', 'mailarchiver' ),
-			'help'      => esc_html__( 'Allows to log line, file, class and function generating the event.', 'mailarchiver' ),
-			'init'      => [
-				[ 'type' => 'level' ],
-				[
-					'type'  => 'literal',
-					'value' => [ 'Mailarchiver\\' ],
-				],
-			],
-		];
-		$this->processors[] = [
 			'id'        => 'WWWProcessor',
 			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'HTTP request', 'mailarchiver' ),

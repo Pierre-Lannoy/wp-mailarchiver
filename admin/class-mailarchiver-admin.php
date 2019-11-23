@@ -22,7 +22,7 @@ use Mailarchiver\System\UUID;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Form;
 use Mailarchiver\System\Role;
-use Monolog\Logger;
+use Mailarchiver\System\Logger;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -40,14 +40,6 @@ class Mailarchiver_Admin {
 	 * @var    Assets    $assets    The plugin assets manager.
 	 */
 	protected $assets;
-
-	/**
-	 * The internal archiver.
-	 *
-	 * @since  1.0.0
-	 * @var    DArchiver    $archiver    The plugin admin archiver.
-	 */
-	protected $archiver;
 
 	/**
 	 * The current archiver.
@@ -80,7 +72,6 @@ class Mailarchiver_Admin {
 	 */
 	public function __construct() {
 		$this->assets = new Assets();
-		$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
 	}
 
 	/**
@@ -132,7 +123,7 @@ class Mailarchiver_Admin {
 				$logid   = filter_input( INPUT_GET, 'logid', FILTER_SANITIZE_STRING );
 				$eventid = filter_input( INPUT_GET, 'eventid', FILTER_SANITIZE_NUMBER_INT );
 				if ( isset( $logid ) && isset( $eventid ) && 0 !== $eventid ) {
-					$this->current_view = new EventViewer( $logid, $eventid, $this->archiver );
+					$this->current_view = new EventViewer( $logid, $eventid );
 					add_action( 'load-' . $name, [ $this->current_view, 'add_metaboxes_options' ] );
 					add_action( 'admin_footer-' . $name, [ $this->current_view, 'add_footer' ] );
 					add_filter( 'screen_settings', [ $this->current_view, 'display_screen_settings' ], 10, 2 );
@@ -162,7 +153,7 @@ class Mailarchiver_Admin {
 	 */
 	public function blog_action( $actions, $user_blog ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
-			$actions .= " | <a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Events log', 'mailarchiver' ) . '</a>';
+			$actions .= " | <a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Archived mails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
 	}
@@ -179,7 +170,7 @@ class Mailarchiver_Admin {
 	 */
 	public function site_action( $actions, $blog_id, $blogname ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
-			$actions['events_log'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Events log', 'mailarchiver' ) . '</a>';
+			$actions['events_log'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived mails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
 	}
@@ -216,7 +207,7 @@ class Mailarchiver_Admin {
 	public function add_actions_links( $actions, $plugin_file, $plugin_data, $context ) {
 		$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php?page=mailarchiver-settings' ), esc_html__( 'Settings', 'mailarchiver' ) );
 		if ( Events::archivers_count() > 0 ) {
-			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'tools.php?page=mailarchiver-viewer' ), esc_html__( 'Events Logs', 'mailarchiver' ) );
+			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'tools.php?page=mailarchiver-viewer' ), esc_html__( 'Archived Mails', 'mailarchiver' ) );
 		}
 		return $actions;
 	}
@@ -257,8 +248,8 @@ class Mailarchiver_Admin {
 	 * @since 1.0.0
 	 */
 	public function get_settings_page() {
-		$this->current_handler = null;
-		$this->current_archiver  = null;
+		$this->current_handler  = null;
+		$this->current_archiver = null;
 		if ( ! ( $action = filter_input( INPUT_GET, 'action' ) ) ) {
 			$action = filter_input( INPUT_POST, 'action' );
 		}
@@ -295,7 +286,7 @@ class Mailarchiver_Admin {
 			];
 		}
 		if ( $this->current_archiver ) {
-			$factory              = new ArchiverFactory();
+			$factory                = new ArchiverFactory();
 			$this->current_archiver = $factory->check( $this->current_archiver );
 		}
 		$view = 'mailarchiver-admin-settings-main';
@@ -305,18 +296,18 @@ class Mailarchiver_Admin {
 					switch ( $action ) {
 						case 'form-edit':
 							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								$current_archiver  = $this->current_archiver;
-								$current_handler = $this->current_handler;
-								$args            = compact( 'current_archiver', 'current_handler' );
-								$view            = 'mailarchiver-admin-settings-archiver-edit';
+								$current_archiver = $this->current_archiver;
+								$current_handler  = $this->current_handler;
+								$args             = compact( 'current_archiver', 'current_handler' );
+								$view             = 'mailarchiver-admin-settings-archiver-edit';
 							}
 							break;
 						case 'form-delete':
 							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								$current_archiver  = $this->current_archiver;
-								$current_handler = $this->current_handler;
-								$args            = compact( 'current_archiver', 'current_handler' );
-								$view            = 'mailarchiver-admin-settings-archiver-delete';
+								$current_archiver = $this->current_archiver;
+								$current_handler  = $this->current_handler;
+								$args             = compact( 'current_archiver', 'current_handler' );
+								$view             = 'mailarchiver-admin-settings-archiver-delete';
 							}
 							break;
 						case 'do-edit':
@@ -336,11 +327,10 @@ class Mailarchiver_Admin {
 									if ( array_key_exists( $uuid, $archivers ) ) {
 										$archivers[ $uuid ]['running'] = true;
 										Option::network_set( 'archivers', $archivers );
-										$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-										$message      = sprintf( esc_html__( 'Archiver %s has started.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
-										$code         = 0;
+										$message = sprintf( esc_html__( 'Archiver %s has started.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
+										$code    = 0;
 										add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-										$this->archiver->info( sprintf( 'Archiver "%s" has started.', $archivers[ $uuid ]['name'] ), $code );
+										Logger::info( sprintf( 'Archiver "%s" has started.', $archivers[ $uuid ]['name'] ), $code );
 									}
 								}
 							}
@@ -352,40 +342,10 @@ class Mailarchiver_Admin {
 									if ( array_key_exists( $uuid, $archivers ) ) {
 										$message = sprintf( esc_html__( 'Archiver %s has been paused.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
 										$code    = 0;
-										$this->archiver->notice( sprintf( 'Archiver "%s" has been paused.', $archivers[ $uuid ]['name'] ), $code );
+										Logger::notice( sprintf( 'Archiver "%s" has been paused.', $archivers[ $uuid ]['name'] ), $code );
 										$archivers[ $uuid ]['running'] = false;
 										Option::network_set( 'archivers', $archivers );
-										$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
 										add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-									}
-								}
-							}
-						case 'test':
-							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								if ( $nonce && $uuid && wp_verify_nonce( $nonce, 'mailarchiver-archiver-test-' . $uuid ) ) {
-									$archivers = Option::network_get( 'archivers' );
-									if ( array_key_exists( $uuid, $archivers ) ) {
-										$test = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION, $uuid );
-										$done = true;
-										$done = $done & $test->debug( 'Debug test message.', 210871 );
-										$done = $done & $test->info( 'Info test message.', 210871 );
-										$done = $done & $test->notice( 'Notice test message.', 210871 );
-										$done = $done & $test->warning( 'Warning test message.', 210871 );
-										$done = $done & $test->error( 'Error test message.', 210871 );
-										$done = $done & $test->critical( 'Critical test message.', 210871 );
-										$done = $done & $test->alert( 'Alert test message.', 210871 );
-										$done = $done & $test->emergency( 'Emergency test message.', 210871 );
-										if ( $done ) {
-											$message = sprintf( esc_html__( 'Test messages have been sent to archiver %s.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
-											$code    = 0;
-											$this->archiver->info( sprintf( 'Archiver "%s" has been tested.', $archivers[ $uuid ]['name'] ), $code );
-											add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-										} else {
-											$message = sprintf( esc_html__( 'Test messages have not been sent to archiver %s. Please check the archiver\'s settings.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
-											$code    = 1;
-											$this->archiver->warning( sprintf( 'Archiver "%s" has been unsuccessfully tested.', $archivers[ $uuid ]['name'] ), $code );
-											add_settings_error( 'mailarchiver_error', $code, $message, 'error' );
-										}
 									}
 								}
 							}
@@ -442,12 +402,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Listeners settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->archiver->info( 'Listeners settings updated.', $code );
+				Logger::info( 'Listeners settings updated.', $code );
 			} else {
 				$message = esc_html__( 'Listeners settings have not been saved. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->archiver->warning( 'Listeners settings not updated.', $code );
+				Logger::warning( 'Listeners settings not updated.', $code );
 			}
 		}
 	}
@@ -464,12 +424,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Listeners settings have been reset to defaults.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->archiver->info( 'Listeners settings reset to defaults.', $code );
+				Logger::info( 'Listeners settings reset to defaults.', $code );
 			} else {
 				$message = esc_html__( 'Listeners settings have not been reset to defaults. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->archiver->warning( 'Listeners settings not reset to defaults.', $code );
+				Logger::warning( 'Listeners settings not reset to defaults.', $code );
 			}
 		}
 	}
@@ -487,16 +447,15 @@ class Mailarchiver_Admin {
 				Option::network_set( 'display_nag', array_key_exists( 'mailarchiver_plugin_options_nag', $_POST ) );
 				Option::network_set( 'archiver_autostart', array_key_exists( 'mailarchiver_archivers_options_autostart', $_POST ) );
 				Option::network_set( 'pseudonymization', array_key_exists( 'mailarchiver_archivers_options_pseudonymization', $_POST ) );
-				Option::network_set( 'respect_wp_debug', array_key_exists( 'mailarchiver_archivers_options_wpdebug', $_POST ) );
 				$message = esc_html__( 'Plugin settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->archiver->info( 'Plugin settings updated.', $code );
+				Logger::info( 'Plugin settings updated.', $code );
 			} else {
 				$message = esc_html__( 'Plugin settings have not been saved. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->archiver->warning( 'Plugin settings not updated.', $code );
+				Logger::warning( 'Plugin settings not updated.', $code );
 			}
 		}
 	}
@@ -513,12 +472,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Plugin settings have been reset to defaults.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->archiver->info( 'Plugin settings reset to defaults.', $code );
+				Logger::info( 'Plugin settings reset to defaults.', $code );
 			} else {
 				$message = esc_html__( 'Plugin settings have not been reset to defaults. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->archiver->warning( 'Plugin settings not reset to defaults.', $code );
+				Logger::warning( 'Plugin settings not reset to defaults.', $code );
 			}
 		}
 	}
@@ -558,25 +517,24 @@ class Mailarchiver_Admin {
 							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_UNSAFE_RAW ) : $this->current_archiver['configuration'][ $key ] );
 						}
 					}
-					$uuid             = $this->current_archiver['uuid'];
+					$uuid               = $this->current_archiver['uuid'];
 					$archivers          = Option::network_get( 'archivers' );
-					$factory          = new ArchiverFactory();
+					$factory            = new ArchiverFactory();
 					$archivers[ $uuid ] = $factory->check( $this->current_archiver, true );
 					if ( array_key_exists( 'uuid', $archivers[ $uuid ] ) ) {
 						unset( $archivers[ $uuid ]['uuid'] );
 					}
 					Option::network_set( 'archivers', $archivers );
-					$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-					$message      = sprintf( esc_html__( 'Archiver %s has been saved.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
-					$code         = 0;
+					$message = sprintf( esc_html__( 'Archiver %s has been saved.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
+					$code    = 0;
 					add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-					$this->archiver->info( sprintf( 'Archiver "%s" has been saved.', $this->current_archiver['name'] ), $code );
+					Logger::info( sprintf( 'Archiver "%s" has been saved.', $this->current_archiver['name'] ), $code );
 				}
 			} else {
 				$message = sprintf( esc_html__( 'Archiver %s has not been saved. Please try again.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->archiver->warning( sprintf( 'Archiver "%s" has not been saved.', $this->current_archiver['name'] ), $code );
+				Logger::warning( sprintf( 'Archiver "%s" has not been saved.', $this->current_archiver['name'] ), $code );
 			}
 		}
 	}
@@ -590,23 +548,22 @@ class Mailarchiver_Admin {
 		if ( ! empty( $_POST ) ) {
 			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-archiver-delete' ) ) {
 				if ( array_key_exists( 'submit', $_POST ) ) {
-					$uuid    = $this->current_archiver['uuid'];
+					$uuid      = $this->current_archiver['uuid'];
 					$archivers = Option::network_get( 'archivers' );
-					$factory = new ArchiverFactory();
+					$factory   = new ArchiverFactory();
 					$factory->clean( $this->current_archiver );
 					unset( $archivers[ $uuid ] );
 					Option::network_set( 'archivers', $archivers );
-					$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-					$message      = sprintf( esc_html__( 'Archiver %s has been removed.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
-					$code         = 0;
+					$message = sprintf( esc_html__( 'Archiver %s has been removed.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
+					$code    = 0;
 					add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-					$this->archiver->notice( sprintf( 'Archiver "%s" has been removed.', $this->current_archiver['name'] ), $code );
+					Logger::notice( sprintf( 'Archiver "%s" has been removed.', $this->current_archiver['name'] ), $code );
 				}
 			} else {
 				$message = sprintf( esc_html__( 'Archiver %s has not been removed. Please try again.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->archiver->warning( sprintf( 'Archiver "%s" has not been removed.', $this->current_archiver['name'] ), $code );
+				Logger::warning( sprintf( 'Archiver "%s" has not been removed.', $this->current_archiver['name'] ), $code );
 			}
 		}
 	}
@@ -733,22 +690,6 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_archivers_options_section', 'mailarchiver_archivers_options_pseudonymization' );
-		add_settings_field(
-			'mailarchiver_archivers_options_wpdebug',
-			__( 'Rules', 'mailarchiver' ),
-			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_archivers_options_section',
-			'mailarchiver_archivers_options_section',
-			[
-				'text'        => esc_html__( 'Respect WP_DEBUG', 'mailarchiver' ),
-				'id'          => 'mailarchiver_archivers_options_wpdebug',
-				'checked'     => Option::network_get( 'respect_wp_debug' ),
-				'description' => esc_html__( 'If checked, the value of WP_DEBUG will override each archiver\'s settings for minimal level of logging.', 'mailarchiver' ),
-				'full_width'  => true,
-				'enabled'     => true,
-			]
-		);
-		register_setting( 'mailarchiver_archivers_options_section', 'mailarchiver_archivers_options_wpdebug' );
 	}
 
 	/**
@@ -1032,7 +973,7 @@ class Mailarchiver_Admin {
 					'checked'     => in_array( $processor['id'], $this->current_archiver['processors'], true ),
 					'description' => $processor['help'],
 					'full_width'  => true,
-					'enabled'     => ( 'WordpressHandler' !== $this->current_archiver['handler'] || 'BacktraceProcessor' === $processor['id'] ) && ( 'PushoverHandler' !== $this->current_archiver['handler'] ),
+					'enabled'     => ( 'WordpressHandler' !== $this->current_archiver['handler'] ) && ( 'PushoverHandler' !== $this->current_archiver['handler'] ),
 				]
 			);
 			register_setting( 'mailarchiver_archiver_details_section', $id );

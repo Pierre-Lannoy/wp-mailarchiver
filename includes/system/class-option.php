@@ -36,19 +36,18 @@ class Option {
 	 * @since 1.0.0
 	 */
 	public static function init() {
-		self::$defaults['use_cdn']           = false;
-		self::$defaults['download_favicons'] = false;
-		self::$defaults['script_in_footer']  = false;
-		self::$defaults['auto_update']       = true;  // In plugin settings.
-		self::$defaults['display_nag']       = true;  // In plugin settings.
-		self::$defaults['nags']              = [];
-		self::$defaults['version']           = '0.0.0';
-		self::$defaults['archivers']           = [];
-		self::$defaults['respect_wp_debug']  = false; // In plugin settings.
-		self::$defaults['archiver_autostart']  = true;  // In plugin settings.
-		self::$defaults['autolisteners']     = true;  // In plugin settings.
-		self::$defaults['listeners']         = [];    // In plugin settings.
-		self::$defaults['pseudonymization']  = false; // In plugin settings.
+		self::$defaults['use_cdn']            = false;
+		self::$defaults['download_favicons']  = false;
+		self::$defaults['script_in_footer']   = false;
+		self::$defaults['auto_update']        = true;  // In plugin settings.
+		self::$defaults['display_nag']        = true;  // In plugin settings.
+		self::$defaults['nags']               = [];
+		self::$defaults['version']            = '0.0.0';
+		self::$defaults['archivers']          = [];
+		self::$defaults['archiver_autostart'] = true;  // In plugin settings.
+		self::$defaults['autolisteners']      = true;  // In plugin settings.
+		self::$defaults['listeners']          = [];    // In plugin settings.
+		self::$defaults['pseudonymization']   = false; // In plugin settings.
 	}
 
 	/**
@@ -165,7 +164,6 @@ class Option {
 		self::network_set( 'script_in_footer', self::$defaults['script_in_footer'] );
 		self::network_set( 'auto_update', self::$defaults['auto_update'] );
 		self::network_set( 'display_nag', self::$defaults['display_nag'] );
-		self::network_set( 'respect_wp_debug', self::$defaults['respect_wp_debug'] );
 		self::network_set( 'archiver_autostart', self::$defaults['archiver_autostart'] );
 		self::network_set( 'autolisteners', self::$defaults['autolisteners'] );
 		self::network_set( 'pseudonymization', self::$defaults['pseudonymization'] );

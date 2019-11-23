@@ -17,6 +17,7 @@ use Mailarchiver\System\Option;
 use Mailarchiver\System\Environment;
 use Mailarchiver\System\Role;
 use Exception;
+use Mailarchiver\System\Logger;
 
 /**
  * Plugin updates handling.
@@ -46,8 +47,7 @@ class Updater {
 				$this->update( $old );
 				// phpcs:ignore
 				$message = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME, $old, MAILARCHIVER_VERSION );
-				$archiver  = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-				$archiver->notice( $message );
+				Logger::notice( $message );
 				// phpcs:ignore
 				$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'mailarchiver' ), admin_url( 'options-general.php?page=mailarchiver-settings&tab=about' ) );
 			}

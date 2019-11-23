@@ -15,6 +15,7 @@ use Mailarchiver\System\Date;
 use Mailarchiver\System\Timezone;
 use Feather;
 use Mailarchiver\System\Database;
+use Mailarchiver\System\Logger;
 
 /**
  * Define the event viewer functionality.
@@ -26,15 +27,6 @@ use Mailarchiver\System\Database;
  * @since   1.0.0
  */
 class EventViewer {
-
-	/**
-	 * The internal archiver.
-	 *
-	 * @since  1.0.0
-	 * @access protected
-	 * @var    DArchiver    $archiver    The plugin admin archiver.
-	 */
-	protected $archiver;
 
 	/**
 	 * The screen id.
@@ -73,12 +65,10 @@ class EventViewer {
 	 *
 	 * @param   string  $logid      The events log id.
 	 * @param   string  $eventid    The specific event id.
-	 * @param   DArchiver $archiver     The internal archiver.
 	 * @since    1.0.0
 	 */
-	public function __construct( $logid, $eventid, $archiver ) {
+	public function __construct( $logid, $eventid ) {
 		$this->logid   = $logid;
-		$this->archiver  = $archiver;
 		$this->eventid = $eventid;
 		$this->event   = null;
 		$database      = new Database();
@@ -217,7 +207,7 @@ class EventViewer {
 			echo '<li>' . sprintf( esc_html__( 'Event: %s', 'mailarchiver' ), '<code>' . $this->eventid . '</code>' ) . '</li>';
 			echo '</ul>';
 			echo '</p>';
-			$this->archiver->warning( sprintf( 'Trying to access out of scope event #%s from events log {%s}.', $this->eventid, $this->logid ), 403 );
+			Logger::warning( sprintf( 'Trying to access out of scope event #%s from events log {%s}.', $this->eventid, $this->logid ), 403 );
 		}
 		echo '</div>';
 	}
