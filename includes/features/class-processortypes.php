@@ -37,26 +37,6 @@ class ProcessorTypes {
 	 */
 	public function __construct() {
 		$this->processors[] = [
-			'id'        => 'WWWProcessor',
-			'namespace' => 'Mailarchiver\\Processor',
-			'name'      => esc_html__( 'HTTP request', 'mailarchiver' ),
-			'help'      => esc_html__( 'Allows to log url, method, referrer and remote IP of the current web request.', 'mailarchiver' ),
-			'init'      => [
-				[
-					'type'  => 'literal',
-					'value' => null,
-				],
-				[
-					'type'  => 'literal',
-					'value' => null,
-				],
-				[
-					'type'  => 'privacy',
-					'value' => 'obfuscation',
-				],
-			],
-		];
-		$this->processors[] = [
 			'id'        => 'WordpressProcessor',
 			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'WordPress ', 'mailarchiver' ),

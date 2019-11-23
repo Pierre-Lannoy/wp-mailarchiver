@@ -252,7 +252,7 @@ class ArchiverFactory {
 			$archiver['processors'] = [];
 		}
 		if ( 'WordpressHandler' === $archiver['handler'] ) {
-			$archiver['processors'] = array_merge( [ 'WordpressProcessor', 'WWWProcessor', 'IntrospectionProcessor' ], $archiver['processors'] );
+			$archiver['processors'] = array_merge( [ 'WordpressProcessor' ], $archiver['processors'] );
 		} else {
 			$processors = [];
 			foreach ( $archiver['processors'] as $processor ) {
