@@ -37,7 +37,7 @@ class Events extends \WP_List_Table {
 	 * The available events logs.
 	 *
 	 * @since    1.0.0
-	 * @var      array    $logs    The loggers list.
+	 * @var      array    $logs    The archivers list.
 	 */
 	private static $logs = [];
 
@@ -90,12 +90,12 @@ class Events extends \WP_List_Table {
 	private $limit = 25;
 
 	/**
-	 * The logger ID.
+	 * The archiver ID.
 	 *
 	 * @since    1.0.0
-	 * @var      string    $logger    The logger ID.
+	 * @var      string    $archiver    The archiver ID.
 	 */
-	private $logger = null;
+	private $archiver = null;
 
 	/**
 	 * The main filter.
@@ -150,7 +150,7 @@ class Events extends \WP_List_Table {
 	protected function column_event( $item ) {
 		$args            = [];
 		$args['page']    = 'mailarchiver-viewer';
-		$args['logid']   = $this->logger;
+		$args['logid']   = $this->archiver;
 		$args['eventid'] = $item['id'];
 		$url             = add_query_arg( $args, admin_url( 'tools.php' ) );
 		$icon            = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $item['level'] ] . '" />';
@@ -286,8 +286,8 @@ class Events extends \WP_List_Table {
 			$this->limit = 25;
 		}
 		$this->force_siteid = null;
-		$this->logger       = filter_input( INPUT_GET, 'logger_id', FILTER_SANITIZE_STRING );
-		if ( $this->logger ) {
+		$this->archiver       = filter_input( INPUT_GET, 'archiver_id', FILTER_SANITIZE_STRING );
+		if ( $this->archiver ) {
 			$this->set_level_access();
 		} else {
 			$this->set_first_available();
@@ -406,7 +406,7 @@ class Events extends \WP_List_Table {
 	public function get_page_url() {
 		$args              = [];
 		$args['page']      = 'mailarchiver-viewer';
-		$args['logger_id'] = $this->logger;
+		$args['archiver_id'] = $this->archiver;
 		if ( count( $this->filters ) > 0 ) {
 			foreach ( $this->filters as $key => $filter ) {
 				if ( '' !== $filter ) {
@@ -450,7 +450,7 @@ class Events extends \WP_List_Table {
 	 * @return  array   The list of available events logs.
 	 * @since    1.0.0
 	 */
-	public function get_loggers() {
+	public function get_archivers() {
 		return self::$logs;
 	}
 
@@ -471,7 +471,7 @@ class Events extends \WP_List_Table {
 	 * @since    1.0.0
 	 */
 	public function get_current_Log_id() {
-		return $this->logger;
+		return $this->archiver;
 	}
 
 	/**
@@ -500,11 +500,11 @@ class Events extends \WP_List_Table {
 	 */
 	private function set_level_access() {
 		$this->force_siteid = null;
-		$id                 = $this->logger;
-		$this->logger       = null;
+		$id                 = $this->archiver;
+		$this->archiver       = null;
 		foreach ( self::$logs as $log ) {
 			if ( $id === $log['id'] ) {
-				$this->logger = $id;
+				$this->archiver = $id;
 				if ( array_key_exists( 'limit', $log ) ) {
 					$this->force_siteid = $log['limit'];
 				}
@@ -519,12 +519,12 @@ class Events extends \WP_List_Table {
 	 */
 	private function set_first_available() {
 		$this->force_siteid = null;
-		$this->logger       = null;
+		$this->archiver       = null;
 		foreach ( self::$logs as $log ) {
 			if ( array_key_exists( 'limit', $log ) ) {
 				$this->force_siteid = $log['limit'];
 			}
-			$this->logger = $log['id'];
+			$this->archiver = $log['id'];
 			break;
 		}
 	}
@@ -544,7 +544,7 @@ class Events extends \WP_List_Table {
 			$limit = 'LIMIT ' . $offset . ',' . $rowcount;
 		}
 		global $wpdb;
-		$table_name = $wpdb->base_prefix . 'mailarchiver_' . str_replace( '-', '', $this->logger );
+		$table_name = $wpdb->base_prefix . 'mailarchiver_' . str_replace( '-', '', $this->archiver );
 		$sql        = 'SELECT * FROM ' . $table_name . ' ' . $this->get_where_clause() . ' ORDER BY id DESC ' . $limit;
 		// phpcs:ignore
 		$query = $wpdb->get_results( $sql, ARRAY_A );
@@ -562,9 +562,9 @@ class Events extends \WP_List_Table {
 	 */
 	protected function get_count() {
 		$result = 0;
-		if ( $this->logger ) {
+		if ( $this->archiver ) {
 			global $wpdb;
-			$table_name = $wpdb->base_prefix . 'mailarchiver_' . str_replace( '-', '', $this->logger );
+			$table_name = $wpdb->base_prefix . 'mailarchiver_' . str_replace( '-', '', $this->archiver );
 			$sql        = 'SELECT COUNT(*) as CNT FROM ' . $table_name . ' ' . $this->get_where_clause();
 			// phpcs:ignore
 			$cnt = $wpdb->get_results( $sql, ARRAY_A );
@@ -720,18 +720,18 @@ class Events extends \WP_List_Table {
 	 */
 	public static function init() {
 		self::$logs = [];
-		foreach ( Option::network_get( 'loggers' ) as $key => $logger ) {
-			if ( 'WordpressHandler' === $logger['handler'] ) {
-				if ( array_key_exists( 'configuration', $logger ) ) {
-					if ( array_key_exists( 'local', $logger['configuration'] ) ) {
-						$local = $logger['configuration']['local'];
+		foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
+			if ( 'WordpressHandler' === $archiver['handler'] ) {
+				if ( array_key_exists( 'configuration', $archiver ) ) {
+					if ( array_key_exists( 'local', $archiver['configuration'] ) ) {
+						$local = $archiver['configuration']['local'];
 					} else {
 						$local = false;
 					}
 					if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() || ( Role::LOCAL_ADMIN === Role::admin_type() && $local ) ) {
 						$log = [
-							'name'    => $logger['name'],
-							'running' => $logger['running'],
+							'name'    => $archiver['name'],
+							'running' => $archiver['running'],
 							'id'      => $key,
 						];
 						if ( Role::LOCAL_ADMIN === Role::admin_type() ) {
@@ -751,7 +751,7 @@ class Events extends \WP_List_Table {
 	 * @return  integer     The number of logs.
 	 * @since    1.0.0
 	 */
-	public static function loggers_count() {
+	public static function archivers_count() {
 		return count( self::$logs );
 	}
 }

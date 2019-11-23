@@ -1,8 +1,8 @@
 <?php
 /**
- * Loggers list
+ * Archivers list
  *
- * Lists all available loggers.
+ * Lists all available archivers.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -19,23 +19,23 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 }
 
 /**
- * Define the loggers list functionality.
+ * Define the archivers list functionality.
  *
- * Lists all available loggers.
+ * Lists all available archivers.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
-class Loggers extends \WP_List_Table {
+class Archivers extends \WP_List_Table {
 
 	/**
-	 * The loggers options handler.
+	 * The archivers options handler.
 	 *
 	 * @since    1.0.0
-	 * @var      array    $loggers    The loggers list.
+	 * @var      array    $archivers    The archivers list.
 	 */
-	private $loggers = [];
+	private $archivers = [];
 
 	/**
 	 * The HandlerTypes instance.
@@ -61,8 +61,8 @@ class Loggers extends \WP_List_Table {
 	public function __construct() {
 		parent::__construct(
 			[
-				'singular' => 'logger',
-				'plural'   => 'loggers',
+				'singular' => 'archiver',
+				'plural'   => 'archivers',
 				'ajax'     => true,
 			]
 		);
@@ -70,10 +70,10 @@ class Loggers extends \WP_List_Table {
 		if ( version_compare( $wp_version, '4.2-z', '>=' ) && $this->compat_fields && is_array( $this->compat_fields ) ) {
 			array_push( $this->compat_fields, 'all_items' );
 		}
-		$this->loggers = [];
-		foreach ( Option::network_get( 'loggers' ) as $key => $logger ) {
-			$logger['uuid']  = $key;
-			$this->loggers[] = $logger;
+		$this->archivers = [];
+		foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
+			$archiver['uuid']  = $key;
+			$this->archivers[] = $archiver;
 		}
 		$this->handler_types   = new HandlerTypes();
 		$this->processor_types = new ProcessorTypes();
@@ -104,7 +104,7 @@ class Loggers extends \WP_List_Table {
 				[
 					'page'   => 'mailarchiver-settings',
 					'action' => 'form-edit',
-					'tab'    => 'loggers',
+					'tab'    => 'archivers',
 					'uuid'   => $item['uuid'],
 				],
 				admin_url( 'options-general.php' )
@@ -115,7 +115,7 @@ class Loggers extends \WP_List_Table {
 				[
 					'page'   => 'mailarchiver-settings',
 					'action' => 'form-delete',
-					'tab'    => 'loggers',
+					'tab'    => 'archivers',
 					'uuid'   => $item['uuid'],
 				],
 				admin_url( 'options-general.php' )
@@ -126,9 +126,9 @@ class Loggers extends \WP_List_Table {
 				[
 					'page'   => 'mailarchiver-settings',
 					'action' => 'pause',
-					'tab'    => 'loggers',
+					'tab'    => 'archivers',
 					'uuid'   => $item['uuid'],
-					'nonce'  => wp_create_nonce( 'mailarchiver-logger-pause-' . $item['uuid'] ),
+					'nonce'  => wp_create_nonce( 'mailarchiver-archiver-pause-' . $item['uuid'] ),
 				],
 				admin_url( 'options-general.php' )
 			)
@@ -138,9 +138,9 @@ class Loggers extends \WP_List_Table {
 				[
 					'page'   => 'mailarchiver-settings',
 					'action' => 'test',
-					'tab'    => 'loggers',
+					'tab'    => 'archivers',
 					'uuid'   => $item['uuid'],
-					'nonce'  => wp_create_nonce( 'mailarchiver-logger-test-' . $item['uuid'] ),
+					'nonce'  => wp_create_nonce( 'mailarchiver-archiver-test-' . $item['uuid'] ),
 				],
 				admin_url( 'options-general.php' )
 			)
@@ -150,9 +150,9 @@ class Loggers extends \WP_List_Table {
 				[
 					'page'   => 'mailarchiver-settings',
 					'action' => 'start',
-					'tab'    => 'loggers',
+					'tab'    => 'archivers',
 					'uuid'   => $item['uuid'],
-					'nonce'  => wp_create_nonce( 'mailarchiver-logger-start-' . $item['uuid'] ),
+					'nonce'  => wp_create_nonce( 'mailarchiver-archiver-start-' . $item['uuid'] ),
 				],
 				admin_url( 'options-general.php' )
 			)
@@ -161,7 +161,7 @@ class Loggers extends \WP_List_Table {
 			add_query_arg(
 				[
 					'page'      => 'mailarchiver-viewer',
-					'logger_id' => $item['uuid'],
+					'archiver_id' => $item['uuid'],
 				],
 				admin_url( 'tools.php' )
 			)
@@ -231,7 +231,7 @@ class Loggers extends \WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = [
-			'name'    => esc_html__( 'Logger', 'mailarchiver' ),
+			'name'    => esc_html__( 'Archiver', 'mailarchiver' ),
 			'status'  => esc_html__( 'Status', 'mailarchiver' ),
 			'level'   => esc_html__( 'Minimal level', 'mailarchiver' ),
 			'details' => esc_html__( 'Reported details', 'mailarchiver' ),
@@ -282,7 +282,7 @@ class Loggers extends \WP_List_Table {
 		$hidden                = $this->get_hidden_columns();
 		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = [ $columns, $hidden, $sortable ];
-		$data                  = $this->loggers;
+		$data                  = $this->archivers;
 		usort(
 			$data,
 			function ( $a, $b ) {

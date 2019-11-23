@@ -62,7 +62,7 @@ class Environment {
 	 * @since 1.0.0
 	 */
 	public static function exec_mode() {
-		$id = 0;
+		$id      = 0;
 		$req_uri = filter_input( INPUT_SERVER, 'REQUEST_URI' );
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			$id = 1;

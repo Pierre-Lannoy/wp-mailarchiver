@@ -26,10 +26,10 @@ use Mailarchiver\System\Option;
 class ListenerFactory {
 
 	/**
-	 * An instance of DLogger to log internal events.
+	 * An instance of DArchiver to log internal events.
 	 *
 	 * @since  1.0.0
-	 * @var    DLogger    $log    An instance of DLogger to log internal events.
+	 * @var    DArchiver    $log    An instance of DArchiver to log internal events.
 	 */
 	private $log = null;
 
@@ -45,8 +45,6 @@ class ListenerFactory {
 		'index.php',
 		'class-abstractlistener.php',
 		'class-listenerfactory.php',
-		//'class-wordfencelistener.php',
-		//'class-wpseolistener.php',
 	];
 
 	/**
@@ -55,10 +53,7 @@ class ListenerFactory {
 	 * @since  1.6.0
 	 * @var    array    $late_init    The list of excluded files.
 	 */
-	private $late_init = [
-		'class-wsallistener.php',
-		'class-wordfencelistener.php',
-	];
+	private $late_init = [];
 
 	/**
 	 * Infos on all loadable listeners.

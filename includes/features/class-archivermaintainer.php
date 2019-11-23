@@ -1,8 +1,8 @@
 <?php
 /**
- * Logger maintenance handling
+ * Archiver maintenance handling
  *
- * Handles all logger maintenance operations.
+ * Handles all archiver maintenance operations.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -14,15 +14,15 @@ namespace Mailarchiver\Plugin\Feature;
 use Mailarchiver\System\Option;
 
 /**
- * Define the logger maintenance functionality.
+ * Define the archiver maintenance functionality.
  *
- * Handles all logger maintenance operations.
+ * Handles all archiver maintenance operations.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
-class LoggerMaintainer {
+class ArchiverMaintainer {
 
 	/**
 	 * Initialize the class and set its properties.
@@ -53,34 +53,34 @@ class LoggerMaintainer {
 	}
 
 	/**
-	 * Clean the logger.
+	 * Clean the archiver.
 	 *
 	 * @since    1.0.0
 	 */
 	public function cron_clean() {
-		foreach ( Option::network_get( 'loggers' ) as $key => $logger ) {
-			$classname = 'Mailarchiver\Plugin\Feature\\' . $logger['handler'];
+		foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
 			if ( class_exists( $classname ) ) {
-				$logger['uuid'] = $key;
-				$instance       = $this->create_instance( $classname );
-				$instance->set_logger( $logger );
+				$archiver['uuid'] = $key;
+				$instance         = $this->create_instance( $classname );
+				$instance->set_archiver( $archiver );
 				$instance->cron_clean();
 			}
 		}
 	}
 
 	/**
-	 * Update the logger.
+	 * Update the archiver.
 	 *
 	 * @since    1.0.0
 	 */
 	public function update( $from ) {
-		foreach ( Option::network_get( 'loggers' ) as $key => $logger ) {
-			$classname = 'Mailarchiver\Plugin\Feature\\' . $logger['handler'];
+		foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
 			if ( class_exists( $classname ) ) {
-				$logger['uuid'] = $key;
-				$instance       = $this->create_instance( $classname );
-				$instance->set_logger( $logger );
+				$archiver['uuid'] = $key;
+				$instance         = $this->create_instance( $classname );
+				$instance->set_archiver( $archiver );
 				$instance->update( $from );
 			}
 		}

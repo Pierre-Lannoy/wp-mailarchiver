@@ -22,12 +22,12 @@ At this time, MailArchiver can send events:
 * by mail (alerting);
 * in the browser console (for debugging purpose);
 * to its internal logging storage and viewer;
-* to external logger, like Syslog or Fluentd;
+* to external archiver, like Syslog or Fluentd;
 * to external logging services, like Logentries / insightOps or Loggly;
 * to external alerting services, like Pushover or Slack;
 * to local or network storage (with file rotation);
 
-Based on the amazing [Monolog 2](https://github.com/Seldaek/monolog) logger, MailArchiver is a free and open source plugin for WordPress. It integrates many other free and open source works (as-is or modified). Please, see 'about' tab in the plugin settings to see the details.
+Based on the amazing [Monolog 2](https://github.com/Seldaek/monolog) archiver, MailArchiver is a free and open source plugin for WordPress. It integrates many other free and open source works (as-is or modified). Please, see 'about' tab in the plugin settings to see the details.
 
 ## Installation
 

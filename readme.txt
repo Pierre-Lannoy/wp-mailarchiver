@@ -30,7 +30,7 @@ At this time, **MailArchiver** can send events:
 * by mail (alerting);
 * in the browser console (for debugging purpose);
 * to its internal logging storage and viewer;
-* to external logger, like Syslog or Fluentd;
+* to external archiver, like Syslog or Fluentd;
 * to external logging services, like Logentries / insightOps or Loggly;
 * to external alerting services, like Pushover or Slack;
 * to local or network storage (with file rotation);
@@ -103,6 +103,6 @@ Please, see [full changelog](https://github.com/Pierre-Lannoy/wp-mailarchiver/bl
 
 == Screenshots ==
 
-1. Set Loggers
+1. Set Archivers
 2. Internal Viewer
 3. Event Details in Internal Viewer

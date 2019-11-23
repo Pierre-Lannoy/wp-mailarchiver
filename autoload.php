@@ -34,8 +34,6 @@ spl_autoload_register(
 				$filepath = MAILARCHIVER_VENDOR_DIR;
 			} elseif ( strpos( $class, 'Mailarchiver\Integration\\' ) === 0 ) {
 				$filepath = MAILARCHIVER_INCLUDES_DIR . 'integrations/';
-			} elseif ( strpos( $class, 'Mailarchiver\API\\' ) === 0 ) {
-				$filepath = MAILARCHIVER_INCLUDES_DIR . 'api/';
 			} elseif ( strpos( $class, 'Mailarchiver\\' ) === 0 ) {
 				$filepath = MAILARCHIVER_INCLUDES_DIR . 'api/';
 			}

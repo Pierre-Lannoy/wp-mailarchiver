@@ -11,10 +11,11 @@
 
 namespace Mailarchiver\Plugin\Feature;
 
-use Mailarchiver\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DArchiver;
 use Mailarchiver\Plugin\Feature\Log;
 use Mailarchiver\System\Database;
 use Mailarchiver\System\Http;
+use Mailarchiver\System\Logger;
 
 /**
  * Define the WordPress handler functionality.
@@ -28,20 +29,12 @@ use Mailarchiver\System\Http;
 class WordpressHandler {
 
 	/**
-	 * The logger definition.
+	 * The archiver definition.
 	 *
 	 * @since  1.0.0
-	 * @var    array    $logger    The logger definition.
+	 * @var    array    $archiver    The archiver definition.
 	 */
-	private $logger = [];
-
-	/**
-	 * An instance of DLogger to log internal events.
-	 *
-	 * @since  1.0.0
-	 * @var    DLogger    $log    An instance of DLogger to log internal events.
-	 */
-	private $log = null;
+	private $archiver = [];
 
 	/**
 	 * The full table name.
@@ -62,31 +55,30 @@ class WordpressHandler {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @param   array $logger    The logger definition.
+	 * @param   array $archiver    The archiver definition.
 	 * @since    1.0.0
 	 */
-	public function __construct( $logger = [] ) {
-		if ( [] !== $logger ) {
-			$this->set_logger( $logger );
+	public function __construct( $archiver = [] ) {
+		if ( [] !== $archiver ) {
+			$this->set_archiver( $archiver );
 		}
-		$this->log = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
 	}
 
 	/**
-	 * Set the internal logger.
+	 * Set the internal archiver.
 	 *
-	 * @param   array $logger    The logger definition.
+	 * @param   array $archiver    The archiver definition.
 	 * @since    1.0.0
 	 */
-	public function set_logger( $logger ) {
+	public function set_archiver( $archiver ) {
 		global $wpdb;
-		$this->logger     = $logger;
-		$this->table_name = 'mailarchiver_' . str_replace( '-', '', $logger['uuid'] );
+		$this->archiver     = $archiver;
+		$this->table_name = 'mailarchiver_' . str_replace( '-', '', $archiver['uuid'] );
 		$this->table      = $wpdb->base_prefix . $this->table_name;
 	}
 
 	/**
-	 * Initialize the logger.
+	 * Initialize the archiver.
 	 *
 	 * @since    1.0.0
 	 */
@@ -132,40 +124,29 @@ class WordpressHandler {
 			$sql            .= ") $charset_collate;";
 			// phpcs:ignore
 			$wpdb->query( $sql );
-			$this->log->debug( sprintf( 'Table "%s" updated or created.', $this->table ) );
+			Logger::debug( sprintf( 'Table "%s" updated or created.', $this->table ) );
 		}
 	}
 
 	/**
-	 * Update the logger.
+	 * Update the archiver.
 	 *
 	 * @param   string $from   The version from which the plugin is updated.
 	 * @since    1.0.0
 	 */
 	public function update( $from ) {
-		global $wpdb;
-		// Starting 1.6.0, WordpressHandler is utf8_unicode_ci and "message" and "trace" fields are varchar(7500).
-		$sql = 'ALTER TABLE ' . $this->table . ' CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;';
-		// phpcs:ignore
-		$wpdb->query( $sql );
-		$sql = 'ALTER TABLE ' . $this->table . " MODIFY COLUMN message varchar(7500) NOT NULL DEFAULT '-';";
-		// phpcs:ignore
-		$wpdb->query( $sql );
-		$sql = 'ALTER TABLE ' . $this->table . " MODIFY COLUMN trace varchar(7500);";
-		// phpcs:ignore
-		$wpdb->query( $sql );
-		$this->log->debug( sprintf( 'Table "%s" updated.', $this->table ) );
+		
 	}
 
 	/**
-	 * Finalize the logger.
+	 * Finalize the archiver.
 	 *
 	 * @since    1.0.0
 	 */
 	public function finalize() {
 		global $wpdb;
 		if ( '' !== $this->table ) {
-			$this->log->debug( sprintf( 'Table "%s" dropped.', $this->table ) );
+			Logger::debug( sprintf( 'Table "%s" dropped.', $this->table ) );
 			$sql = 'DROP TABLE IF EXISTS ' . $this->table;
 			// phpcs:ignore
 			$wpdb->query( $sql );
@@ -181,21 +162,21 @@ class WordpressHandler {
 		if ( '' !== $this->table_name ) {
 			$count    = 0;
 			$database = new Database();
-			if ( $hour_done = $database->purge( $this->table_name, 'timestamp', 24 * (int) $this->logger['configuration']['purge'] ) ) {
+			if ( $hour_done = $database->purge( $this->table_name, 'timestamp', 24 * (int) $this->archiver['configuration']['purge'] ) ) {
 				$count += $hour_done;
 			}
-			$limit = $database->count_lines( $this->table_name ) - (int) $this->logger['configuration']['rotate'];
+			$limit = $database->count_lines( $this->table_name ) - (int) $this->archiver['configuration']['rotate'];
 			if ( $limit > 0 ) {
 				if ( $max_done = $database->rotate( $this->table_name, 'id', $limit ) ) {
 					$count += $max_done;
 				}
 			}
 			if ( 0 === $count ) {
-				$this->log->info( sprintf( 'No old records to delete for logger "%s".', $this->logger['name'] ) );
+				Logger::info( sprintf( 'No old records to delete for archiver "%s".', $this->archiver['name'] ) );
 			} elseif ( 1 === $count ) {
-				$this->log->info( sprintf( '1 old record deleted for logger "%s".', $this->logger['name'] ) );
+				Logger::info( sprintf( '1 old record deleted for archiver "%s".', $this->archiver['name'] ) );
 			} else {
-				$this->log->info( sprintf( '%1$s old records deleted for logger "%2$s".', $count, $this->logger['name'] ) );
+				Logger::info( sprintf( '%1$s old records deleted for archiver "%2$s".', $count, $this->archiver['name'] ) );
 			}
 		}
 	}

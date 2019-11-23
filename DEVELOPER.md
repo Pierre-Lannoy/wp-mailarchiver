@@ -22,8 +22,8 @@ MailArchiver is WordPress plugin which that to:
 ## Definitions
 When using (and developing for) MailArchiver, you will have to deal with the following notions:
 - __Event__ - An event is some bits of information regarding something which happened while executing WordPress. See [Anatomy of an event](#anatomy-of-an-event) to know what it's made of.
-- __Listener__ - A listener is, as its name suggests, something that listens to what's going on in a specific _perimeter_ (mainly a specific WordPress component or subsystem), make it an ___event___ and pass this ___event___ to the running ___loggers___.
-- __Logger__ - A logger is a _recorder_ of ___events___. It can filter them (accept or refuse to record the ___event___ based on settings) then store them (in a database, a file, etc.) or send them (via API calls, sockets, mails, etc.).
+- __Listener__ - A listener is, as its name suggests, something that listens to what's going on in a specific _perimeter_ (mainly a specific WordPress component or subsystem), make it an ___event___ and pass this ___event___ to the running ___archivers___.
+- __Archiver__ - An archiver is a _recorder_ of ___events___. It can filter them (accept or refuse to record the ___event___ based on settings) then store them (in a database, a file, etc.) or send them (via API calls, sockets, mails, etc.).
 
 ## Anatomy of an event
 An ___event___ is composed of:
@@ -35,27 +35,27 @@ An ___event___ is composed of:
 - A __message__ in plain text. I it always in English: messages are not localized.
 - An numerical __code__, which may be everything which makes sense regarding the ___event___ (an error code, for instance).
 
-Depending on each ___loggers___ settings, an ___event___ may contains many other fields which are automaticaly detected and filled by MailArchiver.
+Depending on each ___archivers___ settings, an ___event___ may contains many other fields which are automaticaly detected and filled by MailArchiver.
 
 
 ## Coding with MailArchiver
 In fact, as a developer, you will have to deal only with ___level___, ___message___ and ___code___. All other fields of the ___event___ being handled internaly by MailArchiver.
 
 ### Simple usage
-The simplest way to generate an ___event___ from your code is to use MailArchiver as a standard PSR-3 logger. You can do so as soon as all code for `plugins_loaded` WordPress hook is executed.
+The simplest way to generate an ___event___ from your code is to use MailArchiver as a standard PSR-3 archiver. You can do so as soon as all code for `plugins_loaded` WordPress hook is executed.
 ```php
     
-    // Initializes the events logger
-    $event_logger = new Mailarchiver\Logger( 'plugin', 'My Plugin', '1.2.3' );
+    // Initializes the events archiver
+    $event_archiver = new Mailarchiver\Archiver( 'plugin', 'My Plugin', '1.2.3' );
     
     // Logs a debug message
-    $event_logger->debug( 'Test message.' );
+    $event_archiver->debug( 'Test message.' );
     
     // Logs an error with an optional error code
-    $event_logger->error( 'Page not found.', [ 'code' => 404 ] );
+    $event_archiver->error( 'Page not found.', [ 'code' => 404 ] );
 
     // Logs an event with an arbitrary level
-    $event_logger->log( \PSR\Log\LogLevel::ERROR, 'Error message.' );
+    $event_archiver->log( \PSR\Log\LogLevel::ERROR, 'Error message.' );
 
 ```
 
@@ -140,7 +140,7 @@ Here is an example that implements a simple ___listener___ able to listen the ac
          * @since    1.0.0
          */
         public function delete_content( $content_ID ) {
-            $this->logger->info( sprintf ( 'Content ID %s deleted', $content_ID ) );
+            $this->archiver->info( sprintf ( 'Content ID %s deleted', $content_ID ) );
         }
     
     }  
@@ -181,10 +181,10 @@ MailArchiver let its users to set the needed level of privacy. To respects this 
 To respect the choices made by MailArchiver users, you must use the `get_user()` method in your ___listener___ each time it handles names and user IDs:
 ```php
     // DO NOT DO THAT, PLEASE:
-    $this->logger->info( sprintf ( 'User %1$s done something', $user_ID ) );
+    $this->archiver->info( sprintf ( 'User %1$s done something', $user_ID ) );
     
     // Instead, do that:
-    $this->logger->info( sprintf ( 'User %1$s done something', $this->get_user( $user_ID ) ) );
+    $this->archiver->info( sprintf ( 'User %1$s done something', $this->get_user( $user_ID ) ) );
 ```
 
 ### Coding style

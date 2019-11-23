@@ -9,7 +9,7 @@
  * @since   1.0.0
  */
 
-namespace MailArchiver\System;
+namespace Mailarchiver\System;
 
 /**
  * Define the logging functionality.
@@ -26,7 +26,7 @@ class Logger {
 	 * The "true" Logger instance.
 	 *
 	 * @since  1.0.0
-	 * @var    \Mailarchiver\Logger    $logger    Maintains the internal Logger instance.
+	 * @var    \Decalog\Logger    $logger    Maintains the internal Logger instance.
 	 */
 	private static $logger = null;
 
@@ -44,8 +44,8 @@ class Logger {
 	 * @since    1.0.0
 	 */
 	public static function init() {
-		if ( defined( 'DECALOG_VERSION' ) && class_exists( '\Mailarchiver\Logger' ) ) {
-			self::$logger = new \Mailarchiver\Logger( 'plugin', MAILARCHIVER_PRODUCT_NAME, MAILARCHIVER_VERSION );
+		if ( defined( 'DECALOG_VERSION' ) && class_exists( '\Decalog\Logger' ) ) {
+			self::$logger = new \Decalog\Logger( 'plugin', MAILARCHIVER_PRODUCT_NAME, MAILARCHIVER_VERSION );
 		}
 	}
 

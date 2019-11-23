@@ -1,8 +1,8 @@
 <?php
 /**
- * Logger types handling
+ * Archiver types handling
  *
- * Handles all available logger types.
+ * Handles all available archiver types.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -14,9 +14,9 @@ namespace Mailarchiver\Plugin\Feature;
 use Monolog\Logger;
 
 /**
- * Define the logger types functionality.
+ * Define the archiver types functionality.
  *
- * Handles all available logger types.
+ * Handles all available archiver types.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -725,7 +725,7 @@ class HandlerTypes {
 	/**
 	 * Get the types definition for a specific class.
 	 *
-	 * @param   string $class  The class of loggers ( 'alerting', 'debugging', 'logging').
+	 * @param   string $class  The class of archivers ( 'alerting', 'debugging', 'logging').
 	 * @return  array   A list of all available types definitions.
 	 * @since    1.2.0
 	 */

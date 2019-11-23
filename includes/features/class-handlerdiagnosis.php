@@ -1,8 +1,8 @@
 <?php
 /**
- * Logger types diagnosis
+ * Archiver types diagnosis
  *
- * Diagnose all available logger types.
+ * Diagnose all available archiver types.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -12,9 +12,9 @@
 namespace Mailarchiver\Plugin\Feature;
 
 /**
- * Define the logger types diagnosis.
+ * Define the archiver types diagnosis.
  *
- * Diagnose all available logger types.
+ * Diagnose all available archiver types.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.

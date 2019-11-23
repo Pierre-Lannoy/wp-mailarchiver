@@ -28,20 +28,20 @@ use WP_User;
 abstract class AbstractListener {
 
 	/**
-	 * An instance of DLogger to log internal events.
+	 * An instance of DArchiver to log internal events.
 	 *
 	 * @since  1.0.0
-	 * @var    DLogger    $log    An instance of DLogger to log internal events.
+	 * @var    DArchiver    $log    An instance of DArchiver to log internal events.
 	 */
 	protected $log = null;
 
 	/**
-	 * An instance of DLogger to log listener events.
+	 * An instance of DArchiver to log listener events.
 	 *
 	 * @since  1.0.0
-	 * @var    DLogger    $logger    An instance of DLogger to log listener events.
+	 * @var    DArchiver    $archiver    An instance of DArchiver to log listener events.
 	 */
-	protected $logger = null;
+	protected $archiver = null;
 
 	/**
 	 * The listener id.
@@ -86,11 +86,11 @@ abstract class AbstractListener {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @param    DLogger $internal_logger    An instance of DLogger to log internal events.
+	 * @param    DArchiver $internal_archiver    An instance of DArchiver to log internal events.
 	 * @since    1.0.0
 	 */
-	public function __construct( $internal_logger ) {
-		$this->log = $internal_logger;
+	public function __construct( $internal_archiver ) {
+		$this->log = $internal_archiver;
 		$this->init();
 		if ( $this->is_available() ) {
 			$launch = Option::network_get( 'autolisteners' );
@@ -100,8 +100,8 @@ abstract class AbstractListener {
 				}
 			}
 			if ( $launch && $this->launch() && ! ( 'Mailarchiver\Listener\SelfListener' === get_class( $this ) ) ) {
-				$this->logger = Log::bootstrap( $this->class, $this->product, $this->version );
-				$this->logger->debug( 'Listener launched and operational.' );
+				$this->archiver = Log::bootstrap( $this->class, $this->product, $this->version );
+				$this->archiver->debug( 'Listener launched and operational.' );
 				if ( isset( $this->log ) ) {
 					$this->log->debug( sprintf( 'Listener for %s is launched.', $this->name ) );
 				}

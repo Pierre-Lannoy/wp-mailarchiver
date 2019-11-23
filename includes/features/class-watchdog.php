@@ -12,7 +12,7 @@
 
 namespace Mailarchiver\Plugin\Feature;
 
-use Mailarchiver\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DArchiver;
 
 /**
  * Watchdog for MailArchiver.
@@ -81,7 +81,7 @@ class Watchdog {
 	 * @since    1.2.1
 	 */
 	public function handle_error( $code, $message, $file = '', $line = 0, $context = [] ) {
-		DLogger::ban( $file, $message );
+		DArchiver::ban( $file, $message );
 		if ( $this->previous_error_handler && is_callable( $this->previous_error_handler ) ) {
 			return call_user_func( $this->previous_error_handler, $code, $message, $file, $line, $context );
 		} else {
@@ -96,7 +96,7 @@ class Watchdog {
 	 * @since    1.2.1
 	 */
 	public function handle_exception( $exception ) {
-		DLogger::ban( $exception->getFile(), $exception->getMessage() );
+		DArchiver::ban( $exception->getFile(), $exception->getMessage() );
 		if ( $this->previous_exception_handler && is_callable( $this->previous_exception_handler ) ) {
 			return call_user_func( $this->previous_exception_handler, $exception );
 		} else {

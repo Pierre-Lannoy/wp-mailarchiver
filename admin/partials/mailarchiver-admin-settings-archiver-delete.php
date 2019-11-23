@@ -19,17 +19,17 @@
 			array(
 				'page'   => 'mailarchiver-settings',
 				'action' => 'do-delete',
-				'tab'    => 'loggers',
-				'uuid'   => $current_logger['uuid'],
+				'tab'    => 'archivers',
+				'uuid'   => $current_archiver['uuid'],
 			),
 			admin_url( 'options-general.php' )
 		)
 	);
 	?>
 	" method="POST">
-		<?php do_settings_sections( 'mailarchiver_logger_delete_section' ); ?>
-		<?php wp_nonce_field( 'mailarchiver-logger-delete' ); ?>
-		<p><?php esc_html_e( 'Are you sure you want to permanently remove this logger?', 'mailarchiver' ); ?></p>
+		<?php do_settings_sections( 'mailarchiver_archiver_delete_section' ); ?>
+		<?php wp_nonce_field( 'mailarchiver-archiver-delete' ); ?>
+		<p><?php esc_html_e( 'Are you sure you want to permanently remove this archiver?', 'mailarchiver' ); ?></p>
 		<p><?php echo get_submit_button( esc_html__( 'Abort', 'mailarchiver' ), 'secondary', 'cancel', false ); ?>&nbsp;&nbsp;&nbsp;<?php echo get_submit_button( esc_html__( 'Remove Permanently', 'mailarchiver' ), 'primary', 'submit', false ); ?></p>
 	</form>
 </div>

@@ -12,7 +12,7 @@
 namespace Mailarchiver\Handler;
 
 use Monolog\Logger;
-use Mailarchiver\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DArchiver;
 use Monolog\Handler\SocketHandler;
 use Monolog\Formatter\FormatterInterface;
 use Mailarchiver\Formatter\FluentFormatter;

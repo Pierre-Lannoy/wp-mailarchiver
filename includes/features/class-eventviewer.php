@@ -28,13 +28,13 @@ use Mailarchiver\System\Database;
 class EventViewer {
 
 	/**
-	 * The internal logger.
+	 * The internal archiver.
 	 *
 	 * @since  1.0.0
 	 * @access protected
-	 * @var    DLogger    $logger    The plugin admin logger.
+	 * @var    DArchiver    $archiver    The plugin admin archiver.
 	 */
-	protected $logger;
+	protected $archiver;
 
 	/**
 	 * The screen id.
@@ -73,12 +73,12 @@ class EventViewer {
 	 *
 	 * @param   string  $logid      The events log id.
 	 * @param   string  $eventid    The specific event id.
-	 * @param   DLogger $logger     The internal logger.
+	 * @param   DArchiver $archiver     The internal archiver.
 	 * @since    1.0.0
 	 */
-	public function __construct( $logid, $eventid, $logger ) {
+	public function __construct( $logid, $eventid, $archiver ) {
 		$this->logid   = $logid;
-		$this->logger  = $logger;
+		$this->archiver  = $archiver;
 		$this->eventid = $eventid;
 		$this->event   = null;
 		$database      = new Database();
@@ -217,7 +217,7 @@ class EventViewer {
 			echo '<li>' . sprintf( esc_html__( 'Event: %s', 'mailarchiver' ), '<code>' . $this->eventid . '</code>' ) . '</li>';
 			echo '</ul>';
 			echo '</p>';
-			$this->logger->warning( sprintf( 'Trying to access out of scope event #%s from events log {%s}.', $this->eventid, $this->logid ), 403 );
+			$this->archiver->warning( sprintf( 'Trying to access out of scope event #%s from events log {%s}.', $this->eventid, $this->logid ), 403 );
 		}
 		echo '</div>';
 	}

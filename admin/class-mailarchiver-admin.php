@@ -13,7 +13,7 @@ use Mailarchiver\Plugin\Feature\Log;
 use Mailarchiver\Plugin\Feature\EventViewer;
 use Mailarchiver\Plugin\Feature\HandlerTypes;
 use Mailarchiver\Plugin\Feature\ProcessorTypes;
-use Mailarchiver\Plugin\Feature\LoggerFactory;
+use Mailarchiver\Plugin\Feature\ArchiverFactory;
 use Mailarchiver\Plugin\Feature\Events;
 use Mailarchiver\Plugin\Feature\InlineHelp;
 use Mailarchiver\Listener\ListenerFactory;
@@ -42,20 +42,20 @@ class Mailarchiver_Admin {
 	protected $assets;
 
 	/**
-	 * The internal logger.
+	 * The internal archiver.
 	 *
 	 * @since  1.0.0
-	 * @var    DLogger    $logger    The plugin admin logger.
+	 * @var    DArchiver    $archiver    The plugin admin archiver.
 	 */
-	protected $logger;
+	protected $archiver;
 
 	/**
-	 * The current logger.
+	 * The current archiver.
 	 *
 	 * @since  1.0.0
-	 * @var    array    $current_logger    The current logger.
+	 * @var    array    $current_archiver    The current archiver.
 	 */
-	protected $current_logger;
+	protected $current_archiver;
 
 	/**
 	 * The current handler.
@@ -80,7 +80,7 @@ class Mailarchiver_Admin {
 	 */
 	public function __construct() {
 		$this->assets = new Assets();
-		$this->logger = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
+		$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
 	}
 
 	/**
@@ -118,7 +118,7 @@ class Mailarchiver_Admin {
 			add_action( 'load-' . $settings, [ new InlineHelp(), 'set_contextual_settings' ] );
 		}
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
-			if ( Events::loggers_count() > 0 ) {
+			if ( Events::archivers_count() > 0 ) {
 				$name = add_submenu_page(
 					'tools.php',
 					/* translators: as in the sentence "MailArchiver Viewer" */
@@ -132,7 +132,7 @@ class Mailarchiver_Admin {
 				$logid   = filter_input( INPUT_GET, 'logid', FILTER_SANITIZE_STRING );
 				$eventid = filter_input( INPUT_GET, 'eventid', FILTER_SANITIZE_NUMBER_INT );
 				if ( isset( $logid ) && isset( $eventid ) && 0 !== $eventid ) {
-					$this->current_view = new EventViewer( $logid, $eventid, $this->logger );
+					$this->current_view = new EventViewer( $logid, $eventid, $this->archiver );
 					add_action( 'load-' . $name, [ $this->current_view, 'add_metaboxes_options' ] );
 					add_action( 'admin_footer-' . $name, [ $this->current_view, 'add_footer' ] );
 					add_filter( 'screen_settings', [ $this->current_view, 'display_screen_settings' ], 10, 2 );
@@ -161,7 +161,7 @@ class Mailarchiver_Admin {
 	 * @since 1.2.0
 	 */
 	public function blog_action( $actions, $user_blog ) {
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::loggers_count() > 0 ) {
+		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
 			$actions .= " | <a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Events log', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
@@ -178,7 +178,7 @@ class Mailarchiver_Admin {
 	 * @since 1.2.0
 	 */
 	public function site_action( $actions, $blog_id, $blogname ) {
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::loggers_count() > 0 ) {
+		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
 			$actions['events_log'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Events log', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
@@ -190,15 +190,15 @@ class Mailarchiver_Admin {
 	 * @since 1.0.0
 	 */
 	public function init_settings_sections() {
-		add_settings_section( 'mailarchiver_loggers_options_section', esc_html__( 'Loggers options', 'mailarchiver' ), [ $this, 'loggers_options_section_callback' ], 'mailarchiver_loggers_options_section' );
+		add_settings_section( 'mailarchiver_archivers_options_section', esc_html__( 'Archivers options', 'mailarchiver' ), [ $this, 'archivers_options_section_callback' ], 'mailarchiver_archivers_options_section' );
 		add_settings_section( 'mailarchiver_plugin_options_section', esc_html__( 'Plugin options', 'mailarchiver' ), [ $this, 'plugin_options_section_callback' ], 'mailarchiver_plugin_options_section' );
 		add_settings_section( 'mailarchiver_listeners_options_section', null, [ $this, 'listeners_options_section_callback' ], 'mailarchiver_listeners_options_section' );
 		add_settings_section( 'mailarchiver_listeners_settings_section', null, [ $this, 'listeners_settings_section_callback' ], 'mailarchiver_listeners_settings_section' );
-		add_settings_section( 'mailarchiver_logger_misc_section', null, [ $this, 'logger_misc_section_callback' ], 'mailarchiver_logger_misc_section' );
-		add_settings_section( 'mailarchiver_logger_delete_section', null, [ $this, 'logger_delete_section_callback' ], 'mailarchiver_logger_delete_section' );
-		add_settings_section( 'mailarchiver_logger_specific_section', null, [ $this, 'logger_specific_section_callback' ], 'mailarchiver_logger_specific_section' );
-		add_settings_section( 'mailarchiver_logger_privacy_section', esc_html__( 'Privacy options', 'mailarchiver' ), [ $this, 'logger_privacy_section_callback' ], 'mailarchiver_logger_privacy_section' );
-		add_settings_section( 'mailarchiver_logger_details_section', esc_html__( 'Reported details', 'mailarchiver' ), [ $this, 'logger_details_section_callback' ], 'mailarchiver_logger_details_section' );
+		add_settings_section( 'mailarchiver_archiver_misc_section', null, [ $this, 'archiver_misc_section_callback' ], 'mailarchiver_archiver_misc_section' );
+		add_settings_section( 'mailarchiver_archiver_delete_section', null, [ $this, 'archiver_delete_section_callback' ], 'mailarchiver_archiver_delete_section' );
+		add_settings_section( 'mailarchiver_archiver_specific_section', null, [ $this, 'archiver_specific_section_callback' ], 'mailarchiver_archiver_specific_section' );
+		add_settings_section( 'mailarchiver_archiver_privacy_section', esc_html__( 'Privacy options', 'mailarchiver' ), [ $this, 'archiver_privacy_section_callback' ], 'mailarchiver_archiver_privacy_section' );
+		add_settings_section( 'mailarchiver_archiver_details_section', esc_html__( 'Reported details', 'mailarchiver' ), [ $this, 'archiver_details_section_callback' ], 'mailarchiver_archiver_details_section' );
 	}
 
 	/**
@@ -215,7 +215,7 @@ class Mailarchiver_Admin {
 	 */
 	public function add_actions_links( $actions, $plugin_file, $plugin_data, $context ) {
 		$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php?page=mailarchiver-settings' ), esc_html__( 'Settings', 'mailarchiver' ) );
-		if ( Events::loggers_count() > 0 ) {
+		if ( Events::archivers_count() > 0 ) {
 			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'tools.php?page=mailarchiver-viewer' ), esc_html__( 'Events Logs', 'mailarchiver' ) );
 		}
 		return $actions;
@@ -258,7 +258,7 @@ class Mailarchiver_Admin {
 	 */
 	public function get_settings_page() {
 		$this->current_handler = null;
-		$this->current_logger  = null;
+		$this->current_archiver  = null;
 		if ( ! ( $action = filter_input( INPUT_GET, 'action' ) ) ) {
 			$action = filter_input( INPUT_POST, 'action' );
 		}
@@ -273,50 +273,50 @@ class Mailarchiver_Admin {
 		}
 		$nonce = filter_input( INPUT_GET, 'nonce' );
 		if ( $uuid ) {
-			$loggers = Option::network_get( 'loggers' );
-			if ( array_key_exists( $uuid, $loggers ) ) {
-				$this->current_logger         = $loggers[ $uuid ];
-				$this->current_logger['uuid'] = $uuid;
+			$archivers = Option::network_get( 'archivers' );
+			if ( array_key_exists( $uuid, $archivers ) ) {
+				$this->current_archiver         = $archivers[ $uuid ];
+				$this->current_archiver['uuid'] = $uuid;
 			}
 		}
 		if ( $handler ) {
 			$handlers              = new HandlerTypes();
 			$this->current_handler = $handlers->get( $handler );
-		} elseif ( $this->current_logger ) {
+		} elseif ( $this->current_archiver ) {
 			$handlers              = new HandlerTypes();
-			$this->current_handler = $handlers->get( $this->current_logger['handler'] );
+			$this->current_handler = $handlers->get( $this->current_archiver['handler'] );
 		}
-		if ( $this->current_handler && ! $this->current_logger ) {
-			$this->current_logger = [
+		if ( $this->current_handler && ! $this->current_archiver ) {
+			$this->current_archiver = [
 				'uuid'    => $uuid = UUID::generate_v4(),
-				'name'    => esc_html__( 'New logger', 'mailarchiver' ),
+				'name'    => esc_html__( 'New archiver', 'mailarchiver' ),
 				'handler' => $this->current_handler['id'],
-				'running' => Option::network_get( 'logger_autostart' ),
+				'running' => Option::network_get( 'archiver_autostart' ),
 			];
 		}
-		if ( $this->current_logger ) {
-			$factory              = new LoggerFactory();
-			$this->current_logger = $factory->check( $this->current_logger );
+		if ( $this->current_archiver ) {
+			$factory              = new ArchiverFactory();
+			$this->current_archiver = $factory->check( $this->current_archiver );
 		}
 		$view = 'mailarchiver-admin-settings-main';
 		if ( $action && $tab ) {
 			switch ( $tab ) {
-				case 'loggers':
+				case 'archivers':
 					switch ( $action ) {
 						case 'form-edit':
 							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								$current_logger  = $this->current_logger;
+								$current_archiver  = $this->current_archiver;
 								$current_handler = $this->current_handler;
-								$args            = compact( 'current_logger', 'current_handler' );
-								$view            = 'mailarchiver-admin-settings-logger-edit';
+								$args            = compact( 'current_archiver', 'current_handler' );
+								$view            = 'mailarchiver-admin-settings-archiver-edit';
 							}
 							break;
 						case 'form-delete':
 							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								$current_logger  = $this->current_logger;
+								$current_archiver  = $this->current_archiver;
 								$current_handler = $this->current_handler;
-								$args            = compact( 'current_logger', 'current_handler' );
-								$view            = 'mailarchiver-admin-settings-logger-delete';
+								$args            = compact( 'current_archiver', 'current_handler' );
+								$view            = 'mailarchiver-admin-settings-archiver-delete';
 							}
 							break;
 						case 'do-edit':
@@ -331,40 +331,40 @@ class Mailarchiver_Admin {
 							break;
 						case 'start':
 							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								if ( $nonce && $uuid && wp_verify_nonce( $nonce, 'mailarchiver-logger-start-' . $uuid ) ) {
-									$loggers = Option::network_get( 'loggers' );
-									if ( array_key_exists( $uuid, $loggers ) ) {
-										$loggers[ $uuid ]['running'] = true;
-										Option::network_set( 'loggers', $loggers );
-										$this->logger = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-										$message      = sprintf( esc_html__( 'Logger %s has started.', 'mailarchiver' ), '<em>' . $loggers[ $uuid ]['name'] . '</em>' );
+								if ( $nonce && $uuid && wp_verify_nonce( $nonce, 'mailarchiver-archiver-start-' . $uuid ) ) {
+									$archivers = Option::network_get( 'archivers' );
+									if ( array_key_exists( $uuid, $archivers ) ) {
+										$archivers[ $uuid ]['running'] = true;
+										Option::network_set( 'archivers', $archivers );
+										$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
+										$message      = sprintf( esc_html__( 'Archiver %s has started.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
 										$code         = 0;
 										add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-										$this->logger->info( sprintf( 'Logger "%s" has started.', $loggers[ $uuid ]['name'] ), $code );
+										$this->archiver->info( sprintf( 'Archiver "%s" has started.', $archivers[ $uuid ]['name'] ), $code );
 									}
 								}
 							}
 							break;
 						case 'pause':
 							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								if ( $nonce && $uuid && wp_verify_nonce( $nonce, 'mailarchiver-logger-pause-' . $uuid ) ) {
-									$loggers = Option::network_get( 'loggers' );
-									if ( array_key_exists( $uuid, $loggers ) ) {
-										$message = sprintf( esc_html__( 'Logger %s has been paused.', 'mailarchiver' ), '<em>' . $loggers[ $uuid ]['name'] . '</em>' );
+								if ( $nonce && $uuid && wp_verify_nonce( $nonce, 'mailarchiver-archiver-pause-' . $uuid ) ) {
+									$archivers = Option::network_get( 'archivers' );
+									if ( array_key_exists( $uuid, $archivers ) ) {
+										$message = sprintf( esc_html__( 'Archiver %s has been paused.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
 										$code    = 0;
-										$this->logger->notice( sprintf( 'Logger "%s" has been paused.', $loggers[ $uuid ]['name'] ), $code );
-										$loggers[ $uuid ]['running'] = false;
-										Option::network_set( 'loggers', $loggers );
-										$this->logger = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
+										$this->archiver->notice( sprintf( 'Archiver "%s" has been paused.', $archivers[ $uuid ]['name'] ), $code );
+										$archivers[ $uuid ]['running'] = false;
+										Option::network_set( 'archivers', $archivers );
+										$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
 										add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
 									}
 								}
 							}
 						case 'test':
 							if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-								if ( $nonce && $uuid && wp_verify_nonce( $nonce, 'mailarchiver-logger-test-' . $uuid ) ) {
-									$loggers = Option::network_get( 'loggers' );
-									if ( array_key_exists( $uuid, $loggers ) ) {
+								if ( $nonce && $uuid && wp_verify_nonce( $nonce, 'mailarchiver-archiver-test-' . $uuid ) ) {
+									$archivers = Option::network_get( 'archivers' );
+									if ( array_key_exists( $uuid, $archivers ) ) {
 										$test = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION, $uuid );
 										$done = true;
 										$done = $done & $test->debug( 'Debug test message.', 210871 );
@@ -376,14 +376,14 @@ class Mailarchiver_Admin {
 										$done = $done & $test->alert( 'Alert test message.', 210871 );
 										$done = $done & $test->emergency( 'Emergency test message.', 210871 );
 										if ( $done ) {
-											$message = sprintf( esc_html__( 'Test messages have been sent to logger %s.', 'mailarchiver' ), '<em>' . $loggers[ $uuid ]['name'] . '</em>' );
+											$message = sprintf( esc_html__( 'Test messages have been sent to archiver %s.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
 											$code    = 0;
-											$this->logger->info( sprintf( 'Logger "%s" has been tested.', $loggers[ $uuid ]['name'] ), $code );
+											$this->archiver->info( sprintf( 'Archiver "%s" has been tested.', $archivers[ $uuid ]['name'] ), $code );
 											add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
 										} else {
-											$message = sprintf( esc_html__( 'Test messages have not been sent to logger %s. Please check the logger\'s settings.', 'mailarchiver' ), '<em>' . $loggers[ $uuid ]['name'] . '</em>' );
+											$message = sprintf( esc_html__( 'Test messages have not been sent to archiver %s. Please check the archiver\'s settings.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
 											$code    = 1;
-											$this->logger->warning( sprintf( 'Logger "%s" has been unsuccessfully tested.', $loggers[ $uuid ]['name'] ), $code );
+											$this->archiver->warning( sprintf( 'Archiver "%s" has been unsuccessfully tested.', $archivers[ $uuid ]['name'] ), $code );
 											add_settings_error( 'mailarchiver_error', $code, $message, 'error' );
 										}
 									}
@@ -442,12 +442,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Listeners settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->logger->info( 'Listeners settings updated.', $code );
+				$this->archiver->info( 'Listeners settings updated.', $code );
 			} else {
 				$message = esc_html__( 'Listeners settings have not been saved. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->logger->warning( 'Listeners settings not updated.', $code );
+				$this->archiver->warning( 'Listeners settings not updated.', $code );
 			}
 		}
 	}
@@ -464,12 +464,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Listeners settings have been reset to defaults.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->logger->info( 'Listeners settings reset to defaults.', $code );
+				$this->archiver->info( 'Listeners settings reset to defaults.', $code );
 			} else {
 				$message = esc_html__( 'Listeners settings have not been reset to defaults. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->logger->warning( 'Listeners settings not reset to defaults.', $code );
+				$this->archiver->warning( 'Listeners settings not reset to defaults.', $code );
 			}
 		}
 	}
@@ -485,18 +485,18 @@ class Mailarchiver_Admin {
 				Option::network_set( 'auto_update', array_key_exists( 'mailarchiver_plugin_options_autoupdate', $_POST ) );
 				Option::network_set( 'use_cdn', array_key_exists( 'mailarchiver_plugin_options_usecdn', $_POST ) );
 				Option::network_set( 'display_nag', array_key_exists( 'mailarchiver_plugin_options_nag', $_POST ) );
-				Option::network_set( 'logger_autostart', array_key_exists( 'mailarchiver_loggers_options_autostart', $_POST ) );
-				Option::network_set( 'pseudonymization', array_key_exists( 'mailarchiver_loggers_options_pseudonymization', $_POST ) );
-				Option::network_set( 'respect_wp_debug', array_key_exists( 'mailarchiver_loggers_options_wpdebug', $_POST ) );
+				Option::network_set( 'archiver_autostart', array_key_exists( 'mailarchiver_archivers_options_autostart', $_POST ) );
+				Option::network_set( 'pseudonymization', array_key_exists( 'mailarchiver_archivers_options_pseudonymization', $_POST ) );
+				Option::network_set( 'respect_wp_debug', array_key_exists( 'mailarchiver_archivers_options_wpdebug', $_POST ) );
 				$message = esc_html__( 'Plugin settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->logger->info( 'Plugin settings updated.', $code );
+				$this->archiver->info( 'Plugin settings updated.', $code );
 			} else {
 				$message = esc_html__( 'Plugin settings have not been saved. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->logger->warning( 'Plugin settings not updated.', $code );
+				$this->archiver->warning( 'Plugin settings not updated.', $code );
 			}
 		}
 	}
@@ -513,100 +513,100 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Plugin settings have been reset to defaults.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				$this->logger->info( 'Plugin settings reset to defaults.', $code );
+				$this->archiver->info( 'Plugin settings reset to defaults.', $code );
 			} else {
 				$message = esc_html__( 'Plugin settings have not been reset to defaults. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->logger->warning( 'Plugin settings not reset to defaults.', $code );
+				$this->archiver->warning( 'Plugin settings not reset to defaults.', $code );
 			}
 		}
 	}
 
 	/**
-	 * Save the current logger as new or modified logger.
+	 * Save the current archiver as new or modified archiver.
 	 *
 	 * @since 1.0.0
 	 */
 	private function save_current() {
 		if ( ! empty( $_POST ) ) {
-			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-logger-edit' ) ) {
+			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-archiver-edit' ) ) {
 				if ( array_key_exists( 'submit', $_POST ) ) {
-					$this->current_logger['name']                        = ( array_key_exists( 'mailarchiver_logger_misc_name', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_logger_misc_name', FILTER_SANITIZE_STRING ) : $this->current_logger['name'] );
-					$this->current_logger['level']                       = ( array_key_exists( 'mailarchiver_logger_misc_level', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_logger_misc_level', FILTER_SANITIZE_NUMBER_INT ) : $this->current_logger['level'] );
-					$this->current_logger['privacy']['obfuscation']      = ( array_key_exists( 'mailarchiver_logger_privacy_ip', $_POST ) ? true : false );
-					$this->current_logger['privacy']['pseudonymization'] = ( array_key_exists( 'mailarchiver_logger_privacy_name', $_POST ) ? true : false );
-					$this->current_logger['processors']                  = [];
+					$this->current_archiver['name']                        = ( array_key_exists( 'mailarchiver_archiver_misc_name', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_name', FILTER_SANITIZE_STRING ) : $this->current_archiver['name'] );
+					$this->current_archiver['level']                       = ( array_key_exists( 'mailarchiver_archiver_misc_level', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_level', FILTER_SANITIZE_NUMBER_INT ) : $this->current_archiver['level'] );
+					$this->current_archiver['privacy']['obfuscation']      = ( array_key_exists( 'mailarchiver_archiver_privacy_ip', $_POST ) ? true : false );
+					$this->current_archiver['privacy']['pseudonymization'] = ( array_key_exists( 'mailarchiver_archiver_privacy_name', $_POST ) ? true : false );
+					$this->current_archiver['processors']                  = [];
 					$proc = new ProcessorTypes();
 					foreach ( array_reverse( $proc->get_all() ) as $processor ) {
-						if ( array_key_exists( 'mailarchiver_logger_details_' . strtolower( $processor['id'] ), $_POST ) ) {
-							$this->current_logger['processors'][] = $processor['id'];
+						if ( array_key_exists( 'mailarchiver_archiver_details_' . strtolower( $processor['id'] ), $_POST ) ) {
+							$this->current_archiver['processors'][] = $processor['id'];
 						}
 					}
 					foreach ( $this->current_handler['configuration'] as $key => $configuration ) {
-						$id = 'mailarchiver_logger_details_' . strtolower( $key );
+						$id = 'mailarchiver_archiver_details_' . strtolower( $key );
 						if ( 'boolean' === $configuration['control']['cast'] ) {
-							$this->current_logger['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? true : false );
+							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? true : false );
 						}
 						if ( 'integer' === $configuration['control']['cast'] ) {
-							$this->current_logger['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_SANITIZE_NUMBER_INT ) : $this->current_logger['configuration'][ $key ] );
+							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_SANITIZE_NUMBER_INT ) : $this->current_archiver['configuration'][ $key ] );
 						}
 						if ( 'string' === $configuration['control']['cast'] ) {
-							$this->current_logger['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_SANITIZE_STRING ) : $this->current_logger['configuration'][ $key ] );
+							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_SANITIZE_STRING ) : $this->current_archiver['configuration'][ $key ] );
 						}
 						if ( 'password' === $configuration['control']['cast'] ) {
-							$this->current_logger['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_UNSAFE_RAW ) : $this->current_logger['configuration'][ $key ] );
+							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_UNSAFE_RAW ) : $this->current_archiver['configuration'][ $key ] );
 						}
 					}
-					$uuid             = $this->current_logger['uuid'];
-					$loggers          = Option::network_get( 'loggers' );
-					$factory          = new LoggerFactory();
-					$loggers[ $uuid ] = $factory->check( $this->current_logger, true );
-					if ( array_key_exists( 'uuid', $loggers[ $uuid ] ) ) {
-						unset( $loggers[ $uuid ]['uuid'] );
+					$uuid             = $this->current_archiver['uuid'];
+					$archivers          = Option::network_get( 'archivers' );
+					$factory          = new ArchiverFactory();
+					$archivers[ $uuid ] = $factory->check( $this->current_archiver, true );
+					if ( array_key_exists( 'uuid', $archivers[ $uuid ] ) ) {
+						unset( $archivers[ $uuid ]['uuid'] );
 					}
-					Option::network_set( 'loggers', $loggers );
-					$this->logger = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-					$message      = sprintf( esc_html__( 'Logger %s has been saved.', 'mailarchiver' ), '<em>' . $this->current_logger['name'] . '</em>' );
+					Option::network_set( 'archivers', $archivers );
+					$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
+					$message      = sprintf( esc_html__( 'Archiver %s has been saved.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 					$code         = 0;
 					add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-					$this->logger->info( sprintf( 'Logger "%s" has been saved.', $this->current_logger['name'] ), $code );
+					$this->archiver->info( sprintf( 'Archiver "%s" has been saved.', $this->current_archiver['name'] ), $code );
 				}
 			} else {
-				$message = sprintf( esc_html__( 'Logger %s has not been saved. Please try again.', 'mailarchiver' ), '<em>' . $this->current_logger['name'] . '</em>' );
+				$message = sprintf( esc_html__( 'Archiver %s has not been saved. Please try again.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->logger->warning( sprintf( 'Logger "%s" has not been saved.', $this->current_logger['name'] ), $code );
+				$this->archiver->warning( sprintf( 'Archiver "%s" has not been saved.', $this->current_archiver['name'] ), $code );
 			}
 		}
 	}
 
 	/**
-	 * Delete the current logger.
+	 * Delete the current archiver.
 	 *
 	 * @since 1.0.0
 	 */
 	private function delete_current() {
 		if ( ! empty( $_POST ) ) {
-			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-logger-delete' ) ) {
+			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-archiver-delete' ) ) {
 				if ( array_key_exists( 'submit', $_POST ) ) {
-					$uuid    = $this->current_logger['uuid'];
-					$loggers = Option::network_get( 'loggers' );
-					$factory = new LoggerFactory();
-					$factory->clean( $this->current_logger );
-					unset( $loggers[ $uuid ] );
-					Option::network_set( 'loggers', $loggers );
-					$this->logger = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-					$message      = sprintf( esc_html__( 'Logger %s has been removed.', 'mailarchiver' ), '<em>' . $this->current_logger['name'] . '</em>' );
+					$uuid    = $this->current_archiver['uuid'];
+					$archivers = Option::network_get( 'archivers' );
+					$factory = new ArchiverFactory();
+					$factory->clean( $this->current_archiver );
+					unset( $archivers[ $uuid ] );
+					Option::network_set( 'archivers', $archivers );
+					$this->archiver = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
+					$message      = sprintf( esc_html__( 'Archiver %s has been removed.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 					$code         = 0;
 					add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-					$this->logger->notice( sprintf( 'Logger "%s" has been removed.', $this->current_logger['name'] ), $code );
+					$this->archiver->notice( sprintf( 'Archiver "%s" has been removed.', $this->current_archiver['name'] ), $code );
 				}
 			} else {
-				$message = sprintf( esc_html__( 'Logger %s has not been removed. Please try again.', 'mailarchiver' ), '<em>' . $this->current_logger['name'] . '</em>' );
+				$message = sprintf( esc_html__( 'Archiver %s has not been removed. Please try again.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				$this->logger->warning( sprintf( 'Logger "%s" has not been removed.', $this->current_logger['name'] ), $code );
+				$this->archiver->warning( sprintf( 'Archiver "%s" has not been removed.', $this->current_archiver['name'] ), $code );
 			}
 		}
 	}
@@ -695,60 +695,60 @@ class Mailarchiver_Admin {
 	}
 
 	/**
-	 * Callback for loggers options section.
+	 * Callback for archivers options section.
 	 *
 	 * @since 1.0.0
 	 */
-	public function loggers_options_section_callback() {
+	public function archivers_options_section_callback() {
 		$form = new Form();
 		add_settings_field(
-			'mailarchiver_loggers_options_autostart',
-			__( 'New logger', 'mailarchiver' ),
+			'mailarchiver_archivers_options_autostart',
+			__( 'New archiver', 'mailarchiver' ),
 			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_loggers_options_section',
-			'mailarchiver_loggers_options_section',
+			'mailarchiver_archivers_options_section',
+			'mailarchiver_archivers_options_section',
 			[
 				'text'        => esc_html__( 'Auto-start', 'mailarchiver' ),
-				'id'          => 'mailarchiver_loggers_options_autostart',
-				'checked'     => Option::network_get( 'logger_autostart' ),
-				'description' => esc_html__( 'If checked, when a new logger is added it automatically starts.', 'mailarchiver' ),
+				'id'          => 'mailarchiver_archivers_options_autostart',
+				'checked'     => Option::network_get( 'archiver_autostart' ),
+				'description' => esc_html__( 'If checked, when a new archiver is added it automatically starts.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
 		);
-		register_setting( 'mailarchiver_loggers_options_section', 'mailarchiver_loggers_options_autostart' );
+		register_setting( 'mailarchiver_archivers_options_section', 'mailarchiver_archivers_options_autostart' );
 		add_settings_field(
-			'mailarchiver_loggers_options_pseudonymization',
+			'mailarchiver_archivers_options_pseudonymization',
 			__( 'Events messages', 'mailarchiver' ),
 			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_loggers_options_section',
-			'mailarchiver_loggers_options_section',
+			'mailarchiver_archivers_options_section',
+			'mailarchiver_archivers_options_section',
 			[
 				'text'        => esc_html__( 'Respect privacy', 'mailarchiver' ),
-				'id'          => 'mailarchiver_loggers_options_pseudonymization',
+				'id'          => 'mailarchiver_archivers_options_pseudonymization',
 				'checked'     => Option::network_get( 'pseudonymization' ),
 				'description' => esc_html__( 'If checked, MailArchiver will try to obfuscate personal information in events messages.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
 		);
-		register_setting( 'mailarchiver_loggers_options_section', 'mailarchiver_loggers_options_pseudonymization' );
+		register_setting( 'mailarchiver_archivers_options_section', 'mailarchiver_archivers_options_pseudonymization' );
 		add_settings_field(
-			'mailarchiver_loggers_options_wpdebug',
+			'mailarchiver_archivers_options_wpdebug',
 			__( 'Rules', 'mailarchiver' ),
 			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_loggers_options_section',
-			'mailarchiver_loggers_options_section',
+			'mailarchiver_archivers_options_section',
+			'mailarchiver_archivers_options_section',
 			[
 				'text'        => esc_html__( 'Respect WP_DEBUG', 'mailarchiver' ),
-				'id'          => 'mailarchiver_loggers_options_wpdebug',
+				'id'          => 'mailarchiver_archivers_options_wpdebug',
 				'checked'     => Option::network_get( 'respect_wp_debug' ),
-				'description' => esc_html__( 'If checked, the value of WP_DEBUG will override each logger\'s settings for minimal level of logging.', 'mailarchiver' ),
+				'description' => esc_html__( 'If checked, the value of WP_DEBUG will override each archiver\'s settings for minimal level of logging.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
 		);
-		register_setting( 'mailarchiver_loggers_options_section', 'mailarchiver_loggers_options_wpdebug' );
+		register_setting( 'mailarchiver_archivers_options_section', 'mailarchiver_archivers_options_wpdebug' );
 	}
 
 	/**
@@ -809,127 +809,127 @@ class Mailarchiver_Admin {
 	}
 
 	/**
-	 * Callback for logger misc section.
+	 * Callback for archiver misc section.
 	 *
 	 * @since 1.0.0
 	 */
-	public function logger_misc_section_callback() {
+	public function archiver_misc_section_callback() {
 		$icon  = '<img style="vertical-align:middle;width:34px;margin-top: -2px;padding-right:6px;" src="' . $this->current_handler['icon'] . '" />';
 		$title = $this->current_handler['name'];
 		echo '<h2>' . $icon . '&nbsp;' . $title . '</h2>';
 		echo '<p style="margin-top: -10px;margin-left: 6px;">' . $this->current_handler['help'] . '</p>';
 		$form = new Form();
 		add_settings_field(
-			'mailarchiver_logger_misc_name',
+			'mailarchiver_archiver_misc_name',
 			__( 'Name', 'mailarchiver' ),
 			[ $form, 'echo_field_input_text' ],
-			'mailarchiver_logger_misc_section',
-			'mailarchiver_logger_misc_section',
+			'mailarchiver_archiver_misc_section',
+			'mailarchiver_archiver_misc_section',
 			[
-				'id'          => 'mailarchiver_logger_misc_name',
-				'value'       => $this->current_logger['name'],
+				'id'          => 'mailarchiver_archiver_misc_name',
+				'value'       => $this->current_archiver['name'],
 				'description' => esc_html__( 'Used only in admin dashboard.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
 		);
-		register_setting( 'mailarchiver_logger_misc_section', 'mailarchiver_logger_misc_name' );
+		register_setting( 'mailarchiver_archiver_misc_section', 'mailarchiver_archiver_misc_name' );
 		add_settings_field(
-			'mailarchiver_logger_misc_level',
+			'mailarchiver_archiver_misc_level',
 			__( 'Minimal level', 'mailarchiver' ),
 			[ $form, 'echo_field_select' ],
-			'mailarchiver_logger_misc_section',
-			'mailarchiver_logger_misc_section',
+			'mailarchiver_archiver_misc_section',
+			'mailarchiver_archiver_misc_section',
 			[
 				'list'        => Log::get_levels( $this->current_handler['minimal'] ),
-				'id'          => 'mailarchiver_logger_misc_level',
-				'value'       => $this->current_logger['level'],
+				'id'          => 'mailarchiver_archiver_misc_level',
+				'value'       => $this->current_archiver['level'],
 				'description' => esc_html__( 'Minimal reported level. May be overridden by the "respect WP_DEBUG directive" option.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
 		);
-		register_setting( 'mailarchiver_logger_misc_section', 'mailarchiver_logger_misc_level' );
+		register_setting( 'mailarchiver_archiver_misc_section', 'mailarchiver_archiver_misc_level' );
 	}
 
 	/**
-	 * Callback for logger delete section.
+	 * Callback for archiver delete section.
 	 *
 	 * @since 1.0.0
 	 */
-	public function logger_delete_section_callback() {
+	public function archiver_delete_section_callback() {
 		$icon  = '<img style="vertical-align:middle;width:34px;margin-top: -2px;padding-right:6px;" src="' . $this->current_handler['icon'] . '" />';
 		$title = $this->current_handler['name'];
 		echo '<h2>' . $icon . '&nbsp;' . $title . '</h2>';
 		echo '<p style="margin-top: -10px;margin-left: 6px;">' . $this->current_handler['help'] . '</p>';
 		$form = new Form();
 		add_settings_field(
-			'mailarchiver_logger_delete_name',
+			'mailarchiver_archiver_delete_name',
 			__( 'Name', 'mailarchiver' ),
 			[ $form, 'echo_field_input_text' ],
-			'mailarchiver_logger_delete_section',
-			'mailarchiver_logger_delete_section',
+			'mailarchiver_archiver_delete_section',
+			'mailarchiver_archiver_delete_section',
 			[
-				'id'          => 'mailarchiver_logger_delete_name',
-				'value'       => $this->current_logger['name'],
+				'id'          => 'mailarchiver_archiver_delete_name',
+				'value'       => $this->current_archiver['name'],
 				'description' => null,
 				'full_width'  => true,
 				'enabled'     => false,
 			]
 		);
-		register_setting( 'mailarchiver_logger_delete_section', 'mailarchiver_logger_delete_name' );
+		register_setting( 'mailarchiver_archiver_delete_section', 'mailarchiver_archiver_delete_name' );
 		add_settings_field(
-			'mailarchiver_logger_delete_level',
+			'mailarchiver_archiver_delete_level',
 			__( 'Minimal level', 'mailarchiver' ),
 			[ $form, 'echo_field_select' ],
-			'mailarchiver_logger_delete_section',
-			'mailarchiver_logger_delete_section',
+			'mailarchiver_archiver_delete_section',
+			'mailarchiver_archiver_delete_section',
 			[
 				'list'        => Log::get_levels( $this->current_handler['minimal'] ),
-				'id'          => 'mailarchiver_logger_delete_level',
-				'value'       => $this->current_logger['level'],
+				'id'          => 'mailarchiver_archiver_delete_level',
+				'value'       => $this->current_archiver['level'],
 				'description' => null,
 				'full_width'  => true,
 				'enabled'     => false,
 			]
 		);
-		register_setting( 'mailarchiver_logger_delete_section', 'mailarchiver_logger_delete_level' );
+		register_setting( 'mailarchiver_archiver_delete_section', 'mailarchiver_archiver_delete_level' );
 	}
 
 	/**
-	 * Callback for logger specific section.
+	 * Callback for archiver specific section.
 	 *
 	 * @since 1.0.0
 	 */
-	public function logger_specific_section_callback() {
+	public function archiver_specific_section_callback() {
 		$form = new Form();
-		if ( 'ErrorLogHandler' === $this->current_logger['handler'] ) {
+		if ( 'ErrorLogHandler' === $this->current_archiver['handler'] ) {
 			add_settings_field(
-				'mailarchiver_logger_specific_dummy',
+				'mailarchiver_archiver_specific_dummy',
 				__( 'Log file', 'mailarchiver' ),
 				[ $form, 'echo_field_input_text' ],
-				'mailarchiver_logger_specific_section',
-				'mailarchiver_logger_specific_section',
+				'mailarchiver_archiver_specific_section',
+				'mailarchiver_archiver_specific_section',
 				[
-					'id'          => 'mailarchiver_logger_specific_dummy',
+					'id'          => 'mailarchiver_archiver_specific_dummy',
 					'value'       => ini_get( 'error_log' ),
 					'description' => esc_html__( 'Value set in php.ini file.', 'mailarchiver' ),
 					'full_width'  => true,
 					'enabled'     => false,
 				]
 			);
-			register_setting( 'mailarchiver_logger_specific_section', 'mailarchiver_logger_specific_dummy' );
+			register_setting( 'mailarchiver_archiver_specific_section', 'mailarchiver_archiver_specific_dummy' );
 		}
 		foreach ( $this->current_handler['configuration'] as $key => $configuration ) {
 			if ( ! $configuration['show'] ) {
 				continue;
 			}
-			$id   = 'mailarchiver_logger_details_' . strtolower( $key );
+			$id   = 'mailarchiver_archiver_details_' . strtolower( $key );
 			$args = [
 				'id'          => $id,
 				'text'        => esc_html__( 'Enabled', 'mailarchiver' ),
-				'checked'     => (bool) $this->current_logger['configuration'][ $key ],
-				'value'       => $this->current_logger['configuration'][ $key ],
+				'checked'     => (bool) $this->current_archiver['configuration'][ $key ],
+				'value'       => $this->current_archiver['configuration'][ $key ],
 				'description' => $configuration['help'],
 				'full_width'  => true,
 				'enabled'     => $configuration['control']['enabled'],
@@ -944,69 +944,69 @@ class Mailarchiver_Admin {
 				$id,
 				$configuration['name'],
 				[ $form, 'echo_' . $configuration['control']['type'] ],
-				'mailarchiver_logger_specific_section',
-				'mailarchiver_logger_specific_section',
+				'mailarchiver_archiver_specific_section',
+				'mailarchiver_archiver_specific_section',
 				$args
 			);
-			register_setting( 'mailarchiver_logger_specific_section', $id );
+			register_setting( 'mailarchiver_archiver_specific_section', $id );
 		}
 	}
 
 	/**
-	 * Callback for logger privacy section.
+	 * Callback for archiver privacy section.
 	 *
 	 * @since 1.0.0
 	 */
-	public function logger_privacy_section_callback() {
+	public function archiver_privacy_section_callback() {
 		$form = new Form();
 		add_settings_field(
-			'mailarchiver_logger_privacy_ip',
+			'mailarchiver_archiver_privacy_ip',
 			__( 'Remote IPs', 'mailarchiver' ),
 			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_logger_privacy_section',
-			'mailarchiver_logger_privacy_section',
+			'mailarchiver_archiver_privacy_section',
+			'mailarchiver_archiver_privacy_section',
 			[
 				'text'        => esc_html__( 'Obfuscation', 'mailarchiver' ),
-				'id'          => 'mailarchiver_logger_privacy_ip',
-				'checked'     => $this->current_logger['privacy']['obfuscation'],
+				'id'          => 'mailarchiver_archiver_privacy_ip',
+				'checked'     => $this->current_archiver['privacy']['obfuscation'],
 				'description' => esc_html__( 'If checked, log fields will contain hashes instead of real IPs.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except events messages.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
 		);
-		register_setting( 'mailarchiver_logger_privacy_section', 'mailarchiver_logger_privacy_ip' );
+		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_ip' );
 		add_settings_field(
-			'mailarchiver_logger_privacy_name',
+			'mailarchiver_archiver_privacy_name',
 			__( 'Users', 'mailarchiver' ),
 			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_logger_privacy_section',
-			'mailarchiver_logger_privacy_section',
+			'mailarchiver_archiver_privacy_section',
+			'mailarchiver_archiver_privacy_section',
 			[
 				'text'        => esc_html__( 'Pseudonymisation', 'mailarchiver' ),
-				'id'          => 'mailarchiver_logger_privacy_name',
-				'checked'     => $this->current_logger['privacy']['pseudonymization'],
+				'id'          => 'mailarchiver_archiver_privacy_name',
+				'checked'     => $this->current_archiver['privacy']['pseudonymization'],
 				'description' => esc_html__( 'If checked, log fields will contain hashes instead of user IDs & names.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except events messages.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
 		);
-		register_setting( 'mailarchiver_logger_privacy_section', 'mailarchiver_logger_privacy_name' );
+		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_name' );
 	}
 
 	/**
-	 * Callback for logger privacy section.
+	 * Callback for archiver privacy section.
 	 *
 	 * @since 1.0.0
 	 */
-	public function logger_details_section_callback() {
+	public function archiver_details_section_callback() {
 		$form = new Form();
-		$id   = 'mailarchiver_logger_details_dummy';
+		$id   = 'mailarchiver_archiver_details_dummy';
 		add_settings_field(
 			$id,
 			__( 'Standard', 'mailarchiver' ),
 			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_logger_details_section',
-			'mailarchiver_logger_details_section',
+			'mailarchiver_archiver_details_section',
+			'mailarchiver_archiver_details_section',
 			[
 				'text'        => esc_html__( 'Included', 'mailarchiver' ),
 				'id'          => $id,
@@ -1016,26 +1016,26 @@ class Mailarchiver_Admin {
 				'enabled'     => false,
 			]
 		);
-		register_setting( 'mailarchiver_logger_details_section', $id );
+		register_setting( 'mailarchiver_archiver_details_section', $id );
 		$proc = new ProcessorTypes();
 		foreach ( array_reverse( $proc->get_all() ) as $processor ) {
-			$id = 'mailarchiver_logger_details_' . strtolower( $processor['id'] );
+			$id = 'mailarchiver_archiver_details_' . strtolower( $processor['id'] );
 			add_settings_field(
 				$id,
 				$processor['name'],
 				[ $form, 'echo_field_checkbox' ],
-				'mailarchiver_logger_details_section',
-				'mailarchiver_logger_details_section',
+				'mailarchiver_archiver_details_section',
+				'mailarchiver_archiver_details_section',
 				[
 					'text'        => esc_html__( 'Included', 'mailarchiver' ),
 					'id'          => $id,
-					'checked'     => in_array( $processor['id'], $this->current_logger['processors'], true ),
+					'checked'     => in_array( $processor['id'], $this->current_archiver['processors'], true ),
 					'description' => $processor['help'],
 					'full_width'  => true,
-					'enabled'     => ( 'WordpressHandler' !== $this->current_logger['handler'] || 'BacktraceProcessor' === $processor['id'] ) && ( 'PushoverHandler' !== $this->current_logger['handler'] ),
+					'enabled'     => ( 'WordpressHandler' !== $this->current_archiver['handler'] || 'BacktraceProcessor' === $processor['id'] ) && ( 'PushoverHandler' !== $this->current_archiver['handler'] ),
 				]
 			);
-			register_setting( 'mailarchiver_logger_details_section', $id );
+			register_setting( 'mailarchiver_archiver_details_section', $id );
 		}
 	}
 

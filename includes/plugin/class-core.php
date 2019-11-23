@@ -18,7 +18,7 @@ use Mailarchiver\System\I18n;
 use Mailarchiver\System\Assets;
 use Mailarchiver\Library\Libraries;
 use Mailarchiver\System\Nag;
-use Mailarchiver\Plugin\Feature\LoggerMaintainer;
+use Mailarchiver\Plugin\Feature\ArchiverMaintainer;
 use Mailarchiver\Listener\ListenerFactory;
 
 /**
@@ -94,7 +94,7 @@ class Core {
 		if ( ! wp_next_scheduled( MAILARCHIVER_CRON_NAME ) ) {
 			wp_schedule_event( time(), 'twicedaily', MAILARCHIVER_CRON_NAME );
 		}
-		$maintainer = new LoggerMaintainer();
+		$maintainer = new ArchiverMaintainer();
 		$this->loader->add_action( MAILARCHIVER_CRON_NAME, $maintainer, 'cron_clean' );
 	}
 

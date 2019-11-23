@@ -1,6 +1,6 @@
 <?php
 /**
- * MailArchiver logger utilities.
+ * MailArchiver archiver utilities.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -9,7 +9,7 @@
 
 namespace Mailarchiver\Plugin\Feature;
 
-use Mailarchiver\Plugin\Feature\DLogger;
+use Mailarchiver\Plugin\Feature\DArchiver;
 use Monolog\Logger;
 use Mailarchiver\Plugin\Feature\EventTypes;
 
@@ -34,17 +34,17 @@ class Log {
 	}
 
 	/**
-	 * Get a new logger instance.
+	 * Get a new archiver instance.
 	 *
-	 * @param   string $class The class identifier, see Mailarchiver\API\DLogger::$classes.
+	 * @param   string $class The class identifier, see Mailarchiver\API\DArchiver::$classes.
 	 * @param   string $name Optional. The name of the component.
 	 * @param   string $version Optional. The version of the component.
 	 * @param   string $test Optional. The handler to bootstrap if specified..
-	 * @return  DLogger The MailArchiver logger instance.
+	 * @return  DArchiver The MailArchiver archiver instance.
 	 * @since   1.0.0
 	 */
 	public static function bootstrap( $class, $name = null, $version = null, $test = null ) {
-		return new DLogger( $class, $name, $version, $test );
+		return new DArchiver( $class, $name, $version, $test );
 	}
 
 	/**

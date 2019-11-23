@@ -9,12 +9,12 @@
  * @since   1.0.0
  */
 
-use Mailarchiver\Plugin\Feature\Loggers;
+use Mailarchiver\Plugin\Feature\Archivers;
 
-$loggers = new Loggers();
-$loggers->prepare_items();
+$archivers = new Archivers();
+$archivers->prepare_items();
 
-$button = '<a href="#" class="page-title-action add-trigger">' . esc_html__( 'Add a Logger', 'mailarchiver' ) . '</a>'
+$button = '<a href="#" class="page-title-action add-trigger">' . esc_html__( 'Add an Archiver', 'mailarchiver' ) . '</a>'
 
 ?>
 
@@ -25,11 +25,11 @@ $button = '<a href="#" class="page-title-action add-trigger">' . esc_html__( 'Ad
 <div class="add-text" style="display:none;">
 	<div id="wpcom-stats-meta-box-container" class="metabox-holder">
 		<div class="postbox-container" style="width: 100%;margin-right: 10px;">
-			<?php require MAILARCHIVER_ADMIN_DIR . 'partials/mailarchiver-admin-settings-logger-choose.php'; ?>
+			<?php require MAILARCHIVER_ADMIN_DIR . 'partials/mailarchiver-admin-settings-archiver-choose.php'; ?>
 		</div>
 	</div>
 </div>
-<?php $loggers->display(); ?>
+<?php $archivers->display(); ?>
 
 <script type="text/javascript">
 	jQuery(document).ready(function($) {

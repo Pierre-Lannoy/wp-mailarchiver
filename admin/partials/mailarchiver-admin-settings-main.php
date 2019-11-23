@@ -10,7 +10,7 @@
  */
 
 // phpcs:ignore
-$active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'loggers' );
+$active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'archivers' );
 
 ?>
 
@@ -26,26 +26,13 @@ $active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'loggers' );
 			add_query_arg(
 				array(
 					'page' => 'mailarchiver-settings',
-					'tab'  => 'loggers',
+					'tab'  => 'archivers',
 				),
 				admin_url( 'options-general.php' )
 			)
 		);
 		?>
-		" class="nav-tab <?php echo 'loggers' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Loggers', 'mailarchiver' ); ?></a>
-        <a href="
-		<?php
-		echo esc_url(
-			add_query_arg(
-				array(
-					'page' => 'mailarchiver-settings',
-					'tab'  => 'listeners',
-				),
-				admin_url( 'options-general.php' )
-			)
-		);
-		?>
-        " class="nav-tab <?php echo 'listeners' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Listeners', 'mailarchiver' ); ?></a>
+		" class="nav-tab <?php echo 'archivers' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Archivers', 'mailarchiver' ); ?></a>
 		<a href="
 		<?php
 		echo esc_url(
@@ -74,11 +61,8 @@ $active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'loggers' );
 		" class="nav-tab <?php echo 'about' === $active_tab ? 'nav-tab-active' : ''; ?>" style="float:right;"><?php esc_html_e( 'About', 'mailarchiver' ); ?></a>
 	</h2>
 
-	<?php if ( 'loggers' === $active_tab ) { ?>
-		<?php include __DIR__ . '/mailarchiver-admin-settings-loggers.php'; ?>
-	<?php } ?>
-	<?php if ( 'listeners' === $active_tab ) { ?>
-		<?php include __DIR__ . '/mailarchiver-admin-settings-listeners.php'; ?>
+	<?php if ( 'archivers' === $active_tab ) { ?>
+		<?php include __DIR__ . '/mailarchiver-admin-settings-archivers.php'; ?>
 	<?php } ?>
 	<?php if ( 'misc' === $active_tab ) { ?>
 		<?php include __DIR__ . '/mailarchiver-admin-settings-options.php'; ?>

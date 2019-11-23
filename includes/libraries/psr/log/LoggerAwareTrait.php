@@ -3,24 +3,24 @@
 namespace Psr\Log;
 
 /**
- * Basic Implementation of LoggerAwareInterface.
+ * Basic Implementation of ArchiverAwareInterface.
  */
-trait LoggerAwareTrait
+trait ArchiverAwareTrait
 {
     /**
-     * The logger instance.
+     * The archiver instance.
      *
-     * @var LoggerInterface
+     * @var ArchiverInterface
      */
-    protected $logger;
+    protected $archiver;
 
     /**
-     * Sets a logger.
+     * Sets an archiver.
      *
-     * @param LoggerInterface $logger
+     * @param ArchiverInterface $archiver
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setArchiver(ArchiverInterface $archiver)
     {
-        $this->logger = $logger;
+        $this->archiver = $archiver;
     }
 }

@@ -19,20 +19,20 @@
 			array(
 				'page'    => 'mailarchiver-settings',
 				'action'  => 'do-edit',
-				'tab'     => 'loggers',
-				'handler' => $current_logger['handler'],
-				'uuid'    => $current_logger['uuid'],
+				'tab'     => 'archivers',
+				'handler' => $current_archiver['handler'],
+				'uuid'    => $current_archiver['uuid'],
 			),
 			admin_url( 'options-general.php' )
 		)
 	);
 	?>
 	" method="POST">
-		<?php do_settings_sections( 'mailarchiver_logger_misc_section' ); ?>
-		<?php do_settings_sections( 'mailarchiver_logger_specific_section' ); ?>
-		<?php do_settings_sections( 'mailarchiver_logger_privacy_section' ); ?>
-		<?php do_settings_sections( 'mailarchiver_logger_details_section' ); ?>
-		<?php wp_nonce_field( 'mailarchiver-logger-edit' ); ?>
+		<?php do_settings_sections( 'mailarchiver_archiver_misc_section' ); ?>
+		<?php do_settings_sections( 'mailarchiver_archiver_specific_section' ); ?>
+		<?php do_settings_sections( 'mailarchiver_archiver_privacy_section' ); ?>
+		<?php do_settings_sections( 'mailarchiver_archiver_details_section' ); ?>
+		<?php wp_nonce_field( 'mailarchiver-archiver-edit' ); ?>
 		<p><?php echo get_submit_button( esc_html__( 'Cancel', 'mailarchiver' ), 'secondary', 'cancel', false ); ?>&nbsp;&nbsp;&nbsp;<?php echo get_submit_button( null, 'primary', 'submit', false ); ?></p>
 	</form>
 </div>

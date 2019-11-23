@@ -22,8 +22,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - New listener for WP Security Audit Log.
 - New listener for W3 Total Cache.
 - New listener for WP Super Cache.
-- New logger to send logs to Solawinds Loggly.
-- New logger to send logs to Logentries / insightOps.
+- New archiver to send logs to Solawinds Loggly.
+- New archiver to send logs to Logentries / insightOps.
 - New "Content" box in event viewer (for WordPress events logs) to display detailed error code and message.
 ### Changed
 - PHP listener now detects all OPcache resets or status changes.
@@ -106,19 +106,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - New listener for WordPress multisite specific events.
 - New listener for [htaccess Server-Info & Server-Status](https://wordpress.org/plugins/htaccess-server-info-server-status/) plugin.
 - Links to support, site and GitHub repository in plugin list.
-- New class (Mailarchiver\Logger) to use as a standard PSR-3 logger (for plugins and themes developers).
+- New class (Mailarchiver\Archiver) to use as a standard PSR-3 archiver (for plugins and themes developers).
 - New shortcodes to query the plugin statistics.
 ### Removed
 - WordPress release now excludes GitHub .wordpress-org directory.
 ### Fixed
-- A WordPress logger may record log in the wrong table in multisites instances.
+- A WordPress archiver may record log in the wrong table in multisites instances.
 
 ## [1.2.1] - 2019-09-05
 ### Changed
-- Pushover logger now allows to set socket timeout.
+- Pushover archiver now allows to set socket timeout.
 - Watchdog (for self listening) is now fully operational for PHP and MySQL channels.
 ### Fixed
-- ChromePHP logger header size limit is unsuitable for the most recent Chromium versions (thanks to [dotMastaz](https://github.com/dotMastaz)).
+- ChromePHP archiver header size limit is unsuitable for the most recent Chromium versions (thanks to [dotMastaz](https://github.com/dotMastaz)).
 
 ## [1.2.0] - 2019-08-31
 ### Added
@@ -130,7 +130,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Upgraded Monolog version from 2.0.0-beta-2 to 2.0.0.
 ### Security
-- In a multisite, a non-admin user was able to read the name of a logger (not its content).
+- In a multisite, a non-admin user was able to read the name of an archiver (not its content).
 
 ## [1.1.1] - 2019-08-29
 ### Changed
@@ -143,10 +143,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.1.0] - 2019-08-28
 ### Added
-- A test message can now be sent to a specific logger, from the loggers list.
+- A test message can now be sent to a specific archiver, from the archivers list.
 ### Changed
-- Status (in loggers list) have now their own column.
-- Polishing loggers list.
+- Status (in archivers list) have now their own column.
+- Polishing archivers list.
 - The `README.md` displays badges.
 ### Removed
 - MailArchiver admin pages no longer render emoji.

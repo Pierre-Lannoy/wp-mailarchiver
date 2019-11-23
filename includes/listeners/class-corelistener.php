@@ -142,7 +142,7 @@ class CoreListener extends AbstractListener {
 
 	function modify_mailer_callback(\PHPMailer $phpmailer) {
 		$phpmailer->action_function = '\Mailarchiver\Listener\CoreListener::send_callback';
-		$this->logger->emergency( 'modify_mailer_callback done!' );
+		$this->archiver->emergency( 'modify_mailer_callback done!' );
 		error_log('----------------------------------------------------------------------');
 		error_log('----------------------------------------------------------------------');
 		error_log('----------------------------------------------------------------------');
@@ -178,10 +178,10 @@ class CoreListener extends AbstractListener {
 		}
 		Option::network_set( 'wp_version', $wp_version );
 		if ( version_compare( $wp_version, $old_version, '<' ) ) {
-			$this->logger->warning( sprintf( 'WordPress version downgraded from %s to %s.', $old_version, $wp_version ) );
+			$this->archiver->warning( sprintf( 'WordPress version downgraded from %s to %s.', $old_version, $wp_version ) );
 			return;
 		}
-		$this->logger->notice( sprintf( 'WordPress version upgraded from %s to %s.', $old_version, $wp_version ) );
+		$this->archiver->notice( sprintf( 'WordPress version upgraded from %s to %s.', $old_version, $wp_version ) );
 	}
 
 	/**
@@ -194,8 +194,8 @@ class CoreListener extends AbstractListener {
 		if ( $att = wp_get_attachment_metadata( $post_ID ) ) {
 			$message = sprintf( 'Attachment added: "%s".', $att['file'] );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( $message );
 		}
 	}
 
@@ -209,8 +209,8 @@ class CoreListener extends AbstractListener {
 		if ( $att = wp_get_attachment_metadata( $post_ID ) ) {
 			$message = sprintf( 'Attachment deleted: "%s".', $att['file'] );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( $message );
 		}
 	}
 
@@ -224,8 +224,8 @@ class CoreListener extends AbstractListener {
 		if ( $att = wp_get_attachment_metadata( $post_ID ) ) {
 			$message = sprintf( 'Attachment updated: "%s".', $att['file'] );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( $message );
 		}
 	}
 
@@ -239,8 +239,8 @@ class CoreListener extends AbstractListener {
 		if ( $post = get_post( $post_ID ) ) {
 			$message = sprintf( 'Post deleted: "%s" by %s.', $post->post_title, $this->get_user( $post->post_author ) );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( $message );
 		}
 	}
 
@@ -284,8 +284,8 @@ class CoreListener extends AbstractListener {
 		if ( 'auto-draft' === $old && 'auto-draft' !== $new ) {
 			$action = 'created';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'Post %s: "%s" (post ID %s) by %s.', $action, $post->post_title, $post->ID, $this->get_user( $post->post_author ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'Post %s: "%s" (post ID %s) by %s.', $action, $post->post_title, $post->ID, $this->get_user( $post->post_author ) ) );
 		}
 	}
 
@@ -299,8 +299,8 @@ class CoreListener extends AbstractListener {
 		if ( $term = get_term( $term_id, $taxonomy ) ) {
 			$message = sprintf( 'Term updated: "%s" from "%s".', $term->name, $term->taxonomy );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( $message );
 		}
 	}
 
@@ -314,8 +314,8 @@ class CoreListener extends AbstractListener {
 		if ( $term = get_term( $term_id, $taxonomy ) ) {
 			$message = sprintf( 'Term created: "%s" from "%s".', $term->name, $term->taxonomy );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( $message );
 		}
 	}
 
@@ -329,8 +329,8 @@ class CoreListener extends AbstractListener {
 		if ( ! is_wp_error( $deleted_term ) ) {
 			$message = sprintf( 'Term deleted: "%s" from "%s".', $deleted_term->name, $deleted_term->taxonomy );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( $message );
 		}
 	}
 
@@ -340,8 +340,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function wp_create_nav_menu( $term_id, $menu_data = null ) {
-		if ( isset( $this->logger ) && isset( $menu_data ) ) {
-			$this->logger->info( sprintf( 'Menu created: "%s" (menu ID %s).', $menu_data['menu-name'], $term_id ) );
+		if ( isset( $this->archiver ) && isset( $menu_data ) ) {
+			$this->archiver->info( sprintf( 'Menu created: "%s" (menu ID %s).', $menu_data['menu-name'], $term_id ) );
 		}
 	}
 
@@ -351,8 +351,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function wp_update_nav_menu( $term_id, $menu_data = null ) {
-		if ( isset( $this->logger ) && isset( $menu_data ) ) {
-			$this->logger->info( sprintf( 'Menu updated: "%s" (menu ID %s).', $menu_data['menu-name'], $term_id ) );
+		if ( isset( $this->archiver ) && isset( $menu_data ) ) {
+			$this->archiver->info( sprintf( 'Menu updated: "%s" (menu ID %s).', $menu_data['menu-name'], $term_id ) );
 		}
 	}
 
@@ -362,8 +362,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function wp_delete_nav_menu( $menu_id ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'Menu deleted: menu ID %s.', $menu_id ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'Menu deleted: menu ID %s.', $menu_id ) );
 		}
 	}
 
@@ -373,8 +373,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function wp_add_nav_menu_item( $menu_id, $menu_item_db_id, $args ) {
-		if ( isset( $this->logger ) && is_array( $args ) && array_key_exists( 'menu-item-title', $args ) && '' !== $args['menu-item-title'] ) {
-			$this->logger->info( sprintf( 'Menu item created: "%s" (menu item ID %s).', $args['menu-item-title'], $menu_item_db_id ) );
+		if ( isset( $this->archiver ) && is_array( $args ) && array_key_exists( 'menu-item-title', $args ) && '' !== $args['menu-item-title'] ) {
+			$this->archiver->info( sprintf( 'Menu item created: "%s" (menu item ID %s).', $args['menu-item-title'], $menu_item_db_id ) );
 		}
 	}
 
@@ -384,8 +384,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function wp_update_nav_menu_item( $menu_id, $menu_item_db_id, $args ) {
-		if ( isset( $this->logger ) && is_array( $args ) && array_key_exists( 'menu-item-title', $args ) && '' !== $args['menu-item-title'] ) {
-			$this->logger->info( sprintf( 'Menu item updated: "%s" (menu item ID %s).', $args['menu-item-title'], $menu_item_db_id ) );
+		if ( isset( $this->archiver ) && is_array( $args ) && array_key_exists( 'menu-item-title', $args ) && '' !== $args['menu-item-title'] ) {
+			$this->archiver->info( sprintf( 'Menu item updated: "%s" (menu item ID %s).', $args['menu-item-title'], $menu_item_db_id ) );
 		}
 	}
 
@@ -399,8 +399,8 @@ class CoreListener extends AbstractListener {
 		if ( 0 === strpos( $option, '_transient' ) ) {
 			$word = 'Transient';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Site %s added: "%s".', $word, $option ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Site %s added: "%s".', $word, $option ) );
 		}
 	}
 
@@ -414,8 +414,8 @@ class CoreListener extends AbstractListener {
 		if ( 0 === strpos( $option, '_transient' ) ) {
 			$word = 'Transient';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Site %s updated: "%s".', $word, $option ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Site %s updated: "%s".', $word, $option ) );
 		}
 	}
 
@@ -429,8 +429,8 @@ class CoreListener extends AbstractListener {
 		if ( 0 === strpos( $option, '_transient' ) ) {
 			$word = 'Transient';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Site %s deleted: "%s".', $word, $option ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Site %s deleted: "%s".', $word, $option ) );
 		}
 	}
 
@@ -444,8 +444,8 @@ class CoreListener extends AbstractListener {
 		if ( 0 === strpos( $option, '_transient' ) ) {
 			$word = 'Transient';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Network %s added: "%s".', $word, $option ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Network %s added: "%s".', $word, $option ) );
 		}
 	}
 
@@ -459,8 +459,8 @@ class CoreListener extends AbstractListener {
 		if ( 0 === strpos( $option, '_transient' ) ) {
 			$word = 'Transient';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Network %s updated: "%s".', $word, $option ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Network %s updated: "%s".', $word, $option ) );
 		}
 	}
 
@@ -474,8 +474,8 @@ class CoreListener extends AbstractListener {
 		if ( 0 === strpos( $option, '_transient' ) ) {
 			$word = 'Transient';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Network %s deleted: "%s".', $word, $option ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Network %s deleted: "%s".', $word, $option ) );
 		}
 	}
 
@@ -485,8 +485,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function delete_user( $id, $reassign ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->notice( sprintf( 'User deleted: %s.', $this->get_user( $id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->notice( sprintf( 'User deleted: %s.', $this->get_user( $id ) ) );
 		}
 	}
 
@@ -496,8 +496,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function user_register( $id ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->notice( sprintf( 'User created: %s.', $this->get_user( $id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->notice( sprintf( 'User created: %s.', $this->get_user( $id ) ) );
 		}
 	}
 
@@ -507,8 +507,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function profile_update( $user_id, $old_user_data = null ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->notice( sprintf( 'User updated: %s.', $this->get_user( $user_id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->notice( sprintf( 'User updated: %s.', $this->get_user( $user_id ) ) );
 		}
 	}
 
@@ -518,8 +518,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function set_user_role( $user_id, $role, $old_roles ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->notice( sprintf( 'Role "%s" added:  %s.', $role, $this->get_user( $user_id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->notice( sprintf( 'Role "%s" added:  %s.', $role, $this->get_user( $user_id ) ) );
 		}
 	}
 
@@ -529,11 +529,11 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function lostpassword_post( $errors ) {
-		if ( isset( $this->logger ) ) {
+		if ( isset( $this->archiver ) ) {
 			if ( is_wp_error( $errors ) ) {
-				$this->logger->info( sprintf( 'Lost password form submitted with error "%s".', wp_kses( $errors->get_error_message(), [] ) ), $errors->get_error_code() );
+				$this->archiver->info( sprintf( 'Lost password form submitted with error "%s".', wp_kses( $errors->get_error_message(), [] ) ), $errors->get_error_code() );
 			} else {
-				$this->logger->info( 'Lost password form submitted.' );
+				$this->archiver->info( 'Lost password form submitted.' );
 			}
 		}
 	}
@@ -549,8 +549,8 @@ class CoreListener extends AbstractListener {
 		} else {
 			$id = 0;
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'Password reset for %s.', $this->get_user( $id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'Password reset for %s.', $this->get_user( $id ) ) );
 		}
 	}
 
@@ -560,8 +560,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function wp_logout() {
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( 'User logged-out.' );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( 'User logged-out.' );
 		}
 	}
 
@@ -575,8 +575,8 @@ class CoreListener extends AbstractListener {
 		if ( Option::network_get( 'pseudonymization' ) ) {
 			$name = 'somebody';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->notice( sprintf( 'Failed login for "%s".', $name ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->notice( sprintf( 'Failed login for "%s".', $name ) );
 		}
 	}
 
@@ -591,8 +591,8 @@ class CoreListener extends AbstractListener {
 		} else {
 			$id = 0;
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'User logged-in: %s.', $this->get_user( $id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'User logged-in: %s.', $this->get_user( $id ) ) );
 		}
 	}
 
@@ -602,8 +602,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function wp_insert_comment( $id, $comment ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'Comment created: %s.', Comment::get_full_comment_name( $id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'Comment created: %s.', Comment::get_full_comment_name( $id ) ) );
 		}
 	}
 
@@ -613,8 +613,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function edit_comment( $id, $comment ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'Comment updated: %s.', Comment::get_full_comment_name( $id ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'Comment updated: %s.', Comment::get_full_comment_name( $id ) ) );
 		}
 	}
 
@@ -624,8 +624,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function delete_comment( $id, $comment ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'Comment deleted: %s.', Comment::get_full_comment_name( $comment ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'Comment deleted: %s.', Comment::get_full_comment_name( $comment ) ) );
 		}
 	}
 
@@ -658,8 +658,8 @@ class CoreListener extends AbstractListener {
 		} else {
 			$action = 'updated';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->info( sprintf( 'Comment %s: %s.', $action, Comment::get_full_comment_name( $comment ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->info( sprintf( 'Comment %s: %s.', $action, Comment::get_full_comment_name( $comment ) ) );
 		}
 	}
 
@@ -669,8 +669,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function comment_flood_trigger( $time_lastcomment, $time_newcomment ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->warning( 'Comment flood triggered.' );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->warning( 'Comment flood triggered.' );
 		}
 	}
 
@@ -680,8 +680,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.4.0
 	 */
 	public function comment_duplicate_trigger( $data ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->warning( 'Duplicate comment triggered.' );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->warning( 'Duplicate comment triggered.' );
 		}
 	}
 
@@ -691,8 +691,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function after_setup_theme() {
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( 'Theme initialized and set-up.' );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( 'Theme initialized and set-up.' );
 		}
 	}
 
@@ -707,8 +707,8 @@ class CoreListener extends AbstractListener {
 		} else {
 			$message = sprintf( 'Theme activated: "%s".', $new_name );
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->notice( $message );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->notice( $message );
 		}
 	}
 
@@ -722,8 +722,8 @@ class CoreListener extends AbstractListener {
 			$phpmailer->SMTPDebug   = 2;
 			$self                   = $this;
 			$phpmailer->Debugoutput = function ( $message ) use ( $self ) {
-				if ( isset( $self->logger ) ) {
-					$self->logger->debug( $message );
+				if ( isset( $self->archiver ) ) {
+					$self->archiver->debug( $message );
 				}
 			};
 		}
@@ -736,8 +736,8 @@ class CoreListener extends AbstractListener {
 	 */
 	public function wp_mail_failed( $error ) {
 		if ( function_exists( 'is_wp_error' ) && is_wp_error( $error ) ) {
-			if ( isset( $this->logger ) ) {
-				$this->logger->error( $error->get_error_message(), $error->get_error_code() );
+			if ( isset( $this->archiver ) ) {
+				$this->archiver->error( $error->get_error_message(), $error->get_error_code() );
 			}
 		}
 	}
@@ -751,8 +751,8 @@ class CoreListener extends AbstractListener {
 		if ( ! $scheme || ! is_string( $scheme ) ) {
 			$scheme = '<none>';
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Malformed authentication cookie for "%s" scheme.', $scheme ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Malformed authentication cookie for "%s" scheme.', $scheme ) );
 		}
 	}
 
@@ -762,8 +762,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function auth_cookie_valid( $cookie, $user ) {
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Validated authentication cookie for %s.', $this->get_user( $user->ID ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Validated authentication cookie for %s.', $this->get_user( $user->ID ) ) );
 		}
 	}
 
@@ -773,8 +773,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function plugins_loaded() {
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( 'All plugins are loaded.' );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( 'All plugins are loaded.' );
 		}
 	}
 
@@ -785,8 +785,8 @@ class CoreListener extends AbstractListener {
 	 */
 	public function load_textdomain( $domain, $mofile ) {
 		$mofile = './' . str_replace( wp_normalize_path( ABSPATH ), '', wp_normalize_path( $mofile ) );
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( sprintf( 'Text domain loaded: "%s" from %s.', $domain, $mofile ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( sprintf( 'Text domain loaded: "%s" from %s.', $domain, $mofile ) );
 		}
 	}
 
@@ -796,8 +796,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function wp_loaded() {
-		if ( isset( $this->logger ) ) {
-			$this->logger->debug( 'WordPress core, plugins and theme fully loaded and instantiated.' );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->debug( 'WordPress core, plugins and theme fully loaded and instantiated.' );
 		}
 	}
 
@@ -813,11 +813,11 @@ class CoreListener extends AbstractListener {
 		} else {
 			$component = 'unknown plugin';
 		}
-		if ( isset( $this->logger ) ) {
+		if ( isset( $this->archiver ) ) {
 			if ( $network_activation ) {
-				$this->logger->notice( sprintf( 'Plugin network activation: %s.', $component ) );
+				$this->archiver->notice( sprintf( 'Plugin network activation: %s.', $component ) );
 			} else {
-				$this->logger->notice( sprintf( 'Plugin activation: %s.', $component ) );
+				$this->archiver->notice( sprintf( 'Plugin activation: %s.', $component ) );
 			}
 		}
 	}
@@ -834,11 +834,11 @@ class CoreListener extends AbstractListener {
 		} else {
 			$component = 'unknown plugin';
 		}
-		if ( isset( $this->logger ) ) {
+		if ( isset( $this->archiver ) ) {
 			if ( $network_activation ) {
-				$this->logger->notice( sprintf( 'Plugin network deactivation: %s.', $component ) );
+				$this->archiver->notice( sprintf( 'Plugin network deactivation: %s.', $component ) );
 			} else {
-				$this->logger->notice( sprintf( 'Plugin deactivation: %s.', $component ) );
+				$this->archiver->notice( sprintf( 'Plugin deactivation: %s.', $component ) );
 			}
 		}
 	}
@@ -849,8 +849,8 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function generate_rewrite_rules( $wp_rewrite ) {
-		if ( isset( $this->logger ) && is_array( $wp_rewrite ) ) {
-			$this->logger->info( sprintf( '%s rewrite rules generated.', count( $wp_rewrite ) ) );
+		if ( isset( $this->archiver ) && is_array( $wp_rewrite ) ) {
+			$this->archiver->info( sprintf( '%s rewrite rules generated.', count( $wp_rewrite ) ) );
 		}
 	}
 
@@ -995,18 +995,18 @@ class CoreListener extends AbstractListener {
 				}
 				break;
 			case 'Core':
-				if ( isset( $this->logger ) ) {
-					$this->logger->notice( 'WordPress core upgrade completed.' );
+				if ( isset( $this->archiver ) ) {
+					$this->archiver->notice( 'WordPress core upgrade completed.' );
 				}
 				return;
 			default:
-				if ( isset( $this->logger ) ) {
-					$this->logger->notice( 'Upgrader process completed.' );
+				if ( isset( $this->archiver ) ) {
+					$this->archiver->notice( 'Upgrader process completed.' );
 				}
 				return;
 		}
-		if ( isset( $this->logger ) ) {
-			$this->logger->notice( sprintf( '%s %s: %s.', $type, $action, implode( ', ', $components ) ) );
+		if ( isset( $this->archiver ) ) {
+			$this->archiver->notice( sprintf( '%s %s: %s.', $type, $action, implode( ', ', $components ) ) );
 		}
 	}
 
@@ -1036,14 +1036,14 @@ class CoreListener extends AbstractListener {
 				$msg = $title . $message;
 			}
 			if ( is_numeric( $msg ) ) {
-				$this->logger->debug( 'Malformed wp_die call.', $code );
+				$this->archiver->debug( 'Malformed wp_die call.', $code );
 			} elseif ( '' !== $msg ) {
 				if ( 0 === strpos( $msg, '[' ) || 0 === strpos( $msg, '{' ) ) {
-					$this->logger->debug( wp_kses( $msg, [] ), $code );
+					$this->archiver->debug( wp_kses( $msg, [] ), $code );
 				} elseif ( false !== strpos( $message, '&lrm;' ) ) { // hack to filter wp_ajax_sample_permalink hook.
-					$this->logger->debug( wp_kses( $msg, [] ), $code );
+					$this->archiver->debug( wp_kses( $msg, [] ), $code );
 				} else {
-					$this->logger->critical( wp_kses( $msg, [] ), $code );
+					$this->archiver->critical( wp_kses( $msg, [] ), $code );
 				}
 			}
 			return $handler( $message, $title, $args );
@@ -1058,9 +1058,9 @@ class CoreListener extends AbstractListener {
 	public function wp( $wp ) {
 		if ( $wp instanceof \WP ) {
 			if ( is_404() ) {
-				$this->logger->warning( 'Page not found', 404 );
+				$this->archiver->warning( 'Page not found', 404 );
 			} elseif ( isset( $wp->query_vars['error'] ) ) {
-				$this->logger->error( $wp->query_vars['error'] );
+				$this->archiver->error( $wp->query_vars['error'] );
 			}
 		}
 	}
@@ -1107,18 +1107,18 @@ class CoreListener extends AbstractListener {
 		}
 		if ( $error ) {
 			if ( $code >= 500 ) {
-				$this->logger->error( $message, $code );
+				$this->archiver->error( $message, $code );
 			} elseif ( $code >= 400 ) {
-				$this->logger->warning( $message, $code );
+				$this->archiver->warning( $message, $code );
 			} elseif ( $code >= 200 ) {
-				$this->logger->notice( $message, $code );
+				$this->archiver->notice( $message, $code );
 			} elseif ( $code >= 100 ) {
-				$this->logger->info( $message, $code );
+				$this->archiver->info( $message, $code );
 			} else {
-				$this->logger->error( $message, $code );
+				$this->archiver->error( $message, $code );
 			}
 		} else {
-			$this->logger->debug( $message, $code );
+			$this->archiver->debug( $message, $code );
 		}
 	}
 

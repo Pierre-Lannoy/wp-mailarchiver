@@ -1,6 +1,6 @@
 <?php
 /**
- * MailArchiver logger definition.
+ * MailArchiver archiver definition.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -14,13 +14,14 @@ use Monolog\Logger;
 use Mailarchiver\System\Environment;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Timezone;
-use Mailarchiver\Plugin\Feature\LoggerFactory;
+use Mailarchiver\Plugin\Feature\ArchiverFactory;
 use Mailarchiver\Plugin\Feature\ClassTypes;
 use Mailarchiver\Plugin\Feature\ChannelTypes;
 use Mailarchiver\Plugin\Feature\HandlerDiagnosis;
+use Mailarchiver\System\Logger as InternalLogger;
 
 /**
- * Main MailArchiver logger class.
+ * Main MailArchiver archiver class.
  *
  * This class defines all code necessary to log events with MailArchiver.
  *
@@ -28,7 +29,7 @@ use Mailarchiver\Plugin\Feature\HandlerDiagnosis;
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
-class DLogger {
+class DArchiver {
 
 	/**
 	 * The banned classes.
@@ -63,18 +64,18 @@ class DLogger {
 	protected $version = '-';
 
 	/**
-	 * The monolog logger.
+	 * The monolog archiver.
 	 *
 	 * @since  1.0.0
-	 * @var    object    $logger    Maintains the logger.
+	 * @var    object    $archiver    Maintains the archiver.
 	 */
-	protected $logger = null;
+	protected $archiver = null;
 
 	/**
-	 * Is the logger in test.
+	 * Is the archiver in test.
 	 *
 	 * @since  1.2.1
-	 * @var    boolean    $in_test    Maintains the test status of the logger.
+	 * @var    boolean    $in_test    Maintains the test status of the archiver.
 	 */
 	protected $in_test = false;
 
@@ -82,23 +83,23 @@ class DLogger {
 	 * Is the autolistening mode on.
 	 *
 	 * @since  1.3.0
-	 * @var    boolean    $autolisten    Maintains the autolistenning status of the logger.
+	 * @var    boolean    $autolisten    Maintains the autolistenning status of the archiver.
 	 */
 	private $autolisten = true;
 
 	/**
-	 * Is this listener a PSR-3 logger.
+	 * Is this listener a PSR-3 archiver.
 	 *
 	 * @since  1.3.0
-	 * @var    boolean    $autolisten    Maintains the psr3 status of the logger.
+	 * @var    boolean    $autolisten    Maintains the psr3 status of the archiver.
 	 */
 	private $psr3 = false;
 
 	/**
-	 * Is logger allowed to run.
+	 * Is archiver allowed to run.
 	 *
 	 * @since  1.3.0
-	 * @var    boolean    $allowed    Maintains the allowed status of the logger.
+	 * @var    boolean    $allowed    Maintains the allowed status of the archiver.
 	 */
 	private $allowed = true;
 
@@ -143,7 +144,7 @@ class DLogger {
 	 * @param   string  $name Optional. The name of the component.
 	 * @param   string  $version Optional. The version of the component.
 	 * @param   string  $test Optional. The handler to create if specified.
-	 * @param   boolean $psr3 Optional. True if this logger is a PSR-3 logger.
+	 * @param   boolean $psr3 Optional. True if this archiver is a PSR-3 archiver.
 	 * @since   1.0.0
 	 */
 	public function __construct( $class, $name = null, $version = null, $test = null, $psr3 = false ) {
@@ -158,11 +159,11 @@ class DLogger {
 		}
 		$this->psr3 = $psr3;
 		$this->init( $test );
-		$this->debug( 'A new instance of MailArchiver logger is initialized and operational.' );
+		InternalLogger::debug( 'A new instance of MailArchiver archiver is initialized and operational.' );
 	}
 
 	/**
-	 * Init the logger.
+	 * Init the archiver.
 	 *
 	 * @param   string $test Optional. The handler to init if specified.
 	 * @since 1.0.0
@@ -173,27 +174,27 @@ class DLogger {
 				$this->allowed = in_array( 'psr3', Option::network_get( 'listeners' ), true );
 			}
 		}
-		$this->in_test = isset( $test );
-		$factory       = new LoggerFactory();
-		$this->logger  = new Logger( $this->current_channel_tag(), [], [], Timezone::network_get() );
-		$handlers      = new HandlerTypes();
-		$diagnosis     = new HandlerDiagnosis();
-		$banned        = [];
-		$unloadable    = [];
-		foreach ( Option::network_get( 'loggers' ) as $key => $logger ) {
+		$this->in_test  = isset( $test );
+		$factory        = new ArchiverFactory();
+		$this->archiver = new Logger( $this->current_channel_tag(), [], [], Timezone::network_get() );
+		$handlers       = new HandlerTypes();
+		$diagnosis      = new HandlerDiagnosis();
+		$banned         = [];
+		$unloadable     = [];
+		foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
 			if ( $this->in_test && $key !== $test ) {
 				continue;
 			}
-			$handler_def    = $handlers->get( $logger['handler'] );
-			$logger['uuid'] = $key;
+			$handler_def    = $handlers->get( $archiver['handler'] );
+			$archiver['uuid'] = $key;
 			if ( $this->in_test || ( ! in_array( strtolower( $handler_def['ancestor'] ), self::$banned, true ) && ! in_array( strtolower( $handler_def['id'] ), self::$banned, true ) ) ) {
 				if ( $diagnosis->check( $handler_def['id'] ) ) {
-					$handler = $factory->create_logger( $logger );
+					$handler = $factory->create_archiver( $archiver );
 					if ( $handler ) {
-						$this->logger->pushHandler( $handler );
+						$this->archiver->pushHandler( $handler );
 					}
 				} else {
-					$unloadable[] = sprintf( 'Unable to load a %s logger. %s', $handler_def['name'], $diagnosis->error_string( $handler_def['id'] ) );
+					$unloadable[] = sprintf( 'Unable to load a %s archiver. %s', $handler_def['name'], $diagnosis->error_string( $handler_def['id'] ) );
 				}
 			} else {
 				$banned[] = $handler_def['name'];
@@ -201,17 +202,17 @@ class DLogger {
 		}
 		if ( count( $banned ) > 0 ) {
 			// phpcs:ignore
-			$this->critical( sprintf ('Due to MailArchiver internal errors, the following logger types have been temporarily deactivated: %s.', implode(', ', $banned ) ), 666 );
+			InternalLogger::critical( sprintf ('Due to MailArchiver internal errors, the following archiver types have been temporarily deactivated: %s.', implode(', ', $banned ) ), 666 );
 		}
 		if ( count( $unloadable ) > 0 ) {
 			foreach ( $unloadable as $item ) {
-				$this->error( $item, 666 );
+				InternalLogger::error( $item, 666 );
 			}
 		}
 	}
 
 	/**
-	 * Check the integrity of the logger.
+	 * Check the integrity of the archiver.
 	 *
 	 * @since 1.0.0
 	 */
@@ -219,7 +220,7 @@ class DLogger {
 		if ( count( self::$banned ) > 0 && ! $this->in_test ) {
 			$handlers = new HandlerTypes();
 			$banned   = [];
-			foreach ( $this->logger->getHandlers() as $handler ) {
+			foreach ( $this->archiver->getHandlers() as $handler ) {
 				$classname = get_class( $handler );
 				while ( false !== strpos( $classname, '\\' ) ) {
 					$classname = substr( $classname, strpos( $classname, '\\' ) + 1 );
@@ -227,13 +228,13 @@ class DLogger {
 				$handler_def = $handlers->get( $classname );
 				$ancestor    = $handler_def['ancestor'];
 				if ( in_array( strtolower( $classname ), self::$banned, true ) || in_array( strtolower( $ancestor ), self::$banned, true ) ) {
-					$this->logger->popHandler( $handler );
+					$this->archiver->popHandler( $handler );
 					$banned[] = $handler_def['name'];
 				}
 			}
 			if ( count( $banned ) > 0 ) {
 				// phpcs:ignore
-				$this->critical( sprintf ('Due to MailArchiver internal errors, the following logger types have been temporarily deactivated: %s.', implode(', ', $banned ) ), 666 );
+				InternalLogger::critical( sprintf ('Due to MailArchiver internal errors, the following archiver types have been temporarily deactivated: %s.', implode(', ', $banned ) ), 666 );
 			}
 		}
 	}
@@ -298,10 +299,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->log( $level, filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->log( $level, filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -328,10 +329,10 @@ class DLogger {
 					'code'      => (int) $code,
 				];
 				$channel = $this->current_channel_tag();
-				if ( $this->logger->getName() !== $channel ) {
-					$this->logger = $this->logger->withName( $channel );
+				if ( $this->archiver->getName() !== $channel ) {
+					$this->archiver = $this->archiver->withName( $channel );
 				}
-				$this->logger->debug( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+				$this->archiver->debug( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 				$result = true;
 			} catch ( \Throwable $t ) {
 				$this->integrity_check();
@@ -361,10 +362,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->info( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->info( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -393,10 +394,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->notice( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->notice( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -425,10 +426,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->warning( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->warning( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -457,10 +458,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->error( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->error( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -489,10 +490,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->critical( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->critical( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -521,10 +522,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->alert( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->alert( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -553,10 +554,10 @@ class DLogger {
 				'code'      => (int) $code,
 			];
 			$channel = $this->current_channel_tag();
-			if ( $this->logger->getName() !== $channel ) {
-				$this->logger = $this->logger->withName( $channel );
+			if ( $this->archiver->getName() !== $channel ) {
+				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->logger->emergency( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->emergency( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();

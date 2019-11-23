@@ -10,7 +10,7 @@
 namespace Mailarchiver\Plugin;
 
 use Mailarchiver\Plugin\Feature\Log;
-use Mailarchiver\Plugin\Feature\LoggerMaintainer;
+use Mailarchiver\Plugin\Feature\ArchiverMaintainer;
 use Parsedown;
 use Mailarchiver\System\Nag;
 use Mailarchiver\System\Option;
@@ -46,8 +46,8 @@ class Updater {
 				$this->update( $old );
 				// phpcs:ignore
 				$message = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME, $old, MAILARCHIVER_VERSION );
-				$logger  = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
-				$logger->notice( $message );
+				$archiver  = Log::bootstrap( 'plugin', MAILARCHIVER_PRODUCT_SHORTNAME, MAILARCHIVER_VERSION );
+				$archiver->notice( $message );
 				// phpcs:ignore
 				$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'mailarchiver' ), admin_url( 'options-general.php?page=mailarchiver-settings&tab=about' ) );
 			}
@@ -73,19 +73,19 @@ class Updater {
 	 */
 	private function update( $from ) {
 		// Starting 1.3.x, PushoverHandler is replaced by PshHandler.
-		$loggers = Option::network_get( 'loggers', null );
-		if ( isset( $loggers ) ) {
-			foreach ( $loggers as &$logger ) {
-				if ( array_key_exists( 'handler', $logger ) ) {
-					if ( 'PushoverHandler' === $logger['handler'] ) {
-						$logger['handler'] = 'PshHandler';
+		$archivers = Option::network_get( 'archivers', null );
+		if ( isset( $archivers ) ) {
+			foreach ( $archivers as &$archiver ) {
+				if ( array_key_exists( 'handler', $archiver ) ) {
+					if ( 'PushoverHandler' === $archiver['handler'] ) {
+						$archiver['handler'] = 'PshHandler';
 					}
 				}
 			}
-			Option::network_set( 'loggers', $loggers );
+			Option::network_set( 'archivers', $archivers );
 		}
 		// MailArchiver handlers auto updating.
-		$maintainer = new LoggerMaintainer();
+		$maintainer = new ArchiverMaintainer();
 		$maintainer->update( $from );
 	}
 
