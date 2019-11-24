@@ -12,7 +12,7 @@
 namespace Mailarchiver\Plugin\Feature;
 
 use Mailarchiver\Plugin\Feature\DArchiver;
-use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\Plugin\Feature\Archive;
 use Mailarchiver\System\Database;
 use Mailarchiver\System\Http;
 use Mailarchiver\System\Logger;

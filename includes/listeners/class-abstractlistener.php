@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Listener;
 
-use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\Plugin\Feature\Archive;
 use Mailarchiver\System\Logger;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\User;

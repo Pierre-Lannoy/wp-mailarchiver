@@ -12,7 +12,7 @@
 namespace Mailarchiver\Plugin\Feature;
 
 use Mailarchiver\System\Option;
-use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\Plugin\Feature\Archive;
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
@@ -219,7 +219,7 @@ class Archivers extends \WP_List_Table {
 	 * @since    1.0.0
 	 */
 	protected function column_level( $item ) {
-		$name = ucfirst( strtolower( Log::level_name( $item['level'] ) ) );
+		$name = ucfirst( strtolower( Archive::level_name( $item['level'] ) ) );
 		return $name;
 	}
 

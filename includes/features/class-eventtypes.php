@@ -80,14 +80,8 @@ class EventTypes {
 	 * @var string[] $level_names Logging levels names.
 	 */
 	public static $level_names = [
-		//Logger::DEBUG     => 'SUCCESS',
-		Logger::INFO      => 'SUCCESS',
-		//Logger::NOTICE    => 'SUCCESS',
-		//Logger::WARNING   => 'SUCCESS',
+		Logger::INFO      => 'INFO',
 		Logger::ERROR     => 'ERROR',
-		//Logger::CRITICAL  => 'ERROR',
-		//Logger::ALERT     => 'ERROR',
-		//Logger::EMERGENCY => 'ERROR',
 	];
 
 	/**

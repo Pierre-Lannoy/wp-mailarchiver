@@ -12,6 +12,8 @@
 
 namespace Mailarchiver\Listener;
 
+use Mailarchiver\System\Logger;
+
 /**
  * WP core listener for MailArchiver.
  *
@@ -54,12 +56,61 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	protected function launch() {
-		add_filter( 'wp_mail', [ $this, 'log_email' ], PHP_INT_MAX );
+		add_filter( 'wp_mail', [ $this, 'wp_mail' ] );
+		add_filter( 'wp_mail_failed', [ $this, 'wp_mail_failed' ] );
 		return true;
 	}
 
-	function log_email( $mail ) {
-		error_log(print_r($mail, true));
+	/**
+	 * Recursively get all "to" email adresses.
+	 *
+	 * @since    1.0.0
+	 */
+	private function get_all_emails( $a, &$result ) {
+		if ( is_array( $a ) ) {
+			foreach ( $a as $item ) {
+				$this->get_all_emails( $item, $result );
+			}
+		}
+		if ( is_object( $a ) ) {
+			foreach ( (array) $a as $item ) {
+				$this->get_all_emails( $item, $result );
+			}
+		}
+		if ( is_string( $a ) && false !== strpos( $a, '@' ) ) {
+			$result[] = $a;
+		}
+	}
+
+	/**
+	 * "wp_mail" event.
+	 *
+	 * @since    1.0.0
+	 */
+	public function wp_mail( $mail ) {
+		$tos = [];
+		$this->get_all_emails( $mail['to'], $tos );
+		$mail['to'] = implode( ', ', $tos );
+		\Mailarchiver\Plugin\Feature\Capture::put( $mail );
+	}
+
+	/**
+	 * "wp_mail" event.
+	 *
+	 * @since    1.0.0
+	 */
+	public function wp_mail_failed( $error ) {
+		if ( $error instanceof \WP_Error ) {
+			$message = $error->get_error_message();
+			if ( '' === $message ) {
+				$message = 'Unknown error.';
+			}
+			$data = $error->get_error_data();
+			$tos  = [];
+			$this->get_all_emails( $data['to'], $tos );
+			$data['to'] = implode( ', ', $tos );
+			\Mailarchiver\Plugin\Feature\Capture::put( $data, $message );
+		}
 	}
 
 }

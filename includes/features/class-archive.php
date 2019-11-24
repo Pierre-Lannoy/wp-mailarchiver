@@ -23,7 +23,7 @@ use Mailarchiver\Plugin\Feature\EventTypes;
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
-class Log {
+class Archive {
 
 	/**
 	 * Initialize the class and set its properties.
@@ -44,7 +44,6 @@ class Log {
 	 * @since   1.0.0
 	 */
 	public static function bootstrap( $class, $name = null, $version = null, $test = null ) {
-		// ::bootstrap( 'mail', 'wp_mail', $wp_version );
 		return new DArchiver( $class, $name, $version, $test );
 	}
 
@@ -75,7 +74,7 @@ class Log {
 		foreach ( EventTypes::$level_names as $key => $name ) {
 			if ( $key >= $minimal ) {
 				if ( Logger::INFO === $key || Logger::ERROR === $key ) {
-					if ( 'SUCCESS' === $name ) {
+					if ( 'INFO' === $name ) {
 						$result[] = [ $key, esc_html__( 'All emails', 'mailarchiver' ) ];
 					}
 					if ( 'ERROR' === $name ) {

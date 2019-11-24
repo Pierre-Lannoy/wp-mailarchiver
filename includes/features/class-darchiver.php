@@ -185,7 +185,7 @@ class DArchiver {
 			if ( $this->in_test && $key !== $test ) {
 				continue;
 			}
-			$handler_def    = $handlers->get( $archiver['handler'] );
+			$handler_def      = $handlers->get( $archiver['handler'] );
 			$archiver['uuid'] = $key;
 			if ( $this->in_test || ( ! in_array( strtolower( $handler_def['ancestor'] ), self::$banned, true ) && ! in_array( strtolower( $handler_def['id'] ), self::$banned, true ) ) ) {
 				if ( $diagnosis->check( $handler_def['id'] ) ) {
@@ -319,7 +319,7 @@ class DArchiver {
 				'version'   => (string) $this->version,
 			];
 			if ( is_array( $mail ) ) {
-				foreach ( [ 'to', 'from', 'message', 'headers', 'attachments' ] as $field ) {
+				foreach ( [ 'to', 'from', 'subject', 'body', 'headers', 'attachments' ] as $field ) {
 					if ( array_key_exists( $field, $mail ) ) {
 						$context[ $field ] = $mail[ $field ];
 					}

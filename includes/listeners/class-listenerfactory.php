@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Listener;
 
-use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\Plugin\Feature\Archive;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Logger;
 
@@ -80,6 +80,7 @@ class ListenerFactory {
 				$instance  = $this->create_listener_instance( $classname );
 				if ( $instance ) {
 					self::$infos[] = $instance->get_info();
+					Logger::debug( sprintf( '"%s" loaded.', $classname ) );
 				} else {
 					Logger::error( sprintf( 'Unable to load "%s".', $classname ) );
 				}
@@ -90,7 +91,7 @@ class ListenerFactory {
 	/**
 	 * Launch the listeners which need to be launched at the end of plugin load sequence.
 	 *
-	 * @since    1.6.0
+	 * @since    1.0.0
 	 */
 	public function launch_late_init() {
 		foreach (
@@ -102,6 +103,7 @@ class ListenerFactory {
 				$instance  = $this->create_listener_instance( $classname );
 				if ( $instance ) {
 					self::$infos[] = $instance->get_info();
+					Logger::debug( sprintf( '"%s" loaded.', $classname ) );
 				} else {
 					Logger::error( sprintf( 'Unable to load "%s".', $classname ) );
 				}

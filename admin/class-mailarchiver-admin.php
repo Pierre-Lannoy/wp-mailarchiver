@@ -9,7 +9,7 @@
 
 namespace Mailarchiver\Plugin;
 
-use Mailarchiver\Plugin\Feature\Log;
+use Mailarchiver\Plugin\Feature\Archive;
 use Mailarchiver\Plugin\Feature\EventViewer;
 use Mailarchiver\Plugin\Feature\HandlerTypes;
 use Mailarchiver\Plugin\Feature\ProcessorTypes;
@@ -802,7 +802,7 @@ class Mailarchiver_Admin {
 			'mailarchiver_archiver_misc_section',
 			'mailarchiver_archiver_misc_section',
 			[
-				'list'        => Log::get_levels( $this->current_handler['minimal'] ),
+				'list'        => Archive::get_levels( $this->current_handler['minimal'] ),
 				'id'          => 'mailarchiver_archiver_misc_level',
 				'value'       => $this->current_archiver['level'],
 				'description' => esc_html__( 'What kinds of emails should be archived.', 'mailarchiver' ),
@@ -846,7 +846,7 @@ class Mailarchiver_Admin {
 			'mailarchiver_archiver_delete_section',
 			'mailarchiver_archiver_delete_section',
 			[
-				'list'        => Log::get_levels( $this->current_handler['minimal'] ),
+				'list'        => Archive::get_levels( $this->current_handler['minimal'] ),
 				'id'          => 'mailarchiver_archiver_delete_level',
 				'value'       => $this->current_archiver['level'],
 				'description' => null,
