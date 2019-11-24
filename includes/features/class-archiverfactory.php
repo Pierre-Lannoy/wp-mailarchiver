@@ -111,6 +111,22 @@ class ArchiverFactory {
 				}
 			}
 			if ( $handler ) {
+				$archiver['processors'][] = [
+					'id'        => 'MailProcessor',
+					'namespace' => 'Mailarchiver\\Processor',
+					'name'      => esc_html__( 'Mail ', 'mailarchiver' ),
+					'help'      => esc_html__( 'Allows to log email fields and metadata.', 'mailarchiver' ),
+					'init'      => [
+						[
+							'type'  => 'privacy',
+							'value' => 'mailanonymization',
+						],
+						[
+							'type'  => 'privacy',
+							'value' => 'encryption',
+						],
+					],
+				];
 				foreach ( array_reverse( $archiver['processors'] ) as $processor ) {
 					$p_instance    = null;
 					$processor_def = $this->processor_types->get( $processor );
@@ -124,7 +140,11 @@ class ArchiverFactory {
 										$args[] = (int) $archiver['level'];
 										break;
 									case 'privacy':
-										$args[] = (bool) $archiver['privacy'][ $p['value'] ];
+										if ( 'encryption' === $p['type'] ) {
+											$args[] = (string) $archiver['privacy'][ $p['value'] ];
+										} else {
+											$args[] = (bool) $archiver['privacy'][ $p['value'] ];
+										}
 										break;
 									case 'literal':
 										$args[] = $p['value'];
@@ -233,9 +253,17 @@ class ArchiverFactory {
 			if ( ! array_key_exists( 'pseudonymization', $archiver['privacy'] ) ) {
 				$archiver['privacy']['pseudonymization'] = false;
 			}
+			if ( ! array_key_exists( 'mailanonymization', $archiver['privacy'] ) ) {
+				$archiver['privacy']['mailanonymization'] = false;
+			}
+			if ( ! array_key_exists( 'encryption', $archiver['privacy'] ) ) {
+				$archiver['privacy']['encryption'] = '';
+			}
 		} else {
-			$archiver['privacy']['obfuscation']      = false;
-			$archiver['privacy']['pseudonymization'] = false;
+			$archiver['privacy']['obfuscation']       = false;
+			$archiver['privacy']['pseudonymization']  = false;
+			$archiver['privacy']['mailanonymization'] = false;
+			$archiver['privacy']['encryption']        = '';
 		}
 		return $archiver;
 	}

@@ -72,7 +72,7 @@ class WordpressHandler {
 	 */
 	public function set_archiver( $archiver ) {
 		global $wpdb;
-		$this->archiver     = $archiver;
+		$this->archiver   = $archiver;
 		$this->table_name = 'mailarchiver_' . str_replace( '-', '', $archiver['uuid'] );
 		$this->table      = $wpdb->base_prefix . $this->table_name;
 	}
@@ -89,37 +89,28 @@ class WordpressHandler {
 			$cl[] = "'" . $c . "'";
 		}
 		$classes = implode( ',', $cl );
-		$cl      = [];
-		foreach ( Http::$verbs as $c ) {
-			$cl[] = "'" . $c . "'";
-		}
-		$verbs = implode( ',', $cl );
 		if ( '' !== $this->table ) {
 			$charset_collate = 'DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci';
 			$sql             = 'CREATE TABLE IF NOT EXISTS ' . $this->table;
 			$sql            .= ' (`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,';
 			$sql            .= " `timestamp` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',";
-			$sql            .= " `level` enum('emergency','alert','critical','error','warning','notice','info','debug','unknown') NOT NULL DEFAULT 'unknown',";
+			$sql            .= " `level` enum('error','info','unknown') NOT NULL DEFAULT 'unknown',";
 			$sql            .= " `channel` enum('cli','cron','ajax','xmlrpc','api','feed','wback','wfront','unknown') NOT NULL DEFAULT 'unknown',";
 			$sql            .= ' `class` enum(' . $classes . ") NOT NULL DEFAULT 'unknown',";
+			$sql            .= " `error` varchar(250) NOT NULL DEFAULT '-',";
+			$sql            .= " `subject` varchar(250) NOT NULL DEFAULT '-',";
+			$sql            .= " `from` varchar(256) NOT NULL DEFAULT '0',";  // Needed by SHA-256 pseudonymization.
+			$sql            .= " `to` varchar(256) NOT NULL DEFAULT '0',";  // Needed by SHA-256 pseudonymization.
+			$sql            .= ' `body` mediumtext,';
+			$sql            .= ' `headers` text,';
+			$sql            .= ' `attachments` text,';
 			$sql            .= " `component` varchar(26) NOT NULL DEFAULT 'Unknown',";
 			$sql            .= " `version` varchar(13) NOT NULL DEFAULT 'N/A',";
-			$sql            .= " `code` int(11) UNSIGNED NOT NULL DEFAULT '0',";
-			$sql            .= " `message` varchar(7500) NOT NULL DEFAULT '-',";
 			$sql            .= " `site_id` int(11) UNSIGNED NOT NULL DEFAULT '0',";
 			$sql            .= " `site_name` varchar(250) NOT NULL DEFAULT 'Unknown',";
 			$sql            .= " `user_id` varchar(66) NOT NULL DEFAULT '0',";  // Needed by SHA-256 pseudonymization.
 			$sql            .= " `user_name` varchar(250) NOT NULL DEFAULT 'Unknown',";
 			$sql            .= " `remote_ip` varchar(66) NOT NULL DEFAULT '127.0.0.1',";  // Needed by SHA-256 obfuscation.
-			$sql            .= " `url` varchar(2083) NOT NULL DEFAULT '-',";
-			$sql            .= ' `verb` enum(' . $verbs . ") NOT NULL DEFAULT 'unknown',";
-			$sql            .= " `server` varchar(250) NOT NULL DEFAULT 'unknown',";
-			$sql            .= " `referrer` varchar(250) NOT NULL DEFAULT '-',";
-			$sql            .= " `file` varchar(250) NOT NULL DEFAULT 'unknown',";
-			$sql            .= " `line` int(11) UNSIGNED NOT NULL DEFAULT '0',";
-			$sql            .= " `classname` varchar(100) NOT NULL DEFAULT 'unknown',";
-			$sql            .= " `function` varchar(100) NOT NULL DEFAULT 'unknown',";
-			$sql            .= ' `trace` varchar(7500),';
 			$sql            .= ' PRIMARY KEY (`id`)';
 			$sql            .= ") $charset_collate;";
 			// phpcs:ignore

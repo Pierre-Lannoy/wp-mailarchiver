@@ -80,14 +80,14 @@ class EventTypes {
 	 * @var string[] $level_names Logging levels names.
 	 */
 	public static $level_names = [
-		Logger::DEBUG     => 'DEBUG',
-		Logger::INFO      => 'INFO',
-		Logger::NOTICE    => 'NOTICE',
-		Logger::WARNING   => 'WARNING',
+		//Logger::DEBUG     => 'SUCCESS',
+		Logger::INFO      => 'SUCCESS',
+		//Logger::NOTICE    => 'SUCCESS',
+		//Logger::WARNING   => 'SUCCESS',
 		Logger::ERROR     => 'ERROR',
-		Logger::CRITICAL  => 'CRITICAL',
-		Logger::ALERT     => 'ALERT',
-		Logger::EMERGENCY => 'EMERGENCY',
+		//Logger::CRITICAL  => 'ERROR',
+		//Logger::ALERT     => 'ERROR',
+		//Logger::EMERGENCY => 'ERROR',
 	];
 
 	/**
@@ -114,34 +114,13 @@ class EventTypes {
 	 */
 	public static function init() {
 		self::$icons              = [];
-		self::$icons['unknown']   = Feather\Icons::get_base64( 'circle', '#F0F0F0', '#CCCCCC' );
-		self::$icons['debug']     = Feather\Icons::get_base64( 'info', '#F0F0F0', '#CCCCCC' );
-		self::$icons['info']      = Feather\Icons::get_base64( 'info', '#EEEEFF', '#9999FF' );
-		self::$icons['notice']    = Feather\Icons::get_base64( 'info', '#DDDDFF', '#5555FF' );
-		self::$icons['warning']   = Feather\Icons::get_base64( 'alert-circle', '#FFFFC4', '#FFAB10' );
-		self::$icons['error']     = Feather\Icons::get_base64( 'alert-circle', '#FFD2A8', '#FB7B00' );
-		self::$icons['critical']  = Feather\Icons::get_base64( 'alert-circle', '#FFB7B7', '#FF0000' );
-		self::$icons['alert']     = Feather\Icons::get_base64( 'x-circle', '#FFB7B7', '#DD0000' );
-		self::$icons['emergency'] = Feather\Icons::get_base64( 'x-circle', '#FFB7B7', '#AA0000' );
+		self::$icons['unknown']   = Feather\Icons::get_base64( 'mail', '#F0F0F0', '#CCCCCC' );
+		self::$icons['info']      = Feather\Icons::get_base64( 'mail', '#DDDDFF', '#5555FF' );
+		self::$icons['error']     = Feather\Icons::get_base64( 'mail', '#FFB7B7', '#DD0000' );
 		self::$level_texts        = [];
-		/* translators: definition of an event typed 'UNKNOWN' */
-		self::$level_texts['unknown'] = esc_html__( 'The event is not typed, this can\'t be a good news.', 'mailarchiver' );
-		/* translators: definition of an event typed 'DEBUG', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['debug'] = esc_html__( 'An information for developers and testers. Only used for events related to application/system debugging.', 'mailarchiver' );
-		/* translators: definition of an event typed 'INFO', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['info'] = esc_html__( 'A standard information, just for you to know… and forget!', 'mailarchiver' );
-		/* translators: definition of an event typed 'NOTICE', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['notice'] = esc_html__( 'A normal but significant condition. Now you know!', 'mailarchiver' );
-		/* translators: definition of an event typed 'WARNING', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['warning'] = esc_html__( 'A significant condition indicating a situation that may lead to an error if recurring or if no action is taken. Does not usually affect the operations.', 'mailarchiver' );
-		/* translators: definition of an event typed 'ERROR', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['error'] = esc_html__( 'A minor operating error that may affects the operations. It requires investigation and preventive treatment.', 'mailarchiver' );
-		/* translators: definition of an event typed 'CRITICAL', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['critical'] = esc_html__( 'An operating error that undoubtedly affects the operations. It requires investigation and corrective treatment.', 'mailarchiver' );
-		/* translators: definition of an event typed 'ALERT', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['alert'] = esc_html__( 'A major operating error that undoubtedly affects the operations. It requires immediate investigation and corrective treatment.', 'mailarchiver' );
-		/* translators: definition of an event typed 'EMERGENCY', see https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/DEVELOPER.md for details*/
-		self::$level_texts['emergency'] = esc_html__( 'A panic condition. WordPress is unusable.', 'mailarchiver' );
+		self::$level_texts['unknown'] = esc_html__( 'The sent status of the mail is unknown.', 'mailarchiver' );
+		self::$level_texts['info'] = esc_html__( 'The mail was successfully sent.', 'mailarchiver' );
+		self::$level_texts['error'] = esc_html__( 'The mail was not sent, an error was generated.', 'mailarchiver' );
 	}
 
 }

@@ -491,11 +491,13 @@ class Mailarchiver_Admin {
 		if ( ! empty( $_POST ) ) {
 			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-archiver-edit' ) ) {
 				if ( array_key_exists( 'submit', $_POST ) ) {
-					$this->current_archiver['name']                        = ( array_key_exists( 'mailarchiver_archiver_misc_name', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_name', FILTER_SANITIZE_STRING ) : $this->current_archiver['name'] );
-					$this->current_archiver['level']                       = ( array_key_exists( 'mailarchiver_archiver_misc_level', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_level', FILTER_SANITIZE_NUMBER_INT ) : $this->current_archiver['level'] );
-					$this->current_archiver['privacy']['obfuscation']      = ( array_key_exists( 'mailarchiver_archiver_privacy_ip', $_POST ) ? true : false );
-					$this->current_archiver['privacy']['pseudonymization'] = ( array_key_exists( 'mailarchiver_archiver_privacy_name', $_POST ) ? true : false );
-					$this->current_archiver['processors']                  = [];
+					$this->current_archiver['name']                         = ( array_key_exists( 'mailarchiver_archiver_misc_name', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_name', FILTER_SANITIZE_STRING ) : $this->current_archiver['name'] );
+					$this->current_archiver['level']                        = ( array_key_exists( 'mailarchiver_archiver_misc_level', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_level', FILTER_SANITIZE_NUMBER_INT ) : $this->current_archiver['level'] );
+					$this->current_archiver['privacy']['obfuscation']       = ( array_key_exists( 'mailarchiver_archiver_privacy_ip', $_POST ) ? true : false );
+					$this->current_archiver['privacy']['pseudonymization']  = ( array_key_exists( 'mailarchiver_archiver_privacy_name', $_POST ) ? true : false );
+					$this->current_archiver['privacy']['mailanonymization'] = ( array_key_exists( 'mailarchiver_archiver_privacy_mail', $_POST ) ? true : false );
+					$this->current_archiver['privacy']['encryption']        = ( array_key_exists( 'mailarchiver_archiver_privacy_encryption', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_privacy_encryption', FILTER_UNSAFE_RAW ) : '' );
+					$this->current_archiver['processors']                   = [];
 					$proc = new ProcessorTypes();
 					foreach ( array_reverse( $proc->get_all() ) as $processor ) {
 						if ( array_key_exists( 'mailarchiver_archiver_details_' . strtolower( $processor['id'] ), $_POST ) ) {
@@ -795,7 +797,7 @@ class Mailarchiver_Admin {
 		register_setting( 'mailarchiver_archiver_misc_section', 'mailarchiver_archiver_misc_name' );
 		add_settings_field(
 			'mailarchiver_archiver_misc_level',
-			__( 'Minimal level', 'mailarchiver' ),
+			__( 'Archived emails', 'mailarchiver' ),
 			[ $form, 'echo_field_select' ],
 			'mailarchiver_archiver_misc_section',
 			'mailarchiver_archiver_misc_section',
@@ -803,7 +805,7 @@ class Mailarchiver_Admin {
 				'list'        => Log::get_levels( $this->current_handler['minimal'] ),
 				'id'          => 'mailarchiver_archiver_misc_level',
 				'value'       => $this->current_archiver['level'],
-				'description' => esc_html__( 'Minimal reported level. May be overridden by the "respect WP_DEBUG directive" option.', 'mailarchiver' ),
+				'description' => esc_html__( 'What kinds of emails should be archived.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
@@ -950,6 +952,37 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_name' );
+		add_settings_field(
+			'mailarchiver_archiver_privacy_mail',
+			__( 'Email adresses', 'mailarchiver' ),
+			[ $form, 'echo_field_checkbox' ],
+			'mailarchiver_archiver_privacy_section',
+			'mailarchiver_archiver_privacy_section',
+			[
+				'text'        => esc_html__( 'Pseudonymisation', 'mailarchiver' ),
+				'id'          => 'mailarchiver_archiver_privacy_mail',
+				'checked'     => $this->current_archiver['privacy']['mailanonymization'],
+				'description' => esc_html__( 'If checked, archive fields will contain hashes instead of email adresses.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns only "to" and "from" fields.', 'mailarchiver' ),
+				'full_width'  => true,
+				'enabled'     => true,
+			]
+		);
+		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_mail' );
+		add_settings_field(
+			'mailarchiver_archiver_privacy_encryption',
+			__( 'Encryption key', 'mailarchiver' ),
+			[ $form, 'echo_field_input_text' ],
+			'mailarchiver_archiver_privacy_section',
+			'mailarchiver_archiver_privacy_section',
+			[
+				'id'          => 'mailarchiver_archiver_privacy_encryption',
+				'value'       => $this->current_archiver['privacy']['encryption'],
+				'description' => esc_html__( 'Key used to encrypt mail body. Let blank to not encrypt it.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: XXXXXXXXXXXXXXXXXXXXXXXX.', 'mailarchiver' ),
+				'full_width'  => true,
+				'enabled'     => true,
+			]
+		);
+		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_encryption' );
 	}
 
 	/**

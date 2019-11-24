@@ -264,14 +264,13 @@ class DArchiver {
 	}
 
 	/**
-	 * Adds a log record at a specific level.
+	 * Adds a mail archive at the INFO level.
 	 *
-	 * @param mixed   $level The log level.
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
+	 * @param array  $mail      The mail.
+	 * @param string $message   Optional. The error message.
 	 * @since 1.0.0
 	 */
-	public function log( $level, $message, $code = 0 ) {
+	public function success( $mail, $message = '-') {
 		if ( ! $this->allowed ) {
 			return;
 		}
@@ -280,69 +279,14 @@ class DArchiver {
 				'class'     => (string) $this->class,
 				'component' => (string) $this->name,
 				'version'   => (string) $this->version,
-				'code'      => (int) $code,
 			];
-			$channel = $this->current_channel_tag();
-			if ( $this->archiver->getName() !== $channel ) {
-				$this->archiver = $this->archiver->withName( $channel );
+			if ( is_array( $mail ) ) {
+				foreach ( [ 'to', 'from', 'subject', 'body', 'headers', 'attachments' ] as $field ) {
+					if ( array_key_exists( $field, $mail ) ) {
+						$context[ $field ] = $mail[ $field ];
+					}
+				}
 			}
-			$this->archiver->log( $level, filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-			$result = true;
-		} catch ( \Throwable $t ) {
-			$this->integrity_check();
-			$result = false;
-		} finally {
-			return $result;
-		}
-	}
-
-	/**
-	 * Adds a log record at the DEBUG level.
-	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
-	 * @since 1.0.0
-	 */
-	public function debug( $message, $code = 0 ) {
-		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-				'code'      => (int) $code,
-			];
-			$channel = $this->current_channel_tag();
-			if ( $this->archiver->getName() !== $channel ) {
-				$this->archiver = $this->archiver->withName( $channel );
-			}
-			$this->archiver->debug( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-			$result = true;
-		} catch ( \Throwable $t ) {
-			$this->integrity_check();
-			$result = false;
-		} finally {
-			return $result;
-		}
-	}
-
-	/**
-	 * Adds a log record at the INFO level.
-	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
-	 * @since 1.0.0
-	 */
-	public function info( $message, $code = 0 ) {
-		if ( ! $this->allowed ) {
-			return;
-		}
-		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-				'code'      => (int) $code,
-			];
 			$channel = $this->current_channel_tag();
 			if ( $this->archiver->getName() !== $channel ) {
 				$this->archiver = $this->archiver->withName( $channel );
@@ -358,13 +302,13 @@ class DArchiver {
 	}
 
 	/**
-	 * Adds a log record at the NOTICE level.
+	 * Adds a mail archive at the ERROR level.
 	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
+	 * @param array  $mail      The mail.
+	 * @param string $message   Optional. The error message.
 	 * @since 1.0.0
 	 */
-	public function notice( $message, $code = 0 ) {
+	public function error( $mail, $message = '-') {
 		if ( ! $this->allowed ) {
 			return;
 		}
@@ -373,173 +317,19 @@ class DArchiver {
 				'class'     => (string) $this->class,
 				'component' => (string) $this->name,
 				'version'   => (string) $this->version,
-				'code'      => (int) $code,
 			];
-			$channel = $this->current_channel_tag();
-			if ( $this->archiver->getName() !== $channel ) {
-				$this->archiver = $this->archiver->withName( $channel );
+			if ( is_array( $mail ) ) {
+				foreach ( [ 'to', 'from', 'message', 'headers', 'attachments' ] as $field ) {
+					if ( array_key_exists( $field, $mail ) ) {
+						$context[ $field ] = $mail[ $field ];
+					}
+				}
 			}
-			$this->archiver->notice( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-			$result = true;
-		} catch ( \Throwable $t ) {
-			$this->integrity_check();
-			$result = false;
-		} finally {
-			return $result;
-		}
-	}
-
-	/**
-	 * Adds a log record at the WARNING level.
-	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
-	 * @since 1.0.0
-	 */
-	public function warning( $message, $code = 0 ) {
-		if ( ! $this->allowed ) {
-			return;
-		}
-		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-				'code'      => (int) $code,
-			];
-			$channel = $this->current_channel_tag();
-			if ( $this->archiver->getName() !== $channel ) {
-				$this->archiver = $this->archiver->withName( $channel );
-			}
-			$this->archiver->warning( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-			$result = true;
-		} catch ( \Throwable $t ) {
-			$this->integrity_check();
-			$result = false;
-		} finally {
-			return $result;
-		}
-	}
-
-	/**
-	 * Adds a log record at the ERROR level.
-	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
-	 * @since 1.0.0
-	 */
-	public function error( $message, $code = 0 ) {
-		if ( ! $this->allowed ) {
-			return;
-		}
-		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-				'code'      => (int) $code,
-			];
 			$channel = $this->current_channel_tag();
 			if ( $this->archiver->getName() !== $channel ) {
 				$this->archiver = $this->archiver->withName( $channel );
 			}
 			$this->archiver->error( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-			$result = true;
-		} catch ( \Throwable $t ) {
-			$this->integrity_check();
-			$result = false;
-		} finally {
-			return $result;
-		}
-	}
-
-	/**
-	 * Adds a log record at the CRITICAL level.
-	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
-	 * @since 1.0.0
-	 */
-	public function critical( $message, $code = 0 ) {
-		if ( ! $this->allowed ) {
-			return;
-		}
-		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-				'code'      => (int) $code,
-			];
-			$channel = $this->current_channel_tag();
-			if ( $this->archiver->getName() !== $channel ) {
-				$this->archiver = $this->archiver->withName( $channel );
-			}
-			$this->archiver->critical( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-			$result = true;
-		} catch ( \Throwable $t ) {
-			$this->integrity_check();
-			$result = false;
-		} finally {
-			return $result;
-		}
-	}
-
-	/**
-	 * Adds a log record at the ALERT level.
-	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
-	 * @since 1.0.0
-	 */
-	public function alert( $message, $code = 0 ) {
-		if ( ! $this->allowed ) {
-			return;
-		}
-		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-				'code'      => (int) $code,
-			];
-			$channel = $this->current_channel_tag();
-			if ( $this->archiver->getName() !== $channel ) {
-				$this->archiver = $this->archiver->withName( $channel );
-			}
-			$this->archiver->alert( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
-			$result = true;
-		} catch ( \Throwable $t ) {
-			$this->integrity_check();
-			$result = false;
-		} finally {
-			return $result;
-		}
-	}
-
-	/**
-	 * Adds a log record at the EMERGENCY level.
-	 *
-	 * @param string  $message The log message.
-	 * @param integer $code Optional. The log code.
-	 * @since 1.0.0
-	 */
-	public function emergency( $message, $code = 0 ) {
-		if ( ! $this->allowed ) {
-			return;
-		}
-		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-				'code'      => (int) $code,
-			];
-			$channel = $this->current_channel_tag();
-			if ( $this->archiver->getName() !== $channel ) {
-				$this->archiver = $this->archiver->withName( $channel );
-			}
-			$this->archiver->emergency( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();

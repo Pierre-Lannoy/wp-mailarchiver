@@ -106,9 +106,9 @@ class InlineHelp {
 	 */
 	private function get_levels_content() {
 		$content = '<p>' . sprintf( esc_html__( 'The severity of an event is indicated by a "level". %s uses the following levels classification:', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ) . '</p>';
-		foreach ( array_reverse( EventTypes::$level_names ) as $name ) {
+		foreach ( [ 'info', 'error' ] as $name ) {
 			$icon     = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ strtolower( $name ) ] . '" />';
-			$content .= '<p>' . $icon . '<strong>' . ucwords( strtolower( $name ) ) . '</strong> &mdash; ' . EventTypes::$level_texts[ strtolower( $name ) ] . '</p>';
+			$content .= '<p>' . $icon . '<strong>' . ucwords( strtolower( EventTypes::$level_names[ EventTypes::$levels[ strtolower( $name ) ] ] ) ) . '</strong> &mdash; ' . EventTypes::$level_texts[ strtolower( $name ) ] . '</p>';
 		}
 		return $content;
 	}
@@ -170,19 +170,19 @@ class InlineHelp {
 			'id'      => 'mailarchiver-contextual-settings-archivers-alerting',
 			'content' => $content . $this->get_archivers( 'alerting' ),
 		];
-		// Debugging.
-		$content = '<p>' . esc_html__( 'These archivers can help you to debug your site:', 'mailarchiver' ) . '</p>';
-		$tabs[]  = [
-			'title'   => esc_html__( 'Debugging', 'mailarchiver' ),
-			'id'      => 'mailarchiver-contextual-settings-archivers-debugging',
-			'content' => $content . $this->get_archivers( 'debugging' ),
-		];
 		// Logging.
 		$content = '<p>' . esc_html__( 'These archivers send events to logging services. It may be local or SaaS, free or paid services.', 'mailarchiver' ) . '</p>';
 		$tabs[]  = [
 			'title'   => esc_html__( 'Logging', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-logging',
 			'content' => $content . $this->get_archivers( 'logging' ),
+		];
+		// Logging.
+		$content = '<p>' . esc_html__( 'These archivers send events to logging services. It may be local or SaaS, free or paid services.', 'mailarchiver' ) . '</p>';
+		$tabs[]  = [
+			'title'   => esc_html__( 'Storing', 'mailarchiver' ),
+			'id'      => 'mailarchiver-contextual-settings-archivers-storing',
+			'content' => $content . $this->get_archivers( 'storing' ),
 		];
 		// Admin Rights.
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {

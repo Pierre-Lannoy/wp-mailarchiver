@@ -44,6 +44,7 @@ class Log {
 	 * @since   1.0.0
 	 */
 	public static function bootstrap( $class, $name = null, $version = null, $test = null ) {
+		// ::bootstrap( 'mail', 'wp_mail', $wp_version );
 		return new DArchiver( $class, $name, $version, $test );
 	}
 
@@ -69,14 +70,21 @@ class Log {
 	 * @return  array The level list.
 	 * @since   1.0.0
 	 */
-	public static function get_levels( $minimal = Logger::DEBUG ) {
+	public static function get_levels( $minimal = Logger::INFO ) {
 		$result = [];
 		foreach ( EventTypes::$level_names as $key => $name ) {
 			if ( $key >= $minimal ) {
-				$result[] = [ $key, $name ];
+				if ( Logger::INFO === $key || Logger::ERROR === $key ) {
+					if ( 'SUCCESS' === $name ) {
+						$result[] = [ $key, esc_html__( 'All emails', 'mailarchiver' ) ];
+					}
+					if ( 'ERROR' === $name ) {
+						$result[] = [ $key, esc_html__( 'Only emails that could not be sent', 'mailarchiver' ) ];
+					}
+				}
 			}
 		}
-		return array_reverse( $result );
+		return $result;
 	}
 
 }

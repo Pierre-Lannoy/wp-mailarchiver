@@ -13,7 +13,6 @@ namespace Mailarchiver\Formatter;
 
 use Mailarchiver\Plugin\Feature\ClassTypes;
 use Mailarchiver\Plugin\Feature\EventTypes;
-use Mailarchiver\System\Http;
 use Monolog\Formatter\FormatterInterface;
 
 /**
@@ -36,7 +35,7 @@ class WordpressFormatter implements FormatterInterface {
 	 */
 	public function format( array $record ): string {
 		$message             = [];
-		$values              = array();
+		$values              = [];
 		$values['timestamp'] = date( 'Y-m-d H:i:s' );
 		if ( array_key_exists( 'level', $record ) ) {
 			if ( array_key_exists( $record['level'], EventTypes::$level_names ) ) {
@@ -47,7 +46,7 @@ class WordpressFormatter implements FormatterInterface {
 			$values['channel'] = strtolower( $record['channel'] );
 		}
 		if ( array_key_exists( 'message', $record ) ) {
-			$values['message'] = substr( $record['message'], 0, 7500 );
+			$values['error'] = substr( $record['message'], 0, 250 );
 		}
 		// Context formatting.
 		if ( array_key_exists( 'context', $record ) ) {
@@ -63,8 +62,19 @@ class WordpressFormatter implements FormatterInterface {
 			if ( array_key_exists( 'version', $context ) ) {
 				$values['version'] = substr( $context['version'], 0, 13 );
 			}
-			if ( array_key_exists( 'code', $context ) ) {
-				$values['code'] = (int) $context['code'];
+			if ( array_key_exists( 'subject', $context ) ) {
+				$values['subject'] = substr( $context['subject'], 0, 250 );
+			}
+			if ( array_key_exists( 'to', $context ) ) {
+				$values['to'] = substr( $context['to'], 0, 256 );
+			}
+			if ( array_key_exists( 'from', $context ) ) {
+				$values['from'] = substr( $context['from'], 0, 256 );
+			}
+			foreach ( [ 'body', 'headers', 'attachments' ] as $field ) {
+				if ( array_key_exists( $field, $context ) ) {
+					$values[ $field ] = $context[ $field ];
+				}
 			}
 		}
 		// Extra formatting.
@@ -84,44 +94,6 @@ class WordpressFormatter implements FormatterInterface {
 			}
 			if ( array_key_exists( 'ip', $extra ) && is_string( $extra['ip'] ) ) {
 				$values['remote_ip'] = substr( $extra['ip'], 0, 66 );
-			}
-			if ( array_key_exists( 'url', $extra ) && is_string( $extra['url'] ) ) {
-				$values['url'] = substr( $extra['url'], 0, 2083 );
-			}
-			if ( array_key_exists( 'http_method', $extra ) && is_string( $extra['http_method'] ) ) {
-				if ( in_array( strtolower( $extra['http_method'] ), Http::$verbs, true ) ) {
-					$values['verb'] = strtolower( $extra['http_method'] );
-				}
-			}
-			if ( array_key_exists( 'server', $extra ) && is_string( $extra['server'] ) ) {
-				$values['server'] = substr( $extra['server'], 0, 250 );
-			}
-			if ( array_key_exists( 'referrer', $extra ) && $extra['referrer'] && is_string( $extra['referrer'] ) ) {
-				$values['referrer'] = substr( $extra['referrer'], 0, 250 );
-			}
-			if ( array_key_exists( 'file', $extra ) && $extra['file'] && is_string( $extra['file'] ) ) {
-				$values['file'] = substr( $extra['file'], 0, 250 );
-			}
-			if ( array_key_exists( 'line', $extra ) && $extra['line'] ) {
-				$values['line'] = (int) $extra['line'];
-			}
-			if ( array_key_exists( 'class', $extra ) && $extra['class'] && is_string( $extra['class'] ) ) {
-				$values['classname'] = substr( $extra['class'], 0, 100 );
-			}
-			if ( array_key_exists( 'function', $extra ) && $extra['function'] && is_string( $extra['function'] ) ) {
-				$values['function'] = substr( $extra['function'], 0, 100 );
-			}
-			if ( array_key_exists( 'trace', $extra ) && $extra['trace'] ) {
-				// phpcs:ignore
-				$s = serialize( $extra['trace'] );
-				if ( strlen( $s ) < 7500 ) {
-					$values['trace'] = $s;
-				} else {
-					$s          = [];
-					$s['error'] = 'This backtrace was not recorded: size exceeds limit.';
-					// phpcs:ignore
-					$values['trace'] = serialize( $s );
-				}
 			}
 		}
 		$message[] = $values;
