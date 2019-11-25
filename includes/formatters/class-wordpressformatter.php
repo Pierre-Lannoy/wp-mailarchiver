@@ -65,13 +65,10 @@ class WordpressFormatter implements FormatterInterface {
 			if ( array_key_exists( 'subject', $context ) ) {
 				$values['subject'] = substr( $context['subject'], 0, 250 );
 			}
-			if ( array_key_exists( 'to', $context ) ) {
-				$values['to'] = substr( $context['to'], 0, 256 );
-			}
 			if ( array_key_exists( 'from', $context ) ) {
 				$values['from'] = substr( $context['from'], 0, 256 );
 			}
-			foreach ( [ 'headers', 'attachments', 'body' ] as $field ) {
+			foreach ( [ 'to', 'headers', 'attachments', 'body' ] as $field ) {
 				if ( array_key_exists( $field, $context ) ) {
 					// phpcs:ignore
 					$values[ $field ] = wp_json_encode( $context[ $field ] );

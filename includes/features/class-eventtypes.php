@@ -32,31 +32,8 @@ class EventTypes {
 	 * @var string[] $levels Logging levels.
 	 */
 	public static $levels = [
-		'debug'     => Logger::DEBUG,
-		'info'      => Logger::INFO,
-		'notice'    => Logger::NOTICE,
-		'warning'   => Logger::WARNING,
-		'error'     => Logger::ERROR,
-		'critical'  => Logger::CRITICAL,
-		'alert'     => Logger::ALERT,
-		'emergency' => Logger::EMERGENCY,
-	];
-
-	/**
-	 * List of the available WSAL levels.
-	 *
-	 * @since    1.0.0
-	 * @var string[] $levels Logging levels.
-	 */
-	public static $wsal_levels = [
-		7 => Logger::DEBUG,
-		6 => Logger::INFO,
-		5 => Logger::NOTICE,
-		4 => Logger::WARNING,
-		3 => Logger::ERROR,
-		2 => Logger::CRITICAL,
-		1 => Logger::ALERT,
-		0 => Logger::EMERGENCY,
+		'info'  => Logger::INFO,
+		'error' => Logger::ERROR,
 	];
 
 	/**
@@ -80,8 +57,8 @@ class EventTypes {
 	 * @var string[] $level_names Logging levels names.
 	 */
 	public static $level_names = [
-		Logger::INFO      => 'INFO',
-		Logger::ERROR     => 'ERROR',
+		Logger::INFO  => 'INFO',
+		Logger::ERROR => 'ERROR',
 	];
 
 	/**
@@ -91,14 +68,8 @@ class EventTypes {
 	 * @var string[] $level_values Logging levels.
 	 */
 	public static $level_values = [
-		Logger::DEBUG,
 		Logger::INFO,
-		Logger::NOTICE,
-		Logger::WARNING,
 		Logger::ERROR,
-		Logger::CRITICAL,
-		Logger::ALERT,
-		Logger::EMERGENCY,
 	];
 
 	/**
@@ -107,14 +78,14 @@ class EventTypes {
 	 * @since    1.0.0
 	 */
 	public static function init() {
-		self::$icons              = [];
-		self::$icons['unknown']   = Feather\Icons::get_base64( 'mail', '#F0F0F0', '#CCCCCC' );
-		self::$icons['info']      = Feather\Icons::get_base64( 'mail', '#DDDDFF', '#5555FF' );
-		self::$icons['error']     = Feather\Icons::get_base64( 'mail', '#FFB7B7', '#DD0000' );
-		self::$level_texts        = [];
+		self::$icons                  = [];
+		self::$icons['unknown']       = Feather\Icons::get_base64( 'mail', '#F0F0F0', '#CCCCCC' );
+		self::$icons['info']          = Feather\Icons::get_base64( 'mail', '#DDDDFF', '#5555FF' );
+		self::$icons['error']         = Feather\Icons::get_base64( 'mail', '#FFB7B7', '#DD0000' );
+		self::$level_texts            = [];
 		self::$level_texts['unknown'] = esc_html__( 'The sent status of the mail is unknown.', 'mailarchiver' );
-		self::$level_texts['info'] = esc_html__( 'The mail was successfully sent.', 'mailarchiver' );
-		self::$level_texts['error'] = esc_html__( 'The mail was not sent, an error was generated.', 'mailarchiver' );
+		self::$level_texts['info']    = esc_html__( 'The mail was successfully sent.', 'mailarchiver' );
+		self::$level_texts['error']   = esc_html__( 'The mail was not sent, an error was generated.', 'mailarchiver' );
 	}
 
 }

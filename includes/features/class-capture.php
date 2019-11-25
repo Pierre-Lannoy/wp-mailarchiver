@@ -96,9 +96,10 @@ class Capture {
 	 */
 	public static function put( $mail, $message = '' ) {
 		if ( is_array( $mail ) ) {
-			$mail['body'] = $mail['message'];
-			$mail['from'] = self::from( $mail['headers'] );
-			$key          = Hash::simple_hash( $mail['from'] . $mail['to'] . $mail['subject'] );
+			$mail['body']['raw']  = $mail['message'];
+			$mail['body']['type'] = 'raw';
+			$mail['from']         = self::from( $mail['headers'] );
+			$key                  = Hash::simple_hash( $mail['from'] . $mail['to'] . $mail['subject'] );
 			unset( $mail['message'] );
 			self::$mails[ $key ]['raw'] = $mail;
 			if ( '' !== $message ) {

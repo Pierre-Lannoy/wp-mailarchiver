@@ -90,7 +90,7 @@ class CoreListener extends AbstractListener {
 	public function wp_mail( $mail ) {
 		$tos = [];
 		$this->get_all_emails( $mail['to'], $tos );
-		$mail['to'] = implode( ', ', $tos );
+		$data['to'] = $tos;
 		\Mailarchiver\Plugin\Feature\Capture::put( $mail );
 	}
 
@@ -108,7 +108,7 @@ class CoreListener extends AbstractListener {
 			$data = $error->get_error_data();
 			$tos  = [];
 			$this->get_all_emails( $data['to'], $tos );
-			$data['to'] = implode( ', ', $tos );
+			$data['to'] = $tos;
 			\Mailarchiver\Plugin\Feature\Capture::put( $data, $message );
 		}
 	}

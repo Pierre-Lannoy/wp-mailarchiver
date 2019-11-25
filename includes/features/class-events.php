@@ -15,6 +15,7 @@ use Mailarchiver\System\Date;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Role;
 use Mailarchiver\System\Timezone;
+use Mailarchiver\System\User;
 use Feather\Icons;
 
 
@@ -121,8 +122,8 @@ class Events extends \WP_List_Table {
 	public function __construct() {
 		parent::__construct(
 			[
-				'singular' => 'event',
-				'plural'   => 'events',
+				'singular' => 'mail',
+				'plural'   => 'mails',
 				'ajax'     => true,
 			]
 		);
@@ -141,36 +142,38 @@ class Events extends \WP_List_Table {
 	}
 
 	/**
-	 * "event" column formatter.
+	 * "mail" column formatter.
 	 *
 	 * @param   object $item   The current item to render.
 	 * @return  string  The cell formatted, ready to print.
 	 * @since   1.0.0
 	 */
-	protected function column_event( $item ) {
+	protected function column_mail( $item ) {
 		$args            = [];
 		$args['page']    = 'mailarchiver-viewer';
 		$args['logid']   = $this->archiver;
 		$args['eventid'] = $item['id'];
 		$url             = add_query_arg( $args, admin_url( 'tools.php' ) );
 		$icon            = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $item['level'] ] . '" />';
-		$name            = '<a href="' . $url . '">' . ChannelTypes::$channel_names[ strtoupper( $item['channel'] ) ] . '</a>' . $this->get_filter( 'channel', $item['channel'] ) . '&nbsp;<span style="color:silver">#' . $item['id'] . '</span>';
-		/* translators: as in the sentence "Error code 501" or "Alert code 0" */
-		$code   = '<br /><span style="color:silver">' . sprintf( esc_html__( '%1$s code %2$s', 'mailarchiver' ), ucfirst( $item['level'] ), $item['code'] ) . '</span>';
-		$result = $icon . $name . $code;
+		$name            = '<a href="' . $url . '">' . $item['subject'] . '</a>';
+		$result          = $icon . $name;
 		return $result;
 	}
 
 	/**
-	 * "component" column formatter.
+	 * "to" column formatter.
 	 *
 	 * @param   object $item   The current item to render.
 	 * @return  string  The cell formatted, ready to print.
 	 * @since   1.0.0
 	 */
-	protected function column_component( $item ) {
-		$name   = $item['component'] . $this->get_filter( 'component', $item['component'] ) . ' <span style="color:silver">' . $item['version'] . '</span>';
-		$result = $name . '<br /><span style="color:silver">' . ClassTypes::$classe_names[ $item['class'] ] . $this->get_filter( 'class', $item['class'], true ) . '</span>';
+	protected function column_to( $item ) {
+		$result = $item['to'] . $this->get_filter( 'to', $item['to'] );
+		$user   = get_user_by( 'email', $item['to'] );
+		if ( false !== $user ) {
+			// phpcs:ignore
+			$result = $result . '<br /><span style="color:silver">' . User::get_user_string( $user->ID ) . '</span>';
+		}
 		return $result;
 	}
 
@@ -185,6 +188,22 @@ class Events extends \WP_List_Table {
 		$result  = Date::get_date_from_mysql_utc( $item['timestamp'], Timezone::network_get()->getName(), 'Y-m-d H:i:s' );
 		$result .= '<br /><span style="color:silver">' . Date::get_positive_time_diff_from_mysql_utc( $item['timestamp'] ) . '</span>';
 		return $result;
+	}
+
+	/**
+	 * "attachments" column formatter.
+	 *
+	 * @param   object $item   The current item to render.
+	 * @return  string  The cell formatted, ready to print.
+	 * @since   1.0.0
+	 */
+	protected function column_attachments( $item ) {
+		$result = '-';
+		$att    = \json_decode( $item['attachments'] );
+		if ( is_array( $att ) ) {
+			$result = count ( $att );
+		}
+		return (string) $result;
 	}
 
 	/**
@@ -241,22 +260,6 @@ class Events extends \WP_List_Table {
 	}
 
 	/**
-	 * "message" column formatter.
-	 *
-	 * @param   object $item   The current item to render.
-	 * @return  string  The cell formatted, ready to print.
-	 * @since   1.0.0
-	 */
-	protected function column_message( $item ) {
-		$cut     = 200;
-		$message = $item['message'];
-		if ( $cut < strlen( $message ) ) {
-			$message = substr( $message, 0, $cut ) . '&nbsp;&nbsp;<em>[…]</em>';
-		}
-		return $message;
-	}
-
-	/**
 	 * Initialize the list view.
 	 *
 	 * @return  array   The columns to render.
@@ -286,7 +289,7 @@ class Events extends \WP_List_Table {
 			$this->limit = 25;
 		}
 		$this->force_siteid = null;
-		$this->archiver       = filter_input( INPUT_GET, 'archiver_id', FILTER_SANITIZE_STRING );
+		$this->archiver     = filter_input( INPUT_GET, 'archiver_id', FILTER_SANITIZE_STRING );
 		if ( $this->archiver ) {
 			$this->set_level_access();
 		} else {
@@ -297,7 +300,7 @@ class Events extends \WP_List_Table {
 		if ( $level && array_key_exists( strtolower( $level ), EventTypes::$levels ) && 'debug' !== strtolower( $level ) ) {
 			$this->filters['level'] = strtolower( $level );
 		}
-		foreach ( [ 'component', 'class', 'channel', 'site_id', 'user_id', 'remote_ip' ] as $f ) {
+		foreach ( [ 'to', 'site_id', 'user_id', 'remote_ip' ] as $f ) {
 			$v = filter_input( INPUT_GET, $f, FILTER_SANITIZE_STRING );
 			if ( $v ) {
 				$this->filters[ $f ] = strtolower( $v );
@@ -404,8 +407,8 @@ class Events extends \WP_List_Table {
 	 * @since 1.0.0
 	 */
 	public function get_page_url() {
-		$args              = [];
-		$args['page']      = 'mailarchiver-viewer';
+		$args                = [];
+		$args['page']        = 'mailarchiver-viewer';
 		$args['archiver_id'] = $this->archiver;
 		if ( count( $this->filters ) > 0 ) {
 			foreach ( $this->filters as $key => $filter ) {
@@ -431,14 +434,11 @@ class Events extends \WP_List_Table {
 		$level   = array_key_exists( 'level', $this->filters ) ? $this->filters['level'] : '';
 		unset( $this->filters['level'] );
 		$s1                     = '<a href="' . $this->get_page_url() . '"' . ( '' === $level ? ' class="current"' : '' ) . '>' . esc_html__( 'All', 'mailarchiver' ) . ' <span class="count">(' . $this->get_count() . ')</span></a>';
-		$this->filters['level'] = 'notice';
-		$s2                     = '<a href="' . $this->get_page_url() . '"' . ( 'notice' === $level ? ' class="current"' : '' ) . '>' . esc_html__( 'Notices & beyond', 'mailarchiver' ) . ' <span class="count">(' . $this->get_count() . ')</span></a>';
 		$this->filters['level'] = 'error';
-		$s3                     = '<a href="' . $this->get_page_url() . '"' . ( 'error' === $level ? ' class="current"' : '' ) . '>' . esc_html__( 'Errors & beyond', 'mailarchiver' ) . ' <span class="count">(' . $this->get_count() . ')</span></a>';
+		$s2                     = '<a href="' . $this->get_page_url() . '"' . ( 'error' === $level ? ' class="current"' : '' ) . '>' . esc_html__( 'Errors', 'mailarchiver' ) . ' <span class="count">(' . $this->get_count() . ')</span></a>';
 		$status_links           = [
-			'all'     => $s1,
-			'notices' => $s2,
-			'errors'  => $s3,
+			'all'   => $s1,
+			'error' => $s2,
 		];
 		$this->filters          = $filters;
 		return $status_links;
@@ -501,7 +501,7 @@ class Events extends \WP_List_Table {
 	private function set_level_access() {
 		$this->force_siteid = null;
 		$id                 = $this->archiver;
-		$this->archiver       = null;
+		$this->archiver     = null;
 		foreach ( self::$logs as $log ) {
 			if ( $id === $log['id'] ) {
 				$this->archiver = $id;
@@ -519,7 +519,7 @@ class Events extends \WP_List_Table {
 	 */
 	private function set_first_available() {
 		$this->force_siteid = null;
-		$this->archiver       = null;
+		$this->archiver     = null;
 		foreach ( self::$logs as $log ) {
 			if ( array_key_exists( 'limit', $log ) ) {
 				$this->force_siteid = $log['limit'];
@@ -597,7 +597,7 @@ class Events extends \WP_List_Table {
 					}
 					$w[] = $key . ' IN (' . implode( ',', $l ) . ')';
 				} else {
-					$w[] = $key . '="' . $filter . '"';
+					$w[] = '`' . $key . '`="' . $filter . '"';
 				}
 			}
 		}
@@ -692,18 +692,18 @@ class Events extends \WP_List_Table {
 	 * @since    1.0.0
 	 */
 	private static function load_columns() {
-		self::$standard_columns            = [];
-		self::$standard_columns['event']   = esc_html__( 'Event', 'mailarchiver' );
-		self::$standard_columns['time']    = esc_html__( 'Time', 'mailarchiver' );
-		self::$standard_columns['message'] = esc_html__( 'Message', 'mailarchiver' );
-		self::$extra_columns               = [];
-		self::$extra_columns['component']  = esc_html__( 'Source', 'mailarchiver' );
-		self::$extra_columns['site']       = esc_html__( 'Site', 'mailarchiver' );
-		self::$extra_columns['user']       = esc_html__( 'User', 'mailarchiver' );
-		self::$extra_columns['ip']         = esc_html__( 'Remote IP', 'mailarchiver' );
-		self::$columns_order               = [ 'event', 'component', 'time', 'site', 'user', 'ip', 'message' ];
-		$user_meta                         = get_user_meta( get_current_user_id(), 'mailarchiver_options' );
-		self::$user_columns                = [];
+		self::$standard_columns             = [];
+		self::$standard_columns['mail']     = esc_html__( 'Mail', 'mailarchiver' );
+		self::$standard_columns['to']       = esc_html__( 'To', 'mailarchiver' );
+		self::$standard_columns['time']     = esc_html__( 'Time', 'mailarchiver' );
+		self::$extra_columns                = [];
+		self::$extra_columns['attachments'] = esc_html__( 'Attachments', 'mailarchiver' );
+		self::$extra_columns['site']        = esc_html__( 'Site', 'mailarchiver' );
+		self::$extra_columns['user']        = esc_html__( 'User', 'mailarchiver' );
+		self::$extra_columns['ip']          = esc_html__( 'Remote IP', 'mailarchiver' );
+		self::$columns_order                = [ 'mail', 'to', 'time', 'attachments', 'site', 'user', 'ip' ];
+		$user_meta                          = get_user_meta( get_current_user_id(), 'mailarchiver_options' );
+		self::$user_columns                 = [];
 		if ( $user_meta ) {
 			foreach ( self::$extra_columns as $key => $extra_column ) {
 				if ( array_key_exists( $key, $user_meta[0] ) ) {

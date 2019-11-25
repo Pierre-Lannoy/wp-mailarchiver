@@ -10,7 +10,7 @@
  * Plugin Name:       MailArchiver
  * Plugin URI:        https://github.com/Pierre-Lannoy/wp-mailarchiver
  * Description:       Capture and log events on your site. View them in your dashboard and send them to logging services.
- * Version:           1.6.0
+ * Version:           1.0.0
  * Author:            Pierre Lannoy
  * Author URI:        https://pierre.lannoy.fr
  * License:           GPLv3

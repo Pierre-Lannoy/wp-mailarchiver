@@ -171,10 +171,11 @@ class EventViewer {
 		echo '<div class="wrap">';
 		if ( isset( $this->event ) ) {
 			$icon = '<img style="width:30px;float:left;padding-right:8px;" src="' . EventTypes::$icons[ $this->event['level'] ] . '" />';
-			$name = ChannelTypes::$channel_names[ strtoupper( $this->event['channel'] ) ] . '&nbsp;#' . $this->event['id'];
+			$name = $this->event['subject'];
 			// phpcs:ignore
 			echo '<h2>' . $icon . $name . '</h2>';
 			settings_errors();
+			echo '<style>#wpfooter{position:unset!important;}</style>';
 			echo '<form name="mailarchiver_event" method="post">';
 			echo '<div id="dashboard-widgets-wrap">';
 			wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
@@ -192,6 +193,10 @@ class EventViewer {
 			echo '        <div id="postbox-container-4" class="postbox-container">';
 			do_meta_boxes( self::$screen_id, 'column4', null );
 			echo '        </div>';
+			echo '        <div id="postbox-container-5" class="postbox-container" style="width:100%">';
+			do_meta_boxes( self::$screen_id, 'column5', null );
+			echo '        </div>';
+			echo '    </div>';
 			echo '    </div>';
 			echo '</div>';
 			echo '</form>';
@@ -218,8 +223,35 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	public function add_footer() {
+		$body   = json_decode( $this->event['body'] );
+		$body = str_replace('\\', '\\\\', $body);
+
+		$body = str_replace('"', '\"', $body);
+
+		$body = str_replace("\r\n", " ", $body);
+		$body = str_replace("\n", " ", $body);
+		$body = str_replace("\r", " ", $body);
+		$body = str_replace("\t", " ", $body);
+
+		$body = str_replace("  ", " ", $body);
+		$body = str_replace("  ", " ", $body);
+		$body = str_replace("  ", " ", $body);
+		$body = str_replace("  ", " ", $body);
+		$body = str_replace("  ", " ", $body);
+		$body = str_replace("  ", " ", $body);
+		$body = str_replace("  ", " ", $body);
+		$body = str_replace("  ", " ", $body);
+
+
+
+
 		$result  = '<script>';
 		$result .= '    jQuery(document).ready( function($) {';
+
+		$result .= '      const iframe = document.querySelector("#mailarchiver-body-iframe");';
+		$result .= '      const source = "' . $body . '";';
+		$result .= '      iframe.src = URL.createObjectURL(new Blob([source], { type : "text/html" }));';
+
 		$result .= "        $('.if-js-closed').removeClass('if-js-closed').addClass('closed');";
 		$result .= "        if(typeof postboxes !== 'undefined')";
 		$result .= "            postboxes.add_postbox_toggles('" . self::$screen_id . "');";
@@ -243,9 +275,7 @@ class EventViewer {
 		add_meta_box( 'mailarchiver-php', esc_html__( 'PHP introspection', 'mailarchiver' ), [ $this, 'php_widget' ], self::$screen_id, 'advanced' );
 		// Right column.
 		/* translators: like in the sentence "PHP backtrace" or "WordPress backtrace" */
-		add_meta_box( 'mailarchiver-wpbacktrace', sprintf( esc_html__( '%s backtrace', 'mailarchiver' ), 'WordPress' ), [ $this, 'wpbacktrace_widget' ], self::$screen_id, 'side' );
-		/* translators: like in the sentence "PHP backtrace" or "WordPress backtrace" */
-		add_meta_box( 'mailarchiver-phpbacktrace', sprintf( esc_html__( '%s backtrace', 'mailarchiver' ), 'PHP' ), [ $this, 'phpbacktrace_widget' ], self::$screen_id, 'side' );
+		add_meta_box( 'mailarchiver-body', esc_html__( 'Content', 'mailarchiver' ), [ $this, 'body_widget' ], self::$screen_id, 'column5' );
 	}
 
 	/**
@@ -407,61 +437,23 @@ class EventViewer {
 		$this->output_activity_block( $class . $function . $file );
 	}
 
-	/**
-	 * Get content of the php backtrace widget box.
-	 *
-	 * @since 1.0.0
-	 */
-	public function phpbacktrace_widget() {
-		$trace   = unserialize( $this->event['trace'] );
-		$content = '';
-		if ( is_array( $trace ) ) {
-			if ( array_key_exists( 'error', $trace ) ) {
-				$error   = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'alert-triangle' ) . $trace['error'] . '</span>';
-				$content = $this->get_section( $error );
-			} else {
-				foreach ( array_reverse( $trace['callstack'] ) as $idx => $item ) {
-					if ( $idx < 10 ) {
-						$element = '<span style="font-family:monospace;font-size:8px;font-weight: bold;vertical-align: middle;padding:3px 5px;background-color:#F9F9F9;color:#9999BB;border:2px solid #9999BB;border-radius:50%;cursor: default;">' . $idx . '</span> &nbsp;' . $item['call'];
-					} else {
-						$element = '<span style="font-family:monospace;font-size:8px;font-weight: bold;vertical-align: middle;padding:3px;background-color:#F9F9F9;color:#9999BB;border:2px solid #9999BB;border-radius:50%;cursor: default;">' . $idx . '</span> &nbsp;' . $item['call'];
-					}
-					$element .= '<br/><span style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="width:100%;cursor: default;">' . $this->get_icon( 'file-text' ) . $item['file'] . '</span>';
-					$content .= $this->get_section( $element );
-				}
-			}
-		} else {
-			$content = '- no content- ';
-		}
-		$this->output_activity_block( $content );
-	}
+
+
+
+
+
+
+
+
+
 
 	/**
-	 * Get content of the WordPress backtrace widget box.
+	 * Get content of the mail body.
 	 *
 	 * @since 1.0.0
 	 */
-	public function wpbacktrace_widget() {
-		$trace   = unserialize( $this->event['trace'] );
-		$content = '';
-		if ( is_array( $trace ) ) {
-			if ( array_key_exists( 'error', $trace ) ) {
-				$error   = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'alert-triangle' ) . $trace['error'] . '</span>';
-				$content = $this->get_section( $error );
-			} else {
-				foreach ( array_reverse( $trace['wordpress'] ) as $idx => $item ) {
-					if ( $idx < 10 ) {
-						$element = '<span style="font-family:monospace;font-size:8px;font-weight: bold;vertical-align: middle;padding:3px 5px;background-color:#F9F9F9;color:#9999BB;border:2px solid #9999BB;border-radius:50%;cursor: default;">' . $idx . '</span> &nbsp;' . $item;
-					} else {
-						$element = '<span style="font-family:monospace;font-size:8px;font-weight: bold;vertical-align: middle;padding:3px;background-color:#F9F9F9;color:#9999BB;border:2px solid #9999BB;border-radius:50%;cursor: default;">' . $idx . '</span> &nbsp;' . $item;
-					}
-					$content .= $this->get_section( $element );
-				}
-			}
-		} else {
-			$content = '- no content- ';
-		}
-		$this->output_activity_block( $content );
+	public function body_widget() {
+		$this->output_activity_block( $this->get_section( '<iframe id="mailarchiver-body-iframe" class="mailarchiver-iframe" style="width:100%;height:800px"></iframe>' ) );
 	}
 
 }

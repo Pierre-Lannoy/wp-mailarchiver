@@ -100,7 +100,7 @@ class WordpressHandler {
 			$sql            .= " `error` varchar(250) NOT NULL DEFAULT '-',";
 			$sql            .= " `subject` varchar(250) NOT NULL DEFAULT '-',";
 			$sql            .= " `from` varchar(256) NOT NULL DEFAULT '0',";  // Needed by SHA-256 pseudonymization.
-			$sql            .= " `to` varchar(256) NOT NULL DEFAULT '0',";  // Needed by SHA-256 pseudonymization.
+			$sql            .= " `to` text,";
 			$sql            .= ' `body` mediumtext,';
 			$sql            .= ' `headers` text,';
 			$sql            .= ' `attachments` text,';
@@ -137,10 +137,10 @@ class WordpressHandler {
 	public function finalize() {
 		global $wpdb;
 		if ( '' !== $this->table ) {
-			Logger::debug( sprintf( 'Table "%s" dropped.', $this->table ) );
 			$sql = 'DROP TABLE IF EXISTS ' . $this->table;
 			// phpcs:ignore
 			$wpdb->query( $sql );
+			Logger::emergency( sprintf( 'Table "%s" dropped.', $this->table ) );
 		}
 	}
 

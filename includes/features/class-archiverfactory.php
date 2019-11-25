@@ -204,6 +204,7 @@ class ArchiverFactory {
 		if ( array_key_exists( 'uuid', $archiver ) ) {
 			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
 			if ( class_exists( $classname ) ) {
+
 				$instance = $this->create_instance( $classname );
 				$instance->set_archiver( $archiver );
 				$instance->finalize();
