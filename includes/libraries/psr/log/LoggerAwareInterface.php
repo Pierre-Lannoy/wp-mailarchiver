@@ -3,16 +3,16 @@
 namespace Psr\Log;
 
 /**
- * Describes an archiver-aware instance.
+ * Describes an logger-aware instance.
  */
-interface ArchiverAwareInterface
+interface LoggerAwareInterface
 {
     /**
-     * Sets an archiver instance on the object.
+     * Sets an logger instance on the object.
      *
-     * @param ArchiverInterface $archiver
+     * @param LoggerInterface $logger
      *
      * @return void
      */
-    public function setArchiver(ArchiverInterface $archiver);
+    public function setLogger(LoggerInterface $logger);
 }

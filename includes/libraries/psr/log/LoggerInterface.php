@@ -3,7 +3,7 @@
 namespace Psr\Log;
 
 /**
- * Describes an archiver instance.
+ * Describes an logger instance.
  *
  * The message MUST be a string or object implementing __toString().
  *
@@ -14,10 +14,10 @@ namespace Psr\Log;
  * can be made by implementors is that if an Exception instance is given
  * to produce a stack trace, it MUST be in a key named "exception".
  *
- * See https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-archiver-interface.md
+ * See https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
  * for the full interface specification.
  */
-interface ArchiverInterface
+interface LoggerInterface
 {
     /**
      * System is unusable.
