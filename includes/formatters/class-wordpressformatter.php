@@ -71,10 +71,7 @@ class WordpressFormatter implements FormatterInterface {
 			if ( array_key_exists( 'from', $context ) ) {
 				$values['from'] = substr( $context['from'], 0, 256 );
 			}
-			if ( array_key_exists( 'body', $context ) ) {
-				$values['body'] = $context['body'];
-			}
-			foreach ( [ 'headers', 'attachments' ] as $field ) {
+			foreach ( [ 'headers', 'attachments', 'body' ] as $field ) {
 				if ( array_key_exists( $field, $context ) ) {
 					// phpcs:ignore
 					$values[ $field ] = wp_json_encode( $context[ $field ] );

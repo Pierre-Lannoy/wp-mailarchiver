@@ -264,6 +264,56 @@ class DArchiver {
 	}
 
 	/**
+	 * Get the mail context.
+	 *
+	 * @param array $mail      The mail.
+	 * @return  array The context.
+	 * @since 1.0.0
+	 */
+	private function context( $mail ) {
+		$context = [
+			'class'     => (string) $this->class,
+			'component' => (string) $this->name,
+			'version'   => (string) $this->version,
+		];
+		if ( is_array( $mail ) ) {
+			foreach ( [ 'to', 'from', 'subject' ] as $field ) {
+				if ( array_key_exists( $field, $mail ) ) {
+					$context[ $field ] = $mail[ $field ];
+				} else {
+					$context[ $field ] = '-';
+				}
+			}
+			$context['body'] = '';
+			if ( array_key_exists( 'body', $mail ) ) {
+				$context['body'] = $mail['body'];
+			}
+			$context['headers'] = [];
+			if ( array_key_exists( 'headers', $mail ) ) {
+				if ( is_array( $mail['headers'] ) ) {
+					$context['headers'] = $mail['headers'];
+				} elseif ( is_string( $mail['headers'] ) ) {
+					$headers = explode( "\n", str_replace( "\r\n", "\n", $mail['headers'] ) );
+					foreach ( $headers as $header ) {
+						$header = '"' . $header . '"';
+						if ( '"' === $header[0] && '"' === $header[ strlen( $header ) - 1 ] ) {
+							$header = substr( $header, 1, strlen( $header ) - 2 );
+						}
+						$context['headers'][] = $header;
+					}
+				}
+			}
+			$context['attachments'] = [];
+			if ( array_key_exists( 'attachments', $mail ) ) {
+				if ( is_array( $mail['attachments'] ) ) {
+					$context['attachments'] = $mail['attachments'];
+				}
+			}
+		}
+		return $context;
+	}
+
+	/**
 	 * Adds a mail archive at the INFO level.
 	 *
 	 * @param array  $mail      The mail.
@@ -275,23 +325,11 @@ class DArchiver {
 			return;
 		}
 		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-			];
-			if ( is_array( $mail ) ) {
-				foreach ( [ 'to', 'from', 'subject', 'body', 'headers', 'attachments' ] as $field ) {
-					if ( array_key_exists( $field, $mail ) ) {
-						$context[ $field ] = $mail[ $field ];
-					}
-				}
-			}
 			$channel = $this->current_channel_tag();
 			if ( $this->archiver->getName() !== $channel ) {
 				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->archiver->info( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->info( filter_var( $message, FILTER_SANITIZE_STRING ), $this->context( $mail ) );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
@@ -313,23 +351,11 @@ class DArchiver {
 			return;
 		}
 		try {
-			$context = [
-				'class'     => (string) $this->class,
-				'component' => (string) $this->name,
-				'version'   => (string) $this->version,
-			];
-			if ( is_array( $mail ) ) {
-				foreach ( [ 'to', 'from', 'subject', 'body', 'headers', 'attachments' ] as $field ) {
-					if ( array_key_exists( $field, $mail ) ) {
-						$context[ $field ] = $mail[ $field ];
-					}
-				}
-			}
 			$channel = $this->current_channel_tag();
 			if ( $this->archiver->getName() !== $channel ) {
 				$this->archiver = $this->archiver->withName( $channel );
 			}
-			$this->archiver->error( filter_var( $message, FILTER_SANITIZE_STRING ), $context );
+			$this->archiver->error( filter_var( $message, FILTER_SANITIZE_STRING ), $this->context( $mail ) );
 			$result = true;
 		} catch ( \Throwable $t ) {
 			$this->integrity_check();
