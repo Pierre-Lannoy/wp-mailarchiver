@@ -494,7 +494,7 @@ class Events extends \WP_List_Table {
 			$l['value'] = $d;
 			// phpcs:ignore
 			$l['text']     = sprintf( esc_html__( 'Show %d lines per page', 'mailarchiver' ), $d );
-			$l['selected'] = ( $d === $this->limit ? 'selected="selected" ' : '' );
+			$l['selected'] = ( $d === (int) $this->limit ? 'selected="selected" ' : '' );
 			$result[]      = $l;
 		}
 		return $result;
