@@ -13,6 +13,7 @@
 namespace Mailarchiver\Listener;
 
 use Mailarchiver\System\Logger;
+use Mailarchiver\Plugin\Feature\Capture;
 
 /**
  * WP core listener for MailArchiver.
@@ -78,7 +79,7 @@ class CoreListener extends AbstractListener {
 			}
 		}
 		if ( is_string( $a ) && false !== strpos( $a, '@' ) ) {
-			$result[] = $a;
+			$result[] = trim( $a) ;
 		}
 	}
 
@@ -87,11 +88,25 @@ class CoreListener extends AbstractListener {
 	 *
 	 * @since    1.0.0
 	 */
-	public function wp_mail( $mail ) {
+	public function wp_mail( $mail, $message = '' ) {
+		$recipients = null;
+		if ( is_string( $mail['to'] ) ) {
+			foreach ( [ ',', ';' ] as $sep ) {
+				if ( false !== strpos( $mail['to'], $sep ) ) {
+					$recipients = explode( $sep, $mail['to'] );
+					break;
+				}
+			}
+			if ( ! isset( $recipients ) ) {
+				$recipients = [ $mail['to'] ];
+			}
+		} else {
+			$recipients = $mail['to'];
+		}
 		$tos = [];
-		$this->get_all_emails( $mail['to'], $tos );
-		$data['to'] = $tos;
-		\Mailarchiver\Plugin\Feature\Capture::put( $mail );
+		$this->get_all_emails( $recipients, $tos );
+		$mail['to'] = $tos;
+		Capture::put( $mail );
 	}
 
 	/**
@@ -105,11 +120,7 @@ class CoreListener extends AbstractListener {
 			if ( '' === $message ) {
 				$message = 'Unknown error.';
 			}
-			$data = $error->get_error_data();
-			$tos  = [];
-			$this->get_all_emails( $data['to'], $tos );
-			$data['to'] = $tos;
-			\Mailarchiver\Plugin\Feature\Capture::put( $data, $message );
+			$this->wp_mail( $error->get_error_data(), $message );
 		}
 	}
 

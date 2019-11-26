@@ -99,7 +99,8 @@ class Capture {
 			$mail['body']['raw']  = $mail['message'];
 			$mail['body']['type'] = 'raw';
 			$mail['from']         = self::from( $mail['headers'] );
-			$key                  = Hash::simple_hash( $mail['from'] . $mail['to'] . $mail['subject'] );
+			// phpcs:ignore
+			$key = Hash::simple_hash( $mail['from'] . serialize( $mail['to'] ) . $mail['subject'] );
 			unset( $mail['message'] );
 			self::$mails[ $key ]['raw'] = $mail;
 			if ( '' !== $message ) {
@@ -121,10 +122,10 @@ class Capture {
 			$archiver = Archive::bootstrap( 'mail', 'wp_mail', $wp_version );
 			foreach ( self::$mails as $mail ) {
 				if ( array_key_exists( 'message', $mail ) && '' !== $mail['message'] ) {
-					Logger::warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], $mail['raw']['to'] ) );
+					Logger::warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
 					$archiver->error( $mail['raw'], $mail['message'] );
 				} else {
-					Logger::info( sprintf( 'Mail "%s" sent from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], $mail['raw']['to'] ) );
+					Logger::info( sprintf( 'Mail "%s" sent from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
 					$archiver->success( $mail['raw'] );
 				}
 			}
