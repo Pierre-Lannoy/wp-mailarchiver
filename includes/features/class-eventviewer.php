@@ -61,6 +61,14 @@ class EventViewer {
 	private $eventid = null;
 
 	/**
+	 * Mail body.
+	 *
+	 * @since  1.0.0
+	 * @var    string    $body    The body, ready to print.
+	 */
+	private $body = 'No Content';
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @param   string  $logid      The events log id.
@@ -83,6 +91,69 @@ class EventViewer {
 				}
 			}
 		}
+		$this->prepare_body();
+	}
+
+	/**
+	 * Prepare the body to be printed.
+	 *
+	 * @since 1.0.0
+	 */
+	private function prepare_body() {
+		$body = json_decode( $this->event['body'], true );
+		if ( is_array( $body ) && array_key_exists( 'raw', $body ) ) {
+			$content = $body['raw'];
+		} else {
+			$content = esc_html__( 'malformed', 'mailarchiver' );
+		}
+		$is_html = false;
+		if ( is_array( $body ) && array_key_exists( 'type', $body ) && 'raw' === $body['type'] ) {
+			$search = strtolower( $body['raw'] );
+			foreach ( [ '!doctype', 'html', 'body', 'span', 'table', 'div', 'ul' ] as $tag ) {
+				if ( false !== strpos( $search, '<' . $tag ) ) {
+					$is_html = true;
+					break;
+				}
+			}
+			if ( $is_html ) {
+				$start = 0;
+				if ( false !== strpos( $search, '<!doctype ' ) ) {
+					$start = strpos( $search, '<!doctype ' );
+				} elseif ( false !== strpos( $search, '<html ' ) ) {
+					$start = strpos( $search, '<html ' );
+				}
+				$length = strlen( $content );
+				if ( false !== strpos( $search, '</html>' ) ) {
+					$length = strpos( $search, '</html>' ) + 6 - $start;
+				}
+				$content = substr( $content, $start, $length );
+			} else {
+				$content = str_replace( "\r\n", "<br />", $content );
+				$content = str_replace( "\n", "<br />", $content );
+				$content = str_replace( "\r", "<br />", $content );
+				$content = str_replace( "\t", " ", $content );
+				$content = '<html><body>' . $content . '</body></html>';
+			}
+		} elseif ( 'encrypted' === $body['type'] ) {
+			$content = '<html><body>' . esc_html__( 'encrypted', 'mailarchiver' ) . '</body></html>';
+			$is_html = true;
+		} else {
+			$content = '<html><body>' . esc_html__( 'unknow', 'mailarchiver' ) . '</body></html>';
+			$is_html = true;
+		}
+		if ( $is_html ) {
+			$content = str_replace( '\\', '\\\\', $content );
+			$content = str_replace( '"', '\"', $content );
+			$content = str_replace( "\r\n", " ", $content );
+			$content = str_replace( "\n", " ", $content );
+			$content = str_replace( "\r", " ", $content );
+			$content = str_replace( "\t", " ", $content );
+			while ( false !== strpos( $content, '  ' ) ) {
+				$content = str_replace("  ", " ", $content);
+			}
+
+		}
+		$this->body = $content;
 	}
 
 	/**
@@ -223,24 +294,7 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	public function add_footer() {
-		$body   = json_decode( $this->event['body'] );
-		$body = str_replace('\\', '\\\\', $body);
 
-		$body = str_replace('"', '\"', $body);
-
-		$body = str_replace("\r\n", " ", $body);
-		$body = str_replace("\n", " ", $body);
-		$body = str_replace("\r", " ", $body);
-		$body = str_replace("\t", " ", $body);
-
-		$body = str_replace("  ", " ", $body);
-		$body = str_replace("  ", " ", $body);
-		$body = str_replace("  ", " ", $body);
-		$body = str_replace("  ", " ", $body);
-		$body = str_replace("  ", " ", $body);
-		$body = str_replace("  ", " ", $body);
-		$body = str_replace("  ", " ", $body);
-		$body = str_replace("  ", " ", $body);
 
 
 
@@ -249,7 +303,7 @@ class EventViewer {
 		$result .= '    jQuery(document).ready( function($) {';
 
 		$result .= '      const iframe = document.querySelector("#mailarchiver-body-iframe");';
-		$result .= '      const source = "' . $body . '";';
+		$result .= '      const source = "' . $this->body . '";';
 		$result .= '      iframe.src = URL.createObjectURL(new Blob([source], { type : "text/html" }));';
 
 		$result .= "        $('.if-js-closed').removeClass('if-js-closed').addClass('closed');";
