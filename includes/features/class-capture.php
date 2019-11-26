@@ -88,6 +88,26 @@ class Capture {
 	}
 
 	/**
+	 * Normalize attachments filenames.
+	 *
+	 * @param array|string $attachments The attachments.
+	 * @return array The normalized filenames.
+	 * @since    1.0.0
+	 */
+	private static function attachments( $attachments ) {
+		$att = [];
+		if ( ! is_array( $attachments ) ) {
+			$attachments = explode( "\n", str_replace( "\r\n", "\n", $attachments ) );
+		}
+		if ( ! empty( $attachments ) ) {
+			foreach ( $attachments as $attachment ) {
+				$att[] = basename( $attachment );
+			}
+		}
+		return $att;
+	}
+
+	/**
 	 * Put the mail in the store queue.
 	 *
 	 * @param array  $mail      The raw mail.
@@ -99,6 +119,7 @@ class Capture {
 			$mail['body']['raw']  = $mail['message'];
 			$mail['body']['type'] = 'raw';
 			$mail['from']         = self::from( $mail['headers'] );
+			$mail['attachments']  = self::attachments( $mail['attachments'] );
 			// phpcs:ignore
 			$key = Hash::simple_hash( $mail['from'] . serialize( $mail['to'] ) . $mail['subject'] );
 			unset( $mail['message'] );
