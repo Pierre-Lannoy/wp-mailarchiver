@@ -23,6 +23,7 @@ use Mailarchiver\System\Option;
 use Mailarchiver\System\Form;
 use Mailarchiver\System\Role;
 use Mailarchiver\System\Logger;
+use Mailarchiver\System\Secret;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -498,7 +499,7 @@ class Mailarchiver_Admin {
 					$this->current_archiver['privacy']['obfuscation']       = ( array_key_exists( 'mailarchiver_archiver_privacy_ip', $_POST ) ? true : false );
 					$this->current_archiver['privacy']['pseudonymization']  = ( array_key_exists( 'mailarchiver_archiver_privacy_name', $_POST ) ? true : false );
 					$this->current_archiver['privacy']['mailanonymization'] = ( array_key_exists( 'mailarchiver_archiver_privacy_mail', $_POST ) ? true : false );
-					$this->current_archiver['privacy']['encryption']        = ( array_key_exists( 'mailarchiver_archiver_privacy_encryption', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_privacy_encryption', FILTER_UNSAFE_RAW ) : '' );
+					$this->current_archiver['privacy']['encryption']        = ( array_key_exists( 'mailarchiver_archiver_privacy_encryption', $_POST ) ? Secret::set( filter_input( INPUT_POST, 'mailarchiver_archiver_privacy_encryption', FILTER_UNSAFE_RAW ) ) : '' );
 					$this->current_archiver['processors']                   = [];
 					$proc = new ProcessorTypes();
 					foreach ( array_reverse( $proc->get_all() ) as $processor ) {
@@ -978,7 +979,7 @@ class Mailarchiver_Admin {
 			'mailarchiver_archiver_privacy_section',
 			[
 				'id'          => 'mailarchiver_archiver_privacy_encryption',
-				'value'       => $this->current_archiver['privacy']['encryption'],
+				'value'       => Secret::get( $this->current_archiver['privacy']['encryption'] ),
 				'description' => esc_html__( 'Key used to encrypt mail body. Let blank to not encrypt it.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: XXXXXXXXXXXXXXXXXXXXXXXX.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
