@@ -449,7 +449,6 @@ class Mailarchiver_Admin {
 				Option::network_set( 'use_cdn', array_key_exists( 'mailarchiver_plugin_options_usecdn', $_POST ) );
 				Option::network_set( 'display_nag', array_key_exists( 'mailarchiver_plugin_options_nag', $_POST ) );
 				Option::network_set( 'archiver_autostart', array_key_exists( 'mailarchiver_archivers_options_autostart', $_POST ) );
-				Option::network_set( 'pseudonymization', array_key_exists( 'mailarchiver_archivers_options_pseudonymization', $_POST ) );
 				$message = esc_html__( 'Plugin settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
@@ -679,22 +678,6 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_archivers_options_section', 'mailarchiver_archivers_options_autostart' );
-		add_settings_field(
-			'mailarchiver_archivers_options_pseudonymization',
-			__( 'Events messages', 'mailarchiver' ),
-			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_archivers_options_section',
-			'mailarchiver_archivers_options_section',
-			[
-				'text'        => esc_html__( 'Respect privacy', 'mailarchiver' ),
-				'id'          => 'mailarchiver_archivers_options_pseudonymization',
-				'checked'     => Option::network_get( 'pseudonymization' ),
-				'description' => esc_html__( 'If checked, MailArchiver will try to obfuscate personal information in events messages.', 'mailarchiver' ),
-				'full_width'  => true,
-				'enabled'     => true,
-			]
-		);
-		register_setting( 'mailarchiver_archivers_options_section', 'mailarchiver_archivers_options_pseudonymization' );
 	}
 
 	/**

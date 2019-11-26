@@ -294,18 +294,11 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	public function add_footer() {
-
-
-
-
-
 		$result  = '<script>';
 		$result .= '    jQuery(document).ready( function($) {';
-
 		$result .= '      const iframe = document.querySelector("#mailarchiver-body-iframe");';
 		$result .= '      const source = "' . $this->body . '";';
 		$result .= '      iframe.src = URL.createObjectURL(new Blob([source], { type : "text/html" }));';
-
 		$result .= "        $('.if-js-closed').removeClass('if-js-closed').addClass('closed');";
 		$result .= "        if(typeof postboxes !== 'undefined')";
 		$result .= "            postboxes.add_postbox_toggles('" . self::$screen_id . "');";

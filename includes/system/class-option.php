@@ -47,7 +47,6 @@ class Option {
 		self::$defaults['archiver_autostart'] = true;  // In plugin settings.
 		self::$defaults['autolisteners']      = true;  // In plugin settings.
 		self::$defaults['listeners']          = [];    // In plugin settings.
-		self::$defaults['pseudonymization']   = false; // In plugin settings.
 	}
 
 	/**
@@ -166,7 +165,6 @@ class Option {
 		self::network_set( 'display_nag', self::$defaults['display_nag'] );
 		self::network_set( 'archiver_autostart', self::$defaults['archiver_autostart'] );
 		self::network_set( 'autolisteners', self::$defaults['autolisteners'] );
-		self::network_set( 'pseudonymization', self::$defaults['pseudonymization'] );
 	}
 
 	/**
