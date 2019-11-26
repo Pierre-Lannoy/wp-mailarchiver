@@ -168,11 +168,18 @@ class Events extends \WP_List_Table {
 	 * @since   1.0.0
 	 */
 	protected function column_to( $item ) {
-		$result = $item['to'] . $this->get_filter( 'to', $item['to'] );
-		$user   = get_user_by( 'email', $item['to'] );
-		if ( false !== $user ) {
-			// phpcs:ignore
-			$result = $result . '<br /><span style="color:silver">' . User::get_user_string( $user->ID ) . '</span>';
+		$items = json_decode( $item['to'], true );
+		$tos   = [];
+		foreach ( $items as $item ) {
+			$tos[] = $item . $this->get_filter( 'to', $item );
+		}
+		$result = implode( '<br/>', $tos );
+		if ( 1 === count( $items ) ) {
+			$user = get_user_by( 'email', $items[0] );
+			if ( false !== $user ) {
+				// phpcs:ignore
+				$result = $result . '<br /><span style="color:silver">' . User::get_user_string( $user->ID ) . '</span>';
+			}
 		}
 		return $result;
 	}
@@ -322,7 +329,7 @@ class Events extends \WP_List_Table {
 	 */
 	protected function get_filter( $filter, $value, $soft = false ) {
 		$filters = $this->filters;
-		if ( array_key_exists( $filter, $this->filters ) ) {
+		if ( array_key_exists( $filter, $this->filters ) && $value === $this->filters[ $filter ] ) {
 			unset( $this->filters[ $filter ] );
 			$url    = $this->get_page_url();
 			$alt    = esc_html__( 'Remove this filter', 'mailarchiver' );
@@ -596,6 +603,8 @@ class Events extends \WP_List_Table {
 						}
 					}
 					$w[] = $key . ' IN (' . implode( ',', $l ) . ')';
+				} elseif ( 'to' === $key ) {
+					$w[] = '`' . $key . '` like "%' . $filter . '%"';
 				} else {
 					$w[] = '`' . $key . '`="' . $filter . '"';
 				}
