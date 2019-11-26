@@ -106,7 +106,7 @@ class CoreListener extends AbstractListener {
 		$tos = [];
 		$this->get_all_emails( $recipients, $tos );
 		$mail['to'] = $tos;
-		Capture::put( $mail );
+		Capture::put( $mail, $message );
 	}
 
 	/**
