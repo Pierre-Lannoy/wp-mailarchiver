@@ -526,7 +526,6 @@ class Mailarchiver_Admin {
 					$archivers          = Option::network_get( 'archivers' );
 					$factory            = new ArchiverFactory();
 					$archivers[ $uuid ] = $factory->check( $this->current_archiver, true );
-					error_log(print_r($archivers[ $uuid ],true));
 					if ( array_key_exists( 'uuid', $archivers[ $uuid ] ) ) {
 						unset( $archivers[ $uuid ]['uuid'] );
 					}
