@@ -506,6 +506,7 @@ class Mailarchiver_Admin {
 							$this->current_archiver['processors'][] = $processor['id'];
 						}
 					}
+					$this->current_archiver['processors'][] = 'MailProcessor';
 					foreach ( $this->current_handler['configuration'] as $key => $configuration ) {
 						$id = 'mailarchiver_archiver_details_' . strtolower( $key );
 						if ( 'boolean' === $configuration['control']['cast'] ) {
@@ -525,6 +526,7 @@ class Mailarchiver_Admin {
 					$archivers          = Option::network_get( 'archivers' );
 					$factory            = new ArchiverFactory();
 					$archivers[ $uuid ] = $factory->check( $this->current_archiver, true );
+					error_log(print_r($archivers[ $uuid ],true));
 					if ( array_key_exists( 'uuid', $archivers[ $uuid ] ) ) {
 						unset( $archivers[ $uuid ]['uuid'] );
 					}

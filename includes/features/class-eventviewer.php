@@ -100,7 +100,7 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	private function prepare_body() {
-		$body = json_decode( $this->event['body'], true );
+		$body = \json_decode( $this->event['body'], true );
 		if ( is_array( $body ) && array_key_exists( 'raw', $body ) ) {
 			$content = $body['raw'];
 		} else {
@@ -296,9 +296,9 @@ class EventViewer {
 	public function add_footer() {
 		$result  = '<script>';
 		$result .= '    jQuery(document).ready( function($) {';
-		$result .= '      const iframe = document.querySelector("#mailarchiver-body-iframe");';
-		$result .= '      const source = "' . $this->body . '";';
-		$result .= '      iframe.src = URL.createObjectURL(new Blob([source], { type : "text/html" }));';
+		$result .= '        const iframe = document.querySelector("#mailarchiver-body-iframe");';
+		$result .= '        const source = "' . $this->body . '";';
+		$result .= '        iframe.src = URL.createObjectURL(new Blob([source], { type : "text/html" }));';
 		$result .= "        $('.if-js-closed').removeClass('if-js-closed').addClass('closed');";
 		$result .= "        if(typeof postboxes !== 'undefined')";
 		$result .= "            postboxes.add_postbox_toggles('" . self::$screen_id . "');";
@@ -315,13 +315,14 @@ class EventViewer {
 	 */
 	public function add_metaboxes() {
 		// Left column.
-		add_meta_box( 'mailarchiver-main', esc_html__( 'Event', 'mailarchiver' ), [ $this, 'event_widget' ], self::$screen_id, 'advanced' );
-		add_meta_box( 'mailarchiver-message', esc_html__( 'Content', 'mailarchiver' ), [ $this, 'message_widget' ], self::$screen_id, 'advanced' );
+		add_meta_box( 'mailarchiver-main', esc_html__( 'Message details', 'mailarchiver' ), [ $this, 'message_widget' ], self::$screen_id, 'advanced' );
+		add_meta_box( 'mailarchiver-recipients', esc_html__( 'Recipients', 'mailarchiver' ), [ $this, 'recipients_widget' ], self::$screen_id, 'advanced' );
+		add_meta_box( 'mailarchiver-details', esc_html__( 'Request details', 'mailarchiver' ), [ $this, 'details_widget' ], self::$screen_id, 'advanced' );
 		add_meta_box( 'mailarchiver-wordpress', 'WordPress', [ $this, 'wordpress_widget' ], self::$screen_id, 'advanced' );
-		add_meta_box( 'mailarchiver-http', esc_html__( 'HTTP request', 'mailarchiver' ), [ $this, 'http_widget' ], self::$screen_id, 'advanced' );
-		add_meta_box( 'mailarchiver-php', esc_html__( 'PHP introspection', 'mailarchiver' ), [ $this, 'php_widget' ], self::$screen_id, 'advanced' );
 		// Right column.
-		/* translators: like in the sentence "PHP backtrace" or "WordPress backtrace" */
+		add_meta_box( 'mailarchiver-attachments', esc_html__( 'Attachments', 'mailarchiver' ), [ $this, 'attachments_widget' ], self::$screen_id, 'side' );
+		add_meta_box( 'mailarchiver-headers', esc_html__( 'Headers', 'mailarchiver' ), [ $this, 'headers_widget' ], self::$screen_id, 'side' );
+		// Bottom area.
 		add_meta_box( 'mailarchiver-body', esc_html__( 'Content', 'mailarchiver' ), [ $this, 'body_widget' ], self::$screen_id, 'column5' );
 	}
 
@@ -362,23 +363,73 @@ class EventViewer {
 	}
 
 	/**
-	 * Get content of the event widget box.
+	 * Get content of the message widget box.
 	 *
 	 * @since 1.0.0
 	 */
-	public function event_widget() {
+	public function message_widget() {
 		// Event type.
-		$icon     = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $this->event['level'] ] . '" />';
-		$level    = ucwords( strtolower( EventTypes::$level_names[ EventTypes::$levels[ $this->event['level'] ] ] ) );
-		$channel  = ChannelTypes::$channel_names[ strtoupper( $this->event['channel'] ) ];
-		$content  = '<span style="width:40%;cursor: default;float:left">' . $icon . $level . '</span>';
-		$content .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'activity', 'none' ) . $channel . '</span>';
-		$event    = $this->get_section( $content );
+		$icon    = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $this->event['level'] ] . '" />';
+		$level   = EventTypes::$level_texts[ $this->event['level'] ];
+		$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $icon . $level . '</span>';
+		$event   = $this->get_section( $content );
 		// Event time.
 		$time    = Date::get_date_from_mysql_utc( $this->event['timestamp'], Timezone::network_get()->getName(), 'Y-m-d H:i:s' );
 		$dif     = Date::get_positive_time_diff_from_mysql_utc( $this->event['timestamp'] );
 		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'clock' ) . $time . '</span> <span style="color:silver">(' . $dif . ')</span>';
 		$hour    = $this->get_section( $content );
+		// Event message.
+		if ( 'info' !== $this->event['level'] ) {
+			$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'message-square' ) . $this->event['error'] . '</span>';
+			$message = $this->get_section( $content );
+		} else {
+			$message = '';
+		}
+		$this->output_activity_block( $event . $hour . $message );
+	}
+
+	/**
+	 * Get content of the recipients widget box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function recipients_widget() {
+		$tos = \json_decode( $this->event['to'], true );
+		if ( 0 < count( $tos ) ) {
+
+
+
+		}
+		// Event type.
+		$icon    = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $this->event['level'] ] . '" />';
+		$level   = EventTypes::$level_texts[ $this->event['level'] ];
+		$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $icon . $level . '</span>';
+		$event   = $this->get_section( $content );
+		// Event time.
+		$time    = Date::get_date_from_mysql_utc( $this->event['timestamp'], Timezone::network_get()->getName(), 'Y-m-d H:i:s' );
+		$dif     = Date::get_positive_time_diff_from_mysql_utc( $this->event['timestamp'] );
+		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'clock' ) . $time . '</span> <span style="color:silver">(' . $dif . ')</span>';
+		$hour    = $this->get_section( $content );
+		// Event message.
+		if ( 'info' !== $this->event['level'] ) {
+			$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'message-square' ) . $this->event['error'] . '</span>';
+			$message = $this->get_section( $content );
+		} else {
+			$message = '';
+		}
+		$this->output_activity_block( $event . $hour . $message );
+	}
+
+	/**
+	 * Get content of the details widget box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function details_widget() {
+		// Event type.
+		$channel = ChannelTypes::$channel_names[ strtoupper( $this->event['channel'] ) ];
+		$content = '<span style="width:60%;cursor: default;">' . $this->get_icon( 'activity', 'none' ) . $channel . '</span>';
+		$event   = $this->get_section( $content );
 		// Event source.
 		$class     = ClassTypes::$classe_names[ strtolower( $this->event['class'] ) ];
 		$component = $this->event['component'] . ' ' . $this->event['version'];
@@ -386,23 +437,7 @@ class EventViewer {
 		$content  .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'box' ) . $component . '</span>';
 		$source    = $this->get_section( $content );
 
-		$this->output_activity_block( $event . $hour . $source );
-	}
-
-	/**
-	 * Get content of the message widget box.
-	 *
-	 * @since 1.0.0
-	 */
-	public function message_widget() {
-		// Event code.
-		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'tag' ) . $this->event['code'] . '</span>';
-		$error   = $this->get_section( $content );
-		// Event message.
-		$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'message-square' ) . $this->event['message'] . '</span>';
-		$message = $this->get_section( $content );
-
-		$this->output_activity_block( $error . $message );
+		$this->output_activity_block( $event . $source );
 	}
 
 	/**
@@ -434,57 +469,46 @@ class EventViewer {
 	}
 
 	/**
-	 * Get content of the http widget box.
+	 * Get content of the headers widget box.
 	 *
 	 * @since 1.0.0
 	 */
-	public function http_widget() {
-		// Server detail.
-		$ip = $this->event['remote_ip'];
-		if ( 0 === strpos( $ip, '{' ) ) {
-			$ip = esc_html__( 'obfuscated IP', 'mailarchiver' );
-		}
-		// phpcs:ignore
-		$ip      = sprintf( esc_html__( 'from %s.', 'mailarchiver' ), $ip );
-		$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'layout' ) . $this->event['server'] . ' ' . $ip . '</span>';
-		$server  = $this->get_section( $content );
-		// Request detail.
-		$verb = $this->event['verb'];
-		if ( '-' !== $verb ) {
-			$verb = '<span style="vertical-align: middle;font-size:8px;padding:2px 6px;text-transform:uppercase;font-weight: bold;background-color:#9999BB;color:#F9F9F9;border-radius:2px;cursor: default;">' . $verb . '</span>';
-		} else {
-			$verb = '';
-		}
-		$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'server' ) . $this->event['url'] . '&nbsp;' . $verb . '</span>';
-		$request = $this->get_section( $content );
-		// referrer detail.
-		$content  = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'arrow-left-circle' ) . $this->event['referrer'] . '</span>';
-		$referrer = $this->get_section( $content );
+	public function headers_widget() {
+		/*if ( 0 < count)
+		// Event type.
+		$channel = ChannelTypes::$channel_names[ strtoupper( $this->event['channel'] ) ];
+		$content = '<span style="width:60%;cursor: default;">' . $this->get_icon( 'activity', 'none' ) . $channel . '</span>';
+		$event   = $this->get_section( $content );
+		// Event source.
+		$class     = ClassTypes::$classe_names[ strtolower( $this->event['class'] ) ];
+		$component = $this->event['component'] . ' ' . $this->event['version'];
+		$content   = '<span style="width:40%;cursor: default;float:left">' . $this->get_icon( 'folder' ) . $class . '</span>';
+		$content  .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'box' ) . $component . '</span>';
+		$source    = $this->get_section( $content );
 
-		$this->output_activity_block( $server . $request . $referrer );
+		$this->output_activity_block( $event . $source );*/
 	}
 
 	/**
-	 * Get content of the php widget box.
+	 * Get content of the attachments widget box.
 	 *
 	 * @since 1.0.0
 	 */
-	public function php_widget() {
-		// File detail.
-		$element = './' . str_replace( wp_normalize_path( ABSPATH ), '', wp_normalize_path( $this->event['file'] ) );
-		$element = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'file-text' ) . $element . ':' . $this->event['line'] . '</span>';
-		$file    = $this->get_section( $element );
-		// Function detail.
-		$element  = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'code', 'none' ) . $this->event['function'] . '</span>';
-		$function = $this->get_section( $element );
-		// Function detail.
-		$element = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'layers' ) . $this->event['classname'] . '</span>';
-		$class   = $this->get_section( $element );
+	public function attachments_widget() {
+		/*if ( 0 < count)
+		// Event type.
+		$channel = ChannelTypes::$channel_names[ strtoupper( $this->event['channel'] ) ];
+		$content = '<span style="width:60%;cursor: default;">' . $this->get_icon( 'activity', 'none' ) . $channel . '</span>';
+		$event   = $this->get_section( $content );
+		// Event source.
+		$class     = ClassTypes::$classe_names[ strtolower( $this->event['class'] ) ];
+		$component = $this->event['component'] . ' ' . $this->event['version'];
+		$content   = '<span style="width:40%;cursor: default;float:left">' . $this->get_icon( 'folder' ) . $class . '</span>';
+		$content  .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'box' ) . $component . '</span>';
+		$source    = $this->get_section( $content );
 
-		$this->output_activity_block( $class . $function . $file );
+		$this->output_activity_block( $event . $source );*/
 	}
-
-
 
 
 

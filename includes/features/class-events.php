@@ -168,7 +168,7 @@ class Events extends \WP_List_Table {
 	 * @since   1.0.0
 	 */
 	protected function column_to( $item ) {
-		$items = json_decode( $item['to'], true );
+		$items = \json_decode( $item['to'], true );
 		$tos   = [];
 		foreach ( $items as $item ) {
 			$tos[] = $item . $this->get_filter( 'to', $item );

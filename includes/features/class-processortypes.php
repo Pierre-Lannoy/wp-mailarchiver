@@ -31,12 +31,20 @@ class ProcessorTypes {
 	private $processors = [];
 
 	/**
+	 * The array of mandatory processors.
+	 *
+	 * @since  1.0.0
+	 * @var    array    $mandatory_processors    The mandatory processors.
+	 */
+	private $mandatory_processors = [];
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		$this->processors[] = [
+		$this->processors[]           = [
 			'id'        => 'WordpressProcessor',
 			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'WordPress ', 'mailarchiver' ),
@@ -49,6 +57,22 @@ class ProcessorTypes {
 				[
 					'type'  => 'privacy',
 					'value' => 'obfuscation',
+				],
+			],
+		];
+		$this->mandatory_processors[] = [
+			'id'        => 'MailProcessor',
+			'namespace' => 'Mailarchiver\\Processor',
+			'name'      => esc_html__( 'Mail ', 'mailarchiver' ),
+			'help'      => esc_html__( 'Allows to log email fields and metadata.', 'mailarchiver' ),
+			'init'      => [
+				[
+					'type'  => 'privacy',
+					'value' => 'mailanonymization',
+				],
+				[
+					'type'  => 'privacy',
+					'value' => 'encryption',
 				],
 			],
 		];
@@ -67,13 +91,19 @@ class ProcessorTypes {
 	/**
 	 * Get the processors list.
 	 *
+	 * @param boolean $full Optional. Get mandatory processors too.
 	 * @return  array   A list of all available processors.
 	 * @since    1.0.0
 	 */
-	public function get_list() {
+	public function get_list( $full = false ) {
 		$result = [];
 		foreach ( $this->processors as $processor ) {
 			$result[] = $processor['id'];
+		}
+		if ( $full ) {
+			foreach ( $this->mandatory_processors as $processor ) {
+				$result[] = $processor['id'];
+			}
 		}
 		return $result;
 	}
@@ -86,7 +116,7 @@ class ProcessorTypes {
 	 * @since    1.0.0
 	 */
 	public function get( $id ) {
-		foreach ( $this->processors as $processor ) {
+		foreach ( array_merge( $this->processors, $this->mandatory_processors ) as $processor ) {
 			if ( $processor['id'] === $id ) {
 				return $processor;
 			}

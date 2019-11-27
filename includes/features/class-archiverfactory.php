@@ -111,22 +111,6 @@ class ArchiverFactory {
 				}
 			}
 			if ( $handler ) {
-				$archiver['processors'][] = [
-					'id'        => 'MailProcessor',
-					'namespace' => 'Mailarchiver\\Processor',
-					'name'      => esc_html__( 'Mail ', 'mailarchiver' ),
-					'help'      => esc_html__( 'Allows to log email fields and metadata.', 'mailarchiver' ),
-					'init'      => [
-						[
-							'type'  => 'privacy',
-							'value' => 'mailanonymization',
-						],
-						[
-							'type'  => 'privacy',
-							'value' => 'encryption',
-						],
-					],
-				];
 				foreach ( array_reverse( $archiver['processors'] ) as $processor ) {
 					$p_instance    = null;
 					$processor_def = $this->processor_types->get( $processor );
@@ -140,7 +124,7 @@ class ArchiverFactory {
 										$args[] = (int) $archiver['level'];
 										break;
 									case 'privacy':
-										if ( 'encryption' === $p['type'] ) {
+										if ( 'encryption' === $p['value'] ) {
 											$args[] = (string) $archiver['privacy'][ $p['value'] ];
 										} else {
 											$args[] = (bool) $archiver['privacy'][ $p['value'] ];
@@ -204,7 +188,6 @@ class ArchiverFactory {
 		if ( array_key_exists( 'uuid', $archiver ) ) {
 			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
 			if ( class_exists( $classname ) ) {
-
 				$instance = $this->create_instance( $classname );
 				$instance->set_archiver( $archiver );
 				$instance->finalize();
@@ -285,7 +268,7 @@ class ArchiverFactory {
 		} else {
 			$processors = [];
 			foreach ( $archiver['processors'] as $processor ) {
-				if ( in_array( $processor, $this->processor_types->get_list(), true ) ) {
+				if ( in_array( $processor, $this->processor_types->get_list( true ), true ) ) {
 					$processors[] = $processor;
 				}
 			}
