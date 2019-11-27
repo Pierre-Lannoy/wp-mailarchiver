@@ -947,7 +947,7 @@ class Mailarchiver_Admin {
 			'mailarchiver_archiver_privacy_section',
 			'mailarchiver_archiver_privacy_section',
 			[
-				'text'        => esc_html__( 'Pseudonymisation', 'mailarchiver' ),
+				'text'        => esc_html__( 'Masking', 'mailarchiver' ),
 				'id'          => 'mailarchiver_archiver_privacy_mail',
 				'checked'     => $this->current_archiver['privacy']['mailanonymization'],
 				'description' => esc_html__( 'If checked, archive fields will contain hashes instead of email adresses.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns only "to" and "from" fields.', 'mailarchiver' ),
