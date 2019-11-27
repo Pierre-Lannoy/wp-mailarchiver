@@ -16,6 +16,7 @@ use Mailarchiver\System\Timezone;
 use Feather;
 use Mailarchiver\System\Database;
 use Mailarchiver\System\Logger;
+use Mailarchiver\System\User;
 
 /**
  * Define the event viewer functionality.
@@ -132,7 +133,7 @@ class EventViewer {
 				$content = str_replace( "\n", "<br />", $content );
 				$content = str_replace( "\r", "<br />", $content );
 				$content = str_replace( "\t", " ", $content );
-				$content = '<html><body>' . $content . '</body></html>';
+				$content = '<html><body style=\"padding:10px;font-family:\'Lucida Console\', Monaco, monospace;font-size: 14px;background-color:#F1F1F1;\">' . $content . '</body></html>';
 			}
 		} elseif ( 'encrypted' === $body['type'] ) {
 			$content = '<html><body>' . esc_html__( 'encrypted', 'mailarchiver' ) . '</body></html>';
@@ -151,7 +152,6 @@ class EventViewer {
 			while ( false !== strpos( $content, '  ' ) ) {
 				$content = str_replace("  ", " ", $content);
 			}
-
 		}
 		$this->body = $content;
 	}
@@ -299,6 +299,7 @@ class EventViewer {
 		$result .= '        const iframe = document.querySelector("#mailarchiver-body-iframe");';
 		$result .= '        const source = "' . $this->body . '";';
 		$result .= '        iframe.src = URL.createObjectURL(new Blob([source], { type : "text/html" }));';
+		$result .= '        $("#mailarchiver-body-iframe").load(function() {this.style.height = this.contentWindow.document.body.offsetHeight + 10 + "px";});';
 		$result .= "        $('.if-js-closed').removeClass('if-js-closed').addClass('closed');";
 		$result .= "        if(typeof postboxes !== 'undefined')";
 		$result .= "            postboxes.add_postbox_toggles('" . self::$screen_id . "');";
@@ -318,7 +319,6 @@ class EventViewer {
 		add_meta_box( 'mailarchiver-main', esc_html__( 'Message details', 'mailarchiver' ), [ $this, 'message_widget' ], self::$screen_id, 'advanced' );
 		add_meta_box( 'mailarchiver-recipients', esc_html__( 'Recipients', 'mailarchiver' ), [ $this, 'recipients_widget' ], self::$screen_id, 'advanced' );
 		add_meta_box( 'mailarchiver-details', esc_html__( 'Request details', 'mailarchiver' ), [ $this, 'details_widget' ], self::$screen_id, 'advanced' );
-		add_meta_box( 'mailarchiver-wordpress', 'WordPress', [ $this, 'wordpress_widget' ], self::$screen_id, 'advanced' );
 		// Right column.
 		add_meta_box( 'mailarchiver-attachments', esc_html__( 'Attachments', 'mailarchiver' ), [ $this, 'attachments_widget' ], self::$screen_id, 'side' );
 		add_meta_box( 'mailarchiver-headers', esc_html__( 'Headers', 'mailarchiver' ), [ $this, 'headers_widget' ], self::$screen_id, 'side' );
@@ -394,30 +394,23 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	public function recipients_widget() {
-		$tos = \json_decode( $this->event['to'], true );
+		$content = '';
+		$tos     = \json_decode( $this->event['to'], true );
 		if ( 0 < count( $tos ) ) {
-
-
-
+			foreach ( $tos as $to ) {
+				if ( 0 === strpos( $to, '{' ) ) {
+					$content .= $this->get_section( '<span style="width:100%;cursor: default;">' . $this->get_icon( 'user' ) . esc_html__( 'Masked address', 'decalog' ) . '</span>' );
+				} else {
+					$user = get_user_by( 'email', $to );
+					if ( false !== $user ) {
+						$content .= $this->get_section( '<span style="width:100%;cursor: default;">' . $this->get_icon( 'user-check' ) . $to . '<span style="margin-left:8px;color:silver">' . User::get_user_string( $user->ID ) . '</span>' . '</span>' );
+					} else {
+						$content .= $this->get_section( '<span style="width:100%;cursor: default;">' . $this->get_icon( 'user' ) . $to . '</span>' );
+					}
+				}
+			}
 		}
-		// Event type.
-		$icon    = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $this->event['level'] ] . '" />';
-		$level   = EventTypes::$level_texts[ $this->event['level'] ];
-		$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $icon . $level . '</span>';
-		$event   = $this->get_section( $content );
-		// Event time.
-		$time    = Date::get_date_from_mysql_utc( $this->event['timestamp'], Timezone::network_get()->getName(), 'Y-m-d H:i:s' );
-		$dif     = Date::get_positive_time_diff_from_mysql_utc( $this->event['timestamp'] );
-		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'clock' ) . $time . '</span> <span style="color:silver">(' . $dif . ')</span>';
-		$hour    = $this->get_section( $content );
-		// Event message.
-		if ( 'info' !== $this->event['level'] ) {
-			$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'message-square' ) . $this->event['error'] . '</span>';
-			$message = $this->get_section( $content );
-		} else {
-			$message = '';
-		}
-		$this->output_activity_block( $event . $hour . $message );
+		$this->output_activity_block( $content );
 	}
 
 	/**
@@ -436,36 +429,21 @@ class EventViewer {
 		$content   = '<span style="width:40%;cursor: default;float:left">' . $this->get_icon( 'folder' ) . $class . '</span>';
 		$content  .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'box' ) . $component . '</span>';
 		$source    = $this->get_section( $content );
-
-		$this->output_activity_block( $event . $source );
-	}
-
-	/**
-	 * Get content of the WordPress widget box.
-	 *
-	 * @since 1.0.0
-	 */
-	public function wordpress_widget() {
 		// User detail.
-		$user_name = $this->event['user_name'];
-		if ( 'anonymous' === $user_name ) {
-			$user_name = esc_html__( 'Anonymous user', 'mailarchiver' );
-		}
-		$user_id = '-';
-		if ( 0 === strpos( $this->event['user_name'], '{' ) ) {
-			$user_name = esc_html__( 'Pseudonymized user', 'mailarchiver' );
+		if ( 'anonymous' === $this->event['user_name'] ) {
+			$user = $this->get_section( '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'user' ) . esc_html__( 'Anonymous user', 'mailarchiver' ) . '</span>' );
+		} elseif ( 0 === strpos( $this->event['user_name'], '{' ) ) {
+			$user = $this->get_section( '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'user' ) . esc_html__( 'Pseudonymized user', 'mailarchiver' ) . '</span>' );
 		} elseif ( 0 !== (int) $this->event['user_id'] ) {
-			// phpcs:ignore
-			$user_id = sprintf( esc_html__( 'User ID %s', 'mailarchiver' ), $this->event[ 'user_id' ] );
+			$user = $this->get_section( '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'user-check' ) . User::get_user_string( (int) $this->event['user_id'] ) . '</span>' );
+		} else {
+			$user = $this->get_section( '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'user-x' ) . esc_html__( 'Deleted user', 'mailarchiver' ) . '</span>' );
 		}
-		$content  = '<span style="width:40%;cursor: default;float:left">' . $this->get_icon( 'user' ) . $user_id . '</span>';
-		$content .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'user-check' ) . $user_name . '</span>';
-		$user     = $this->get_section( $content );
 		// Site detail.
 		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'layout' ) . $this->event['site_name'] . '</span>';
 		$site    = $this->get_section( $content );
 
-		$this->output_activity_block( $user . $site );
+		$this->output_activity_block( $event . $source . $user . $site);
 	}
 
 	/**
@@ -474,19 +452,14 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	public function headers_widget() {
-		/*if ( 0 < count)
-		// Event type.
-		$channel = ChannelTypes::$channel_names[ strtoupper( $this->event['channel'] ) ];
-		$content = '<span style="width:60%;cursor: default;">' . $this->get_icon( 'activity', 'none' ) . $channel . '</span>';
-		$event   = $this->get_section( $content );
-		// Event source.
-		$class     = ClassTypes::$classe_names[ strtolower( $this->event['class'] ) ];
-		$component = $this->event['component'] . ' ' . $this->event['version'];
-		$content   = '<span style="width:40%;cursor: default;float:left">' . $this->get_icon( 'folder' ) . $class . '</span>';
-		$content  .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'box' ) . $component . '</span>';
-		$source    = $this->get_section( $content );
-
-		$this->output_activity_block( $event . $source );*/
+		$content = '';
+		$headers = \json_decode( $this->event['headers'], true );
+		if ( 0 < count( $headers ) ) {
+			foreach ( $headers as $header ) {
+				$content .= $this->get_section( '<span style="width:100%;cursor: default;">' . $this->get_icon( 'list' ) . $header . '</span>' );
+			}
+		}
+		$this->output_activity_block( $content );
 	}
 
 	/**
@@ -495,28 +468,15 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	public function attachments_widget() {
-		/*if ( 0 < count)
-		// Event type.
-		$channel = ChannelTypes::$channel_names[ strtoupper( $this->event['channel'] ) ];
-		$content = '<span style="width:60%;cursor: default;">' . $this->get_icon( 'activity', 'none' ) . $channel . '</span>';
-		$event   = $this->get_section( $content );
-		// Event source.
-		$class     = ClassTypes::$classe_names[ strtolower( $this->event['class'] ) ];
-		$component = $this->event['component'] . ' ' . $this->event['version'];
-		$content   = '<span style="width:40%;cursor: default;float:left">' . $this->get_icon( 'folder' ) . $class . '</span>';
-		$content  .= '<span style="width:60%;cursor: default;">' . $this->get_icon( 'box' ) . $component . '</span>';
-		$source    = $this->get_section( $content );
-
-		$this->output_activity_block( $event . $source );*/
+		$content     = '';
+		$attachments = \json_decode( $this->event['attachments'], true );
+		if ( 0 < count( $attachments ) ) {
+			foreach ( $attachments as $attachment ) {
+				$content .= $this->get_section( '<span style="width:100%;cursor: default;">' . $this->get_icon( 'file' ) . $attachment . '</span>' );
+			}
+		}
+		$this->output_activity_block( $content );
 	}
-
-
-
-
-
-
-
-
 
 	/**
 	 * Get content of the mail body.
@@ -524,7 +484,7 @@ class EventViewer {
 	 * @since 1.0.0
 	 */
 	public function body_widget() {
-		$this->output_activity_block( $this->get_section( '<iframe id="mailarchiver-body-iframe" class="mailarchiver-iframe" style="width:100%;height:800px"></iframe>' ) );
+		$this->output_activity_block( $this->get_section( '<iframe id="mailarchiver-body-iframe" class="mailarchiver-iframe" style="width:100%;"></iframe>' ) );
 	}
 
 }

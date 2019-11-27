@@ -171,10 +171,16 @@ class Events extends \WP_List_Table {
 		$items = \json_decode( $item['to'], true );
 		$tos   = [];
 		foreach ( $items as $item ) {
-			$tos[] = $item . $this->get_filter( 'to', $item );
+			if ( 0 === strpos( $item, '{' ) ) {
+				$email = '<em>' . esc_html__( 'Masked address', 'decalog' ) . '</em>';
+			} else {
+				// phpcs:ignore
+				$email = $item;
+			}
+			$tos[] = $email . $this->get_filter( 'to', $item );
 		}
 		$result = implode( '<br/>', $tos );
-		if ( 1 === count( $items ) ) {
+		if ( 1 === count( $items ) && ! ( 0 === strpos( $items[0], '{' ) ) ) {
 			$user = get_user_by( 'email', $items[0] );
 			if ( false !== $user ) {
 				// phpcs:ignore
