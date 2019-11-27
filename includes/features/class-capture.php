@@ -101,10 +101,34 @@ class Capture {
 		}
 		if ( ! empty( $attachments ) ) {
 			foreach ( $attachments as $attachment ) {
-				$att[] = basename( $attachment );
+				if ( '' !== $attachment ) {
+					$att[] = basename( $attachment );
+				}
 			}
 		}
 		return $att;
+	}
+
+	/**
+	 * Normalize headers.
+	 *
+	 * @param array|string $headers The headers.
+	 * @return array The normalized headers.
+	 * @since    1.0.0
+	 */
+	private static function headers( $headers ) {
+		$hdr = [];
+		if ( ! is_array( $headers ) ) {
+			$headers = explode( "\n", str_replace( "\r\n", "\n", $headers ) );
+		}
+		if ( ! empty( $headers ) ) {
+			foreach ( $headers as $header ) {
+				if ( '' !== $header ) {
+					$hdr[] = $header;
+				}
+			}
+		}
+		return $hdr;
 	}
 
 	/**
@@ -120,6 +144,7 @@ class Capture {
 			$mail['body']['type'] = 'raw';
 			$mail['from']         = self::from( $mail['headers'] );
 			$mail['attachments']  = self::attachments( $mail['attachments'] );
+			$mail['headers']      = self::headers( $mail['headers'] );
 			// phpcs:ignore
 			$key = Hash::simple_hash( $mail['from'] . serialize( $mail['to'] ) . $mail['subject'] );
 			unset( $mail['message'] );
