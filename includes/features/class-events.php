@@ -122,8 +122,8 @@ class Events extends \WP_List_Table {
 	public function __construct() {
 		parent::__construct(
 			[
-				'singular' => 'mail',
-				'plural'   => 'mails',
+				'singular' => 'email',
+				'plural'   => 'emails',
 				'ajax'     => true,
 			]
 		);
@@ -708,7 +708,7 @@ class Events extends \WP_List_Table {
 	 */
 	private static function load_columns() {
 		self::$standard_columns             = [];
-		self::$standard_columns['mail']     = esc_html__( 'Mail', 'mailarchiver' );
+		self::$standard_columns['mail']     = esc_html__( 'Email', 'mailarchiver' );
 		self::$standard_columns['to']       = esc_html__( 'To', 'mailarchiver' );
 		self::$standard_columns['time']     = esc_html__( 'Time', 'mailarchiver' );
 		self::$extra_columns                = [];

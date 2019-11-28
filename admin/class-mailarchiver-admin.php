@@ -156,7 +156,7 @@ class Mailarchiver_Admin {
 	 */
 	public function blog_action( $actions, $user_blog ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
-			$actions .= " | <a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Archived mails', 'mailarchiver' ) . '</a>';
+			$actions .= " | <a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
 	}
@@ -173,7 +173,7 @@ class Mailarchiver_Admin {
 	 */
 	public function site_action( $actions, $blog_id, $blogname ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
-			$actions['events_log'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived mails', 'mailarchiver' ) . '</a>';
+			$actions['events_log'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
 	}
@@ -210,7 +210,7 @@ class Mailarchiver_Admin {
 	public function add_actions_links( $actions, $plugin_file, $plugin_data, $context ) {
 		$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php?page=mailarchiver-settings' ), esc_html__( 'Settings', 'mailarchiver' ) );
 		if ( Events::archivers_count() > 0 ) {
-			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'tools.php?page=mailarchiver-viewer' ), esc_html__( 'Archived Mails', 'mailarchiver' ) );
+			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'tools.php?page=mailarchiver-viewer' ), esc_html__( 'Archived Emails', 'mailarchiver' ) );
 		}
 		return $actions;
 	}
@@ -792,7 +792,7 @@ class Mailarchiver_Admin {
 				'list'        => Archive::get_levels( $this->current_handler['minimal'] ),
 				'id'          => 'mailarchiver_archiver_misc_level',
 				'value'       => $this->current_archiver['level'],
-				'description' => esc_html__( 'What kinds of emails should be archived.', 'mailarchiver' ),
+				'description' => esc_html__( 'What kind of emails should be archived.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
@@ -828,7 +828,7 @@ class Mailarchiver_Admin {
 		register_setting( 'mailarchiver_archiver_delete_section', 'mailarchiver_archiver_delete_name' );
 		add_settings_field(
 			'mailarchiver_archiver_delete_level',
-			__( 'Minimal level', 'mailarchiver' ),
+			__( 'Archived emails', 'mailarchiver' ),
 			[ $form, 'echo_field_select' ],
 			'mailarchiver_archiver_delete_section',
 			'mailarchiver_archiver_delete_section',
@@ -851,23 +851,6 @@ class Mailarchiver_Admin {
 	 */
 	public function archiver_specific_section_callback() {
 		$form = new Form();
-		if ( 'ErrorLogHandler' === $this->current_archiver['handler'] ) {
-			add_settings_field(
-				'mailarchiver_archiver_specific_dummy',
-				__( 'Log file', 'mailarchiver' ),
-				[ $form, 'echo_field_input_text' ],
-				'mailarchiver_archiver_specific_section',
-				'mailarchiver_archiver_specific_section',
-				[
-					'id'          => 'mailarchiver_archiver_specific_dummy',
-					'value'       => ini_get( 'error_log' ),
-					'description' => esc_html__( 'Value set in php.ini file.', 'mailarchiver' ),
-					'full_width'  => true,
-					'enabled'     => false,
-				]
-			);
-			register_setting( 'mailarchiver_archiver_specific_section', 'mailarchiver_archiver_specific_dummy' );
-		}
 		foreach ( $this->current_handler['configuration'] as $key => $configuration ) {
 			if ( ! $configuration['show'] ) {
 				continue;
@@ -917,7 +900,7 @@ class Mailarchiver_Admin {
 				'text'        => esc_html__( 'Obfuscation', 'mailarchiver' ),
 				'id'          => 'mailarchiver_archiver_privacy_ip',
 				'checked'     => $this->current_archiver['privacy']['obfuscation'],
-				'description' => esc_html__( 'If checked, log fields will contain hashes instead of real IPs.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except events messages.', 'mailarchiver' ),
+				'description' => esc_html__( 'If checked, recorded fields will contain hashes instead of real IPs.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except email content.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
@@ -933,7 +916,7 @@ class Mailarchiver_Admin {
 				'text'        => esc_html__( 'Pseudonymisation', 'mailarchiver' ),
 				'id'          => 'mailarchiver_archiver_privacy_name',
 				'checked'     => $this->current_archiver['privacy']['pseudonymization'],
-				'description' => esc_html__( 'If checked, log fields will contain hashes instead of user IDs & names.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except events messages.', 'mailarchiver' ),
+				'description' => esc_html__( 'If checked, recorded fields will contain hashes instead of user IDs & names.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except email content.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
@@ -949,7 +932,7 @@ class Mailarchiver_Admin {
 				'text'        => esc_html__( 'Masking', 'mailarchiver' ),
 				'id'          => 'mailarchiver_archiver_privacy_mail',
 				'checked'     => $this->current_archiver['privacy']['mailanonymization'],
-				'description' => esc_html__( 'If checked, archive fields will contain hashes instead of email adresses.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns only "to" and "from" fields.', 'mailarchiver' ),
+				'description' => esc_html__( 'If checked, recorded fields will contain hashes instead of email adresses.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns only "to" and "from" fields.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => true,
 			]
@@ -991,7 +974,7 @@ class Mailarchiver_Admin {
 				'text'        => esc_html__( 'Included', 'mailarchiver' ),
 				'id'          => $id,
 				'checked'     => true,
-				'description' => esc_html__( 'Allows to log standard MailArchiver information.', 'mailarchiver' ),
+				'description' => esc_html__( 'Allows to record standard MailArchiver information.', 'mailarchiver' ),
 				'full_width'  => true,
 				'enabled'     => false,
 			]

@@ -83,9 +83,9 @@ class EventTypes {
 		self::$icons['info']          = Feather\Icons::get_base64( 'mail', '#DDDDFF', '#5555FF' );
 		self::$icons['error']         = Feather\Icons::get_base64( 'mail', '#FFB7B7', '#DD0000' );
 		self::$level_texts            = [];
-		self::$level_texts['unknown'] = esc_html__( 'The sent status of the mail is unknown.', 'mailarchiver' );
-		self::$level_texts['info']    = esc_html__( 'The mail was successfully sent.', 'mailarchiver' );
-		self::$level_texts['error']   = esc_html__( 'The mail was not sent, an error was generated.', 'mailarchiver' );
+		self::$level_texts['unknown'] = esc_html__( 'The sent status of the email is unknown.', 'mailarchiver' );
+		self::$level_texts['info']    = esc_html__( 'The email was successfully sent.', 'mailarchiver' );
+		self::$level_texts['error']   = esc_html__( 'The email was not sent, an error was generated.', 'mailarchiver' );
 	}
 
 }

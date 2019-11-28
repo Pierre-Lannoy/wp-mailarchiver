@@ -81,7 +81,7 @@ class Archive {
 						$result[] = [ $key, esc_html__( 'All emails', 'mailarchiver' ) ];
 					}
 					if ( 'ERROR' === $name ) {
-						$result[] = [ $key, esc_html__( 'Only emails that could not be sent', 'mailarchiver' ) ];
+						$result[] = [ $key, esc_html__( 'Only emails in error', 'mailarchiver' ) ];
 					}
 				}
 			}

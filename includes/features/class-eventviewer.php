@@ -274,16 +274,16 @@ class EventViewer {
 		} else {
 			echo '<h2>' . esc_html__( 'Forbidden', 'mailarchiver' ) . '</h2>';
 			settings_errors();
-			echo '<p>' . esc_html__( 'The event or events log you tried to access is out of your scope.', 'mailarchiver' ) . '</p>';
+			echo '<p>' . esc_html__( 'The email archive you tried to access is out of your scope.', 'mailarchiver' ) . '</p>';
 			echo '<p>' . esc_html__( 'If you think this is an error, please contact the network administrator with these details:', 'mailarchiver' );
 			echo '<ul>';
 			// phpcs:ignore
-			echo '<li>' . sprintf( esc_html__( 'Events log: %s', 'mailarchiver' ), '<code>' . $this->logid . '</code>' ) . '</li>';
+			echo '<li>' . sprintf( esc_html__( 'Archive: %s', 'mailarchiver' ), '<code>' . $this->logid . '</code>' ) . '</li>';
 			// phpcs:ignore
-			echo '<li>' . sprintf( esc_html__( 'Event: %s', 'mailarchiver' ), '<code>' . $this->eventid . '</code>' ) . '</li>';
+			echo '<li>' . sprintf( esc_html__( 'Email: %s', 'mailarchiver' ), '<code>' . $this->eventid . '</code>' ) . '</li>';
 			echo '</ul>';
 			echo '</p>';
-			Logger::warning( sprintf( 'Trying to access out of scope event #%s from events log {%s}.', $this->eventid, $this->logid ), 403 );
+			Logger::warning( sprintf( 'Trying to access out of scope email #%s from archive {%s}.', $this->eventid, $this->logid ), 403 );
 		}
 		echo '</div>';
 	}

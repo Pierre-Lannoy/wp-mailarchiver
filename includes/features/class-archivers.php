@@ -178,9 +178,6 @@ class Archivers extends \WP_List_Table {
 		if ( 'WordpressHandler' === $handler['id'] ) {
 			$actions['view'] = sprintf( '<a href="%s">' . esc_html__( 'View', 'mailarchiver' ) . '</a>', $view );
 		}
-		if ( $item['running'] ) {
-			$actions['test'] = sprintf( '<a href="%s">' . esc_html__( 'Send Test', 'mailarchiver' ) . '</a>', $test );
-		}
 		return $icon . '&nbsp;' . sprintf( '<a href="%1$s">%2$s</a><br /><span style="color:silver">&nbsp;%3$s</span>%4$s', $edit, $item['name'], $handler['name'], $this->row_actions( $actions ) );
 	}
 

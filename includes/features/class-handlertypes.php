@@ -45,7 +45,7 @@ class HandlerTypes {
 			'class'         => 'null',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Blackhole', 'mailarchiver' ),
-			'help'          => esc_html__( 'Any mail it can handle will be thrown away.', 'mailarchiver' ),
+			'help'          => esc_html__( 'Any email it can handle will be thrown away.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_php_icon(),
 			'params'        => [],
 			'configuration' => [],
@@ -58,7 +58,7 @@ class HandlerTypes {
 			'class'         => 'logging',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Fluentd', 'mailarchiver' ),
-			'help'          => esc_html__( 'A mail archive sent to a Fluentd collector.', 'mailarchiver' ),
+			'help'          => esc_html__( 'An archive sent to a Fluentd collector.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_fluentd_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -113,7 +113,7 @@ class HandlerTypes {
 			'class'         => 'logging',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Logentries & insightOps', 'mailarchiver' ),
-			'help'          => esc_html__( 'A mail archive sent to Logentries & insightOps service.', 'mailarchiver' ),
+			'help'          => esc_html__( 'An archive sent to Logentries & insightOps service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_logentries_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -181,7 +181,7 @@ class HandlerTypes {
 			'class'         => 'logging',
 			'minimal'       => Logger::ERROR,
 			'name'          => esc_html__( 'Loggly', 'mailarchiver' ),
-			'help'          => esc_html__( 'A mail archive sent to Solawinds Loggly service.', 'mailarchiver' ),
+			'help'          => esc_html__( 'An archive sent to Solawinds Loggly service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_loggly_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -213,7 +213,7 @@ class HandlerTypes {
 			'class'         => 'alerting',
 			'minimal'       => Logger::ERROR,
 			'name'          => esc_html__( 'Pushover', 'mailarchiver' ),
-			'help'          => esc_html__( 'Mails errors signaled to Pushover service.', 'mailarchiver' ),
+			'help'          => esc_html__( 'Emails in error signaled to Pushover service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_pushover_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -296,7 +296,7 @@ class HandlerTypes {
 			'class'         => 'storing',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Rotating files', 'mailarchiver' ),
-			'help'          => esc_html__( 'A mail archive sent to files that are rotated every day and a limited number of files are kept.', 'mailarchiver' ),
+			'help'          => esc_html__( 'An archive sent to files that are rotated every day and a limited number of files are kept.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_rotatingfiles_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -351,7 +351,7 @@ class HandlerTypes {
 			'class'         => 'alerting',
 			'minimal'       => Logger::ERROR,
 			'name'          => esc_html__( 'Slack', 'mailarchiver' ),
-			'help'          => esc_html__( 'Mails errors signaled through Slack Webhooks.', 'mailarchiver' ),
+			'help'          => esc_html__( 'Emails in error signaled through Slack Webhooks.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_slack_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -370,8 +370,8 @@ class HandlerTypes {
 				'short'   => [
 					'type'    => 'boolean',
 					'show'    => true,
-					'name'    => esc_html__( 'Short attachment', 'mailarchiver' ),
-					'help'    => esc_html__( 'Use a shortened version for attachments sent in channel.', 'mailarchiver' ),
+					'name'    => esc_html__( 'Short version', 'mailarchiver' ),
+					'help'    => esc_html__( 'Use a shortened version of details sent in channel.', 'mailarchiver' ),
 					'default' => false,
 					'control' => [
 						'type'    => 'field_checkbox',
@@ -383,7 +383,7 @@ class HandlerTypes {
 					'type'    => 'boolean',
 					'show'    => true,
 					'name'    => esc_html__( 'Full data', 'mailarchiver' ),
-					'help'    => esc_html__( 'Whether the attachments should include context and extra data.', 'mailarchiver' ),
+					'help'    => esc_html__( 'Whether the sent details should include context and extra data.', 'mailarchiver' ),
 					'default' => true,
 					'control' => [
 						'type'    => 'field_checkbox',
@@ -435,7 +435,7 @@ class HandlerTypes {
 			'class'         => 'logging',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Syslog', 'mailarchiver' ),
-			'help'          => esc_html__( 'A mail archive sent to a remote syslogd server.', 'mailarchiver' ),
+			'help'          => esc_html__( 'An archive sent to a remote syslogd server.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_syslog_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -494,7 +494,7 @@ class HandlerTypes {
 					'type'    => 'string',
 					'show'    => true,
 					'name'    => esc_html__( 'Identifier', 'mailarchiver' ),
-					'help'    => esc_html__( 'The program identifier for messages sent by MailArchiver.', 'mailarchiver' ),
+					'help'    => esc_html__( 'The program identifier for archive sent by MailArchiver.', 'mailarchiver' ),
 					'default' => 'MailArchiver',
 					'control' => [
 						'type'    => 'field_input_text',
@@ -552,7 +552,7 @@ class HandlerTypes {
 			'class'         => 'storing',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'WordPress archiver', 'mailarchiver' ),
-			'help'          => esc_html__( 'A mail archive stored in your WordPress database and available right in your admin dashboard.', 'mailarchiver' ),
+			'help'          => esc_html__( 'An archive stored in your WordPress database and available right in your admin dashboard.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_wordpress_icon(),
 			'params'        => [ 'processors', 'privacy' ],
 			'configuration' => [
@@ -560,7 +560,7 @@ class HandlerTypes {
 					'type'    => 'integer',
 					'show'    => true,
 					'name'    => esc_html__( 'Mails', 'mailarchiver' ),
-					'help'    => esc_html__( 'Maximum number of emails stored in this archiver (0 for no limit).', 'mailarchiver' ),
+					'help'    => esc_html__( 'Maximum number of emails stored in this archive (0 for no limit).', 'mailarchiver' ),
 					'default' => 10000,
 					'control' => [
 						'type'    => 'field_input_integer',
@@ -575,7 +575,7 @@ class HandlerTypes {
 					'type'    => 'integer',
 					'show'    => true,
 					'name'    => esc_html__( 'Days', 'mailarchiver' ),
-					'help'    => esc_html__( 'Maximum age of emails stored in this archiver (0 for no limit).', 'mailarchiver' ),
+					'help'    => esc_html__( 'Maximum age of emails stored in this archive (0 for no limit).', 'mailarchiver' ),
 					'default' => 15,
 					'control' => [
 						'type'    => 'field_input_integer',
@@ -590,7 +590,7 @@ class HandlerTypes {
 					'type'    => 'boolean',
 					'show'    => is_multisite(),
 					'name'    => esc_html__( 'Multisite partitioning', 'mailarchiver' ),
-					'help'    => esc_html__( 'Local administrators can view emails that relate to their site.', 'mailarchiver' ),
+					'help'    => esc_html__( 'Local administrators can view emails sent via their site.', 'mailarchiver' ),
 					'default' => false,
 					'control' => [
 						'type'    => 'field_checkbox',

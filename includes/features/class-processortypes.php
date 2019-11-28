@@ -48,7 +48,7 @@ class ProcessorTypes {
 			'id'        => 'WordpressProcessor',
 			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'WordPress ', 'mailarchiver' ),
-			'help'      => esc_html__( 'Allows to log site, user and remote IP of the current request.', 'mailarchiver' ),
+			'help'      => esc_html__( 'Allows to record site, user and remote IP of the current request.', 'mailarchiver' ),
 			'init'      => [
 				[
 					'type'  => 'privacy',
@@ -64,7 +64,7 @@ class ProcessorTypes {
 			'id'        => 'MailProcessor',
 			'namespace' => 'Mailarchiver\\Processor',
 			'name'      => esc_html__( 'Mail ', 'mailarchiver' ),
-			'help'      => esc_html__( 'Allows to log email fields and metadata.', 'mailarchiver' ),
+			'help'      => esc_html__( 'Allows to record email fields and metadata.', 'mailarchiver' ),
 			'init'      => [
 				[
 					'type'  => 'privacy',

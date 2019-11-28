@@ -105,7 +105,7 @@ class InlineHelp {
 	 * @since    1.2.0
 	 */
 	private function get_levels_content() {
-		$content = '<p>' . sprintf( esc_html__( 'The severity of an event is indicated by a "level". %s uses the following levels classification:', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ) . '</p>';
+		$content = '<p>' . sprintf( esc_html__( 'The status of an email is indicated by a "level". %s uses the following levels classification:', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ) . '</p>';
 		foreach ( [ 'info', 'error' ] as $name ) {
 			$icon     = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ strtolower( $name ) ] . '" />';
 			$content .= '<p>' . $icon . '<strong>' . ucwords( strtolower( EventTypes::$level_names[ EventTypes::$levels[ strtolower( $name ) ] ] ) ) . '</strong> &mdash; ' . EventTypes::$level_texts[ strtolower( $name ) ] . '</p>';
@@ -139,9 +139,9 @@ class InlineHelp {
 	private function get_admin_rights_content() {
 		$content = '';
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
-			$content  = '<p>' . esc_html__( 'Because your site takes part in a sites network, admin ability to view and configure events logs differ as follows:', 'mailarchiver' ) . '</p>';
-			$content .= '<p><strong>' . esc_html_x( 'Network Admin', 'WordPress multisite', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'Can set archivers, can view all events in all WordPress events log.', 'mailarchiver' ) . ( Role::SUPER_ADMIN === Role::admin_type() ? ' <strong><em>' . esc_html__( 'That\'s your current role.', 'mailarchiver' ) . '</em></strong>' : '' ) . '</p>';
-			$content .= '<p><strong>' . esc_html_x( 'Sites Admin', 'WordPress multisite', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'Can\'t set archivers, can only view events regarding their own sites in all authorized WordPress events log.', 'mailarchiver' ) . ( Role::LOCAL_ADMIN === Role::admin_type() ? ' <strong><em>' . esc_html__( 'That\'s your current role.', 'mailarchiver' ) . '</em></strong>' : '' ) . '</p>';
+			$content  = '<p>' . esc_html__( 'Because your site takes part in a sites network, admin ability to view and configure archivers differ as follows:', 'mailarchiver' ) . '</p>';
+			$content .= '<p><strong>' . esc_html_x( 'Network Admin', 'WordPress multisite', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'Can set archivers, can view all emails in all WordPress archives.', 'mailarchiver' ) . ( Role::SUPER_ADMIN === Role::admin_type() ? ' <strong><em>' . esc_html__( 'That\'s your current role.', 'mailarchiver' ) . '</em></strong>' : '' ) . '</p>';
+			$content .= '<p><strong>' . esc_html_x( 'Sites Admin', 'WordPress multisite', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'Can\'t set archivers, can only view emails sent via their own sites in all authorized WordPress archives.', 'mailarchiver' ) . ( Role::LOCAL_ADMIN === Role::admin_type() ? ' <strong><em>' . esc_html__( 'That\'s your current role.', 'mailarchiver' ) . '</em></strong>' : '' ) . '</p>';
 		}
 		return $content;
 	}
@@ -155,9 +155,9 @@ class InlineHelp {
 		$tabs = [];
 		// Overview.
 		$content  = '<p>' . sprintf( esc_html__( 'This screen allows you to set the %s archivers.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ) . '</p>';
-		$content .= '<p>' . esc_html__( 'An archiver is a recorder of events. It can filter them (accept or refuse to record the event based on settings) then store them or send them to logging/alerting services.', 'mailarchiver' );
-		$content .= ' ' . esc_html__( 'You can set as many archivers as you want. All the set archivers will receive all events and, regarding their own settings, will enrich them and record them or not.', 'mailarchiver' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'Archivers are classified in three main categories: alerting, debugging and logging. You can find details on these categories on the corresponding tabs of this help.', 'mailarchiver' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'An archiver is a recorder of emails. It can filter them (accept or refuse to record the email based on settings) then store them or transmit them to logging/alerting services.', 'mailarchiver' );
+		$content .= ' ' . esc_html__( 'You can set as many archivers as you want. All the set archivers will receive all emails and, regarding their own settings, will enrich them and record them or not.', 'mailarchiver' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'Archivers are classified in three main categories: alerting, logging and storing. You can find details on these categories on the corresponding tabs of this help.', 'mailarchiver' ) . '</p>';
 		$tabs[]   = [
 			'title'   => esc_html__( 'Overview', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-overview',
@@ -171,14 +171,14 @@ class InlineHelp {
 			'content' => $content . $this->get_archivers( 'alerting' ),
 		];
 		// Logging.
-		$content = '<p>' . esc_html__( 'These archivers send events to logging services. It may be local or SaaS, free or paid services.', 'mailarchiver' ) . '</p>';
+		$content = '<p>' . esc_html__( 'These archivers send archived emails to logging services. It may be local or SaaS, free or paid services:', 'mailarchiver' ) . '</p>';
 		$tabs[]  = [
 			'title'   => esc_html__( 'Logging', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-logging',
 			'content' => $content . $this->get_archivers( 'logging' ),
 		];
 		// Logging.
-		$content = '<p>' . esc_html__( 'These archivers send events to logging services. It may be local or SaaS, free or paid services.', 'mailarchiver' ) . '</p>';
+		$content = '<p>' . esc_html__( 'These archivers store archived emails for future reference:', 'mailarchiver' ) . '</p>';
 		$tabs[]  = [
 			'title'   => esc_html__( 'Storing', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-storing',
@@ -194,7 +194,7 @@ class InlineHelp {
 		}
 		// Levels.
 		$tabs[] = [
-			'title'   => esc_html__( 'Events levels', 'mailarchiver' ),
+			'title'   => esc_html__( 'Status levels', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-levels',
 			'content' => $this->get_levels_content(),
 		];
@@ -300,11 +300,11 @@ class InlineHelp {
 	private function set_contextual_viewer_main() {
 		$tabs = [];
 		// Overview.
-		$content  = '<p>' . esc_html__( 'This screen displays the list of events belonging to a specific WordPress archiver. This list is sorted with the most recent event at the top.', 'mailarchiver' ) . '</p>';
+		$content  = '<p>' . esc_html__( 'This screen displays the list of archived emails. This list is sorted with the most recent email at the top.', 'mailarchiver' ) . '</p>';
 		$content .= '<p>' . esc_html__( 'To move forward or backward in time, use the navigation buttons at the top or bottom right of this list.', 'mailarchiver' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'You can restrict the display of events according to their severity levels. To do so, use the three links at the top left of the list.', 'mailarchiver' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'You can change the events log being viewed (if you have set more than one WordPress archiver) with the selector at the top left of the list (don\'t forget to click on the "apply" button).', 'mailarchiver' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'To filter the displayed events, use the small blue funnel next to the filterable items. These filters are cumulative, you can activate simultaneously several filters.', 'mailarchiver' ) . '<br/>';
+		$content .= '<p>' . esc_html__( 'You can restrict the display of emails according to their status levels. To do so, use the three links at the top left of the list.', 'mailarchiver' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'You can change the archive being viewed (if you have set more than one WordPress archiver) with the selector at the top left of the list (don\'t forget to click on the "apply" button).', 'mailarchiver' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'To filter the displayed emails, use the small blue funnel next to the filterable items. These filters are cumulative, you can activate simultaneously several filters.', 'mailarchiver' ) . '<br/>';
 		$content .= '<em>' . esc_html__( 'Note these filters are effective even on pseudonymized or obfuscated fields.', 'mailarchiver' ) . '</em></p>';
 		$tabs[]   = [
 			'title'   => esc_html__( 'Overview', 'mailarchiver' ),
@@ -329,7 +329,7 @@ class InlineHelp {
 		}
 		// Levels.
 		$tabs[] = [
-			'title'   => esc_html__( 'Events levels', 'mailarchiver' ),
+			'title'   => esc_html__( 'Status levels', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-viewer-main-levels',
 			'content' => $this->get_levels_content(),
 		];
@@ -347,14 +347,13 @@ class InlineHelp {
 	private function set_contextual_viewer_event() {
 		$tabs = [];
 		// Overview.
-		$content  = '<p>' . esc_html__( 'This screen displays the details of a specific event.', 'mailarchiver' ) . ' ' . esc_html__( 'It consists of four to six boxes, depending on your settings, which give specific details of the event:', 'mailarchiver' ) . '</p>';
-		$content .= '<p><strong>' . esc_html__( 'Event', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'General information about the event.', 'mailarchiver' ) . '</p>';
-		$content .= '<p><strong>' . esc_html__( 'Content', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'Event code and message.', 'mailarchiver' ) . '</p>';
-		$content .= '<p><strong>WordPress</strong> &mdash; ' . esc_html__( 'User and site where the event occurs.', 'mailarchiver' ) . '</p>';
-		$content .= '<p><strong>' . esc_html__( 'HTTP request', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'The detail of the request that led to this event.', 'mailarchiver' ) . '</p>';
-		$content .= '<p><strong>' . esc_html__( 'PHP introspection', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'The code location where this event was generated.', 'mailarchiver' ) . '</p>';
-		/* translators: like in the sentence "PHP backtrace" or "WordPress backtrace" */
-		$content .= '<p><strong>' . sprintf( esc_html__( '%s backtrace', 'mailarchiver' ), 'PHP' ) . ' / ' . sprintf( esc_html__( '%s backtrace', 'mailarchiver' ), 'WordPress' ) . '</strong> &mdash; ' . esc_html__( 'Two different views of the same informations: the backtrace of the call that led to this event.', 'mailarchiver' ) . '</p>';
+		$content  = '<p>' . esc_html__( 'This screen displays the details of a specific email.', 'mailarchiver' ) . ' ' . esc_html__( 'It consists of four to six boxes, depending on your settings, which give specific details of the email:', 'mailarchiver' ) . '</p>';
+		$content .= '<p><strong>' . esc_html__( 'Message details', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'General information about the email.', 'mailarchiver' ) . '</p>';
+		$content .= '<p><strong>' . esc_html__( 'Recipients', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'List of recipients.', 'mailarchiver' ) . '</p>';
+		$content .= '<p><strong>' . esc_html__( 'Request details', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'Process, user and site from where the email was sent.', 'mailarchiver' ) . '</p>';
+		$content .= '<p><strong>' . esc_html__( 'Attachments', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'List of the email attachements.', 'mailarchiver' ) . '</p>';
+		$content .= '<p><strong>' . esc_html__( 'Headers', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'List of the email headers.', 'mailarchiver' ) . '</p>';
+		$content .= '<p><strong>' . esc_html__( 'Content', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'The content of the email itself.', 'mailarchiver' ) . '</p>';
 		$tabs[]   = [
 			'title'   => esc_html__( 'Overview', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-viewer-event-overview',
@@ -372,7 +371,7 @@ class InlineHelp {
 		];
 		// Levels.
 		$tabs[] = [
-			'title'   => esc_html__( 'Events levels', 'mailarchiver' ),
+			'title'   => esc_html__( 'Status levels', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-viewer-event-levels',
 			'content' => $this->get_levels_content(),
 		];
