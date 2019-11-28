@@ -221,7 +221,7 @@ class Archivers extends \WP_List_Table {
 	 * @since    1.0.0
 	 */
 	protected function column_level( $item ) {
-		$name = ucfirst( strtolower( Archive::level_name( $item['level'] ) ) );
+		$name = Archive::level_name( $item['level'] );
 		return $name;
 	}
 
@@ -235,7 +235,7 @@ class Archivers extends \WP_List_Table {
 		$columns = [
 			'name'    => esc_html__( 'Archiver', 'mailarchiver' ),
 			'status'  => esc_html__( 'Status', 'mailarchiver' ),
-			'level'   => esc_html__( 'Minimal level', 'mailarchiver' ),
+			'level'   => esc_html__( 'Records', 'mailarchiver' ),
 			'details' => esc_html__( 'Reported details', 'mailarchiver' ),
 		];
 		return $columns;

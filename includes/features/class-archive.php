@@ -56,8 +56,11 @@ class Archive {
 	 */
 	public static function level_name( $level ) {
 		$result = 'UNKNOWN';
-		if ( array_key_exists( $level, EventTypes::$level_names ) ) {
-			$result = EventTypes::$level_names[ $level ];
+		if ( Logger::INFO === (int) $level ) {
+			$result = esc_html__( 'All emails', 'mailarchiver' );
+		}
+		if ( Logger::ERROR === (int) $level ) {
+			$result = esc_html__( 'Only emails in error', 'mailarchiver' );
 		}
 		return $result;
 	}
