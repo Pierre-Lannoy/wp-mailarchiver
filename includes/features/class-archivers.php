@@ -206,7 +206,9 @@ class Archivers extends \WP_List_Table {
 	protected function column_details( $item ) {
 		$list = [ esc_html__( 'Standard', 'mailarchiver' ) ];
 		foreach ( $item['processors'] as $processor ) {
-			$list[] = $this->processor_types->get( $processor )['name'];
+			if ( 'MailProcessor' !== $this->processor_types->get( $processor )['id'] ) {
+				$list[] = $this->processor_types->get( $processor )['name'];
+			}
 		}
 		return implode( ', ', $list );
 	}
