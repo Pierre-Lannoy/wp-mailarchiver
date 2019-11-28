@@ -299,7 +299,7 @@ class EventViewer {
 		$result .= '        const iframe = document.querySelector("#mailarchiver-body-iframe");';
 		$result .= '        const source = "' . $this->body . '";';
 		$result .= '        iframe.src = URL.createObjectURL(new Blob([source], { type : "text/html" }));';
-		$result .= '        $("#mailarchiver-body-iframe").load(function() {this.style.height = this.contentWindow.document.body.offsetHeight + 10 + "px";});';
+		$result .= '        $("#mailarchiver-body-iframe").load(function() {this.style.height = this.contentWindow.document.body.offsetHeight + 30 + "px";});';
 		$result .= "        $('.if-js-closed').removeClass('if-js-closed').addClass('closed');";
 		$result .= "        if(typeof postboxes !== 'undefined')";
 		$result .= "            postboxes.add_postbox_toggles('" . self::$screen_id . "');";
