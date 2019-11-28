@@ -173,7 +173,7 @@ class Mailarchiver_Admin {
 	 */
 	public function site_action( $actions, $blog_id, $blogname ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
-			$actions['events_log'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
+			$actions['mail_archive'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
 	}
