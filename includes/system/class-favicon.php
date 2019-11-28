@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\System;
 
-use Mailarchiver\Archiver;
+use Mailarchiver\System\Logger;
 
 /**
  * Define the favicons functionality.
@@ -52,7 +52,6 @@ class Favicon {
 		if ( ! Option::network_get( 'download_favicons' ) ) {
 			return self::get_default();
 		}
-		$archiver   = new Archiver( 'plugin', MAILARCHIVER_PRODUCT_NAME, MAILARCHIVER_VERSION );
 		$dir      = WP_CONTENT_DIR . '/cache/site-favicons/';
 		$name     = strtolower( $name );
 		$filename = $dir . sanitize_file_name( $name ) . '.png';
@@ -62,9 +61,9 @@ class Favicon {
 		if ( ! file_exists( $dir ) ) {
 			try {
 				mkdir( $dir, 0755, true );
-				$archiver->info( 'Created: "' . $dir . '" favicons cache directory.' );
+				Logger::info( 'Created: "' . $dir . '" favicons cache directory.' );
 			} catch ( \Exception $ex ) {
-				$archiver->error( 'Unable to create "' . $dir . '" favicons cache directory.' );
+				Logger::error( 'Unable to create "' . $dir . '" favicons cache directory.' );
 				return self::get_default();
 			}
 		}
@@ -74,11 +73,11 @@ class Favicon {
 			}
 			$response = wp_remote_get( 'https://www.google.com/s2/favicons?domain=' . esc_url_raw( $name ) );
 			if ( is_wp_error( $response ) ) {
-				$archiver->error( 'Unable to download "' . $name . '" favicon: ' . $response->get_error_message(), $response->get_error_code() );
+				Logger::error( 'Unable to download "' . $name . '" favicon: ' . $response->get_error_message(), $response->get_error_code() );
 				return self::get_default();
 			}
 			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-				$archiver->error( 'Unable to download "' . $name . '" favicon.', wp_remote_retrieve_response_code( $response ) );
+				Logger::error( 'Unable to download "' . $name . '" favicon.', wp_remote_retrieve_response_code( $response ) );
 				return self::get_default();
 			}
 			global $wp_filesystem;
@@ -93,11 +92,11 @@ class Favicon {
 			);
 			if ( $wp_filesystem->errors->has_errors() ) {
 				foreach ( $wp_filesystem->errors->get_error_messages() as $message ) {
-					$archiver->error( 'Unable to download "' . $name . '" favicon: ' . $message );
+					Logger::error( 'Unable to download "' . $name . '" favicon: ' . $message );
 				}
 				return self::get_default();
 			}
-			$archiver->debug( 'Favicon downloaded for "' . $name . '".' );
+			Logger::debug( 'Favicon downloaded for "' . $name . '".' );
 		}
 		// phpcs:ignore
 		self::$icons[ $name ] = file_get_contents( $filename );
