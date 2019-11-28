@@ -97,4 +97,4 @@ Please, see [full changelog](https://github.com/Pierre-Lannoy/wp-mailarchiver/bl
 
 1. Set Archivers
 2. Internal Viewer
-3. Event Details in Internal Viewer
+3. Email Details in Internal Viewer
