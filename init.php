@@ -12,7 +12,7 @@ define( 'MAILARCHIVER_PRODUCT_URL', 'https://github.com/Pierre-Lannoy/wp-mailarc
 define( 'MAILARCHIVER_PRODUCT_SHORTNAME', 'MailArchiver' );
 define( 'MAILARCHIVER_PRODUCT_ABBREVIATION', 'mailarchiver' );
 define( 'MAILARCHIVER_SLUG', 'mailarchiver' );
-define( 'MAILARCHIVER_VERSION', '1.0.0-dev2' );
+define( 'MAILARCHIVER_VERSION', '1.0.0-rc1' );
 define( 'MAILARCHIVER_CODENAME', '"-"' );
 define( 'MAILARCHIVER_CRON_NAME', 'mailarchiver_clean_database' );
 
