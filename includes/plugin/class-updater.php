@@ -72,18 +72,6 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	private function update( $from ) {
-		// Starting 1.3.x, PushoverHandler is replaced by PshHandler.
-		$archivers = Option::network_get( 'archivers', null );
-		if ( isset( $archivers ) ) {
-			foreach ( $archivers as &$archiver ) {
-				if ( array_key_exists( 'handler', $archiver ) ) {
-					if ( 'PushoverHandler' === $archiver['handler'] ) {
-						$archiver['handler'] = 'PshHandler';
-					}
-				}
-			}
-			Option::network_set( 'archivers', $archivers );
-		}
 		// MailArchiver handlers auto updating.
 		$maintainer = new ArchiverMaintainer();
 		$maintainer->update( $from );
