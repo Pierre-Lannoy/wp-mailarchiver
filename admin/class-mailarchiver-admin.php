@@ -445,7 +445,6 @@ class Mailarchiver_Admin {
 	private function save_options() {
 		if ( ! empty( $_POST ) ) {
 			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-plugin-options' ) ) {
-				Option::network_set( 'auto_update', array_key_exists( 'mailarchiver_plugin_options_autoupdate', $_POST ) );
 				Option::network_set( 'use_cdn', array_key_exists( 'mailarchiver_plugin_options_usecdn', $_POST ) );
 				Option::network_set( 'display_nag', array_key_exists( 'mailarchiver_plugin_options_nag', $_POST ) );
 				Option::network_set( 'archiver_autostart', array_key_exists( 'mailarchiver_archivers_options_autostart', $_POST ) );
@@ -722,22 +721,6 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_usecdn' );
-		add_settings_field(
-			'mailarchiver_plugin_options_autoupdate',
-			__( 'Plugin updates', 'mailarchiver' ),
-			[ $form, 'echo_field_checkbox' ],
-			'mailarchiver_plugin_options_section',
-			'mailarchiver_plugin_options_section',
-			[
-				'text'        => esc_html__( 'Automatic (recommended)', 'mailarchiver' ),
-				'id'          => 'mailarchiver_plugin_options_autoupdate',
-				'checked'     => Option::network_get( 'auto_update' ),
-				'description' => esc_html__( 'If checked, MailArchiver will update itself as soon as a new version is available.', 'mailarchiver' ),
-				'full_width'  => true,
-				'enabled'     => true,
-			]
-		);
-		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_autoupdate' );
 		add_settings_field(
 			'mailarchiver_plugin_options_nag',
 			__( 'Admin notices', 'mailarchiver' ),
