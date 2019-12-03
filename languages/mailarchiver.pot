@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MailArchiver\n"
-"POT-Creation-Date: 2019-12-03 00:17+0100\n"
+"POT-Creation-Date: 2019-12-03 15:52+0100\n"
 "PO-Revision-Date: 2019-07-08 14:07+0200\n"
 "Last-Translator: Pierre Lannoy <pierre@lannoy.fr>\n"
 "Language-Team: Pierre Lannoy <pierre@lannoy.fr>\n"
@@ -1082,7 +1082,7 @@ msgstr ""
 #: includes/features/class-inlinehelp.php:305
 msgid ""
 "You can restrict the display of emails according to their status levels. To do "
-"so, use the three links at the top left of the list."
+"so, use the two links at the top left of the list."
 msgstr ""
 
 #: includes/features/class-inlinehelp.php:306

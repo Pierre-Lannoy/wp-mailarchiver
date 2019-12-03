@@ -63,7 +63,7 @@ class ProcessorTypes {
 		$this->mandatory_processors[] = [
 			'id'        => 'MailProcessor',
 			'namespace' => 'Mailarchiver\\Processor',
-			'name'      => esc_html__( 'Mail ', 'mailarchiver' ),
+			'name'      => esc_html__( 'Mail', 'mailarchiver' ),
 			'help'      => esc_html__( 'Allows to record email fields and metadata.', 'mailarchiver' ),
 			'init'      => [
 				[

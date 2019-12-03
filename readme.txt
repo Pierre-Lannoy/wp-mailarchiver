@@ -81,8 +81,6 @@ Support is provided via the official [WordPress page](https://wordpress.org/supp
 
 Documentation for users is provided as the form of inline help in the plugin.
 
-Developer's documentation can be found in the [GitHub reporistory](https://github.com/Pierre-Lannoy/wp-mailarchiver) of the plugin.
-
 = Where can I report a bug? =
  
 You can report bugs and suggest ideas via the [GitHub issue tracker](https://github.com/Pierre-Lannoy/wp-mailarchiver/issues) of the plugin.

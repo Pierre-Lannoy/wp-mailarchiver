@@ -302,7 +302,7 @@ class InlineHelp {
 		// Overview.
 		$content  = '<p>' . esc_html__( 'This screen displays the list of archived emails. This list is sorted with the most recent email at the top.', 'mailarchiver' ) . '</p>';
 		$content .= '<p>' . esc_html__( 'To move forward or backward in time, use the navigation buttons at the top or bottom right of this list.', 'mailarchiver' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'You can restrict the display of emails according to their status levels. To do so, use the three links at the top left of the list.', 'mailarchiver' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'You can restrict the display of emails according to their status levels. To do so, use the two links at the top left of the list.', 'mailarchiver' ) . '</p>';
 		$content .= '<p>' . esc_html__( 'You can change the archive being viewed (if you have set more than one WordPress archiver) with the selector at the top left of the list (don\'t forget to click on the "apply" button).', 'mailarchiver' ) . '</p>';
 		$content .= '<p>' . esc_html__( 'To filter the displayed emails, use the small blue funnel next to the filterable items. These filters are cumulative, you can activate simultaneously several filters.', 'mailarchiver' ) . '<br/>';
 		$content .= '<em>' . esc_html__( 'Note these filters are effective even on pseudonymized or obfuscated fields.', 'mailarchiver' ) . '</em></p>';
