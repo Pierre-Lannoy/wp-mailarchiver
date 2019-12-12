@@ -28,7 +28,7 @@ class ClassTypes {
 	 * @since  1.0.0
 	 * @var    array    $classes    Maintains the classes list.
 	 */
-	public static $classes = [ 'mail','unknown' ];
+	public static $classes = [ 'mail', 'plugin', 'unknown' ];
 
 	/**
 	 * The list of classes names.
@@ -44,7 +44,8 @@ class ClassTypes {
 	 * @since    1.0.0
 	 */
 	public static function init() {
-		self::$classe_names['mail']    = esc_html__( 'Mail', 'mailarchiver' );
+		self::$classe_names['mail']    = esc_html__( 'Core', 'mailarchiver' );
+		self::$classe_names['plugin']  = esc_html__( 'Plugin', 'mailarchiver' );
 		self::$classe_names['unknown'] = esc_html__( 'Unknown', 'mailarchiver' );
 	}
 

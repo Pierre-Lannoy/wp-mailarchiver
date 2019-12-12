@@ -24,7 +24,7 @@ use Mailarchiver\Plugin\Feature\Capture;
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
-class CoreListener extends AbstractListener {
+class WpmsListener extends AbstractListener {
 
 	/**
 	 * Sets the listener properties.
@@ -32,12 +32,15 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	protected function init() {
-		global $wp_version;
-		$this->id      = 'wpcore';
-		$this->name    = esc_html__( 'WordPress core', 'mailarchiver' );
-		$this->class   = 'core';
-		$this->product = 'WordPress';
-		$this->version = $wp_version;
+		$this->id      = 'wpms';
+		$this->class   = 'plugin';
+		$this->product = 'WP Mail SMTP';
+		$this->name    = 'WP Mail SMTP';
+		if ( defined( 'WPMS_PLUGIN_VER' ) ) {
+			$this->version = WPMS_PLUGIN_VER;
+		} else {
+			$this->version = 'x';
+		}
 	}
 
 	/**
@@ -47,7 +50,7 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	protected function is_available() {
-		return true;
+		return function_exists( 'wp_mail_smtp' );
 	}
 
 	/**
@@ -57,9 +60,7 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	protected function launch() {
-		//add_filter( 'wp_mail', [ $this, 'wp_mail' ] );
-		//add_filter( 'wp_mail_failed', [ $this, 'wp_mail_failed' ], PHP_INT_MAX );
-		//add_action( 'phpmailer_init', [ $this, 'phpmailer_init' ], PHP_INT_MAX );
+		add_action( 'phpmailer_init', [ $this, 'phpmailer_init' ], PHP_INT_MAX );
 		return true;
 	}
 
@@ -81,51 +82,6 @@ class CoreListener extends AbstractListener {
 		}
 		if ( is_string( $a ) && false !== strpos( $a, '@' ) ) {
 			$result[] = trim( $a) ;
-		}
-	}
-
-	/**
-	 * "wp_mail" event.
-	 *
-	 * @since    1.0.0
-	 */
-	public function wp_mail( $mail, $message = '' ) {
-		$recipients = null;
-		if ( is_string( $mail['to'] ) ) {
-			foreach ( [ ',', ';' ] as $sep ) {
-				if ( false !== strpos( $mail['to'], $sep ) ) {
-					$recipients = explode( $sep, $mail['to'] );
-					break;
-				}
-			}
-			if ( ! isset( $recipients ) ) {
-				$recipients = [ $mail['to'] ];
-			}
-		} else {
-			$recipients = $mail['to'];
-		}
-		$tos = [];
-		$this->get_all_emails( $recipients, $tos );
-		natcasesort( $tos );
-		$mail['to']                  = $tos;
-		$mail['listener']['class']   = $this->class;
-		$mail['listener']['product'] = $this->product;
-		$mail['listener']['version'] = $this->version;
-		Capture::put( $mail, $message );
-	}
-
-	/**
-	 * "wp_mail" event.
-	 *
-	 * @since    1.0.0
-	 */
-	public function wp_mail_failed( $error ) {
-		if ( $error instanceof \WP_Error ) {
-			$message = $error->get_error_message();
-			if ( '' === $message ) {
-				$message = 'Unknown error.';
-			}
-			$this->wp_mail( $error->get_error_data(), $message );
 		}
 	}
 

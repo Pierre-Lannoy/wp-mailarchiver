@@ -126,7 +126,17 @@ class WordpressHandler {
 	 * @since    1.0.0
 	 */
 	public function update( $from ) {
-		
+		global $wpdb;
+		// Starting 1.1.0, WordpressHandler can recognize 'plugin' class.
+		$cl = [];
+		foreach ( ClassTypes::$classes as $c ) {
+			$cl[] = "'" . $c . "'";
+		}
+		$classes = implode( ',', $cl );
+		$sql     = 'ALTER TABLE ' . $this->table . ' MODIFY COLUMN class enum(' . $classes . ") NOT NULL DEFAULT 'unknown';";
+		// phpcs:ignore
+		$wpdb->query( $sql );
+		Logger::debug( sprintf( 'Table "%s" updated.', $this->table ) );
 	}
 
 	/**

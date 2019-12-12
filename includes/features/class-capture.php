@@ -142,16 +142,39 @@ class Capture {
 		if ( is_array( $mail ) ) {
 			$mail['body']['raw']  = $mail['message'];
 			$mail['body']['type'] = 'raw';
-			$mail['from']         = self::from( $mail['headers'] );
-			$mail['attachments']  = self::attachments( $mail['attachments'] );
-			$mail['headers']      = self::headers( $mail['headers'] );
+			if ( ! array_key_exists( 'from', $mail ) ) {
+				$mail['from'] = self::from( $mail['headers'] );
+			}
+			$mail['attachments'] = self::attachments( $mail['attachments'] );
+			$mail['headers']     = self::headers( $mail['headers'] );
 			// phpcs:ignore
-			$key = Hash::simple_hash( $mail['from'] . serialize( $mail['to'] ) . $mail['subject'] );
+			$key = Hash::simple_hash( serialize( $mail['to'] ) . $mail['subject'] );
 			unset( $mail['message'] );
-			self::$mails[ $key ]['raw'] = $mail;
+			if ( '' === $message || ! array_key_exists( 'raw', self::$mails[ $key ] ) ) {
+				self::$mails[ $key ]['raw'] = $mail;
+			}
 			if ( '' !== $message ) {
 				self::$mails[ $key ]['message'] = $message;
 			}
+			$class   = 'generic';
+			$product = 'generic';
+			$version = 'x';
+			if ( array_key_exists( 'listener', $mail ) ) {
+				if ( array_key_exists( 'class', $mail['listener'] ) ) {
+					$class = $mail['listener']['class'];
+				}
+				if ( array_key_exists( 'product', $mail['listener'] ) ) {
+					$product = $mail['listener']['product'];
+				}
+				if ( array_key_exists( 'version', $mail['listener'] ) ) {
+					$version = $mail['listener']['version'];
+				}
+				unset( $mail['listener'] );
+			}
+			self::$mails[ $key ]['listener']['class']   = $class;
+			self::$mails[ $key ]['listener']['product'] = $product;
+			self::$mails[ $key ]['listener']['version'] = $version;
+
 		} else {
 			Logger::error( 'Unable to archive a malformed email.' );
 		}
@@ -165,8 +188,9 @@ class Capture {
 	public static function store_archives() {
 		global $wp_version;
 		if ( 0 < count( self::$mails ) ) {
-			$archiver = Archive::bootstrap( 'mail', 'wp_mail', $wp_version );
 			foreach ( self::$mails as $mail ) {
+
+				$archiver = Archive::bootstrap( $mail['listener']['class'], $mail['listener']['product'], $mail['listener']['version'] );
 				if ( array_key_exists( 'message', $mail ) && '' !== $mail['message'] ) {
 					Logger::warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
 					$archiver->error( $mail['raw'], $mail['message'] );

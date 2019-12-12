@@ -172,7 +172,7 @@ class Events extends \WP_List_Table {
 		$tos   = [];
 		foreach ( $items as $item ) {
 			if ( 0 === strpos( $item, '{' ) ) {
-				$email = '<em>' . esc_html__( 'Masked address', 'decalog' ) . '</em>';
+				$email = '<em>' . esc_html__( 'Masked address', 'mailarchiver' ) . '</em>';
 			} else {
 				// phpcs:ignore
 				$email = $item;
@@ -634,10 +634,10 @@ class Events extends \WP_List_Table {
 		if ( isset( $_POST['wp_screen_options_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_screen_options_nonce'] ) ), 'wp_screen_options_nonce' ) ) {
 			if ( 'mailarchiver_options' === $option ) {
 				// phpcs:ignore
-				$value = isset( $_POST['mailarchiver'] ) && is_array( $_POST['mailarchiver'] ) ? $_POST['mailarchiver'] : [];
+				return isset( $_POST['mailarchiver'] ) && is_array( $_POST['mailarchiver'] ) ? $_POST['mailarchiver'] : [];
 			}
 		}
-		return $value;
+		return $status;
 	}
 
 	/**

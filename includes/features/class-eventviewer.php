@@ -399,7 +399,7 @@ class EventViewer {
 		if ( 0 < count( $tos ) ) {
 			foreach ( $tos as $to ) {
 				if ( 0 === strpos( $to, '{' ) ) {
-					$content .= $this->get_section( '<span style="width:100%;cursor: default;">' . $this->get_icon( 'user' ) . esc_html__( 'Masked address', 'decalog' ) . '</span>' );
+					$content .= $this->get_section( '<span style="width:100%;cursor: default;">' . $this->get_icon( 'user' ) . esc_html__( 'Masked address', 'mailarchiver' ) . '</span>' );
 				} else {
 					$user = get_user_by( 'email', $to );
 					if ( false !== $user ) {
