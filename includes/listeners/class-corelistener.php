@@ -35,7 +35,7 @@ class CoreListener extends AbstractListener {
 		global $wp_version;
 		$this->id      = 'wpcore';
 		$this->name    = esc_html__( 'WordPress core', 'mailarchiver' );
-		$this->class   = 'core';
+		$this->class   = 'mail';
 		$this->product = 'WordPress';
 		$this->version = $wp_version;
 	}
@@ -57,9 +57,9 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	protected function launch() {
-		//add_filter( 'wp_mail', [ $this, 'wp_mail' ] );
-		//add_filter( 'wp_mail_failed', [ $this, 'wp_mail_failed' ], PHP_INT_MAX );
-		//add_action( 'phpmailer_init', [ $this, 'phpmailer_init' ], PHP_INT_MAX );
+		add_filter( 'wp_mail', [ $this, 'wp_mail' ], PHP_INT_MAX );
+		add_filter( 'wp_mail_failed', [ $this, 'wp_mail_failed' ], PHP_INT_MAX );
+		add_action( 'phpmailer_init', [ $this, 'phpmailer_init' ], PHP_INT_MAX );
 		return true;
 	}
 

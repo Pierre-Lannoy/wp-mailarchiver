@@ -156,7 +156,7 @@ class Capture {
 			if ( '' !== $message ) {
 				self::$mails[ $key ]['message'] = $message;
 			}
-			$class   = 'generic';
+			$class   = 'unknown';
 			$product = 'generic';
 			$version = 'x';
 			if ( array_key_exists( 'listener', $mail ) ) {
@@ -189,7 +189,6 @@ class Capture {
 		global $wp_version;
 		if ( 0 < count( self::$mails ) ) {
 			foreach ( self::$mails as $mail ) {
-
 				$archiver = Archive::bootstrap( $mail['listener']['class'], $mail['listener']['product'], $mail['listener']['version'] );
 				if ( array_key_exists( 'message', $mail ) && '' !== $mail['message'] ) {
 					Logger::warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );

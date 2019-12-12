@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased - will be 1.1.0]
 ### Added
+- Full compatibility with WP Mail SMTP.
+- Full compatibility with Post SMTP.
 ### Changed
 - The detection of the "from" field has been improved.
 ### Fixed

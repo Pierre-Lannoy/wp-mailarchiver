@@ -60,7 +60,7 @@ class WpmsListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	protected function launch() {
-		add_action( 'phpmailer_init', [ $this, 'phpmailer_init' ], PHP_INT_MAX );
+		add_action( 'wp_mail_smtp_mailcatcher_send_after', [ $this, 'wp_mail_smtp_mailcatcher_send_after' ], PHP_INT_MAX, 2 );
 		return true;
 	}
 
@@ -90,45 +90,51 @@ class WpmsListener extends AbstractListener {
 	 *
 	 * @since    1.0.0
 	 */
-	public function phpmailer_init( &$phpmailer ) {
+	public function wp_mail_smtp_mailcatcher_send_after( $mailer, $mailcatcher ) {
 		$mail = [];
-		if ( method_exists( $phpmailer, 'getToAddresses' ) ) {
+		if ( method_exists( $mailcatcher, 'getToAddresses' ) ) {
 			$tos = [];
-			$this->get_all_emails( $phpmailer->getToAddresses(), $tos );
+			$this->get_all_emails( $mailcatcher->getToAddresses(), $tos );
 			natcasesort( $tos );
 			$mail['to'] = $tos;
 		} else {
 			$mail['to'] = [];
 		}
-		if ( property_exists( $phpmailer, 'Body' ) ) {
-			$mail['message'] = $phpmailer->Body;
+		if ( property_exists( $mailcatcher, 'Body' ) ) {
+			$mail['message'] = $mailcatcher->Body;
 		} else {
 			$mail['message'] = '';
 		}
-		if ( property_exists( $phpmailer, 'From' ) ) {
-			$mail['from'] = $phpmailer->From;
+		if ( property_exists( $mailcatcher, 'From' ) ) {
+			$mail['from'] = $mailcatcher->From;
 		} else {
 			$mail['from'] = '';
 		}
-		if ( property_exists( $phpmailer, 'Subject' ) ) {
-			$mail['subject'] = $phpmailer->Subject;
+		if ( property_exists( $mailcatcher, 'Subject' ) ) {
+			$mail['subject'] = $mailcatcher->Subject;
 		} else {
 			$mail['subject'] = '';
 		}
-		if ( method_exists( $phpmailer, 'getAttachments' ) ) {
-			$mail['attachments'] = $phpmailer->getAttachments();
+		if ( method_exists( $mailcatcher, 'getAttachments' ) ) {
+			$mail['attachments'] = $mailcatcher->getAttachments();
 		} else {
 			$mail['attachments'] = [];
 		}
-		if ( method_exists( $phpmailer, 'createHeader' ) ) {
-			$mail['headers'] = $phpmailer->createHeader();
+		if ( method_exists( $mailcatcher, 'createHeader' ) ) {
+			$mail['headers'] = $mailcatcher->createHeader();
 		} else {
 			$mail['headers'] = [];
 		}
 		$mail['listener']['class']   = $this->class;
 		$mail['listener']['product'] = $this->product;
 		$mail['listener']['version'] = $this->version;
-		Capture::put( $mail, '' );
+		if ( $mailer->is_email_sent() ) {
+			$message = '';
+		} else {
+			$message = $mailer->get_debug_info();
+			$message = wp_kses( str_replace( '<br>', '. ', $message ), [] );
+		}
+		Capture::put( $mail, $message );
 	}
 
 }
