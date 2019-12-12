@@ -378,6 +378,9 @@ class EventViewer {
 		$dif     = Date::get_positive_time_diff_from_mysql_utc( $this->event['timestamp'] );
 		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'clock' ) . $time . '</span> <span style="color:silver">(' . $dif . ')</span>';
 		$hour    = $this->get_section( $content );
+		// From
+		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'user' ) . $this->event['from'] . '</span>';
+		$from    = $this->get_section( $content );
 		// Event message.
 		if ( 'info' !== $this->event['level'] ) {
 			$content = '<span style="width:100%;cursor: default;word-break: break-all;">' . $this->get_icon( 'message-square' ) . $this->event['error'] . '</span>';
@@ -385,7 +388,7 @@ class EventViewer {
 		} else {
 			$message = '';
 		}
-		$this->output_activity_block( $event . $hour . $message );
+		$this->output_activity_block( $event . $hour . $from . $message );
 	}
 
 	/**
