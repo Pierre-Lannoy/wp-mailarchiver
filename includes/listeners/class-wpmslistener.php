@@ -125,15 +125,16 @@ class WpmsListener extends AbstractListener {
 		} else {
 			$mail['headers'] = [];
 		}
+		$message = '';
+		if ( method_exists( $mailcatcher, 'is_email_sent' ) && method_exists( $mailcatcher, 'get_debug_info' ) ) {
+			if ( ! $mailer->is_email_sent() ) {
+				$message = $mailer->get_debug_info();
+				$message = wp_kses( str_replace( '<br>', '. ', $message ), [] );
+			}
+		}
 		$mail['listener']['class']   = $this->class;
 		$mail['listener']['product'] = $this->product;
 		$mail['listener']['version'] = $this->version;
-		if ( $mailer->is_email_sent() ) {
-			$message = '';
-		} else {
-			$message = $mailer->get_debug_info();
-			$message = wp_kses( str_replace( '<br>', '. ', $message ), [] );
-		}
 		Capture::put( $mail, $message );
 	}
 

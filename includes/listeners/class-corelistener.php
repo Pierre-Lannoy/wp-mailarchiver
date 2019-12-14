@@ -38,6 +38,45 @@ class CoreListener extends AbstractListener {
 		$this->class   = 'mail';
 		$this->product = 'WordPress';
 		$this->version = $wp_version;
+		$function      = new \ReflectionFunction( 'wp_mail' );
+		$path          = $function->getFileName();
+		if ( false !== strpos( $path, '/mu-plugins/' ) ) {
+			$slug = substr( $path, strpos( $path, '/mu-plugins/' ) + 12 );
+			$slug = substr( $slug, 0, strpos( $slug, '/' ) );
+			foreach ( get_plugins() as $key => $details ) {
+				if ( 0 === strpos( $key, $slug . '/' ) ) {
+					$this->name    = $details['Name'];
+					$this->class   = 'mu';
+					$this->product = $details['Name'];
+					$this->version = $details['Version'];
+					break;
+				}
+			}
+		} elseif ( false !== strpos( $path, '/plugins/' ) ) {
+			$slug = substr( $path, strpos( $path, '/plugins/' ) + 9 );
+			$slug = substr( $slug, 0, strpos( $slug, '/' ) );
+			foreach ( get_plugins() as $key => $details ) {
+				if ( 0 === strpos( $key, $slug . '/' ) ) {
+					$this->name    = $details['Name'];
+					$this->class   = 'plugin';
+					$this->product = $details['Name'];
+					$this->version = $details['Version'];
+					break;
+				}
+			}
+		} elseif ( false !== strpos( $path, '/themes/' ) ) {
+			$slug = substr( $path, strpos( $path, '/themes/' ) + 8 );
+			$slug = substr( $slug, 0, strpos( $slug, '/' ) );
+			foreach ( wp_get_themes() as $key => $details ) {
+				if ( $key === $slug ) {
+					$this->name    = $details->Name;
+					$this->class   = 'theme';
+					$this->product = $details->Name;
+					$this->version = $details->Version;
+					break;
+				}
+			}
+		}
 	}
 
 	/**
@@ -112,6 +151,7 @@ class CoreListener extends AbstractListener {
 		$mail['listener']['product'] = $this->product;
 		$mail['listener']['version'] = $this->version;
 		Capture::put( $mail, $message );
+		return $mail;
 	}
 
 	/**
