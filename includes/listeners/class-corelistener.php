@@ -97,7 +97,7 @@ class CoreListener extends AbstractListener {
 	 */
 	protected function launch() {
 		add_filter( 'wp_mail', [ $this, 'wp_mail' ], PHP_INT_MAX );
-		add_filter( 'wp_mail_failed', [ $this, 'wp_mail_failed' ], PHP_INT_MAX );
+		add_action( 'wp_mail_failed', [ $this, 'wp_mail_failed' ], PHP_INT_MAX );
 		add_action( 'phpmailer_init', [ $this, 'phpmailer_init' ], PHP_INT_MAX );
 		return true;
 	}
@@ -129,6 +129,7 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	public function wp_mail( $mail, $message = '' ) {
+		$return     = $mail;
 		$recipients = null;
 		if ( is_string( $mail['to'] ) ) {
 			foreach ( [ ',', ';' ] as $sep ) {
@@ -151,7 +152,7 @@ class CoreListener extends AbstractListener {
 		$mail['listener']['product'] = $this->product;
 		$mail['listener']['version'] = $this->version;
 		Capture::put( $mail, $message );
-		return $mail;
+		return $return;
 	}
 
 	/**
