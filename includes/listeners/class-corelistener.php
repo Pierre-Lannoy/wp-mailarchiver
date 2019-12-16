@@ -141,8 +141,10 @@ class CoreListener extends AbstractListener {
 			if ( ! isset( $recipients ) ) {
 				$recipients = [ $mail['to'] ];
 			}
-		} else {
+		} elseif ( isset( $mail['to'] ) ) {
 			$recipients = $mail['to'];
+		} else {
+			$recipients = [ 'unknown@example.com' ];
 		}
 		$tos = [];
 		$this->get_all_emails( $recipients, $tos );

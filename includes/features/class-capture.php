@@ -150,7 +150,7 @@ class Capture {
 			// phpcs:ignore
 			$key = Hash::simple_hash( serialize( $mail['to'] ) . $mail['subject'] );
 			unset( $mail['message'] );
-			if ( '' === $message || ! array_key_exists( 'raw', self::$mails[ $key ] ) ) {
+			if ( '' === $message || ( array_key_exists( $key, self::$mails ) && ! array_key_exists( 'raw', self::$mails[ $key ] ) ) ) {
 				self::$mails[ $key ]['raw'] = $mail;
 			}
 			if ( '' !== $message ) {

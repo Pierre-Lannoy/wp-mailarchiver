@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased - will be 1.2.0]
 ### Added
 - Support for plugged (custom) `wp_mail` function (mu-plugins or themes).
+### Fixed
+- In some rare cases, recording a mail error may produce a PHP warning.
+- Typo in a string.
 
-## [1.1.0]
+## [1.1.0] - 2019-12-12
 ### Added
 - Full compatibility with WP Mail SMTP.
 - Full compatibility with Post SMTP.
@@ -15,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - The detection of the "from" field has been improved.
 ### Fixed
-- some strings are not translatable.
+- Some strings are not translatable.
 - Some typos in inline help. 
 
 ## [1.0.0] - 2019-12-03

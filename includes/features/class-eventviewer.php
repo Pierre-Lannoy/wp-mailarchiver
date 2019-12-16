@@ -139,7 +139,7 @@ class EventViewer {
 			$content = '<html><body>' . esc_html__( 'encrypted', 'mailarchiver' ) . '</body></html>';
 			$is_html = true;
 		} else {
-			$content = '<html><body>' . esc_html__( 'unknow', 'mailarchiver' ) . '</body></html>';
+			$content = '<html><body>' . esc_html__( 'unknown', 'mailarchiver' ) . '</body></html>';
 			$is_html = true;
 		}
 		if ( $is_html ) {
