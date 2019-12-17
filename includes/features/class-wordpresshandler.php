@@ -90,7 +90,7 @@ class WordpressHandler {
 		}
 		$classes = implode( ',', $cl );
 		if ( '' !== $this->table ) {
-			$charset_collate = 'DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci';
+			$charset_collate = 'DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci';
 			$sql             = 'CREATE TABLE IF NOT EXISTS ' . $this->table;
 			$sql            .= ' (`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,';
 			$sql            .= " `timestamp` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',";
@@ -136,6 +136,12 @@ class WordpressHandler {
 		$sql     = 'ALTER TABLE ' . $this->table . ' MODIFY COLUMN class enum(' . $classes . ") NOT NULL DEFAULT 'unknown';";
 		// phpcs:ignore
 		$wpdb->query( $sql );
+
+		// Starting 1.2.0, WordpressHandler is utf8mb4_unicode_ci .
+		$sql = 'ALTER TABLE ' . $this->table . ' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;';
+		// phpcs:ignore
+		$wpdb->query( $sql );
+
 		Logger::debug( sprintf( 'Table "%s" updated.', $this->table ) );
 	}
 

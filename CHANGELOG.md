@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased - will be 1.2.0]
 ### Added
 - Support for plugged (custom) `wp_mail` function (mu-plugins or themes).
+### Changed
+- Mail subject can now contains emojis.
+- WordPress archivers now report full source of mail (even for plugged `wp_mail`).
 ### Fixed
 - In some rare cases, recording a mail error may produce a PHP warning.
 - Typo in a string.

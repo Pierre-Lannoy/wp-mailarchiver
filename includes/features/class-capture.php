@@ -74,6 +74,9 @@ class Capture {
 						}
 						break;
 				}
+				if ( false === strpos( '@', $from_email ) ) {
+					$from_email = '';
+				}
 			}
 		}
 		if ( '' === $from_email ) {
