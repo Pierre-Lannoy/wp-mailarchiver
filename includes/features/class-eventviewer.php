@@ -379,7 +379,7 @@ class EventViewer {
 		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'clock' ) . $time . '</span> <span style="color:silver">(' . $dif . ')</span>';
 		$hour    = $this->get_section( $content );
 		// From
-		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'user' ) . $this->event['from'] . '</span>';
+		$content = '<span style="width:100%;cursor: default;">' . $this->get_icon( 'at-sign', 'none' ) . $this->event['from'] . '</span>';
 		$from    = $this->get_section( $content );
 		// Event message.
 		if ( 'info' !== $this->event['level'] ) {
