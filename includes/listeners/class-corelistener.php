@@ -32,6 +32,7 @@ class CoreListener extends AbstractListener {
 	 * @since    1.0.0
 	 */
 	protected function init() {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		global $wp_version;
 		$this->id      = 'wpcore';
 		$this->name    = esc_html__( 'WordPress core', 'mailarchiver' );
@@ -43,7 +44,7 @@ class CoreListener extends AbstractListener {
 		if ( false !== strpos( $path, '/mu-plugins/' ) ) {
 			$slug = substr( $path, strpos( $path, '/mu-plugins/' ) + 12 );
 			$slug = substr( $slug, 0, strpos( $slug, '/' ) );
-			foreach ( get_plugins() as $key => $details ) {
+			foreach ( get_mu_plugins() as $key => $details ) {
 				if ( 0 === strpos( $key, $slug . '/' ) ) {
 					$this->name    = $details['Name'];
 					$this->class   = 'mu';

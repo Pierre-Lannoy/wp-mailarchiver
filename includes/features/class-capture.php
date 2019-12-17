@@ -80,6 +80,11 @@ class Capture {
 			}
 		}
 		if ( '' === $from_email ) {
+			if ( class_exists( 'PostmanOptions' ) ) {
+				$from_email = \PostmanOptions::getInstance()->getMessageSenderEmail();
+			}
+		}
+		if ( '' === $from_email ) {
 			$sitename = strtolower( filter_input( INPUT_SERVER, 'SERVER_NAME' ) );
 			if ( 'www.' === substr( $sitename, 0, 4 ) ) {
 				$sitename = substr( $sitename, 4 );

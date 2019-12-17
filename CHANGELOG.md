@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Mail subject can now contains emojis.
 - WordPress archivers now report full source of mail (even for plugged `wp_mail`).
+- The "from" field is now detected with Post SMPT plugin.
 ### Fixed
 - In some rare cases, recording a mail error may produce a PHP warning.
 - Typo in a string.
