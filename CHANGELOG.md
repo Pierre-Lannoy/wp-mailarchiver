@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - The "from" field is now detected with Post SMPT plugin.
 ### Fixed
 - In some rare cases, recording a mail error may produce a PHP warning.
+- Some plugin options may be not saved when needed (thanks to [Lucas Bustamante](https://github.com/Luc45)).
 - Typo in a string.
 
 ## [1.1.0] - 2019-12-12
