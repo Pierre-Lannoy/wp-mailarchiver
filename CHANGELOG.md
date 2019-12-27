@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Full compatibility (for internal cache) with Redis and Memcached.
 - Using APCu rather than database transients if APCu is available.
+### Changed
+- Upgraded Monolog library from version 2.0.1 to version 2.0.2.
 
 ## [1.2.0] - 2019-12-19
 ### Added
