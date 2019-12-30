@@ -9,8 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Using APCu rather than database transients if APCu is available.
 - New Site Health "status" sections about OPcache and object cache. 
 - New Site Health "status" section about i18n extension for non `en_US` sites.
-- New Site Health "info" sections about OPcache and object cache. 
-- New Site Health "info" section about the plugin itself. 
+- New Site Health "info" sections about OPcache and object cache.
+- New Site Health "info" section about the plugin itself.
+- New Site Health "info" section about archivers settings. 
 ### Changed
 - Upgraded Monolog library from version 2.0.1 to version 2.0.2.
 

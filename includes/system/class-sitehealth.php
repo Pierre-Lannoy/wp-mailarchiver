@@ -12,6 +12,7 @@ namespace Mailarchiver\System;
 use Mailarchiver\System\Cache;
 use Mailarchiver\System\I18n;
 use Mailarchiver\System\Option;
+use Mailarchiver\Plugin\Feature\ArchiverMaintainer;
 
 /**
  * The class responsible to handle cache management.
@@ -88,6 +89,7 @@ class Sitehealth {
 	 */
 	private static function perfopsone_info_init() {
 		add_filter( 'debug_information', [ self::class, 'perfopsone_info' ] );
+		add_filter( 'debug_information', [ self::class, 'archivers_info' ] );
 	}
 
 	/**
@@ -146,6 +148,24 @@ class Sitehealth {
 			'label'       => MAILARCHIVER_PRODUCT_NAME,
 			'description' => esc_html__( 'Plugin diagnostic information', 'mailarchiver' ),
 			'fields'      => Option::debug_info(),
+		];
+		return $debug_info;
+	}
+
+	/**
+	 * Adds plugin infos section.
+	 *
+	 * @param array $debug_info The already set infos.
+	 * @return array    The extended infos if needed.
+	 * @since 1.0.0
+	 */
+	public static function archivers_info( $debug_info ) {
+		$maintener                                = new ArchiverMaintainer();
+		$debug_info[ self::$slug . '_archivers' ] = [
+			'label'       => esc_html__( 'Archivers', 'mailarchiver' ),
+			'description' => esc_html__( 'Archivers list', 'mailarchiver' ),
+			'show_count'  => true,
+			'fields'      => $maintener->debug_info(),
 		];
 		return $debug_info;
 	}
