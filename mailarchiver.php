@@ -68,6 +68,7 @@ function mailarchiver_uninstall() {
 function mailarchiver_run() {
 	Mailarchiver\System\Logger::init();
 	Mailarchiver\System\Cache::init();
+	Mailarchiver\System\Sitehealth::init();
 	$plugin = new Mailarchiver\Plugin\Core();
 	$plugin->run();
 }
