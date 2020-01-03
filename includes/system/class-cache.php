@@ -103,6 +103,17 @@ class Cache {
 		}
 		self::$apcu_available = function_exists( 'apcu_delete' ) && function_exists( 'apcu_fetch' ) && function_exists( 'apcu_store' );
 		add_action( 'shutdown', [ 'Mailarchiver\System\Cache', 'log_debug' ], 10, 0 );
+		add_filter( 'perfopsone_icache_introspection', [ 'Mailarchiver\System\Cache', 'introspection' ] );
+	}
+
+	/**
+	 * Get the introspection endpoint.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function introspection( $endpoints ) {
+		$endpoints[ MAILARCHIVER_SLUG ] = [ 'name' => MAILARCHIVER_PRODUCT_NAME, 'version' => MAILARCHIVER_VERSION, 'endpoint' => [ 'Mailarchiver\System\Cache', 'get_analytics' ] ];
+		return $endpoints;
 	}
 
 	/**
