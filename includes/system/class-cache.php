@@ -33,7 +33,7 @@ class Cache {
 	 * Available TTLs.
 	 *
 	 * @since  1.0.0
-	 * @var    array    $ttls    The TTLs array.
+	 * @var    array    $ttls   The TTLs array.
 	 */
 	private static $ttls;
 
