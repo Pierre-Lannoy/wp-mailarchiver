@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MailArchiver - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-12-03 15:45+0100\n"
+"PO-Revision-Date: 2020-01-03 09:22+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,6 +13,124 @@ msgstr ""
 "POT-Creation-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+
+#: includes/system/class-sitehealth.php:340
+msgid "You should consider using PHP Intl extension. It would improve localization features on your site."
+msgstr "Vous devriez envisager d’utiliser l’extension PHP Intl. Cela permettrait d’améliorer les fonctionnalités de traduction sur votre site."
+
+#: includes/system/class-sitehealth.php:334
+msgid "You should use Intl extension"
+msgstr "Vous devriez utiliser l’extension Intl"
+
+#: includes/system/class-sitehealth.php:328
+msgid "Your site uses PHP Intl extension to improve localization features. That's great."
+msgstr "Votre site utilise l’extension PHP Intl pour améliorer les fonctionnalités de traduction. C’est super."
+
+#: includes/system/class-sitehealth.php:325
+#: includes/system/class-sitehealth.php:337
+msgid "Internationalization"
+msgstr "Internationalisation"
+
+#: includes/system/class-sitehealth.php:322
+msgid "Your site uses Intl extension"
+msgstr "Votre site utilise l’extension Intl"
+
+#: includes/system/class-sitehealth.php:305
+msgid "I18n Extension Test"
+msgstr "Test d’extension I18n"
+
+#: includes/system/class-sitehealth.php:286
+msgid "You should consider using OPcache. It would improve PHP performance of your site."
+msgstr "Vous devriez envisager d’utiliser OPcache. Cela permettrait d’améliorer les performances PHP de votre site."
+
+#: includes/system/class-sitehealth.php:280
+msgid "You should use OPcache"
+msgstr "Vous devriez utiliser OPcache"
+
+#: includes/system/class-sitehealth.php:274
+msgid "Your site uses OPcache to improve PHP performance. That's great."
+msgstr "Votre site utilise OPcache pour améliorer les performances de PHP. C’est super."
+
+#: includes/system/class-sitehealth.php:268
+msgid "Your site uses OPcache"
+msgstr "Votre site utilise OPcache"
+
+#: includes/system/class-sitehealth.php:251
+msgid "OPcache Test"
+msgstr "Test OPcache"
+
+#: includes/system/class-sitehealth.php:232
+msgid "Your site uses a dedicated object caching mechanism. That's great."
+msgstr "Votre site utilise un mécanisme dédié de mise cache d’objets. C'est super."
+
+#: includes/system/class-sitehealth.php:226
+msgid "Your site uses object caching"
+msgstr "Votre site utilise la mise en cache d’objets"
+
+#: includes/system/class-sitehealth.php:220
+msgid "Your site uses APCu, but only a few plugins know how to take advantage of it."
+msgstr "Votre site utilise APCu, mais seules quelques extensions savent comment en profiter."
+
+#: includes/system/class-sitehealth.php:214
+msgid "You should improve object caching"
+msgstr "Vous devriez améliorer la mise en cache d’objets"
+
+#: includes/system/class-sitehealth.php:208
+#: includes/system/class-sitehealth.php:220
+msgid "You should consider using a dedicated object caching mechanism, like Memcached or Redis, to improve your site's speed."
+msgstr "Vous devriez envisager d’utiliser un mécanisme dédié de mise en cache d’objets, comme Memcached ou Redis, pour améliorer la vitesse de votre site."
+
+#: includes/system/class-sitehealth.php:208
+msgid "Your site uses database transient."
+msgstr "Votre site utilise des Transients stockés en base de données."
+
+#: includes/system/class-sitehealth.php:205
+#: includes/system/class-sitehealth.php:217
+#: includes/system/class-sitehealth.php:229
+#: includes/system/class-sitehealth.php:271
+#: includes/system/class-sitehealth.php:283
+msgid "Performance"
+msgstr "Performance"
+
+#: includes/system/class-sitehealth.php:202
+msgid "You should use object caching"
+msgstr "Vous devriez utiliser la mise en cache d’objets"
+
+#: includes/system/class-sitehealth.php:184
+msgid "Object Cache Test"
+msgstr "Test de cache d’objets"
+
+#: includes/system/class-sitehealth.php:166
+msgid "Archivers list"
+msgstr "Liste des archiveurs"
+
+#: includes/system/class-sitehealth.php:149
+msgid "Plugin diagnostic information"
+msgstr "Informations de diagnostique de l’extension"
+
+#: includes/system/class-sitehealth.php:132
+msgid "OPcache settings and status"
+msgstr "Réglages et état OPcache"
+
+#: includes/system/class-sitehealth.php:124
+msgid "Object cache"
+msgstr "Cache d’objets"
+
+#: includes/features/class-classtypes.php:50
+msgid "MU-Plugin"
+msgstr "MU-Plugin"
+
+#: includes/features/class-classtypes.php:49
+msgid "Theme"
+msgstr "Thème"
+
+#: includes/features/class-classtypes.php:48
+msgid "Plugin"
+msgstr "Extension"
+
+#: includes/features/class-classtypes.php:47
+msgid "Core"
+msgstr "Cœur"
 
 #: admin/class-mailarchiver-admin.php:960
 msgid "Allows to record standard MailArchiver information."
@@ -265,6 +383,7 @@ msgstr "À propos"
 msgid "Options"
 msgstr "Options"
 
+#: includes/system/class-sitehealth.php:165
 #: admin/partials/mailarchiver-admin-settings-main.php:35
 msgid "Archivers"
 msgstr "Archiveurs"
@@ -367,10 +486,6 @@ msgstr "%1$s a été correctement installé."
 msgid "Allows to record email fields and metadata."
 msgstr "Permet de consigner les champs de courriels et leur métadonnées."
 
-#: includes/features/class-processortypes.php:66
-msgid "Mail "
-msgstr "Courriel"
-
 #: includes/features/class-processortypes.php:51
 msgid "Allows to record site, user and remote IP of the current request."
 msgstr "Permet de consigner le site, l’utilisateur et l’adresse IP de provenance de la requête courante."
@@ -379,7 +494,7 @@ msgstr "Permet de consigner le site, l’utilisateur et l’adresse IP de proven
 msgid "WordPress "
 msgstr "WordPress "
 
-#: includes/features/class-classtypes.php:47
+#: includes/features/class-processortypes.php:66
 msgid "Mail"
 msgstr "Courriel"
 
@@ -420,7 +535,7 @@ msgid "Command Line Interface"
 msgstr "Interface de ligne de commande"
 
 #: includes/features/class-channeltypes.php:47
-#: includes/features/class-classtypes.php:48
+#: includes/features/class-classtypes.php:51
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -508,7 +623,7 @@ msgid "You can change the archive being viewed (if you have set more than one Wo
 msgstr "Vous pouvez sélectionner l’archive affichée (si vous avez réglé plus d’un archiveur WordPress) avec le sélecteur en haut à gauche de la liste (n’oubliez pas de cliquer sur le bouton « Appliquer »)."
 
 #: includes/features/class-inlinehelp.php:305
-msgid "You can restrict the display of emails according to their status levels. To do so, use the three links at the top left of the list."
+msgid "You can restrict the display of emails according to their status levels. To do so, use the two links at the top left of the list."
 msgstr "Vous pouvez restreindre l’affichage des courriels en fonction de leur niveaux d’état. Pour ce faire, utilisez les deux liens en haut à gauche de la liste."
 
 #: includes/features/class-inlinehelp.php:304
@@ -571,7 +686,7 @@ msgstr "Enregistrement"
 
 #: includes/features/class-inlinehelp.php:174
 msgid "These archivers send archived emails to logging services. It may be local or SaaS, free or paid services:"
-msgstr "Ces archiveurs envoient des courriels à des services d’enregistrement. Il peut s’agir de services locaux ou SaaS, gratuits ou payants."
+msgstr "Ces archiveurs envoient des courriels à des services d’enregistrement. Il peut s’agir de services locaux ou SaaS, gratuits ou payants :"
 
 #: includes/features/class-inlinehelp.php:169
 msgid "Alerting"
@@ -920,7 +1035,7 @@ msgstr "Tout courriel qu’il peut gérer sera oublié aussitôt."
 msgid "Blackhole"
 msgstr "Trou noir"
 
-#: includes/features/class-eventviewer.php:440
+#: includes/features/class-eventviewer.php:443
 msgid "Deleted user"
 msgstr "Utilisateur supprimé"
 
@@ -974,8 +1089,8 @@ msgid "Boxes"
 msgstr "Blocs"
 
 #: includes/features/class-eventviewer.php:142
-msgid "unknow"
-msgstr "Inconnu"
+msgid "unknown"
+msgstr "inconnu"
 
 #: includes/features/class-eventviewer.php:139
 msgid "encrypted"
@@ -1116,12 +1231,12 @@ msgid "User ID %s"
 msgstr "ID d’utilisateur %s"
 
 #: includes/features/class-events.php:250
-#: includes/features/class-eventviewer.php:436
+#: includes/features/class-eventviewer.php:439
 msgid "Pseudonymized user"
 msgstr "Utilisateur pseudonymisé"
 
 #: includes/features/class-events.php:246
-#: includes/features/class-eventviewer.php:434
+#: includes/features/class-eventviewer.php:437
 msgid "Anonymous user"
 msgstr "Utilisateur anonyme"
 
@@ -1130,11 +1245,11 @@ msgid "Site ID %s"
 msgstr "Site ID %s"
 
 #: includes/features/class-events.php:175
-#: includes/features/class-eventviewer.php:402
+#: includes/features/class-eventviewer.php:405
 msgid "Masked address"
 msgstr "Adresse masquée"
 
-#: includes/listeners/class-corelistener.php:37
+#: includes/listeners/class-corelistener.php:38
 msgid "WordPress core"
 msgstr "Cœur de WordPress"
 
