@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MailArchiver\n"
-"POT-Creation-Date: 2019-12-03 15:52+0100\n"
+"POT-Creation-Date: 2020-01-03 08:39+0100\n"
 "PO-Revision-Date: 2019-07-08 14:07+0200\n"
 "Last-Translator: Pierre Lannoy <pierre@lannoy.fr>\n"
 "Language-Team: Pierre Lannoy <pierre@lannoy.fr>\n"
@@ -363,6 +363,7 @@ msgid "Reset to Defaults"
 msgstr ""
 
 #: admin/partials/mailarchiver-admin-settings-main.php:35
+#: includes/system/class-sitehealth.php:165
 msgid "Archivers"
 msgstr ""
 
@@ -449,7 +450,7 @@ msgid "Records"
 msgstr ""
 
 #: includes/features/class-channeltypes.php:47
-#: includes/features/class-classtypes.php:48
+#: includes/features/class-classtypes.php:51
 msgid "Unknown"
 msgstr ""
 
@@ -486,11 +487,23 @@ msgid "Site Frontend"
 msgstr ""
 
 #: includes/features/class-classtypes.php:47
-msgid "Mail"
+msgid "Core"
+msgstr ""
+
+#: includes/features/class-classtypes.php:48
+msgid "Plugin"
+msgstr ""
+
+#: includes/features/class-classtypes.php:49
+msgid "Theme"
+msgstr ""
+
+#: includes/features/class-classtypes.php:50
+msgid "MU-Plugin"
 msgstr ""
 
 #: includes/features/class-events.php:175
-#: includes/features/class-eventviewer.php:402
+#: includes/features/class-eventviewer.php:405
 msgid "Masked address"
 msgstr ""
 
@@ -500,12 +513,12 @@ msgid "Site ID %s"
 msgstr ""
 
 #: includes/features/class-events.php:246
-#: includes/features/class-eventviewer.php:434
+#: includes/features/class-eventviewer.php:437
 msgid "Anonymous user"
 msgstr ""
 
 #: includes/features/class-events.php:250
-#: includes/features/class-eventviewer.php:436
+#: includes/features/class-eventviewer.php:439
 msgid "Pseudonymized user"
 msgstr ""
 
@@ -594,7 +607,7 @@ msgid "encrypted"
 msgstr ""
 
 #: includes/features/class-eventviewer.php:142
-msgid "unknow"
+msgid "unknown"
 msgstr ""
 
 #: includes/features/class-eventviewer.php:195
@@ -650,7 +663,7 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: includes/features/class-eventviewer.php:440
+#: includes/features/class-eventviewer.php:443
 msgid "Deleted user"
 msgstr ""
 
@@ -1190,7 +1203,7 @@ msgid "Allows to record site, user and remote IP of the current request."
 msgstr ""
 
 #: includes/features/class-processortypes.php:66
-msgid "Mail "
+msgid "Mail"
 msgstr ""
 
 #: includes/features/class-processortypes.php:67
@@ -1230,7 +1243,7 @@ msgstr ""
 msgid "<a href=\"%1$s\">%2$s %3$s</a>%4$s by %5$s (%6$s)"
 msgstr ""
 
-#: includes/listeners/class-corelistener.php:37
+#: includes/listeners/class-corelistener.php:38
 msgid "WordPress core"
 msgstr ""
 
@@ -1379,6 +1392,111 @@ msgstr ""
 
 #: includes/system/class-environment.php:215
 msgid "Debug disabled"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:124
+msgid "Object cache"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:132
+msgid "OPcache settings and status"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:149
+msgid "Plugin diagnostic information"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:166
+msgid "Archivers list"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:184
+msgid "Object Cache Test"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:202
+msgid "You should use object caching"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:205 includes/system/class-sitehealth.php:217
+#: includes/system/class-sitehealth.php:229 includes/system/class-sitehealth.php:271
+#: includes/system/class-sitehealth.php:283
+msgid "Performance"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:208
+msgid "Your site uses database transient."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:208 includes/system/class-sitehealth.php:220
+msgid ""
+"You should consider using a dedicated object caching mechanism, like Memcached or "
+"Redis, to improve your site's speed."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:214
+msgid "You should improve object caching"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:220
+msgid ""
+"Your site uses APCu, but only a few plugins know how to take advantage of it."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:226
+msgid "Your site uses object caching"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:232
+msgid "Your site uses a dedicated object caching mechanism. That's great."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:251
+msgid "OPcache Test"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:268
+msgid "Your site uses OPcache"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:274
+msgid "Your site uses OPcache to improve PHP performance. That's great."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:280
+msgid "You should use OPcache"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:286
+msgid ""
+"You should consider using OPcache. It would improve PHP performance of your site."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:305
+msgid "I18n Extension Test"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:322
+msgid "Your site uses Intl extension"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:325 includes/system/class-sitehealth.php:337
+msgid "Internationalization"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:328
+msgid ""
+"Your site uses PHP Intl extension to improve localization features. That's great."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:334
+msgid "You should use Intl extension"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:340
+msgid ""
+"You should consider using PHP Intl extension. It would improve localization "
+"features on your site."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
