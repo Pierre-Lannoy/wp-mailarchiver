@@ -60,7 +60,7 @@ class Libraries {
 			'name'    => 'Monolog',
 			'prefix'  => 'Monolog',
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'monolog/',
-			'version' => '2.0.1',
+			'version' => '2.0.2',
 			// phpcs:ignore
 			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Jordi Boggiano' ),
 			'url'     => 'https://github.com/Seldaek/monolog',
