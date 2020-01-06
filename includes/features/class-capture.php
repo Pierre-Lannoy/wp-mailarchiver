@@ -74,7 +74,7 @@ class Capture {
 						}
 						break;
 				}
-				if ( false === strpos( '@', $from_email ) ) {
+				if ( false === strpos( $from_email, '@' ) ) {
 					$from_email = '';
 				}
 			}
