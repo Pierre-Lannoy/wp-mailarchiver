@@ -35,6 +35,9 @@ class Initializer {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
+		\Mailarchiver\System\Logger::init();
+		\Mailarchiver\System\Cache::init();
+		\Mailarchiver\System\Sitehealth::init();
 		add_filter( 'set-screen-option', [ 'Mailarchiver\Plugin\Feature\Events', 'save_screen_option' ], 100, 3 );
 	}
 
