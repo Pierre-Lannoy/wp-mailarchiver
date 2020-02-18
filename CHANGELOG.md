@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Full compatibility with [APCu Manager](https://wordpress.org/plugins/apcu-manager/).
 ### Fixed
+- Some raw mails may be wrongly rendered in WordPress archiver when they contains the character `"`.
 - The header extraction of the "from" field may produce an error.
 
 ## [1.3.0] - 2020-01-03

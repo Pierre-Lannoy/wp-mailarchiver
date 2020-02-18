@@ -129,6 +129,7 @@ class EventViewer {
 				}
 				$content = substr( $content, $start, $length );
 			} else {
+				$content = str_replace( '"', '\"', $content );
 				$content = str_replace( "\r\n", "<br />", $content );
 				$content = str_replace( "\n", "<br />", $content );
 				$content = str_replace( "\r", "<br />", $content );
