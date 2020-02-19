@@ -16,7 +16,4 @@ define( 'MAILARCHIVER_VERSION', '1.4.0-dev0' );
 define( 'MAILARCHIVER_CODENAME', '"-"' );
 define( 'MAILARCHIVER_CRON_NAME', 'mailarchiver_clean_database' );
 
-define( 'MAILARCHIVER_MINIMUM_WP_VERSION', '5.2' );
-define( 'MAILARCHIVER_MINIMUM_PHP_VERSION', '7.2' );
-
 define( 'MAILARCHIVER_CDN_AVAILABLE', true );

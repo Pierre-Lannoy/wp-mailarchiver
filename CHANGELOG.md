@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Some raw mails may be wrongly rendered in WordPress archiver when they contains the character `"`.
 - The header extraction of the "from" field may produce an error.
+### Removed
+- Compatibility with WordPress versions prior to 5.2.
 
 ## [1.3.0] - 2020-01-03
 ### Added
