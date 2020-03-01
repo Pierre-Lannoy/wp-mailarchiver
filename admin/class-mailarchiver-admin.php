@@ -160,7 +160,7 @@ class Mailarchiver_Admin {
 			if ( Events::archivers_count() > 0 ) {
 				$perfops['records'][] = [
 					'name'          => esc_html__( 'Archived Mails', 'mailarchiver' ),
-					/* translators: as in the sentence "Check the events that occurred on your network." or "Check the events that occurred on your website." */
+					/* translators: as in the sentence "Access the mails sent from your network." or "Access the mails sent from your website." */
 					'description'   => sprintf( esc_html__( 'Access the mails sent from your %s.', 'mailarchiver' ), Environment::is_wordpress_multisite() ? esc_html__( 'network', 'mailarchiver' ) : esc_html__( 'website', 'mailarchiver' ) ),
 					'icon_callback' => [ \Mailarchiver\Plugin\Core::class, 'get_base64_logo' ],
 					'slug'          => 'mailarchiver-viewer',
@@ -192,103 +192,6 @@ class Mailarchiver_Admin {
 		}
 		add_filter( 'init_perfops_admin_menus', [ $this, 'init_perfops_admin_menus' ] );
 		AdminMenus::initialize();
-	}
-
-	/**
-	 * Set the items in the settings menu.
-	 *
-	 * @since 1.0.0
-	 */
-	public function ainit_admin_menus() {
-		$this->current_view = null;
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-			/* translators: as in the sentence "MailArchiver Settings" or "WordPress Settings" */
-			$settings = add_submenu_page( 'admin.php', sprintf( esc_html__( '%s Settings', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ), MAILARCHIVER_PRODUCT_NAME, 'manage_options', 'mailarchiver-settings', [ $this, 'get_settings_page' ] );
-			add_action( 'load-' . $settings, [ new InlineHelp(), 'set_contextual_settings' ] );
-		}
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
-			if ( Events::archivers_count() > 0 ) {
-				$name = add_submenu_page(
-					'admin.php',
-					/* translators: as in the sentence "MailArchiver Viewer" */
-					sprintf( esc_html__( '%s Viewer', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ),
-					MAILARCHIVER_PRODUCT_NAME,
-					'manage_options',
-					'mailarchiver-viewer',
-					[ $this, 'get_tools_page' ]
-				);
-				add_action( 'load-' . $name, [ new InlineHelp(), 'set_contextual_viewer' ] );
-				$logid   = filter_input( INPUT_GET, 'logid', FILTER_SANITIZE_STRING );
-				$eventid = filter_input( INPUT_GET, 'eventid', FILTER_SANITIZE_NUMBER_INT );
-				if ( 'mailarchiver-viewer' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
-					if ( isset( $logid ) && isset( $eventid ) && 0 !== $eventid ) {
-						$this->current_view = new EventViewer( $logid, $eventid );
-						add_action( 'load-' . $name, [ $this->current_view, 'add_metaboxes_options' ] );
-						add_action( 'admin_footer-' . $name, [ $this->current_view, 'add_footer' ] );
-						add_filter( 'screen_settings', [ $this->current_view, 'display_screen_settings' ], 10, 2 );
-					} else {
-						add_action( 'load-' . $name, [ 'Mailarchiver\Plugin\Feature\Events', 'add_column_options' ] );
-						add_filter(
-							'screen_settings',
-							[
-								'Mailarchiver\Plugin\Feature\Events',
-								'display_screen_settings',
-							],
-							10,
-							2
-						);
-					}
-				}
-			}
-		}
-	}
-
-	public function binit_admin_menus() {
-		if ( 'mailarchiver-settings' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
-			remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-			remove_action( 'admin_print_styles', 'print_emoji_styles' );
-		}
-		$this->current_view = null;
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
-			/* translators: as in the sentence "MailArchiver Settings" or "WordPress Settings" */
-			$settings = add_submenu_page( 'admin.php', sprintf( esc_html__( '%s Settings', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ), MAILARCHIVER_PRODUCT_NAME, 'manage_options', 'mailarchiver-settings', [ $this, 'get_settings_page' ] );
-			add_action( 'load-' . $settings, [ new InlineHelp(), 'set_contextual_settings' ] );
-		}
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
-			if ( Events::archivers_count() > 0 ) {
-				$name = add_submenu_page(
-					'admin.php',
-					/* translators: as in the sentence "MailArchiver Viewer" */
-					sprintf( esc_html__( '%s Viewer', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ),
-					MAILARCHIVER_PRODUCT_NAME,
-					'manage_options',
-					'mailarchiver-viewer',
-					[ $this, 'get_tools_page' ]
-				);
-				add_action( 'load-' . $name, [ new InlineHelp(), 'set_contextual_viewer' ] );
-				$logid   = filter_input( INPUT_GET, 'logid', FILTER_SANITIZE_STRING );
-				$eventid = filter_input( INPUT_GET, 'eventid', FILTER_SANITIZE_NUMBER_INT );
-				if ( 'mailarchiver-viewer' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
-					if ( isset( $logid ) && isset( $eventid ) && 0 !== $eventid ) {
-						$this->current_view = new EventViewer( $logid, $eventid );
-						add_action( 'load-' . $name, [ $this->current_view, 'add_metaboxes_options' ] );
-						add_action( 'admin_footer-' . $name, [ $this->current_view, 'add_footer' ] );
-						add_filter( 'screen_settings', [ $this->current_view, 'display_screen_settings' ], 10, 2 );
-					} else {
-						add_action( 'load-' . $name, [ 'Mailarchiver\Plugin\Feature\Events', 'add_column_options' ] );
-						add_filter(
-							'screen_settings',
-							[
-								'Mailarchiver\Plugin\Feature\Events',
-								'display_screen_settings',
-							],
-							10,
-							2
-						);
-					}
-				}
-			}
-		}
 	}
 
 	/**
