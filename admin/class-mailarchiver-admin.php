@@ -160,9 +160,9 @@ class Mailarchiver_Admin {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
 			if ( Events::archivers_count() > 0 ) {
 				$perfops['records'][] = [
-					'name'          => esc_html__( 'Archived Mails', 'mailarchiver' ),
-					/* translators: as in the sentence "Access the mails sent from your network." or "Access the mails sent from your website." */
-					'description'   => sprintf( esc_html__( 'Access the mails sent from your %s.', 'mailarchiver' ), Environment::is_wordpress_multisite() ? esc_html__( 'network', 'mailarchiver' ) : esc_html__( 'website', 'mailarchiver' ) ),
+					'name'          => esc_html__( 'Archived Emails', 'mailarchiver' ),
+					/* translators: as in the sentence "Access the emails sent from your network." or "Access the emails sent from your website." */
+					'description'   => sprintf( esc_html__( 'Access the emails sent from your %s.', 'mailarchiver' ), Environment::is_wordpress_multisite() ? esc_html__( 'network', 'mailarchiver' ) : esc_html__( 'website', 'mailarchiver' ) ),
 					'icon_callback' => [ \Mailarchiver\Plugin\Core::class, 'get_base64_logo' ],
 					'slug'          => 'mailarchiver-viewer',
 					/* translators: as in the sentence "Mailarchiver Viewer" */
