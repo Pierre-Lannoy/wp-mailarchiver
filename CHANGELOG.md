@@ -3,6 +3,8 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased - Will be 1.4.1]
+
 ## [1.4.0] - 2020-03-01
 ### Added
 - Full integration with PerfOps.One suite.
