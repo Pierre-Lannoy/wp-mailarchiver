@@ -353,7 +353,7 @@ class Mailarchiver_Admin {
 	 * @since 1.0.0
 	 */
 	public function add_actions_links( $actions, $plugin_file, $plugin_data, $context ) {
-		$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php?page=mailarchiver-settings' ), esc_html__( 'Settings', 'mailarchiver' ) );
+		$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=mailarchiver-settings' ), esc_html__( 'Settings', 'mailarchiver' ) );
 		if ( Events::archivers_count() > 0 ) {
 			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'tools.php?page=mailarchiver-viewer' ), esc_html__( 'Archived Emails', 'mailarchiver' ) );
 		}
