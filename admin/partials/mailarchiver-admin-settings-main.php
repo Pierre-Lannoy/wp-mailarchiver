@@ -28,7 +28,7 @@ $active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'archivers' );
 					'page' => 'mailarchiver-settings',
 					'tab'  => 'archivers',
 				),
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		?>
@@ -41,7 +41,7 @@ $active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'archivers' );
 					'page' => 'mailarchiver-settings',
 					'tab'  => 'misc',
 				),
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		?>
@@ -54,7 +54,7 @@ $active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'archivers' );
 					'page' => 'mailarchiver-settings',
 					'tab'  => 'about',
 				),
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		?>

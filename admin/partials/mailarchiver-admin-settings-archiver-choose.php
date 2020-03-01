@@ -47,7 +47,7 @@ $archiver_types = new HandlerTypes();
 				});
 				$("#<?php echo $archiver['id']; ?>").click(function() {
 					<?php // phpcs:ignore ?>
-					window.open('<?php echo add_query_arg( array( 'page'    => 'mailarchiver-settings', 'action'  => 'form-edit', 'tab'     => 'archivers', 'handler' => $archiver['id'], ), admin_url( 'options-general.php' ) );?>', '_self');
+					window.open('<?php echo add_query_arg( array( 'page'    => 'mailarchiver-settings', 'action'  => 'form-edit', 'tab'     => 'archivers', 'handler' => $archiver['id'], ), admin_url( 'admin.php' ) );?>', '_self');
 				});
 			<?php } ?>
 		});

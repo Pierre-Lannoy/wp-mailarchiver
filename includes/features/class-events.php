@@ -153,7 +153,7 @@ class Events extends \WP_List_Table {
 		$args['page']    = 'mailarchiver-viewer';
 		$args['logid']   = $this->archiver;
 		$args['eventid'] = $item['id'];
-		$url             = add_query_arg( $args, admin_url( 'tools.php' ) );
+		$url             = add_query_arg( $args, admin_url( 'admin.php' ) );
 		$icon            = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $item['level'] ] . '" />';
 		$name            = '<a href="' . $url . '">' . $item['subject'] . '</a>';
 		$result          = $icon . $name;
@@ -433,7 +433,7 @@ class Events extends \WP_List_Table {
 		if ( 25 !== $this->limit ) {
 			$args['limit'] = $this->limit;
 		}
-		$url = add_query_arg( $args, admin_url( 'tools.php' ) );
+		$url = add_query_arg( $args, admin_url( 'admin.php' ) );
 		return $url;
 	}
 

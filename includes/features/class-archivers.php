@@ -107,7 +107,7 @@ class Archivers extends \WP_List_Table {
 					'tab'    => 'archivers',
 					'uuid'   => $item['uuid'],
 				],
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		$delete            = esc_url(
@@ -118,7 +118,7 @@ class Archivers extends \WP_List_Table {
 					'tab'    => 'archivers',
 					'uuid'   => $item['uuid'],
 				],
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		$pause             = esc_url(
@@ -130,7 +130,7 @@ class Archivers extends \WP_List_Table {
 					'uuid'   => $item['uuid'],
 					'nonce'  => wp_create_nonce( 'mailarchiver-archiver-pause-' . $item['uuid'] ),
 				],
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		$test              = esc_url(
@@ -142,7 +142,7 @@ class Archivers extends \WP_List_Table {
 					'uuid'   => $item['uuid'],
 					'nonce'  => wp_create_nonce( 'mailarchiver-archiver-test-' . $item['uuid'] ),
 				],
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		$start             = esc_url(
@@ -154,7 +154,7 @@ class Archivers extends \WP_List_Table {
 					'uuid'   => $item['uuid'],
 					'nonce'  => wp_create_nonce( 'mailarchiver-archiver-start-' . $item['uuid'] ),
 				],
-				admin_url( 'options-general.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		$view              = esc_url(
@@ -163,7 +163,7 @@ class Archivers extends \WP_List_Table {
 					'page'      => 'mailarchiver-viewer',
 					'archiver_id' => $item['uuid'],
 				],
-				admin_url( 'tools.php' )
+				admin_url( 'admin.php' )
 			)
 		);
 		$handler           = $this->handler_types->get( $item['handler'] );

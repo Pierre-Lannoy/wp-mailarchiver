@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased - Will be 1.4.0]
 ### Added
+- Compatibility with PerfOps.One suite.
 - Full compatibility with [APCu Manager](https://wordpress.org/plugins/apcu-manager/).
+### Changed
+- New menus (in the left admin bar) for accessing features: "PerfOps Records" and "PerfOps Settings".
 ### Fixed
 - Some raw mails may be wrongly rendered in WordPress archiver when they contains the character `"`.
 - The header extraction of the "from" field may produce an error.

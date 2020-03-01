@@ -22,7 +22,7 @@
 				'tab'    => 'archivers',
 				'uuid'   => $current_archiver['uuid'],
 			),
-			admin_url( 'options-general.php' )
+			admin_url( 'admin.php' )
 		)
 	);
 	?>
