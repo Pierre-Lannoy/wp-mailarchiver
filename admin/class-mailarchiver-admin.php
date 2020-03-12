@@ -641,7 +641,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_listeners_options_auto',
 				'value'       => Option::network_get( 'autolisteners' ) ? 'auto' : 'manual',
 				'description' => esc_html__( 'Automatically or selectively choose which sources to listen.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -693,7 +693,7 @@ class Mailarchiver_Admin {
 						'id'          => 'mailarchiver_listeners_settings_' . $item['id'],
 						'checked'     => in_array( $item['id'], Option::network_get( 'listeners' ), true ),
 						'description' => null,
-						'full_width'  => true,
+						'full_width'  => false,
 						'enabled'     => true,
 					]
 				);
@@ -721,7 +721,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archivers_options_autostart',
 				'checked'     => Option::network_get( 'archiver_autostart' ),
 				'description' => esc_html__( 'If checked, when a new archiver is added it automatically starts.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -764,7 +764,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_plugin_options_usecdn',
 				'checked'     => Option::network_get( 'use_cdn' ),
 				'description' => esc_html__( 'Use CDN (jsDelivr) to serve MailArchiver scripts and stylesheets.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -780,7 +780,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_plugin_options_nag',
 				'checked'     => Option::network_get( 'display_nag' ),
 				'description' => esc_html__( 'Allows MailArchiver to display admin notices throughout the admin dashboard.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: MailArchiver respects DISABLE_NAG_NOTICES flag.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -808,7 +808,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_misc_name',
 				'value'       => $this->current_archiver['name'],
 				'description' => esc_html__( 'Used only in admin dashboard.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -824,7 +824,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_misc_level',
 				'value'       => $this->current_archiver['level'],
 				'description' => esc_html__( 'What kind of emails should be archived.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -852,7 +852,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_delete_name',
 				'value'       => $this->current_archiver['name'],
 				'description' => null,
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => false,
 			]
 		);
@@ -868,7 +868,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_delete_level',
 				'value'       => $this->current_archiver['level'],
 				'description' => null,
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => false,
 			]
 		);
@@ -893,7 +893,7 @@ class Mailarchiver_Admin {
 				'checked'     => (bool) $this->current_archiver['configuration'][ $key ],
 				'value'       => $this->current_archiver['configuration'][ $key ],
 				'description' => $configuration['help'],
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => $configuration['control']['enabled'],
 				'list'        => ( array_key_exists( 'list', $configuration['control'] ) ? $configuration['control']['list'] : [] ),
 			];
@@ -932,7 +932,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_privacy_ip',
 				'checked'     => $this->current_archiver['privacy']['obfuscation'],
 				'description' => esc_html__( 'If checked, recorded fields will contain hashes instead of real IPs.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except email content.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -948,7 +948,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_privacy_name',
 				'checked'     => $this->current_archiver['privacy']['pseudonymization'],
 				'description' => esc_html__( 'If checked, recorded fields will contain hashes instead of user IDs & names.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns all fields except email content.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -964,7 +964,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_privacy_mail',
 				'checked'     => $this->current_archiver['privacy']['mailanonymization'],
 				'description' => esc_html__( 'If checked, recorded fields will contain hashes instead of email adresses.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: it concerns only "to" and "from" fields.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -979,7 +979,7 @@ class Mailarchiver_Admin {
 				'id'          => 'mailarchiver_archiver_privacy_encryption',
 				'value'       => Secret::get( $this->current_archiver['privacy']['encryption'] ),
 				'description' => esc_html__( 'Key used to encrypt mail body. Let blank to not encrypt it.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: XXXXXXXXXXXXXXXXXXXXXXXX.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => true,
 			]
 		);
@@ -1006,7 +1006,7 @@ class Mailarchiver_Admin {
 				'id'          => $id,
 				'checked'     => true,
 				'description' => esc_html__( 'Allows to record standard MailArchiver information.', 'mailarchiver' ),
-				'full_width'  => true,
+				'full_width'  => false,
 				'enabled'     => false,
 			]
 		);
@@ -1025,7 +1025,7 @@ class Mailarchiver_Admin {
 					'id'          => $id,
 					'checked'     => in_array( $processor['id'], $this->current_archiver['processors'], true ),
 					'description' => $processor['help'],
-					'full_width'  => true,
+					'full_width'  => false,
 					'enabled'     => ( 'WordpressHandler' !== $this->current_archiver['handler'] ) && ( 'PushoverHandler' !== $this->current_archiver['handler'] ),
 				]
 			);
