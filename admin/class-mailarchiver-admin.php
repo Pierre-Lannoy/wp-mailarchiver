@@ -205,7 +205,7 @@ class Mailarchiver_Admin {
 	 */
 	public function blog_action( $actions, $user_blog ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
-			$actions .= " | <a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
+			$actions .= " | <a href='" . esc_url( admin_url( 'admin.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
 	}
@@ -222,7 +222,7 @@ class Mailarchiver_Admin {
 	 */
 	public function site_action( $actions, $blog_id, $blogname ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
-			$actions['mail_archive'] = "<a href='" . esc_url( admin_url( 'tools.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
+			$actions['mail_archive'] = "<a href='" . esc_url( admin_url( 'admin.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
 	}
@@ -259,7 +259,7 @@ class Mailarchiver_Admin {
 	public function add_actions_links( $actions, $plugin_file, $plugin_data, $context ) {
 		$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=mailarchiver-settings' ), esc_html__( 'Settings', 'mailarchiver' ) );
 		if ( Events::archivers_count() > 0 ) {
-			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'tools.php?page=mailarchiver-viewer' ), esc_html__( 'Archived Emails', 'mailarchiver' ) );
+			$actions[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=mailarchiver-viewer' ), esc_html__( 'Archived Emails', 'mailarchiver' ) );
 		}
 		return $actions;
 	}

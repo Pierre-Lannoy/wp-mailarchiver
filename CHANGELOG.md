@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Better styling in "PerfOps Settings" page.
 ### Fixed
 - In some cases, the "screen options" tab may be invisible.
+- Short links (in other dashboard pages) are wrong. 
 
 ## [1.4.0] - 2020-03-01
 ### Added
