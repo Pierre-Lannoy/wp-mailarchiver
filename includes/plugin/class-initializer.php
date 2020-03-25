@@ -35,7 +35,6 @@ class Initializer {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
-		\Mailarchiver\System\Logger::init();
 		\Mailarchiver\System\Cache::init();
 		\Mailarchiver\System\Sitehealth::init();
 		\Mailarchiver\System\APCu::init();

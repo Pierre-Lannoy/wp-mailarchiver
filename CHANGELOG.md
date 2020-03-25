@@ -3,7 +3,9 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased - Will be 1.4.1]
+## [Unreleased - Will be 1.5.0]
+### Added
+- Compatibility with [DecaLog](https://wordpress.org/plugins/decalog/) early loading feature.
 ### Changed
 - The settings page have now the standard WordPress style.
 - Better styling in "PerfOps Settings" page.
