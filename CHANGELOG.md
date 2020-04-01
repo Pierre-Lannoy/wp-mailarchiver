@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - The settings page have now the standard WordPress style.
 - Better styling in "PerfOps Settings" page.
+- In site health "info" tab, the boolean are now clearly displayed.
 ### Fixed
 - In some cases, the "screen options" tab may be invisible.
 - Short links (in other dashboard pages) are wrong. 
