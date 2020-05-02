@@ -35,6 +35,7 @@ class Environment {
 	 */
 	public static function init() {
 		$plugin_path         = str_replace( MAILARCHIVER_SLUG . '/includes/system/', MAILARCHIVER_SLUG . '/', plugin_dir_path( __FILE__ ) );
+		$plugin_path         = str_replace( MAILARCHIVER_SLUG . '\includes\system/', MAILARCHIVER_SLUG . '/', $plugin_path );
 		$plugin_url          = str_replace( MAILARCHIVER_SLUG . '/includes/system/', MAILARCHIVER_SLUG . '/', plugin_dir_url( __FILE__ ) );
 		$plugin_relative_url = str_replace( get_site_url() . '/', '', $plugin_url );
 		define( 'MAILARCHIVER_PLUGIN_DIR', $plugin_path );
