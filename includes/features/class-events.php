@@ -665,7 +665,7 @@ class Events extends \WP_List_Table {
 	 * @since 1.0.0
 	 */
 	public static function display_screen_settings( $current, $screen ) {
-		if ( ! is_object( $screen ) || 'perfops-records_page_mailarchiver-viewer' !== $screen->id ) {
+		if ( ! is_object( $screen ) || false === strpos( $screen->id, 'page_mailarchiver-viewer' ) ) {
 			return $current;
 		}
 		$current .= '<fieldset>';
@@ -687,7 +687,7 @@ class Events extends \WP_List_Table {
 	 */
 	public static function add_column_options() {
 		$screen = get_current_screen();
-		if ( ! is_object( $screen ) || 'perfops-records_page_mailarchiver-viewer' !== $screen->id ) {
+		if ( ! is_object( $screen ) || false === strpos( $screen->id, 'page_mailarchiver-viewer' ) ) {
 			return;
 		}
 		foreach ( self::$extra_columns as $key => $extra_column ) {
