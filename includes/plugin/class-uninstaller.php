@@ -11,6 +11,7 @@ namespace Mailarchiver\Plugin;
 
 use Mailarchiver\System\Option;
 use Mailarchiver\System\User;
+use Mailarchiver\Plugin\Feature\ArchiverMaintainer;
 
 /**
  * Fired during plugin deletion.
@@ -31,9 +32,8 @@ class Uninstaller {
 	public static function uninstall() {
 		Option::site_delete_all();
 		User::delete_all_meta();
-		// Delete cache?
-
-		// Delete tables!
+		$maintainer = new ArchiverMaintainer();
+		$maintainer->finalize();
 	}
 
 }

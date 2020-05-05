@@ -88,6 +88,23 @@ class ArchiverMaintainer {
 	}
 
 	/**
+	 * Finalize the archiver.
+	 *
+	 * @since    1.0.0
+	 */
+	public function finalize() {
+		foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
+			if ( class_exists( $classname ) ) {
+				$archiver['uuid'] = $key;
+				$instance         = $this->create_instance( $classname );
+				$instance->set_archiver( $archiver );
+				$instance->finalize();
+			}
+		}
+	}
+
+	/**
 	 * Get archivers debug info (for Site Health).
 	 *
 	 * @return array    The archivers definitions.
