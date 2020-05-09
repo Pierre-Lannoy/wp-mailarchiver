@@ -4,6 +4,8 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased - will be 1.5.2]
+### Fixed
+- When used for the first time, settings checkboxes may remain checked after being unchecked.
 
 ## [1.5.1] - 2020-05-05
 ### Changed
