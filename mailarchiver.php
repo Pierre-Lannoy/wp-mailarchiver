@@ -10,7 +10,7 @@
  * Plugin Name:       MailArchiver
  * Plugin URI:        https://github.com/Pierre-Lannoy/wp-mailarchiver
  * Description:       Automatically archive and store all emails sent from your site.
- * Version:           1.5.1
+ * Version:           1.5.2
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Pierre Lannoy
