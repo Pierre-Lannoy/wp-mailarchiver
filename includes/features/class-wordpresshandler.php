@@ -169,7 +169,7 @@ class WordpressHandler {
 		if ( '' !== $this->table_name ) {
 			$count    = 0;
 			$database = new Database();
-			if ( $hour_done = $database->purge( $this->table_name, 'timestamp', 24 * (int) $this->archiver['configuration']['purge'] ) ) {
+			/*if ( $hour_done = $database->purge( $this->table_name, 'timestamp', 24 * (int) $this->archiver['configuration']['purge'] ) ) {
 				$count += $hour_done;
 			}
 			$limit = $database->count_lines( $this->table_name ) - (int) $this->archiver['configuration']['rotate'];
@@ -177,7 +177,27 @@ class WordpressHandler {
 				if ( $max_done = $database->rotate( $this->table_name, 'id', $limit ) ) {
 					$count += $max_done;
 				}
+			}*/
+
+
+
+			if ( 0 < (int) $this->archiver['configuration']['purge'] ) {
+				if ( $hour_done = $database->purge( $this->table_name, 'timestamp', 24 * (int) $this->archiver['configuration']['purge'] ) ) {
+					$count += $hour_done;
+				}
 			}
+			if ( 0 < (int) $this->archiver['configuration']['rotate'] ) {
+				$limit = $database->count_lines( $this->table_name ) - (int) $this->archiver['configuration']['rotate'];
+				if ( $limit > 0 ) {
+					if ( $max_done = $database->rotate( $this->table_name, 'id', $limit ) ) {
+						$count += $max_done;
+					}
+				}
+			}
+
+
+
+
 			if ( 0 === $count ) {
 				Logger::info( sprintf( 'No old records to delete for archiver "%s".', $this->archiver['name'] ) );
 			} elseif ( 1 === $count ) {
