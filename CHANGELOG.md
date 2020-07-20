@@ -3,7 +3,19 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased - will be 1.5.3]
+## [1.6.0] - 2020-07-20
+### Added
+- Compatibility with WordPress 5.5.
+### Changed
+- Improved installation/uninstallation and activation/deactivation processes.
+- In WordPress archiver, the shown columns are now automatically set.
+### Fixed
+- Uninstalling the plugin may produce a PHP error (thanks to [Emil1](https://wordpress.org/support/users/milouze/)).
+- The WordPress archiver may be not purged when it should be (thanks to [Emil1](https://wordpress.org/support/users/milouze/)).
+- The WordPress archiver may be wrongly purged when '0' is set as a limit (thanks to [Emil1](https://wordpress.org/support/users/milouze/)).
+- In some conditions, some table may not be deleted while uninstalling.
+### Removed
+- The screen options in WordPress archiver (as it is now automatically set).
 
 ## [1.5.2] - 2020-06-29
 ### Changed

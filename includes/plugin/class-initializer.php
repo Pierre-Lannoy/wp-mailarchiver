@@ -38,7 +38,6 @@ class Initializer {
 		\Mailarchiver\System\Cache::init();
 		\Mailarchiver\System\Sitehealth::init();
 		\Mailarchiver\System\APCu::init();
-		add_filter( 'set-screen-option', [ 'Mailarchiver\Plugin\Feature\Events', 'save_screen_option' ], 100, 3 );
 	}
 
 	/**

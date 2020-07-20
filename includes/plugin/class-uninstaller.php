@@ -30,10 +30,10 @@ class Uninstaller {
 	 * @since 1.0.0
 	 */
 	public static function uninstall() {
-		Option::site_delete_all();
-		User::delete_all_meta();
 		$maintainer = new ArchiverMaintainer();
 		$maintainer->finalize();
+		Option::site_delete_all();
+		User::delete_all_meta();
 	}
 
 }

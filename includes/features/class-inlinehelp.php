@@ -311,14 +311,6 @@ class InlineHelp {
 			'id'      => 'mailarchiver-contextual-viewer-main-overview',
 			'content' => $content,
 		];
-		// Layout.
-		$content  = '<p>' . esc_html__( 'You can use the following controls to arrange the screen to suit your usage preferences:', 'mailarchiver' ) . '</p>';
-		$content .= '<p><strong>' . esc_html__( 'Screen Options', 'mailarchiver' ) . '</strong> &mdash; ' . esc_html__( 'Use the Screen Options tab to choose which extra columns to show.', 'mailarchiver' ) . '</p>';
-		$tabs[]   = [
-			'title'   => esc_html__( 'Layout', 'mailarchiver' ),
-			'id'      => 'mailarchiver-contextual-viewer-main-layout',
-			'content' => $content,
-		];
 		// Admin Rights.
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
 			$tabs[] = [
