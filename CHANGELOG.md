@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased - Will be 1.6.1]
 ### Changed
+- The positions of PerfOps menus are pushed lower to avoid collision with other plugins (thanks to [Loïc Antignac](https://github.com/webaxones)).
 - The selector for WordPress archivers is now sorted: running first, paused after (thanks to [Loïc Antignac](https://github.com/webaxones)).
 
 ## [1.6.0] - 2020-07-20
