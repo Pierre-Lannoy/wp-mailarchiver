@@ -110,7 +110,13 @@ class Capture {
 		if ( ! empty( $attachments ) ) {
 			foreach ( $attachments as $attachment ) {
 				if ( '' !== $attachment ) {
-					$att[] = basename( $attachment );
+					if ( is_array( $attachment ) ) {
+						foreach ( $attachment as $a ) {
+							$att[] = basename( $a );
+						}
+					} else {
+						$att[] = basename( $attachment );
+					}
 				}
 			}
 		}
