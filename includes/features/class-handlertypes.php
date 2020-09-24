@@ -342,6 +342,11 @@ class HandlerTypes {
 					'type'  => 'literal',
 					'value' => true,
 				],
+
+				[
+					'type'  => 'literal',
+					'value' => 0666,
+				],
 			],
 		];
 		$this->handlers[] = [

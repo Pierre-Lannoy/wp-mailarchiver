@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improved layout for language indicator.
 ### Fixed
 - Some multi-attachments may be wrongly recorded.
+- The rotating file archiver wrongly skips mails when sent from external process.
 
 ## [1.6.0] - 2020-07-20
 ### Added
