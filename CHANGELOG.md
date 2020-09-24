@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Some multi-attachments may be wrongly recorded.
 - The rotating file archiver wrongly skips mails when sent from external process.
+- With Firefox, some links are unclickable in the Control Center (thanks to [Emil1](https://wordpress.org/support/users/milouze/)).
 
 ## [1.6.0] - 2020-07-20
 ### Added
