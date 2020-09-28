@@ -59,6 +59,21 @@ $active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'archivers' );
 		);
 		?>
 		" class="nav-tab <?php echo 'about' === $active_tab ? 'nav-tab-active' : ''; ?>" style="float:right;"><?php esc_html_e( 'About', 'mailarchiver' ); ?></a>
+		<?php if ( class_exists( 'Mailarchiver\Plugin\Feature\Wpcli' ) ) { ?>
+            <a href="
+            <?php
+			echo esc_url(
+				add_query_arg(
+					array(
+						'page' => 'mailarchiver-settings',
+						'tab'  => 'wpcli',
+					),
+					admin_url( 'admin.php' )
+				)
+			);
+			?>
+            " class="nav-tab <?php echo 'wpcli' === $active_tab ? 'nav-tab-active' : ''; ?>" style="float:right;">WP-CLI</a>
+		<?php } ?>
 	</h2>
 
 	<?php if ( 'archivers' === $active_tab ) { ?>
@@ -69,5 +84,9 @@ $active_tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'archivers' );
 	<?php } ?>
 	<?php if ( 'about' === $active_tab ) { ?>
 		<?php include __DIR__ . '/mailarchiver-admin-settings-about.php'; ?>
+	<?php } ?>
+	<?php if ( 'wpcli' === $active_tab ) { ?>
+		<?php wp_enqueue_style( MAILARCHIVER_ASSETS_ID ); ?>
+		<?php echo do_shortcode( '[mailarchiver-wpcli]' ); ?>
 	<?php } ?>
 </div>
