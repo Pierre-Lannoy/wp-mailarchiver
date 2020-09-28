@@ -11,7 +11,6 @@ namespace Mailarchiver\Plugin;
 
 use Mailarchiver\Plugin\Feature\Archive;
 use Mailarchiver\Plugin\Feature\ArchiverMaintainer;
-use Parsedown;
 use Mailarchiver\System\Nag;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Environment;
