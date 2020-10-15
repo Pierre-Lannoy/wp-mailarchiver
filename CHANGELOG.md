@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased - Will be 2.0.0]
 
 ### Added
+- [WP-CLI] New command to display MailArchiver status: see `wp help m-archive status` for details.
+- [WP-CLI] New command to toggle on/off main settings: see `wp help m-archive settings` for details.
+- [WP-CLI] New command to manage archivers (list, start, pause, clean, purge, remove, add and set): see `wp help m-archive logger` for details.
+- [WP-CLI] New command to view available archiver types (list and describe): see `wp help m-archive type` for details.
 - New Site Health "info" section about shared memory.
-- [WP-CLI] New command to display DecaLog status: see `wp help log status` for details.
 
 ### Changed
 - The positions of PerfOps menus are pushed lower to avoid collision with other plugins (thanks to [Loïc Antignac](https://github.com/webaxones)).
