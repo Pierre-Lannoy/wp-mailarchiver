@@ -39,7 +39,7 @@ class HandlerTypes {
 	 */
 	public function __construct() {
 		$this->handlers[] = [
-			'version'       => DECALOG_VERSION,
+			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'NullHandler',
 			'ancestor'      => 'NullHandler',
 			'namespace'     => 'Monolog\Handler',
@@ -53,7 +53,7 @@ class HandlerTypes {
 			'init'          => [],
 		];
 		$this->handlers[] = [
-			'version'       => DECALOG_VERSION,
+			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'FluentHandler',
 			'ancestor'      => 'SocketHandler',
 			'namespace'     => 'Mailarchiver\\Handler',
@@ -109,7 +109,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
-			'version'       => DECALOG_VERSION,
+			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'LogentriesHandler',
 			'ancestor'      => 'SocketHandler',
 			'namespace'     => 'Mailarchiver\\Handler',
@@ -211,7 +211,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
-			'version'       => DECALOG_VERSION,
+			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'PshHandler',
 			'ancestor'      => 'SocketHandler',
 			'namespace'     => 'Mailarchiver\\Handler',
@@ -559,7 +559,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
-			'version'       => DECALOG_VERSION,
+			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'WordpressHandler',
 			'ancestor'      => 'WordpressHandler',
 			'namespace'     => 'Mailarchiver\Handler',
