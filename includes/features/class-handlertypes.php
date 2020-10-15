@@ -39,10 +39,11 @@ class HandlerTypes {
 	 */
 	public function __construct() {
 		$this->handlers[] = [
+			'version'       => DECALOG_VERSION,
 			'id'            => 'NullHandler',
 			'ancestor'      => 'NullHandler',
 			'namespace'     => 'Monolog\Handler',
-			'class'         => 'null',
+			'class'         => 'system',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Blackhole', 'mailarchiver' ),
 			'help'          => esc_html__( 'Any email it can handle will be thrown away.', 'mailarchiver' ),
@@ -52,6 +53,7 @@ class HandlerTypes {
 			'init'          => [],
 		];
 		$this->handlers[] = [
+			'version'       => DECALOG_VERSION,
 			'id'            => 'FluentHandler',
 			'ancestor'      => 'SocketHandler',
 			'namespace'     => 'Mailarchiver\\Handler',
@@ -107,6 +109,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
+			'version'       => DECALOG_VERSION,
 			'id'            => 'LogentriesHandler',
 			'ancestor'      => 'SocketHandler',
 			'namespace'     => 'Mailarchiver\\Handler',
@@ -175,6 +178,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
+			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'LogglyHandler',
 			'ancestor'      => 'LogglyHandler',
 			'namespace'     => 'Monolog\\Handler',
@@ -207,6 +211,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
+			'version'       => DECALOG_VERSION,
 			'id'            => 'PshHandler',
 			'ancestor'      => 'SocketHandler',
 			'namespace'     => 'Mailarchiver\\Handler',
@@ -290,6 +295,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
+			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'RotatingFileHandler',
 			'ancestor'      => 'StreamHandler',
 			'namespace'     => 'Monolog\Handler',
@@ -350,6 +356,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
+			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'SlackWebhookHandler',
 			'ancestor'      => 'SlackWebhookHandler',
 			'namespace'     => 'Monolog\Handler',
@@ -434,6 +441,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
+			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'SyslogUdpHandler',
 			'ancestor'      => 'UdpSocket',
 			'namespace'     => 'Monolog\Handler',
@@ -551,6 +559,7 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
+			'version'       => DECALOG_VERSION,
 			'id'            => 'WordpressHandler',
 			'ancestor'      => 'WordpressHandler',
 			'namespace'     => 'Mailarchiver\Handler',

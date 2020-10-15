@@ -161,6 +161,21 @@ class WordpressHandler {
 	}
 
 	/**
+	 * Force table purge.
+	 *
+	 * @since    2.0.0
+	 */
+	public function force_purge() {
+		global $wpdb;
+		if ( '' !== $this->table ) {
+			Logger::debug( sprintf( 'Table "%s" purged.', $this->table ) );
+			$sql = 'TRUNCATE TABLE ' . $this->table;
+			// phpcs:ignore
+			$wpdb->query( $sql );
+		}
+	}
+
+	/**
 	 * Rotate and purge.
 	 *
 	 * @since    1.0.0

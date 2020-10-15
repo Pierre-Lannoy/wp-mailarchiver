@@ -156,8 +156,8 @@ class ArchiverFactory {
 	 * @since    1.0.0
 	 */
 	public function check( $archiver, $init_handler = false ) {
-		$archiver  = $this->standard_check( $archiver );
-		$handler = $this->handler_types->get( $archiver['handler'] );
+		$archiver = $this->standard_check( $archiver );
+		$handler  = $this->handler_types->get( $archiver['handler'] );
 		if ( $handler && in_array( 'privacy', $handler['params'], true ) ) {
 			$archiver = $this->privacy_check( $archiver );
 		}
@@ -184,13 +184,48 @@ class ArchiverFactory {
 	 * @param   array $archiver  The archiver definition.
 	 * @since    1.0.0
 	 */
-	public function clean( $archiver ) {
+	public function destroy( $archiver ) {
 		if ( array_key_exists( 'uuid', $archiver ) ) {
 			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
 			if ( class_exists( $classname ) ) {
 				$instance = $this->create_instance( $classname );
 				$instance->set_archiver( $archiver );
 				$instance->finalize();
+			}
+		}
+	}
+
+	/**
+	 * Force purge the $archiver.
+	 *
+	 * @param   array $archiver  The $archiver definition.
+	 * @since    2.0.0
+	 */
+	public function purge( $archiver ) {
+		if ( array_key_exists( 'uuid', $archiver ) ) {
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
+			if ( class_exists( $classname ) ) {
+				$instance = $this->create_instance( $classname );
+				$instance->set_archiver( $archiver );
+				$instance->force_purge();
+			}
+		}
+	}
+
+	/**
+	 * Clean the $archiver.
+	 *
+	 * @param   array $logger  The $archiver definition.
+	 * @return  integer     The number of deleted records.
+	 * @since    2.0.0
+	 */
+	public function clean( $archiver ) {
+		if ( array_key_exists( 'uuid', $archiver ) ) {
+			$classname = 'Mailarchiver\Plugin\Feature\\' . $archiver['handler'];
+			if ( class_exists( $classname ) ) {
+				$instance = $this->create_instance( $classname );
+				$instance->set_archiver( $archiver );
+				return $instance->cron_clean();
 			}
 		}
 	}

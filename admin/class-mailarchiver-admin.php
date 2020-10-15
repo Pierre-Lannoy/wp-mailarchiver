@@ -600,7 +600,7 @@ class Mailarchiver_Admin {
 					$uuid      = $this->current_archiver['uuid'];
 					$archivers = Option::network_get( 'archivers' );
 					$factory   = new ArchiverFactory();
-					$factory->clean( $this->current_archiver );
+					$factory->destroy( $this->current_archiver );
 					unset( $archivers[ $uuid ] );
 					Option::network_set( 'archivers', $archivers );
 					$message = sprintf( esc_html__( 'Archiver %s has been removed.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );

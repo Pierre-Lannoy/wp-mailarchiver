@@ -47,7 +47,7 @@ class ProcessorTypes {
 		$this->processors[]           = [
 			'id'        => 'WordpressProcessor',
 			'namespace' => 'Mailarchiver\\Processor',
-			'name'      => esc_html__( 'WordPress ', 'mailarchiver' ),
+			'name'      => esc_html__( 'WordPress', 'mailarchiver' ),
 			'help'      => esc_html__( 'Allows to record site, user and remote IP of the current request.', 'mailarchiver' ),
 			'init'      => [
 				[
