@@ -3,6 +3,11 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unrelaase - will be 2.0.1]
+
+### Fixed
+- Some typos in `readme.txt` and `README.md`.
+
 ## [2.0.0] - 2020-10-15
 
 ### Added
