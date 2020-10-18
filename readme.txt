@@ -34,7 +34,7 @@ At this time, **MailArchiver** can archive emails:
 **MailArchiver** supports an extensive set of WP-CLI commands to:
 
 * toggle on/off main settings - see `wp help m-archive settings` for details;
-* manage archivers (list, start, pause, clean, purge, remove, add and set) - see `wp help m-archive logger` for details;
+* manage archivers (list, start, pause, clean, purge, remove, add and set) - see `wp help m-archive archiver` for details;
 * view available archiver types (list and describe) - see `wp help m-archive type` for details.
 
 For a full help on WP-CLI commands in DecaLog, please [read this guide](https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md).
