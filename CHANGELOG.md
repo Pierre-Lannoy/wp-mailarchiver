@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improvement in the way roles are detected.
 
 ### Fixed
+- [SEC001] User must be wrongly detected in XML-RPC or Rest API calls.
 - Some typos in `readme.txt` and `README.md`.
 
 ## [2.0.0] - 2020-10-15
