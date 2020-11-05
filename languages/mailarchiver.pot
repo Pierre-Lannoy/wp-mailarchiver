@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MailArchiver\n"
-"POT-Creation-Date: 2020-03-01 16:58+0100\n"
+"POT-Creation-Date: 2020-11-05 18:16+0100\n"
 "PO-Revision-Date: 2019-07-08 14:07+0200\n"
 "Last-Translator: Pierre Lannoy <pierre@lannoy.fr>\n"
 "Language-Team: Pierre Lannoy <pierre@lannoy.fr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: mailarchiver.php\n"
@@ -22,183 +22,184 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #. translators: as in the sentence "Mailarchiver Settings" or "WordPress Settings"
-#: admin/class-mailarchiver-admin.php:147
+#: admin/class-mailarchiver-admin.php:144
 #: admin/partials/mailarchiver-admin-settings-main.php:19
 #: perfopsone/class-adminmenus.php:70
 #, php-format
 msgid "%s Settings"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:163 admin/class-mailarchiver-admin.php:170
-msgid "Archived Mails"
+#: admin/class-mailarchiver-admin.php:160 admin/class-mailarchiver-admin.php:259
+msgid "Archived Emails"
 msgstr ""
 
-#. translators: as in the sentence "Access the mails sent from your network." or "Access the mails sent from your website."
-#: admin/class-mailarchiver-admin.php:165
+#. translators: as in the sentence "Access the emails sent from your network." or "Access the emails sent from your website."
+#: admin/class-mailarchiver-admin.php:162
 #, php-format
-msgid "Access the mails sent from your %s."
+msgid "Access the emails sent from your %s."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:165
+#: admin/class-mailarchiver-admin.php:162
 msgid "network"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:165
+#: admin/class-mailarchiver-admin.php:162
 msgid "website"
 msgstr ""
 
 #. translators: as in the sentence "Mailarchiver Viewer"
-#: admin/class-mailarchiver-admin.php:169
+#: admin/class-mailarchiver-admin.php:166
 #: admin/partials/mailarchiver-admin-view-events.php:20
 #, php-format
 msgid "%s Viewer"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:208 admin/class-mailarchiver-admin.php:225
-#: admin/class-mailarchiver-admin.php:818 admin/class-mailarchiver-admin.php:862
+#: admin/class-mailarchiver-admin.php:167
+msgid "Archived Mails"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:205 admin/class-mailarchiver-admin.php:222
+#: admin/class-mailarchiver-admin.php:815 admin/class-mailarchiver-admin.php:859
 msgid "Archived emails"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:236
+#: admin/class-mailarchiver-admin.php:233
 msgid "Archivers options"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:237
+#: admin/class-mailarchiver-admin.php:234
 msgid "Plugin options"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:243
+#: admin/class-mailarchiver-admin.php:240
 msgid "Privacy options"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:244 includes/features/class-archivers.php:236
+#: admin/class-mailarchiver-admin.php:241 includes/features/class-archivers.php:236
 msgid "Reported details"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:260
+#: admin/class-mailarchiver-admin.php:257
 msgid "Settings"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:262
-msgid "Archived Emails"
-msgstr ""
-
-#: admin/class-mailarchiver-admin.php:277
+#: admin/class-mailarchiver-admin.php:274
 msgid "Support"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:278 includes/features/class-inlinehelp.php:97
+#: admin/class-mailarchiver-admin.php:275 includes/features/class-inlinehelp.php:97
 msgid "GitHub repository"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:334 admin/class-mailarchiver-admin.php:715
+#: admin/class-mailarchiver-admin.php:331 admin/class-mailarchiver-admin.php:712
+#: includes/features/class-wpcli.php:301
 msgid "New archiver"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:381
+#: admin/class-mailarchiver-admin.php:378
 #, php-format
 msgid "Archiver %s has started."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:394
+#: admin/class-mailarchiver-admin.php:391
 #, php-format
 msgid "Archiver %s has been paused."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:453
+#: admin/class-mailarchiver-admin.php:450
 msgid "Listeners settings have been saved."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:458
+#: admin/class-mailarchiver-admin.php:455
 msgid "Listeners settings have not been saved. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:475
+#: admin/class-mailarchiver-admin.php:472
 msgid "Listeners settings have been reset to defaults."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:480
+#: admin/class-mailarchiver-admin.php:477
 msgid "Listeners settings have not been reset to defaults. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:499
+#: admin/class-mailarchiver-admin.php:496
 msgid "Plugin settings have been saved."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:504
+#: admin/class-mailarchiver-admin.php:501
 msgid "Plugin settings have not been saved. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:521
+#: admin/class-mailarchiver-admin.php:518
 msgid "Plugin settings have been reset to defaults."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:526
+#: admin/class-mailarchiver-admin.php:523
 msgid "Plugin settings have not been reset to defaults. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:580
+#: admin/class-mailarchiver-admin.php:577
 #, php-format
 msgid "Archiver %s has been saved."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:586
+#: admin/class-mailarchiver-admin.php:583
 #, php-format
 msgid "Archiver %s has not been saved. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:609
+#: admin/class-mailarchiver-admin.php:606
 #, php-format
 msgid "Archiver %s has been removed."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:615
+#: admin/class-mailarchiver-admin.php:612
 #, php-format
 msgid "Archiver %s has not been removed. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:632
+#: admin/class-mailarchiver-admin.php:629
 msgid "Activate"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:638
+#: admin/class-mailarchiver-admin.php:635
 msgid "Selected listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:639
+#: admin/class-mailarchiver-admin.php:636
 msgid "All available listeners (recommended)"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:643
+#: admin/class-mailarchiver-admin.php:640
 msgid "Automatically or selectively choose which sources to listen."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:677
+#: admin/class-mailarchiver-admin.php:674
 msgid "Standard listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:678
+#: admin/class-mailarchiver-admin.php:675
 msgid "Plugin listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:679
+#: admin/class-mailarchiver-admin.php:676
 msgid "Theme listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:720
+#: admin/class-mailarchiver-admin.php:717
 msgid "Auto-start"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:723
+#: admin/class-mailarchiver-admin.php:720
 msgid "If checked, when a new archiver is added it automatically starts."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:740
+#: admin/class-mailarchiver-admin.php:737
 #, php-format
 msgid "Your site is currently using %s."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:743
+#: admin/class-mailarchiver-admin.php:740
 #, php-format
 msgid ""
 "Your site does not use any logging plugin. To log all events triggered in "
@@ -206,107 +207,107 @@ msgid ""
 "not mandatory."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:747 includes/features/class-inlinehelp.php:176
+#: admin/class-mailarchiver-admin.php:744 includes/features/class-inlinehelp.php:176
 msgid "Logging"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:758
+#: admin/class-mailarchiver-admin.php:755
 msgid "Resources"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:763
+#: admin/class-mailarchiver-admin.php:760
 msgid "Use public CDN"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:766
+#: admin/class-mailarchiver-admin.php:763
 msgid "Use CDN (jsDelivr) to serve MailArchiver scripts and stylesheets."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:774
+#: admin/class-mailarchiver-admin.php:771
 msgid "Admin notices"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:779
+#: admin/class-mailarchiver-admin.php:776
 msgid "Display"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:782
+#: admin/class-mailarchiver-admin.php:779
 msgid "Allows MailArchiver to display admin notices throughout the admin dashboard."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:782
+#: admin/class-mailarchiver-admin.php:779
 msgid "Note: MailArchiver respects DISABLE_NAG_NOTICES flag."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:803 admin/class-mailarchiver-admin.php:847
+#: admin/class-mailarchiver-admin.php:800 admin/class-mailarchiver-admin.php:844
 msgid "Name"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:810
+#: admin/class-mailarchiver-admin.php:807
 msgid "Used only in admin dashboard."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:826
+#: admin/class-mailarchiver-admin.php:823
 msgid "What kind of emails should be archived."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:892
+#: admin/class-mailarchiver-admin.php:889
 msgid "Enabled"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:926
+#: admin/class-mailarchiver-admin.php:923
 msgid "Remote IPs"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:931
+#: admin/class-mailarchiver-admin.php:928
 msgid "Obfuscation"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:934
+#: admin/class-mailarchiver-admin.php:931
 msgid "If checked, recorded fields will contain hashes instead of real IPs."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:934 admin/class-mailarchiver-admin.php:950
+#: admin/class-mailarchiver-admin.php:931 admin/class-mailarchiver-admin.php:947
 msgid "Note: it concerns all fields except email content."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:942
+#: admin/class-mailarchiver-admin.php:939
 msgid "Users"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:947
+#: admin/class-mailarchiver-admin.php:944
 msgid "Pseudonymisation"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:950
+#: admin/class-mailarchiver-admin.php:947
 msgid "If checked, recorded fields will contain hashes instead of user IDs & names."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:958
+#: admin/class-mailarchiver-admin.php:955
 msgid "Email adresses"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:963
+#: admin/class-mailarchiver-admin.php:960
 msgid "Masking"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:966
+#: admin/class-mailarchiver-admin.php:963
 msgid "If checked, recorded fields will contain hashes instead of email adresses."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:966
+#: admin/class-mailarchiver-admin.php:963
 msgid "Note: it concerns only \"to\" and \"from\" fields."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:1000 includes/features/class-archivers.php:204
+#: admin/class-mailarchiver-admin.php:997 includes/features/class-archivers.php:204
 msgid "Standard"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:1005 admin/class-mailarchiver-admin.php:1024
+#: admin/class-mailarchiver-admin.php:1002 admin/class-mailarchiver-admin.php:1021
 msgid "Included"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:1008
+#: admin/class-mailarchiver-admin.php:1005
 msgid "Allows to record standard MailArchiver information."
 msgstr ""
 
@@ -382,7 +383,7 @@ msgid "Reset to Defaults"
 msgstr ""
 
 #: admin/partials/mailarchiver-admin-settings-main.php:35
-#: includes/system/class-sitehealth.php:165
+#: includes/system/class-sitehealth.php:166
 msgid "Archivers"
 msgstr ""
 
@@ -400,7 +401,6 @@ msgstr ""
 
 #: admin/partials/mailarchiver-admin-view-events-bottom.php:21
 #: admin/partials/mailarchiver-admin-view-events-top.php:21
-#: includes/features/class-events.php:679
 msgid "Apply"
 msgstr ""
 
@@ -424,7 +424,7 @@ msgstr ""
 msgid "Only emails in error"
 msgstr ""
 
-#: includes/features/class-archiverfactory.php:207
+#: includes/features/class-archiverfactory.php:242
 msgid "Unnamed archiver"
 msgstr ""
 
@@ -521,87 +521,83 @@ msgstr ""
 msgid "MU-Plugin"
 msgstr ""
 
-#: includes/features/class-events.php:175
+#: includes/features/class-events.php:176
 #: includes/features/class-eventviewer.php:406
 msgid "Masked address"
 msgstr ""
 
-#: includes/features/class-events.php:232
+#: includes/features/class-events.php:233
 #, php-format
 msgid "Site ID %s"
 msgstr ""
 
-#: includes/features/class-events.php:246
+#: includes/features/class-events.php:247
 #: includes/features/class-eventviewer.php:438
 msgid "Anonymous user"
 msgstr ""
 
-#: includes/features/class-events.php:250
+#: includes/features/class-events.php:251
 #: includes/features/class-eventviewer.php:440
 msgid "Pseudonymized user"
 msgstr ""
 
-#: includes/features/class-events.php:253
+#: includes/features/class-events.php:254
 #, php-format
 msgid "User ID %s"
 msgstr ""
 
-#: includes/features/class-events.php:269
+#: includes/features/class-events.php:270
 msgid "Obfuscated"
 msgstr ""
 
-#: includes/features/class-events.php:341
+#: includes/features/class-events.php:342
 msgid "Remove this filter"
 msgstr ""
 
-#: includes/features/class-events.php:347
+#: includes/features/class-events.php:348
 msgid "Add as filter"
 msgstr ""
 
-#: includes/features/class-events.php:449
+#: includes/features/class-events.php:450
 msgid "All"
 msgstr ""
 
-#: includes/features/class-events.php:451
+#: includes/features/class-events.php:452
 msgid "Errors"
 msgstr ""
 
-#: includes/features/class-events.php:502
+#: includes/features/class-events.php:503
 #, php-format
 msgid "Show %d lines per page"
 msgstr ""
 
-#: includes/features/class-events.php:673
-msgid "Extra columns"
-msgstr ""
-
-#: includes/features/class-events.php:711
+#: includes/features/class-events.php:633
 msgid "Email"
 msgstr ""
 
-#: includes/features/class-events.php:712
+#: includes/features/class-events.php:634
 msgid "To"
 msgstr ""
 
-#: includes/features/class-events.php:713
+#: includes/features/class-events.php:635
 msgid "Time"
 msgstr ""
 
-#: includes/features/class-events.php:715
+#: includes/features/class-events.php:637
 #: includes/features/class-eventviewer.php:324
-#: includes/features/class-inlinehelp.php:354
+#: includes/features/class-inlinehelp.php:346
 msgid "Attachments"
 msgstr ""
 
-#: includes/features/class-events.php:716
+#: includes/features/class-events.php:638
 msgid "Site"
 msgstr ""
 
-#: includes/features/class-events.php:717
+#: includes/features/class-events.php:639
 msgid "User"
 msgstr ""
 
-#: includes/features/class-events.php:718
+#: includes/features/class-events.php:640
 msgid "Remote IP"
 msgstr ""
 
@@ -658,27 +654,27 @@ msgid "Email: %s"
 msgstr ""
 
 #: includes/features/class-eventviewer.php:320
-#: includes/features/class-inlinehelp.php:351
+#: includes/features/class-inlinehelp.php:343
 msgid "Message details"
 msgstr ""
 
 #: includes/features/class-eventviewer.php:321
-#: includes/features/class-inlinehelp.php:352
+#: includes/features/class-inlinehelp.php:344
 msgid "Recipients"
 msgstr ""
 
 #: includes/features/class-eventviewer.php:322
-#: includes/features/class-inlinehelp.php:353
+#: includes/features/class-inlinehelp.php:345
 msgid "Request details"
 msgstr ""
 
 #: includes/features/class-eventviewer.php:325
-#: includes/features/class-inlinehelp.php:355
+#: includes/features/class-inlinehelp.php:347
 msgid "Headers"
 msgstr ""
 
 #: includes/features/class-eventviewer.php:327
-#: includes/features/class-inlinehelp.php:356
+#: includes/features/class-inlinehelp.php:348
 msgid "Content"
 msgstr ""
 
@@ -686,266 +682,266 @@ msgstr ""
 msgid "Deleted user"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:47
+#: includes/features/class-handlertypes.php:48
 msgid "Blackhole"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:48
+#: includes/features/class-handlertypes.php:49
 msgid "Any email it can handle will be thrown away."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:60
+#: includes/features/class-handlertypes.php:62
 msgid "Fluentd"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:61
+#: includes/features/class-handlertypes.php:63
 msgid "An archive sent to a Fluentd collector."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:68
+#: includes/features/class-handlertypes.php:70
 msgid "Connection string"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:69
+#: includes/features/class-handlertypes.php:71
 msgid ""
 "Connection string to Fluentd. Can be something like \"tcp://127.0.0.1:24224\" or "
 "something like \"unix:///var/run/td-agent/td-agent.sock\"."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:80
-#: includes/features/class-handlertypes.php:148
-#: includes/features/class-handlertypes.php:259
+#: includes/features/class-handlertypes.php:82
+#: includes/features/class-handlertypes.php:151
+#: includes/features/class-handlertypes.php:264
 msgid "Socket timeout"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:81
-#: includes/features/class-handlertypes.php:149
-#: includes/features/class-handlertypes.php:260
+#: includes/features/class-handlertypes.php:83
+#: includes/features/class-handlertypes.php:152
+#: includes/features/class-handlertypes.php:265
 msgid "Max number of milliseconds to wait for the socket."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:115
+#: includes/features/class-handlertypes.php:118
 msgid "Logentries & insightOps"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:116
+#: includes/features/class-handlertypes.php:119
 msgid "An archive sent to Logentries & insightOps service."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:123
+#: includes/features/class-handlertypes.php:126
 msgid "Log endpoint region"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:124
+#: includes/features/class-handlertypes.php:127
 msgid "The region of remote host receiving messages."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:130
+#: includes/features/class-handlertypes.php:133
 msgid "Europe"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:130
+#: includes/features/class-handlertypes.php:133
 msgid "USA"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:136
+#: includes/features/class-handlertypes.php:139
 msgid "Log token"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:137
+#: includes/features/class-handlertypes.php:140
 msgid "The token of the Logentries/insightOps log."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:183
+#: includes/features/class-handlertypes.php:187
 msgid "Loggly"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:184
+#: includes/features/class-handlertypes.php:188
 msgid "An archive sent to Solawinds Loggly service."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:191
-#: includes/features/class-handlertypes.php:223
+#: includes/features/class-handlertypes.php:195
+#: includes/features/class-handlertypes.php:228
 msgid "Application token"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:192
+#: includes/features/class-handlertypes.php:196
 msgid "The token of the Solawinds Loggly application."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:215
+#: includes/features/class-handlertypes.php:220
 msgid "Pushover"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:216
+#: includes/features/class-handlertypes.php:221
 msgid "Emails in error signaled to Pushover service."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:224
+#: includes/features/class-handlertypes.php:229
 msgid "The token of the Pushover application."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:235
+#: includes/features/class-handlertypes.php:240
 msgid "Recipient"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:236
+#: includes/features/class-handlertypes.php:241
 msgid "The recipient key. It can be a \"user key\" or a \"group key\"."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:247
+#: includes/features/class-handlertypes.php:252
 msgid "Message title"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:248
+#: includes/features/class-handlertypes.php:253
 msgid "The title of the message which will be sent."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:298
+#: includes/features/class-handlertypes.php:304
 msgid "Rotating files"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:299
+#: includes/features/class-handlertypes.php:305
 msgid ""
 "An archive sent to files that are rotated every day and a limited number of files "
 "are kept."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:306
+#: includes/features/class-handlertypes.php:312
 msgid "File"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:307
+#: includes/features/class-handlertypes.php:313
 msgid "The full absolute path and filename, like \"/path/to/file\"."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:318
+#: includes/features/class-handlertypes.php:324
 msgid "Maximum"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:319
+#: includes/features/class-handlertypes.php:325
 msgid "The maximal number of files to keep (0 means unlimited)."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:353
+#: includes/features/class-handlertypes.php:365
 msgid "Slack"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:354
+#: includes/features/class-handlertypes.php:366
 msgid "Emails in error signaled through Slack Webhooks."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:361
+#: includes/features/class-handlertypes.php:373
 msgid "Webhook URL"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:362
+#: includes/features/class-handlertypes.php:374
 msgid "The Webhook URL set in the Slack application."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:373
+#: includes/features/class-handlertypes.php:385
 msgid "Short version"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:374
+#: includes/features/class-handlertypes.php:386
 msgid "Use a shortened version of details sent in channel."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:385
+#: includes/features/class-handlertypes.php:397
 msgid "Full data"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:386
+#: includes/features/class-handlertypes.php:398
 msgid "Whether the sent details should include context and extra data."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:437
+#: includes/features/class-handlertypes.php:450
 msgid "Syslog"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:438
+#: includes/features/class-handlertypes.php:451
 msgid "An archive sent to a remote syslogd server."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:445
+#: includes/features/class-handlertypes.php:458
 msgid "Host"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:446
+#: includes/features/class-handlertypes.php:459
 msgid "The remote host receiving syslog messages."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:457
+#: includes/features/class-handlertypes.php:470
 msgid "Protocol"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:458
+#: includes/features/class-handlertypes.php:471
 msgid "The used syslog protocol."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:469
+#: includes/features/class-handlertypes.php:482
 msgid "Port"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:470
+#: includes/features/class-handlertypes.php:483
 msgid "The opened port on remote host to receive syslog messages."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:484
+#: includes/features/class-handlertypes.php:497
 msgid "Facility"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:485
+#: includes/features/class-handlertypes.php:498
 msgid "The syslog facility for messages sent by MailArchiver."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:496
+#: includes/features/class-handlertypes.php:509
 msgid "Identifier"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:497
+#: includes/features/class-handlertypes.php:510
 msgid "The program identifier for archive sent by MailArchiver."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:508
+#: includes/features/class-handlertypes.php:521
 msgid "Time format"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:509
+#: includes/features/class-handlertypes.php:522
 msgid "The time format standard to use."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:554
+#: includes/features/class-handlertypes.php:568
 msgid "WordPress archiver"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:555
+#: includes/features/class-handlertypes.php:569
 msgid ""
 "An archive stored in your WordPress database and available right in your admin "
 "dashboard."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:562
+#: includes/features/class-handlertypes.php:576
 msgid "Mails"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:563
+#: includes/features/class-handlertypes.php:577
 msgid "Maximum number of emails stored in this archive (0 for no limit)."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:577
+#: includes/features/class-handlertypes.php:591
 msgid "Days"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:578
+#: includes/features/class-handlertypes.php:592
 msgid "Maximum age of emails stored in this archive (0 for no limit)."
 msgstr ""
 
-#: includes/features/class-handlertypes.php:592
+#: includes/features/class-handlertypes.php:606
 msgid "Multisite partitioning"
 msgstr ""
 
-#: includes/features/class-handlertypes.php:593
+#: includes/features/class-handlertypes.php:607
 msgid "Local administrators can view emails sent via their site."
 msgstr ""
 
@@ -1027,7 +1023,7 @@ msgstr ""
 #: includes/features/class-inlinehelp.php:219
 #: includes/features/class-inlinehelp.php:252
 #: includes/features/class-inlinehelp.php:310
-#: includes/features/class-inlinehelp.php:358
+#: includes/features/class-inlinehelp.php:350
 msgid "Overview"
 msgstr ""
 
@@ -1056,13 +1052,13 @@ msgstr ""
 #: includes/features/class-inlinehelp.php:190
 #: includes/features/class-inlinehelp.php:226
 #: includes/features/class-inlinehelp.php:259
-#: includes/features/class-inlinehelp.php:325
+#: includes/features/class-inlinehelp.php:317
 msgid "Admin rights"
 msgstr ""
 
 #: includes/features/class-inlinehelp.php:197
-#: includes/features/class-inlinehelp.php:332
-#: includes/features/class-inlinehelp.php:374
+#: includes/features/class-inlinehelp.php:324
+#: includes/features/class-inlinehelp.php:366
 msgid "Status levels"
 msgstr ""
 
@@ -1135,86 +1131,79 @@ msgstr ""
 msgid "Note these filters are effective even on pseudonymized or obfuscated fields."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:315
-#: includes/features/class-inlinehelp.php:363
-msgid ""
-"You can use the following controls to arrange the screen to suit your usage "
-"preferences:"
-msgstr ""
-
-#: includes/features/class-inlinehelp.php:316
-#: includes/features/class-inlinehelp.php:364
-msgid "Screen Options"
-msgstr ""
-
-#: includes/features/class-inlinehelp.php:316
-msgid "Use the Screen Options tab to choose which extra columns to show."
-msgstr ""
-
-#: includes/features/class-inlinehelp.php:318
-#: includes/features/class-inlinehelp.php:368
-msgid "Layout"
-msgstr ""
-
-#: includes/features/class-inlinehelp.php:350
+#: includes/features/class-inlinehelp.php:342
 msgid "This screen displays the details of a specific email."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:350
+#: includes/features/class-inlinehelp.php:342
 msgid ""
 "It consists of four to six boxes, depending on your settings, which give specific "
 "details of the email:"
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:351
+#: includes/features/class-inlinehelp.php:343
 msgid "General information about the email."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:352
+#: includes/features/class-inlinehelp.php:344
 msgid "List of recipients."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:353
+#: includes/features/class-inlinehelp.php:345
 msgid "Process, user and site from where the email was sent."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:354
+#: includes/features/class-inlinehelp.php:346
 msgid "List of the email attachements."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:355
+#: includes/features/class-inlinehelp.php:347
 msgid "List of the email headers."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:356
+#: includes/features/class-inlinehelp.php:348
 msgid "The content of the email itself."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:364
+#: includes/features/class-inlinehelp.php:355
+msgid ""
+"You can use the following controls to arrange the screen to suit your usage "
+"preferences:"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:356
+msgid "Screen Options"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:356
 msgid "Use the Screen Options tab to choose which boxes to show."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:365
+#: includes/features/class-inlinehelp.php:357
 msgid "Drag and Drop"
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:365
+#: includes/features/class-inlinehelp.php:357
 msgid ""
 "To rearrange the boxes, drag and drop by clicking on the title bar of the "
 "selected box and releasing when you see a gray dotted-line rectangle appear in "
 "the location you want to place the box."
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:366
+#: includes/features/class-inlinehelp.php:358
 msgid "Box Controls"
 msgstr ""
 
-#: includes/features/class-inlinehelp.php:366
+#: includes/features/class-inlinehelp.php:358
 msgid "Click the title bar of the box to expand or collapse it."
 msgstr ""
 
+#: includes/features/class-inlinehelp.php:360
+msgid "Layout"
+msgstr ""
+
 #: includes/features/class-processortypes.php:50
-msgid "WordPress "
+msgid "WordPress"
 msgstr ""
 
 #: includes/features/class-processortypes.php:51
@@ -1231,7 +1220,7 @@ msgstr ""
 
 #: includes/libraries/class-libraries.php:65
 #: includes/libraries/class-libraries.php:76
-#: includes/libraries/class-libraries.php:98
+#: includes/libraries/class-libraries.php:97
 #, php-format
 msgid "%s & contributors"
 msgstr ""
@@ -1279,10 +1268,6 @@ msgstr ""
 #: includes/plugin/class-updater.php:52
 #, php-format
 msgid "See <a href=\"%s\">what's new</a>."
-msgstr ""
-
-#: includes/plugin/class-updater.php:98
-msgid "Sorry, unable to find or read changelog file."
 msgstr ""
 
 #: includes/system/class-conversion.php:46
@@ -1397,122 +1382,151 @@ msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/system/class-environment.php:193
+#: includes/system/class-environment.php:194
 msgid "log"
 msgstr ""
 
-#: includes/system/class-environment.php:198
+#: includes/system/class-environment.php:199
 msgid "display"
 msgstr ""
 
-#: includes/system/class-environment.php:204
+#: includes/system/class-environment.php:205
 msgid "Debug enabled"
 msgstr ""
 
-#: includes/system/class-environment.php:204
+#: includes/system/class-environment.php:205
 msgid "Debug disabled"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:124
+#: includes/system/class-markdown.php:46
+msgid "Sorry, unable to find or read the specified file."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:125
 msgid "Object cache"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:132
+#: includes/system/class-sitehealth.php:133
 msgid "OPcache settings and status"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:149
+#: includes/system/class-sitehealth.php:150
 msgid "Plugin diagnostic information"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:166
+#: includes/system/class-sitehealth.php:167
 msgid "Archivers list"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:184
+#: includes/system/class-sitehealth.php:185
 msgid "Object Cache Test"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:202
+#: includes/system/class-sitehealth.php:203
 msgid "You should use object caching"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:205 includes/system/class-sitehealth.php:217
-#: includes/system/class-sitehealth.php:229 includes/system/class-sitehealth.php:271
-#: includes/system/class-sitehealth.php:283
+#: includes/system/class-sitehealth.php:206 includes/system/class-sitehealth.php:218
+#: includes/system/class-sitehealth.php:230 includes/system/class-sitehealth.php:272
+#: includes/system/class-sitehealth.php:284 includes/system/class-sitehealth.php:326
+#: includes/system/class-sitehealth.php:338
 msgid "Performance"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:208
+#: includes/system/class-sitehealth.php:209
 msgid "Your site uses database transient."
 msgstr ""
 
-#: includes/system/class-sitehealth.php:208 includes/system/class-sitehealth.php:220
+#: includes/system/class-sitehealth.php:209 includes/system/class-sitehealth.php:221
 msgid ""
 "You should consider using a dedicated object caching mechanism, like Memcached or "
 "Redis, to improve your site's speed."
 msgstr ""
 
-#: includes/system/class-sitehealth.php:214
+#: includes/system/class-sitehealth.php:215
 msgid "You should improve object caching"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:220
+#: includes/system/class-sitehealth.php:221
 msgid ""
 "Your site uses APCu, but only a few plugins know how to take advantage of it."
 msgstr ""
 
-#: includes/system/class-sitehealth.php:226
+#: includes/system/class-sitehealth.php:227
 msgid "Your site uses object caching"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:232
+#: includes/system/class-sitehealth.php:233
 msgid "Your site uses a dedicated object caching mechanism. That's great."
 msgstr ""
 
-#: includes/system/class-sitehealth.php:251
+#: includes/system/class-sitehealth.php:252
 msgid "OPcache Test"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:268
+#: includes/system/class-sitehealth.php:269
 msgid "Your site uses OPcache"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:274
+#: includes/system/class-sitehealth.php:275
 msgid "Your site uses OPcache to improve PHP performance. That's great."
 msgstr ""
 
-#: includes/system/class-sitehealth.php:280
+#: includes/system/class-sitehealth.php:281
 msgid "You should use OPcache"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:286
+#: includes/system/class-sitehealth.php:287
 msgid ""
 "You should consider using OPcache. It would improve PHP performance of your site."
 msgstr ""
 
-#: includes/system/class-sitehealth.php:305
+#: includes/system/class-sitehealth.php:306
+msgid "Shared Memory Test"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:323
+msgid "Your site can use shared memory"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:329
+msgid ""
+"Your site can use shared memory to allow inter-process communication. That's "
+"great."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:335
+msgid "You should allow inter-process communication"
+msgstr ""
+
+#: includes/system/class-sitehealth.php:341
+msgid ""
+"You should consider using shared memory (PHP shmop) to allow inter-process "
+"communication."
+msgstr ""
+
+#: includes/system/class-sitehealth.php:360
 msgid "I18n Extension Test"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:322
+#: includes/system/class-sitehealth.php:377
 msgid "Your site uses Intl extension"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:325 includes/system/class-sitehealth.php:337
+#: includes/system/class-sitehealth.php:380 includes/system/class-sitehealth.php:392
 msgid "Internationalization"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:328
+#: includes/system/class-sitehealth.php:383
 msgid ""
 "Your site uses PHP Intl extension to improve localization features. That's great."
 msgstr ""
 
-#: includes/system/class-sitehealth.php:334
+#: includes/system/class-sitehealth.php:389
 msgid "You should use Intl extension"
 msgstr ""
 
-#: includes/system/class-sitehealth.php:340
+#: includes/system/class-sitehealth.php:395
 msgid ""
 "You should consider using PHP Intl extension. It would improve localization "
 "features on your site."
@@ -1558,59 +1572,68 @@ msgstr ""
 msgid "Control Center"
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:108
+#: perfopsone/class-adminmenus.php:74 perfopsone/class-adminmenus.php:75
+msgid "Available Consoles"
+msgstr ""
+
+#: perfopsone/class-adminmenus.php:74
+#, php-format
+msgid "%s Consoles"
+msgstr ""
+
+#: perfopsone/class-adminmenus.php:112
 msgid "This analytics feature is currently disabled. Click here to activate it."
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:203
+#: perfopsone/class-adminmenus.php:230
 #, php-format
 msgid "Need to be updated to %s."
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:209 perfopsone/class-adminmenus.php:216
+#: perfopsone/class-adminmenus.php:236 perfopsone/class-adminmenus.php:243
 msgid "OK"
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:211 perfopsone/class-adminmenus.php:218
+#: perfopsone/class-adminmenus.php:238 perfopsone/class-adminmenus.php:245
 msgid "need update"
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:228
+#: perfopsone/class-adminmenus.php:255
 #, php-format
 msgid "%s+ installs."
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:233
+#: perfopsone/class-adminmenus.php:260
 #, php-format
 msgid "%s downloads."
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:238
+#: perfopsone/class-adminmenus.php:265
 #, php-format
 msgid "%s reviews."
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:241
+#: perfopsone/class-adminmenus.php:268
 msgid "No review yet."
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:366
+#: perfopsone/class-adminmenus.php:394
 msgid "settings"
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:367
+#: perfopsone/class-adminmenus.php:395
 msgid "about"
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:368
+#: perfopsone/class-adminmenus.php:396
 msgid "support"
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:369
+#: perfopsone/class-adminmenus.php:397
 msgid "contribution"
 msgstr ""
 
-#: perfopsone/class-adminmenus.php:378
+#: perfopsone/class-adminmenus.php:406
 #, php-format
 msgid "Requires at least PHP %1$s%2$s and WordPress %3$s%4$s."
 msgstr ""
