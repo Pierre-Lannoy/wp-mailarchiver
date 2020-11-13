@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improvement in the way roles are detected.
 
 ### Fixed
-- [SEC001] User must be wrongly detected in XML-RPC or Rest API calls.
+- [SEC001] User may be wrongly detected in XML-RPC or Rest API calls.
 - When site is in english and a user choose another language for herself/himself, menu may be stuck in english.
 - Some typos in `readme.txt` and `README.md`.
 
