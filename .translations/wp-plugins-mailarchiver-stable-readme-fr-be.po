@@ -1,14 +1,14 @@
-# Translation of Plugins - MailArchiver - Stable Readme (latest release) in French (France)
+# Translation of Plugins - MailArchiver - Stable Readme (latest release) in French (Belgium)
 # This file is distributed under the same license as the Plugins - MailArchiver - Stable Readme (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-11-28 15:31+0100\n"
+"PO-Revision-Date: 2020-11-28 15:33+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Poedit 2.4.1\n"
-"Language: fr\n"
+"Language: fr_BE\n"
 "Project-Id-Version: Plugins - MailArchiver - Stable Readme (latest release)\n"
 "POT-Creation-Date: \n"
 "Last-Translator: \n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #. Short description.
 msgid "Automatically archive all emails sent from your site. Store them in your WordPress database or send them to external services."
-msgstr "Archivez automatiquement tous les e-mails envoyés à partir de votre site. Stockez-les dans votre base de données WordPress ou envoyez-les à des services externes."
+msgstr "Archivez automatiquement tous les courriels envoyés à partir de votre site. Stockez-les dans votre base de données WordPress ou envoyez-les à des services externes."
 
 #. Plugin name.
 msgid "MailArchiver"
@@ -164,7 +164,7 @@ msgstr "<strong>MailArchiver</strong> est une extension libre et open source pou
 
 #. Found in description paragraph.
 msgid "At this time, <strong>MailArchiver</strong> can archive emails:"
-msgstr "Pour le moment, <strong>MailArchiver</strong> peut archiver les e-mails :"
+msgstr "Pour le moment, <strong>MailArchiver</strong> peut archiver les courriels :"
 
 #. Found in description paragraph.
 msgid "It supports multisite archive delegation (see FAQ) and contains many features to help to protect personal information (user pseudonymization, IP obfuscation, etc.)."
@@ -176,11 +176,11 @@ msgstr "<strong>MailArchiver</strong> est un outil qui vise à :"
 
 #. Found in description paragraph.
 msgid "<strong>Automatically archive all emails sent from your site. Store them in your WordPress database or send them to external services.</strong>"
-msgstr "<strong>Archivez automatiquement tous les e-mails envoyés à partir de votre site. Stockez-les dans votre base de données WordPress ou envoyez-les à des services externes.</strong>"
+msgstr "<strong>Archivez automatiquement tous les courriels envoyés à partir de votre site. Stockez-les dans votre base de données WordPress ou envoyez-les à des services externes.</strong>"
 
 #. Found in description list item.
 msgid "to system loggers, like Syslog or Fluentd;"
-msgstr "avec des journaliseurs systèmes, comme Syslog ou Fluentd ;"
+msgstr "avec des enregistreurs systèmes, comme Syslog ou Fluentd ;"
 
 #. Found in description list item.
 msgid "to external logging services, like Logentries / insightOps or Loggly;"
@@ -200,11 +200,11 @@ msgstr "avec son propre système d’archivage et de visualisation ;"
 
 #. Found in description list item.
 msgid "view (and filter) archived emails in the WordPress database."
-msgstr "afficher (et filtrer) les e-mails enregistrés dans la base de données de WordPress."
+msgstr "afficher (et filtrer) les courriels enregistrés dans la base de données de WordPress."
 
 #. Found in description list item.
 msgid "archive them in the WordPress database and/or send them to external services for logging and alerting;"
-msgstr "archiver ces e-mails dans la base de données WordPress ou les envoyer à des services externes d’enregistrement ou d’alerte ;"
+msgstr "archiver ces courriels dans la base de données WordPress ou les envoyer à des services externes d’enregistrement ou d’alerte ;"
 
 #. Found in description list item.
 msgid "enrich them with details regarding their sending;"
@@ -212,7 +212,7 @@ msgstr "les enrichir avec des détails concernant leur envoi ;"
 
 #. Found in description list item.
 msgid "catch emails sent by WordPress itself or plugins;"
-msgstr "analyser les e-mails envoyés par WordPress lui-même ou par une extension ;"
+msgstr "analyser les courriels envoyés par WordPress lui-même ou par une extension ;"
 
 #. Found in description header.
 msgid "Donation"
@@ -224,7 +224,7 @@ msgstr "Assistance"
 
 #. Screenshot description.
 msgid "Email Details in Internal Viewer"
-msgstr "Détail de l’e-mail avec la visionneuse interne"
+msgstr "Détail du courriel avec la visionneuse interne"
 
 #. Screenshot description.
 msgid "Internal Viewer"

@@ -1,4 +1,4 @@
-# Translation of Plugins - MailArchiver - Stable (latest release) in French (France)
+# Translation of Plugins - MailArchiver - Stable (latest release) in French (Belgium)
 # This file is distributed under the same license as the Plugins - MailArchiver - Stable (latest release) package.
 msgid ""
 msgstr ""
@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Poedit 2.4.1\n"
-"Language: fr\n"
+"Language: fr_BE\n"
 "Project-Id-Version: Plugins - MailArchiver - Stable (latest release)\n"
 "POT-Creation-Date: \n"
 "Last-Translator: \n"
@@ -62,11 +62,11 @@ msgstr "réseau"
 #. or "Access the emails sent from your website."
 #: admin/class-mailarchiver-admin.php:162
 msgid "Access the emails sent from your %s."
-msgstr "Accédez aux e-mails envoyés à partir de votre %s."
+msgstr "Accédez aux courriels envoyés à partir de votre %s."
 
 #: admin/class-mailarchiver-admin.php:167
 msgid "Archived Mails"
-msgstr "E-mails archivés"
+msgstr "Courriels archivés"
 
 #: perfopsone/class-adminmenus.php:406
 msgid "Requires at least PHP %1$s%2$s and WordPress %3$s%4$s."
@@ -126,7 +126,7 @@ msgstr "Centre de contrôle"
 
 #: perfopsone/class-adminmenus.php:66
 msgid "%s Records"
-msgstr "Relevés %s"
+msgstr "Enregistrements %s"
 
 #: perfopsone/class-adminmenus.php:66 perfopsone/class-adminmenus.php:67
 msgid "Available Catalogues"
@@ -258,7 +258,7 @@ msgstr "Réglages et état OPcache"
 
 #: includes/system/class-sitehealth.php:125
 msgid "Object cache"
-msgstr "Cache objet"
+msgstr "Cache d’objets"
 
 #: includes/features/class-classtypes.php:50
 msgid "MU-Plugin"
@@ -291,7 +291,7 @@ msgstr "Remarque : cela concerne uniquement les champs « à » et « de »
 
 #: admin/class-mailarchiver-admin.php:963
 msgid "If checked, recorded fields will contain hashes instead of email adresses."
-msgstr "Si coché, les champs enregistrés vont contenir des clés de hachage à la place des adresses de messagerie."
+msgstr "Si coché, les champs enregistrés vont contenir des clés de hachage à la place des adresses courriel."
 
 #: admin/class-mailarchiver-admin.php:960
 msgid "Masking"
@@ -299,7 +299,7 @@ msgstr "Masquage"
 
 #: admin/class-mailarchiver-admin.php:955
 msgid "Email adresses"
-msgstr "Adresse de messagerie"
+msgstr "Adresse courriel"
 
 #: admin/class-mailarchiver-admin.php:947
 msgid "If checked, recorded fields will contain hashes instead of user IDs & names."
@@ -316,7 +316,7 @@ msgstr "Utilisateurs"
 #: admin/class-mailarchiver-admin.php:931
 #: admin/class-mailarchiver-admin.php:947
 msgid "Note: it concerns all fields except email content."
-msgstr "Remarque : cela concerne tous les champs sauf le contenu de l’e-mail."
+msgstr "Remarque : cela concerne tous les champs sauf le contenu du courriel."
 
 #: admin/class-mailarchiver-admin.php:931
 msgid "If checked, recorded fields will contain hashes instead of real IPs."
@@ -336,7 +336,7 @@ msgstr "Activé"
 
 #: admin/class-mailarchiver-admin.php:823
 msgid "What kind of emails should be archived."
-msgstr "Quel genre d’e-mails doivent être archivés."
+msgstr "Quel genre de courriels doivent être archivés."
 
 #: admin/class-mailarchiver-admin.php:807
 msgid "Used only in admin dashboard."
@@ -377,7 +377,7 @@ msgstr "Ressources"
 
 #: admin/class-mailarchiver-admin.php:740
 msgid "Your site does not use any logging plugin. To log all events triggered in MailArchiver, I recommend you to install the excellent (and free) %s. But it is not mandatory."
-msgstr "Votre site n’utilise aucune extension de journalisation. Pour journaliser tous les évènements déclenchés par MailArchiver, je vous recommande d’installer l’excellent (et gratuit) %s. Mais ce n’est pas obligatoire."
+msgstr "Votre site n’utilise aucune extension d’enregistrement. Pour enregistrer tous les évènements déclenchés par MailArchiver, je vous recommande d’installer l’excellent (et gratuit) %s. Mais ce n’est pas obligatoire."
 
 #: admin/class-mailarchiver-admin.php:737
 msgid "Your site is currently using %s."
@@ -487,7 +487,7 @@ msgstr "Assistance"
 #: admin/class-mailarchiver-admin.php:160
 #: admin/class-mailarchiver-admin.php:259
 msgid "Archived Emails"
-msgstr "E-mails archivés"
+msgstr "Courriels archivés"
 
 #: admin/class-mailarchiver-admin.php:257
 msgid "Settings"
@@ -510,7 +510,7 @@ msgstr "Options d’archivage"
 #: admin/class-mailarchiver-admin.php:815
 #: admin/class-mailarchiver-admin.php:859
 msgid "Archived emails"
-msgstr "E-mails archivés"
+msgstr "Courriels archivés"
 
 #: admin/partials/mailarchiver-admin-view-events-bottom.php:15
 msgid "Number of lines to display"
@@ -626,7 +626,7 @@ msgstr "%1$s a été correctement installé."
 
 #: includes/features/class-processortypes.php:67
 msgid "Allows to record email fields and metadata."
-msgstr "Permet de consigner les champs des e-mails et leur métadonnées."
+msgstr "Permet de consigner les champs de courriels et leur métadonnées."
 
 #: includes/features/class-processortypes.php:51
 msgid "Allows to record site, user and remote IP of the current request."
@@ -638,7 +638,7 @@ msgstr "WordPress"
 
 #: includes/features/class-processortypes.php:66
 msgid "Mail"
-msgstr "E-mail"
+msgstr "Courriel"
 
 #: includes/features/class-archiverfactory.php:242
 msgid "Unnamed archiver"
@@ -703,19 +703,19 @@ msgstr "Utilisez l’onglet Options de l’écran pour choisir les blocs à affi
 
 #: includes/features/class-inlinehelp.php:348
 msgid "The content of the email itself."
-msgstr "Le contenu de l’e-mail en lui-même."
+msgstr "Le contenu du courriel en lui-même."
 
 #: includes/features/class-inlinehelp.php:347
 msgid "List of the email headers."
-msgstr "Liste des en-têtes de l’e-mail."
+msgstr "Liste des en-têtes du courriel."
 
 #: includes/features/class-inlinehelp.php:346
 msgid "List of the email attachements."
-msgstr "Liste des pièces jointes à l’e-mail."
+msgstr "Liste des pièces jointes au courriel."
 
 #: includes/features/class-inlinehelp.php:345
 msgid "Process, user and site from where the email was sent."
-msgstr "Processus, utilisateur et site d’où l’e-mail a été envoyé."
+msgstr "Processus, utilisateur et site d’où le courriel a été envoyé."
 
 #: includes/features/class-inlinehelp.php:344
 msgid "List of recipients."
@@ -723,15 +723,15 @@ msgstr "Liste des destinataires."
 
 #: includes/features/class-inlinehelp.php:343
 msgid "General information about the email."
-msgstr "Informations générales sur l’e-mail."
+msgstr "Informations générales sur le courriel."
 
 #: includes/features/class-inlinehelp.php:342
 msgid "It consists of four to six boxes, depending on your settings, which give specific details of the email:"
-msgstr "Il se compose de quatre à six boîtes, selon vos réglages, qui donnent des informations spécifiques sur l’e-mail :"
+msgstr "Il se compose de quatre à six boîtes, selon vos réglages, qui donnent des informations spécifiques sur le courriel :"
 
 #: includes/features/class-inlinehelp.php:342
 msgid "This screen displays the details of a specific email."
-msgstr "Cet écran affiche les détails d’un e-mail spécifique."
+msgstr "Cet écran affiche les détails d’un courriel spécifique."
 
 #: includes/features/class-inlinehelp.php:360
 msgid "Layout"
@@ -751,7 +751,7 @@ msgstr "Notez que ces filtres sont effectifs même sur les champs pseudonymisés
 
 #: includes/features/class-inlinehelp.php:307
 msgid "To filter the displayed emails, use the small blue funnel next to the filterable items. These filters are cumulative, you can activate simultaneously several filters."
-msgstr "Pour filtrer les e-mails affichés, utilisez le petit entonnoir bleu à côté des éléments filtrables. Ces filtres sont cumulables, vous pouvez activer simultanément plusieurs filtres."
+msgstr "Pour filtrer les courriels affichés, utilisez le petit entonnoir bleu à côté des éléments filtrables. Ces filtres sont cumulables, vous pouvez activer simultanément plusieurs filtres."
 
 #: includes/features/class-inlinehelp.php:306
 msgid "You can change the archive being viewed (if you have set more than one WordPress archiver) with the selector at the top left of the list (don't forget to click on the \"apply\" button)."
@@ -759,7 +759,7 @@ msgstr "Vous pouvez sélectionner l’archive affichée (si vous avez réglé pl
 
 #: includes/features/class-inlinehelp.php:305
 msgid "You can restrict the display of emails according to their status levels. To do so, use the two links at the top left of the list."
-msgstr "Vous pouvez restreindre l’affichage des e-mails en fonction de leur niveaux d’état. Pour ce faire, utilisez les deux liens en haut à gauche de la liste."
+msgstr "Vous pouvez restreindre l’affichage des courriels en fonction de leur niveaux d’état. Pour ce faire, utilisez les deux liens en haut à gauche de la liste."
 
 #: includes/features/class-inlinehelp.php:304
 msgid "To move forward or backward in time, use the navigation buttons at the top or bottom right of this list."
@@ -767,7 +767,7 @@ msgstr "Pour avancer ou reculer dans le temps, utilisez les boutons de navigatio
 
 #: includes/features/class-inlinehelp.php:303
 msgid "This screen displays the list of archived emails. This list is sorted with the most recent email at the top."
-msgstr "Cet écran affiche la liste des e-mails appartenant à une archive WordPress particulière. Cette liste est triée de telles sorte que l’e-mail le plus récent soit en haut."
+msgstr "Cet écran affiche la liste des courriels appartenant à une archive WordPress particulière. Cette liste est triée de telles sorte que le courriel le plus récent soit en haut."
 
 #: includes/features/class-inlinehelp.php:249
 msgid "Note these options are global. They are set for all archivers."
@@ -812,16 +812,16 @@ msgstr "Stockage"
 
 #: includes/features/class-inlinehelp.php:181
 msgid "These archivers store archived emails for future reference:"
-msgstr "Ces archivers stockent des e-mails pour référence future :"
+msgstr "Ces archivers stockent des courriels pour référence future :"
 
 #: includes/features/class-inlinehelp.php:176
 #: admin/class-mailarchiver-admin.php:744
 msgid "Logging"
-msgstr "Journalisation"
+msgstr "Enregistrement"
 
 #: includes/features/class-inlinehelp.php:174
 msgid "These archivers send archived emails to logging services. It may be local or SaaS, free or paid services:"
-msgstr "Ces archiveurs envoient des e-mails à des services de journalisation. Il peut s’agir de services locaux ou SaaS, gratuits ou payants :"
+msgstr "Ces archiveurs envoient des courriels à des services d’enregistrement. Il peut s’agir de services locaux ou SaaS, gratuits ou payants :"
 
 #: includes/features/class-inlinehelp.php:169
 msgid "Alerting"
@@ -841,15 +841,15 @@ msgstr "Vue d’ensemble"
 
 #: includes/features/class-inlinehelp.php:160
 msgid "Archivers are classified in three main categories: alerting, logging and storing. You can find details on these categories on the corresponding tabs of this help."
-msgstr "Les archiveurs sont classés selon trois catégories principales : alerte, journalisation et stockage. Vous trouverez des détails sur ces catégories dans les onglets correspondants de cette aide."
+msgstr "Les archiveurs sont classés selon trois catégories principales : alerte, enregistrement et stockage. Vous trouverez des détails sur ces catégories dans les onglets correspondants de cette aide."
 
 #: includes/features/class-inlinehelp.php:159
 msgid "You can set as many archivers as you want. All the set archivers will receive all emails and, regarding their own settings, will enrich them and record them or not."
-msgstr "Vous pouvez ajouter autant d’archiveurs que vous le souhaitez. Tous les archiveurs recevront tous les e-mails et, selon leurs réglages individuels, les enrichiront et les enregistreront ou non."
+msgstr "Vous pouvez ajouter autant d’archiveurs que vous le souhaitez. Tous les archiveurs recevront tous les courriels et, selon leurs réglages individuels, les enrichiront et les enregistreront ou non."
 
 #: includes/features/class-inlinehelp.php:158
 msgid "An archiver is a recorder of emails. It can filter them (accept or refuse to record the email based on settings) then store them or transmit them to logging/alerting services."
-msgstr "Un archiveur est un journaliseur d’e-mails. Il peut les filtrer (accepter ou refuser d’enregistrer l’e-mail en fonction des paramètres) puis les stocker ou les transmettre aux services d’enregistrement ou d’alerte."
+msgstr "Un archiveur est un enregistreur de courriels. Il peut les filtrer (accepter ou refuser d’enregistrer le courriel en fonction des paramètres) puis les stocker ou les transmettre aux services d’enregistrement ou d’alerte."
 
 #: includes/features/class-inlinehelp.php:157
 msgid "This screen allows you to set the %s archivers."
@@ -857,7 +857,7 @@ msgstr "Cet écran vous permet de régler les archiveurs de %s."
 
 #: includes/features/class-inlinehelp.php:144
 msgid "Can't set archivers, can only view emails sent via their own sites in all authorized WordPress archives."
-msgstr "Ne peut pas régler des archiveurs, ne peut voir que les e-mails de ses propres sites dans les archives WordPress pour lesquelles une autorisation lui a été accordée."
+msgstr "Ne peut pas régler des archiveurs, ne peut voir que les courriels de ses propres sites dans les archives WordPress pour lesquelles une autorisation lui a été accordée."
 
 #: includes/features/class-inlinehelp.php:144
 msgctxt "WordPress multisite"
@@ -871,7 +871,7 @@ msgstr "C’est votre rôle actuel."
 
 #: includes/features/class-inlinehelp.php:143
 msgid "Can set archivers, can view all emails in all WordPress archives."
-msgstr "Peut régler des archiveurs, peut afficher tous les e-mails dans toutes les archives WordPress."
+msgstr "Peut régler des archiveurs, peut afficher tous les courriel dans toutes les archives WordPress."
 
 #: includes/features/class-inlinehelp.php:143
 msgctxt "WordPress multisite"
@@ -884,7 +884,7 @@ msgstr "Étant donné que votre site participe à un réseau de sites, la capaci
 
 #: includes/features/class-inlinehelp.php:108
 msgid "The status of an email is indicated by a \"level\". %s uses the following levels classification:"
-msgstr "L’état d’un e-mail est indiquée par un « niveau ». %s utilise la classification suivante pour les niveaux :"
+msgstr "L’état d’un courriel est indiquée par un « niveau ». %s utilise la classification suivante pour les niveaux :"
 
 #: includes/features/class-inlinehelp.php:97
 #: admin/class-mailarchiver-admin.php:275
@@ -906,16 +906,16 @@ msgstr "Plus d’informations :"
 #: includes/features/class-archive.php:63
 #: includes/features/class-archive.php:84
 msgid "Only emails in error"
-msgstr "Seulement les e-mails en erreur"
+msgstr "Seulement les courriels en erreur"
 
 #: includes/features/class-archive.php:60
 #: includes/features/class-archive.php:81
 msgid "All emails"
-msgstr "Tous les e-mails"
+msgstr "Tous les courriels"
 
 #: includes/features/class-handlertypes.php:607
 msgid "Local administrators can view emails sent via their site."
-msgstr "Les administrateurs locaux peuvent consulter les e-mails envoyés via leur site."
+msgstr "Les administrateurs locaux peuvent consulter les courriels envoyés via leur site."
 
 #: includes/features/class-handlertypes.php:606
 msgid "Multisite partitioning"
@@ -923,7 +923,7 @@ msgstr "Partitionnement multisite"
 
 #: includes/features/class-handlertypes.php:592
 msgid "Maximum age of emails stored in this archive (0 for no limit)."
-msgstr "Âge maximal des e-mails conservés dans cette archive (0 pour aucune limite)."
+msgstr "Âge maximal des courriels conservés dans cette archive (0 pour aucune limite)."
 
 #: includes/features/class-handlertypes.php:591
 msgid "Days"
@@ -931,11 +931,11 @@ msgstr "Jours"
 
 #: includes/features/class-handlertypes.php:577
 msgid "Maximum number of emails stored in this archive (0 for no limit)."
-msgstr "Nombre maximal d’e-mails conservés dans cette archive (0 pour aucune limite)."
+msgstr "Nombre maximal de courriels conservés dans cette archive (0 pour aucune limite)."
 
 #: includes/features/class-handlertypes.php:576
 msgid "Mails"
-msgstr "E-mails"
+msgstr "Courriels"
 
 #: includes/features/class-handlertypes.php:569
 msgid "An archive stored in your WordPress database and available right in your admin dashboard."
@@ -1027,7 +1027,7 @@ msgstr "URL Webhook"
 
 #: includes/features/class-handlertypes.php:366
 msgid "Emails in error signaled through Slack Webhooks."
-msgstr "E-mails en erreur signalés via Slack Webhooks."
+msgstr "Courriels en erreur signalés via Slack Webhooks."
 
 #: includes/features/class-handlertypes.php:365
 msgid "Slack"
@@ -1079,7 +1079,7 @@ msgstr "Le jeton d’application Pushover."
 
 #: includes/features/class-handlertypes.php:221
 msgid "Emails in error signaled to Pushover service."
-msgstr "E-mails en erreur signalés au service Pushover."
+msgstr "Courriels en erreur signalés au service Pushover."
 
 #: includes/features/class-handlertypes.php:220
 msgid "Pushover"
@@ -1108,7 +1108,7 @@ msgstr "Le jeton du registre Logentries/insightOps."
 
 #: includes/features/class-handlertypes.php:139
 msgid "Log token"
-msgstr "Jeton du journaliseur"
+msgstr "Jeton de l’enregistreur"
 
 #: includes/features/class-handlertypes.php:133
 msgid "USA"
@@ -1164,7 +1164,7 @@ msgstr "Fluentd"
 
 #: includes/features/class-handlertypes.php:49
 msgid "Any email it can handle will be thrown away."
-msgstr "Tout e-mail qu’il peut gérer sera oublié aussitôt."
+msgstr "Tout courriel qu’il peut gérer sera oublié aussitôt."
 
 #: includes/features/class-handlertypes.php:48
 msgid "Blackhole"
@@ -1197,11 +1197,11 @@ msgstr "Destinataires"
 #: includes/features/class-eventviewer.php:320
 #: includes/features/class-inlinehelp.php:343
 msgid "Message details"
-msgstr "Détails de l’e-mail"
+msgstr "Détails du courriel"
 
 #: includes/features/class-eventviewer.php:284
 msgid "Email: %s"
-msgstr "E-mail : %s"
+msgstr "Courriel : %s"
 
 #: includes/features/class-eventviewer.php:282
 msgid "Archive: %s"
@@ -1213,7 +1213,7 @@ msgstr "Si vous pensez qu’il s’agit d’une erreur, veuillez contacter l’a
 
 #: includes/features/class-eventviewer.php:278
 msgid "The email archive you tried to access is out of your scope."
-msgstr "L’e-mail archivé auquel vous avez tenté d’accéder est hors de votre portée."
+msgstr "Le courriel archivé auquel vous avez tenté d’accéder est hors de votre portée."
 
 #: includes/features/class-eventviewer.php:276
 msgid "Forbidden"
@@ -1237,15 +1237,15 @@ msgstr "malformé"
 
 #: includes/features/class-eventtypes.php:88
 msgid "The email was not sent, an error was generated."
-msgstr "Cet e-mail n’a pas été envoyé, une erreur s’est produite."
+msgstr "Ce courriel n’a pas été envoyé, une erreur s’est produite."
 
 #: includes/features/class-eventtypes.php:87
 msgid "The email was successfully sent."
-msgstr "Cet e-mail a été envoyé."
+msgstr "Ce courriel a été envoyé."
 
 #: includes/features/class-eventtypes.php:86
 msgid "The sent status of the email is unknown."
-msgstr "L’état d’envoi de l’e-mail est inconnu."
+msgstr "L’état d’envoi du courriel est inconnu."
 
 #: includes/features/class-archivers.php:236
 #: admin/class-mailarchiver-admin.php:241
@@ -1254,7 +1254,7 @@ msgstr "Détails consignés"
 
 #: includes/features/class-archivers.php:235
 msgid "Records"
-msgstr "Relevés"
+msgstr "Enregistrements"
 
 #: includes/features/class-archivers.php:234
 msgid "Status"
@@ -1325,7 +1325,7 @@ msgstr "À"
 
 #: includes/features/class-events.php:633
 msgid "Email"
-msgstr "E-mail"
+msgstr "Courriel"
 
 #: admin/partials/mailarchiver-admin-view-events-top.php:21
 #: admin/partials/mailarchiver-admin-view-events-bottom.php:21
@@ -1551,7 +1551,7 @@ msgstr "Pierre Lannoy"
 
 #. Description of the plugin
 msgid "Automatically archive and store all emails sent from your site."
-msgstr "Archivez et stockez automatiquement tous les e-mails envoyés à partir de votre site."
+msgstr "Archivez et stockez automatiquement tous les courriels envoyés à partir de votre site."
 
 #. Plugin URI of the plugin
 msgid "https://github.com/Pierre-Lannoy/wp-mailarchiver"
