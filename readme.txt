@@ -37,7 +37,7 @@ At this time, **MailArchiver** can archive emails:
 * manage archivers (list, start, pause, clean, purge, remove, add and set) - see `wp help m-archive archiver` for details;
 * view available archiver types (list and describe) - see `wp help m-archive type` for details.
 
-For a full help on WP-CLI commands in DecaLog, please [read this guide](https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md).
+For a full help on WP-CLI commands in MailArchiver, please [read this guide](https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md).
 
 **MailArchiver** is a free and open source plugin for WordPress. It integrates many other free and open source works (as-is or modified). Please, see 'about' tab in the plugin settings to see the details.
 

@@ -35,7 +35,7 @@ __MailArchiver__ supports an extensive set of WP-CLI commands to:
 * manage archivers (list, start, pause, clean, purge, remove, add and set) - see `wp help m-archive archiver` for details;
 * view available archiver types (list and describe) - see `wp help m-archive type` for details.
 
-For a full help on WP-CLI commands in DecaLog, please [read this guide](WP-CLI.md).
+For a full help on WP-CLI commands in MailArchiver, please [read this guide](WP-CLI.md).
 
 ## Installation
 
