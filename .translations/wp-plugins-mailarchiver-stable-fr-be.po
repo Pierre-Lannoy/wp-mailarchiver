@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MailArchiver - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-11-28 15:17+0100\n"
+"PO-Revision-Date: 2020-12-07 16:19+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -303,7 +303,7 @@ msgstr "Adresse courriel"
 
 #: admin/class-mailarchiver-admin.php:947
 msgid "If checked, recorded fields will contain hashes instead of user IDs & names."
-msgstr "Si coché, les champs enregistrés vont contenir des clés de hachage à la place des noms et ID d’utilisateurs."
+msgstr "Si coché, les champs enregistrés vont contenir des clés de hachage à la place des noms et ID de comptes."
 
 #: admin/class-mailarchiver-admin.php:944
 msgid "Pseudonymisation"
@@ -311,7 +311,7 @@ msgstr "Pseudonymisation"
 
 #: admin/class-mailarchiver-admin.php:939
 msgid "Users"
-msgstr "Utilisateurs"
+msgstr "Comptes"
 
 #: admin/class-mailarchiver-admin.php:931
 #: admin/class-mailarchiver-admin.php:947
@@ -630,7 +630,7 @@ msgstr "Permet de consigner les champs de courriels et leur métadonnées."
 
 #: includes/features/class-processortypes.php:51
 msgid "Allows to record site, user and remote IP of the current request."
-msgstr "Permet de consigner le site, l’utilisateur et l’adresse IP de provenance de la requête courante."
+msgstr "Permet de consigner le site, le compte et l’adresse IP de provenance de la requête courante."
 
 #: includes/features/class-processortypes.php:50
 msgid "WordPress"
@@ -715,7 +715,7 @@ msgstr "Liste des pièces jointes au courriel."
 
 #: includes/features/class-inlinehelp.php:345
 msgid "Process, user and site from where the email was sent."
-msgstr "Processus, utilisateur et site d’où le courriel a été envoyé."
+msgstr "Processus, compte et site d’où le courriel a été envoyé."
 
 #: includes/features/class-inlinehelp.php:344
 msgid "List of recipients."
@@ -862,7 +862,7 @@ msgstr "Ne peut pas régler des archiveurs, ne peut voir que les courriels de se
 #: includes/features/class-inlinehelp.php:144
 msgctxt "WordPress multisite"
 msgid "Sites Admin"
-msgstr "Administrateur de site"
+msgstr "Administrateur·ice de site"
 
 #: includes/features/class-inlinehelp.php:143
 #: includes/features/class-inlinehelp.php:144
@@ -876,7 +876,7 @@ msgstr "Peut régler des archiveurs, peut afficher tous les courriel dans toutes
 #: includes/features/class-inlinehelp.php:143
 msgctxt "WordPress multisite"
 msgid "Network Admin"
-msgstr "Administrateur du réseau"
+msgstr "Administrateur·ice du réseau"
 
 #: includes/features/class-inlinehelp.php:142
 msgid "Because your site takes part in a sites network, admin ability to view and configure archivers differ as follows:"
@@ -897,7 +897,7 @@ msgstr "Voir également :"
 
 #: includes/features/class-inlinehelp.php:94
 msgid "User support"
-msgstr "Assistance utilisateur"
+msgstr "Assistance utilisateur·ice"
 
 #: includes/features/class-inlinehelp.php:93
 msgid "For more help:"
@@ -915,7 +915,7 @@ msgstr "Tous les courriels"
 
 #: includes/features/class-handlertypes.php:607
 msgid "Local administrators can view emails sent via their site."
-msgstr "Les administrateurs locaux peuvent consulter les courriels envoyés via leur site."
+msgstr "Les administrateur·ice·s locaux peuvent consulter les courriels envoyés via leur site."
 
 #: includes/features/class-handlertypes.php:606
 msgid "Multisite partitioning"
@@ -1067,7 +1067,7 @@ msgstr "Titre du message"
 
 #: includes/features/class-handlertypes.php:241
 msgid "The recipient key. It can be a \"user key\" or a \"group key\"."
-msgstr "La clé du destinataire. Il peut s’agir d’une « clé d’utilisateur » ou d’une « clé de groupe »."
+msgstr "La clé du destinataire. Il peut s’agir d’une « clé d’utilisateur·ice » ou d’une « clé de groupe »."
 
 #: includes/features/class-handlertypes.php:240
 msgid "Recipient"
@@ -1172,7 +1172,7 @@ msgstr "Trou noir"
 
 #: includes/features/class-eventviewer.php:444
 msgid "Deleted user"
-msgstr "Utilisateur supprimé"
+msgstr "Compte supprimé"
 
 #: includes/features/class-eventviewer.php:327
 #: includes/features/class-inlinehelp.php:348
@@ -1209,7 +1209,7 @@ msgstr "Archive : %s"
 
 #: includes/features/class-eventviewer.php:279
 msgid "If you think this is an error, please contact the network administrator with these details:"
-msgstr "Si vous pensez qu’il s’agit d’une erreur, veuillez contacter l’administrateur du réseau avec ces informations :"
+msgstr "Si vous pensez qu’il s’agit d’une erreur, veuillez contacter l’administrateur·ice du réseau avec ces informations :"
 
 #: includes/features/class-eventviewer.php:278
 msgid "The email archive you tried to access is out of your scope."
@@ -1303,7 +1303,7 @@ msgstr "IP distante"
 
 #: includes/features/class-events.php:639
 msgid "User"
-msgstr "Utilisateur"
+msgstr "Compte"
 
 #: includes/features/class-events.php:638
 msgid "Site"
@@ -1358,17 +1358,17 @@ msgstr "Obscurci"
 
 #: includes/features/class-events.php:254
 msgid "User ID %s"
-msgstr "ID d’utilisateur %s"
+msgstr "ID de compte %s"
 
 #: includes/features/class-events.php:251
 #: includes/features/class-eventviewer.php:440
 msgid "Pseudonymized user"
-msgstr "Utilisateur pseudonymisé"
+msgstr "Compte pseudonymisé"
 
 #: includes/features/class-events.php:247
 #: includes/features/class-eventviewer.php:438
 msgid "Anonymous user"
-msgstr "Utilisateur anonyme"
+msgstr "Anonyme"
 
 #: includes/features/class-events.php:233
 msgid "Site ID %s"
