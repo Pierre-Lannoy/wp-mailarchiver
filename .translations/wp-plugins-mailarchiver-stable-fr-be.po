@@ -1067,7 +1067,7 @@ msgstr "Titre du message"
 
 #: includes/features/class-handlertypes.php:241
 msgid "The recipient key. It can be a \"user key\" or a \"group key\"."
-msgstr "La clé du destinataire. Il peut s’agir d’une « clé d’utilisateur·ice » ou d’une « clé de groupe »."
+msgstr "La clé du destinataire. Il peut s’agir d’une « clé de compte » ou d’une « clé de groupe »."
 
 #: includes/features/class-handlertypes.php:240
 msgid "Recipient"
