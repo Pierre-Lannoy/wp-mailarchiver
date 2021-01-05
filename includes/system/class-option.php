@@ -233,12 +233,11 @@ class Option {
 	 * @since 1.0.0
 	 */
 	public static function reset_to_defaults() {
-		self::network_set( 'use_cdn', self::$defaults['use_cdn'] );
-		self::network_set( 'download_favicons', self::$defaults['download_favicons'] );
-		self::network_set( 'script_in_footer', self::$defaults['script_in_footer'] );
-		self::network_set( 'display_nag', self::$defaults['display_nag'] );
-		self::network_set( 'archiver_autostart', self::$defaults['archiver_autostart'] );
-		self::network_set( 'autolisteners', self::$defaults['autolisteners'] );
+		foreach ( self::$network as $key ) {
+			if ( 'version' !== $key ) {
+				self::network_set( $key, self::$defaults[ $key ] );
+			}
+		}
 	}
 
 	/**
