@@ -93,7 +93,7 @@ Success: archiver 5b09be13-16f6-4ced-972e-98408df0fd49 successfully created.
 
 ## Using archiver types
 
-With the `wp m-archive type <list|describe> [<archiver_type>] [--format=<format>]` command you can query all types available for archiver creation / modification and obtain description of corresponding settings. This command helps you to fine-tune archivers via the command-line.
+With the `wp m-archive type <list|describe> [<archiver_type>] [--format=<format>]` command you can query all available types for archiver creation / modification and obtain description of corresponding settings. This command helps you to fine-tune archivers via the command-line.
 
 ### Listing types
 
