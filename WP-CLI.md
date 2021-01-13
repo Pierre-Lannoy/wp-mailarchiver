@@ -140,7 +140,7 @@ Parameters
   * Name - Used only in admin dashboard.
     - field name: name
     - field type: string
-    - default value: "New Logger"
+    - default value: "New Archiver"
 
   * Archived emails - Archived emails level.
     - field name: level

@@ -462,7 +462,7 @@ class Wpcli {
 				\WP_CLI::line( $param . 'Name - Used only in admin dashboard.' );
 				\WP_CLI::line( $elem . 'field name: name' );
 				\WP_CLI::line( $elem . 'field type: string' );
-				\WP_CLI::line( $elem . 'default value: "New Logger"' );
+				\WP_CLI::line( $elem . 'default value: "New Archiver"' );
 				\WP_CLI::line( '' );
 				\WP_CLI::line( $param . 'Archived emails - Archived emails level.' );
 				\WP_CLI::line( $elem . 'field name: level' );
