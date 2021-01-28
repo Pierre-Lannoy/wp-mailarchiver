@@ -27,7 +27,7 @@ use Monolog\Logger as Mnlg;
 use Spyc;
 
 /**
- * WP-CLI for MailArchiver.
+ * Manages MailArchiver.
  *
  * Defines methods and properties for WP-CLI commands.
  *
@@ -43,7 +43,7 @@ class Wpcli {
 	 * @since    2.0.0
 	 * @var array $exit_codes Exit codes.
 	 */
-	private static $exit_codes = [
+	private $exit_codes = [
 		0   => 'operation successful.',
 		1   => 'invalid archiver type supplied.',
 		2   => 'invalid archiver uuid supplied.',
@@ -60,7 +60,7 @@ class Wpcli {
 	 *
 	 * @since    2.0.2
 	 */
-	private static function flush() {
+	private function flush() {
 		// phpcs:ignore
 		set_error_handler( null );
 		// phpcs:ignore
@@ -76,7 +76,7 @@ class Wpcli {
 	 * @param   string  $field  Optional. The field to output.
 	 * @since   2.0.0
 	 */
-	private static function write_ids( $ids, $field = '' ) {
+	private function write_ids( $ids, $field = '' ) {
 		$result = '';
 		$last   = end( $ids );
 		foreach ( $ids as $key => $id ) {
@@ -100,7 +100,7 @@ class Wpcli {
 	 * @param   boolean  $stdout    Optional. Clean stdout output.
 	 * @since   2.0.0
 	 */
-	private static function error( $code = 255, $stdout = false ) {
+	private function error( $code = 255, $stdout = false ) {
 		if ( \WP_CLI\Utils\isPiped() ) {
 			// phpcs:ignore
 			fwrite( STDOUT, '' );
@@ -108,11 +108,11 @@ class Wpcli {
 			exit( $code );
 		} elseif ( $stdout ) {
 			// phpcs:ignore
-			fwrite( STDERR, ucfirst( self::$exit_codes[ $code ] ) );
+			fwrite( STDERR, ucfirst( $this->exit_codes[ $code ] ) );
 			// phpcs:ignore
 			exit( $code );
 		} else {
-			\WP_CLI::error( self::$exit_codes[ $code ] );
+			\WP_CLI::error( $this->exit_codes[ $code ] );
 		}
 	}
 
@@ -124,7 +124,7 @@ class Wpcli {
 	 * @param   boolean  $stdout    Optional. Clean stdout output.
 	 * @since   2.0.0
 	 */
-	private static function warning( $msg, $result = '', $stdout = false ) {
+	private function warning( $msg, $result = '', $stdout = false ) {
 		if ( \WP_CLI\Utils\isPiped() || $stdout ) {
 			// phpcs:ignore
 			fwrite( STDOUT, $result );
@@ -141,7 +141,7 @@ class Wpcli {
 	 * @param   boolean  $stdout    Optional. Clean stdout output.
 	 * @since   2.0.0
 	 */
-	private static function success( $msg, $result = '', $stdout = false ) {
+	private function success( $msg, $result = '', $stdout = false ) {
 		if ( \WP_CLI\Utils\isPiped() || $stdout ) {
 			// phpcs:ignore
 			fwrite( STDOUT, $result );
@@ -158,7 +158,7 @@ class Wpcli {
 	 * @param   boolean  $stdout    Optional. Clean stdout output.
 	 * @since   2.0.0
 	 */
-	private static function line( $msg, $result = '', $stdout = false ) {
+	private function line( $msg, $result = '', $stdout = false ) {
 		if ( \WP_CLI\Utils\isPiped() || $stdout ) {
 			// phpcs:ignore
 			fwrite( STDOUT, $result );
@@ -174,7 +174,7 @@ class Wpcli {
 	 * @param   boolean  $stdout    Optional. Clean stdout output.
 	 * @since   2.0.0
 	 */
-	private static function log( $msg, $stdout = false ) {
+	private function log( $msg, $stdout = false ) {
 		if ( ! \WP_CLI\Utils\isPiped() && ! $stdout ) {
 			\WP_CLI::log( $msg );
 		}
@@ -187,7 +187,7 @@ class Wpcli {
 	 * @return  array The true parameters.
 	 * @since   2.0.0
 	 */
-	private static function get_params( $args ) {
+	private function get_params( $args ) {
 		$result = '';
 		if ( array_key_exists( 'settings', $args ) ) {
 			$result = \json_decode( $args['settings'], true );
@@ -207,7 +207,7 @@ class Wpcli {
 	 * @return  array The updated processors.
 	 * @since   2.0.0
 	 */
-	private static function updated_proc( $processors, $proc, $value ) {
+	private function updated_proc( $processors, $proc, $value ) {
 		$key = '';
 		switch ( $proc ) {
 			case 'proc_wp':
@@ -234,8 +234,8 @@ class Wpcli {
 	 * @return  string The archiver uuid.
 	 * @since   2.0.0
 	 */
-	private static function archiver_modify( $uuid, $args, $start = false ) {
-		$params        = self::get_params( $args );
+	private function archiver_modify( $uuid, $args, $start = false ) {
+		$params        = $this->get_params( $args );
 		$loggers       = Option::network_get( 'archivers' );
 		$logger        = $loggers[$uuid];
 		$handler_types = new HandlerTypes();
@@ -249,7 +249,7 @@ class Wpcli {
 					$logger['privacy'][$param] = (bool) $value;
 					break;
 				case 'proc_wp':
-					$logger['processors'] = self::updated_proc( $logger['processors'], $param, (bool) $value );
+					$logger['processors'] = $this->updated_proc( $logger['processors'], $param, (bool) $value );
 					break;
 				case 'level':
 					if ( array_key_exists( strtolower( $value ), EventTypes::$levels ) ) {
@@ -294,7 +294,7 @@ class Wpcli {
 	 * @return  string The archiver uuid.
 	 * @since   2.0.0
 	 */
-	private static function archiver_add( $handler, $args ) {
+	private function archiver_add( $handler, $args ) {
 		$uuid             = UUID::generate_v4();
 		$logger           = [
 			'uuid'    => $uuid,
@@ -306,7 +306,7 @@ class Wpcli {
 		$factory          = new ArchiverFactory();
 		$loggers[ $uuid ] = $factory->check( $logger, true );
 		Option::network_set( 'archivers', $loggers );
-		if ( self::archiver_modify( $uuid, $args, Option::network_get( 'archiver_autostart' ) ) === $uuid ) {
+		if ( $this->archiver_modify( $uuid, $args, Option::network_get( 'archiver_autostart' ) ) === $uuid ) {
 			return $uuid;
 		}
 		return '';
@@ -323,7 +323,7 @@ class Wpcli {
 	 *   === For other examples and recipes, visit https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md ===
 	 *
 	 */
-	public static function status( $args, $assoc_args ) {
+	public function status( $args, $assoc_args ) {
 		$run = 0;
 		foreach ( Option::network_get( 'archivers' ) as $key => $logger ) {
 			if ( $logger['running'] ) {
@@ -391,7 +391,7 @@ class Wpcli {
 	 *   === For other examples and recipes, visit https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md ===
 	 *
 	 */
-	public static function handler( $args, $assoc_args ) {
+	public function type( $args, $assoc_args ) {
 		$stdout        = \WP_CLI\Utils\get_flag_value( $assoc_args, 'stdout', false );
 		$format        = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'table' );
 		$handler_types = new HandlerTypes();
@@ -417,7 +417,7 @@ class Wpcli {
 			}
 		}
 		if ( 'list' !== $action && '' === $uuid ) {
-			self::error( 1, $stdout );
+			$this->error( 1, $stdout );
 		}
 		switch ( $action ) {
 			case 'list':
@@ -432,13 +432,13 @@ class Wpcli {
 					$details[ $handler['type'] ] = $item;
 				}
 				if ( 'ids' === $format ) {
-					self::write_ids( $handlers, 'type' );
+					$this->write_ids( $handlers, 'type' );
 				} elseif ( 'yaml' === $format ) {
 					$details = Spyc::YAMLDump( $details, true, true, true );
-					self::line( $details, $details, $stdout );
+					$this->line( $details, $details, $stdout );
 				}  elseif ( 'json' === $format ) {
 					$details = wp_json_encode( $details );
-					self::line( $details, $details, $stdout );
+					$this->line( $details, $details, $stdout );
 				} else {
 					\WP_CLI\Utils\format_items( $format, $details, [ 'type', 'class', 'name', 'version' ] );
 				}
@@ -641,7 +641,7 @@ class Wpcli {
 	 *   === For other examples and recipes, visit https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md ===
 	 *
 	 */
-	public static function archiver( $args, $assoc_args ) {
+	public function archiver( $args, $assoc_args ) {
 		$stdout       = \WP_CLI\Utils\get_flag_value( $assoc_args, 'stdout', false );
 		$format       = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'table' );
 		$detail       = \WP_CLI\Utils\get_flag_value( $assoc_args, 'detail', 'short' );
@@ -676,11 +676,11 @@ class Wpcli {
 			}
 		}
 		if ( 'add' === $action && '' === $uuid ) {
-			self::error( 1, $stdout );
+			$this->error( 1, $stdout );
 		} elseif ( 'system' === $uuid ) {
-			self::error( 3, $stdout );
+			$this->error( 3, $stdout );
 		} elseif ( 'list' !== $action && '' === $uuid ) {
-			self::error( 2, $stdout );
+			$this->error( 2, $stdout );
 		}
 		switch ( $action ) {
 			case 'list':
@@ -716,58 +716,58 @@ class Wpcli {
 					$detail = [ 'uuid', 'type', 'name', 'running' ];
 				}
 				if ( 'ids' === $format ) {
-					self::write_ids( $loggers, 'uuid' );
+					$this->write_ids( $loggers, 'uuid' );
 				} elseif ( 'yaml' === $format ) {
 					$details = Spyc::YAMLDump( $loggers_list, true, true, true );
-					self::line( $details, $details, $stdout );
+					$this->line( $details, $details, $stdout );
 				}  elseif ( 'json' === $format ) {
 					$details = wp_json_encode( $loggers_list );
-					self::line( $details, $details, $stdout );
+					$this->line( $details, $details, $stdout );
 				} else {
 					\WP_CLI\Utils\format_items( $format, $loggers, $detail );
 				}
 				break;
 			case 'start':
 				if ( $loggers_list[$uuid]['running'] ) {
-					self::line( sprintf( 'The archiver %s is already running.', $uuid ), $uuid, $stdout );
+					$this->line( sprintf( 'The archiver %s is already running.', $uuid ), $uuid, $stdout );
 				} else {
 					$loggers_list[$uuid]['running'] = true;
 					Option::network_set( 'archivers', $loggers_list );
 					Logger::info( sprintf( 'Archiver "%s" has started.', $loggers_list[ $uuid ]['name'] ) );
-					self::success( sprintf( 'archiver %s is now running.', $uuid ), $uuid, $stdout );
+					$this->success( sprintf( 'archiver %s is now running.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'pause':
 				if ( ! $loggers_list[$uuid]['running'] ) {
-					self::line( sprintf( 'The archiver %s is already paused.', $uuid ), $uuid, $stdout );
+					$this->line( sprintf( 'The archiver %s is already paused.', $uuid ), $uuid, $stdout );
 				} else {
 					$loggers_list[$uuid]['running'] = false;
 					Logger::info( sprintf( 'Archiver "%s" has been paused.', $loggers_list[ $uuid ]['name'] ) );
 					Option::network_set( 'archivers', $loggers_list );
-					self::success( sprintf( 'archiver %s is now paused.', $uuid ), $uuid, $stdout );
+					$this->success( sprintf( 'archiver %s is now paused.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'purge':
 				$loggers_list[$uuid]['uuid'] = $uuid;
 				if ( 'WordpressHandler' !== $loggers_list[$uuid]['handler'] ) {
-					self::warning( sprintf( 'archiver %s can\'t be purged.', $uuid ), $uuid, $stdout );
+					$this->warning( sprintf( 'archiver %s can\'t be purged.', $uuid ), $uuid, $stdout );
 				} else {
 					\WP_CLI::confirm( sprintf( 'Are you sure you want to purge archiver %s?', $uuid ), $assoc_args );
 					$factory = new ArchiverFactory();
 					$factory->purge( $loggers_list[$uuid] );
 					Logger::notice( sprintf( 'Archiver "%s" has been purged.', $loggers_list[ $uuid ]['name'] ) );
-					self::success( sprintf( 'archiver %s successfully purged.', $uuid ), $uuid, $stdout );
+					$this->success( sprintf( 'archiver %s successfully purged.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'clean':
 				$loggers_list[$uuid]['uuid'] = $uuid;
 				if ( 'WordpressHandler' !== $loggers_list[$uuid]['handler'] ) {
-					self::warning( sprintf( 'archiver %s can\'t be cleaned.', $uuid ), $uuid, $stdout );
+					$this->warning( sprintf( 'archiver %s can\'t be cleaned.', $uuid ), $uuid, $stdout );
 				} else {
 					$factory = new ArchiverFactory();
 					$count   = $factory->clean( $loggers_list[$uuid] );
-					self::log( sprintf( '%d record(s) deleted.', $count ), $stdout );
-					self::success( sprintf( 'archiver %s successfully cleaned.', $uuid ), $uuid, $stdout );
+					$this->log( sprintf( '%d record(s) deleted.', $count ), $stdout );
+					$this->success( sprintf( 'archiver %s successfully cleaned.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'remove':
@@ -778,28 +778,28 @@ class Wpcli {
 				Logger::notice( sprintf( 'Archiver "%s" has been removed.', $loggers_list[ $uuid ]['name'] ) );
 				unset( $loggers_list[$uuid] );
 				Option::network_set( 'archivers', $loggers_list );
-				self::success( sprintf( 'archiver %s successfully removed.', $uuid ), $uuid, $stdout );
+				$this->success( sprintf( 'archiver %s successfully removed.', $uuid ), $uuid, $stdout );
 				break;
 			case 'add':
-				$result = self::archiver_add( $uuid, $assoc_args );
+				$result = $this->archiver_add( $uuid, $assoc_args );
 				if ( '' === $result ) {
 					Logger::error( 'Unable to add a archiver.', 1 );
-					self::error( 4, $stdout );
+					$this->error( 4, $stdout );
 				} else {
 					$loggers_list = Option::network_get( 'archivers' );
 					Logger::notice( sprintf( 'Archiver "%s" has been saved.', $loggers_list[ $result ]['name'] ) );
-					self::success( sprintf( 'archiver %s successfully created.', $result ), $result, $stdout );
+					$this->success( sprintf( 'archiver %s successfully created.', $result ), $result, $stdout );
 				}
 				break;
 			case 'set':
-				$result = self::archiver_modify( $uuid, $assoc_args );
+				$result = $this->archiver_modify( $uuid, $assoc_args );
 				if ( '' === $result ) {
 					Logger::error( 'Unable to modify a archiver.', 1 );
-					self::error( 5, $stdout );
+					$this->error( 5, $stdout );
 				} else {
 					$loggers_list = Option::network_get( 'archivers' );
 					Logger::notice( sprintf( 'Archiver "%s" has been saved.', $loggers_list[ $result ]['name'] ) );
-					self::success( sprintf( 'archiver %s successfully saved.', $result ), $result, $stdout );
+					$this->success( sprintf( 'archiver %s successfully saved.', $result ), $result, $stdout );
 				}
 				break;
 		}
@@ -831,7 +831,7 @@ class Wpcli {
 	 *   === For other examples and recipes, visit https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md ===
 	 *
 	 */
-	public static function settings( $args, $assoc_args ) {
+	public function settings( $args, $assoc_args ) {
 		$stdout  = \WP_CLI\Utils\get_flag_value( $assoc_args, 'stdout', false );
 		$action  = isset( $args[0] ) ? (string) $args[0] : '';
 		$setting = isset( $args[1] ) ? (string) $args[1] : '';
@@ -840,10 +840,10 @@ class Wpcli {
 				switch ( $setting ) {
 					case 'auto-start':
 						Option::network_set( 'archiver_autostart', true );
-						self::success( 'auto-start is now activated.', '', $stdout );
+						$this->success( 'auto-start is now activated.', '', $stdout );
 						break;
 					default:
-						self::error( 6, $stdout );
+						$this->error( 6, $stdout );
 				}
 				break;
 			case 'disable':
@@ -851,14 +851,14 @@ class Wpcli {
 					case 'auto-start':
 						\WP_CLI::confirm( 'Are you sure you want to deactivate auto-start?', $assoc_args );
 						Option::network_set( 'archiver_autostart', false );
-						self::success( 'auto-start is now deactivated.', '', $stdout );
+						$this->success( 'auto-start is now deactivated.', '', $stdout );
 						break;
 					default:
-						self::error( 6, $stdout );
+						$this->error( 6, $stdout );
 				}
 				break;
 			default:
-				self::error( 7, $stdout );
+				$this->error( 7, $stdout );
 		}
 	}
 
@@ -897,18 +897,18 @@ class Wpcli {
 	 *   === For other examples and recipes, visit https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md ===
 	 *
 	 */
-	public static function exitcode( $args, $assoc_args ) {
+	public function exitcode( $args, $assoc_args ) {
 		$stdout = \WP_CLI\Utils\get_flag_value( $assoc_args, 'stdout', false );
 		$format = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'table' );
 		$action = isset( $args[0] ) ? $args[0] : 'list';
 		$codes  = [];
-		foreach ( self::$exit_codes as $key => $msg ) {
+		foreach ( $this->exit_codes as $key => $msg ) {
 			$codes[ $key ] = [ 'code' => $key, 'meaning' => ucfirst( $msg ) ];
 		}
 		switch ( $action ) {
 			case 'list':
 				if ( 'ids' === $format ) {
-					self::write_ids( $codes );
+					$this->write_ids( $codes );
 				} else {
 					\WP_CLI\Utils\format_items( $format, $codes, [ 'code', 'meaning' ] );
 				}
@@ -934,9 +934,5 @@ class Wpcli {
 add_shortcode( 'mailarchiver-wpcli', [ 'Mailarchiver\Plugin\Feature\Wpcli', 'sc_get_helpfile' ] );
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	\WP_CLI::add_command( 'm-archive status', [ Wpcli::class, 'status' ] );
-	\WP_CLI::add_command( 'm-archive archiver', [ Wpcli::class, 'archiver' ] );
-	\WP_CLI::add_command( 'm-archive type', [ Wpcli::class, 'handler' ] );
-	\WP_CLI::add_command( 'm-archive settings', [ Wpcli::class, 'settings' ] );
-	\WP_CLI::add_command( 'm-archive exitcode', [ Wpcli::class, 'exitcode' ] );
+	\WP_CLI::add_command( 'm-archive', 'Mailarchiver\Plugin\Feature\Wpcli' );
 }
