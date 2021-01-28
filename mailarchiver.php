@@ -33,8 +33,6 @@ require_once __DIR__ . '/includes/system/class-environment.php';
 require_once __DIR__ . '/autoload.php';
 require_once __DIR__ . '/includes/libraries/class-libraries.php';
 require_once __DIR__ . '/includes/libraries/autoload.php';
-require_once __DIR__ . '/includes/features/class-watchdog.php';
-require_once __DIR__ . '/includes/features/class-wpcli.php';
 
 /**
  * The code that runs during plugin activation.
@@ -69,9 +67,13 @@ function mailarchiver_uninstall() {
  * @since 1.0.0
  */
 function mailarchiver_run() {
-	\Mailarchiver\System\Logger::init();
-	$plugin = new Mailarchiver\Plugin\Core();
-	$plugin->run();
+	if ( ! Mailarchiver\System\Environment::is_editor_scrapping() ) {
+		require_once __DIR__ . '/includes/features/class-watchdog.php';
+		require_once __DIR__ . '/includes/features/class-wpcli.php';
+		\Mailarchiver\System\Logger::init();
+		$plugin = new Mailarchiver\Plugin\Core();
+		$plugin->run();
+	}
 }
 
 register_activation_hook( __FILE__, 'mailarchiver_activate' );
