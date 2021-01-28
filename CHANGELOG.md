@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improved translation loading.
 
 ### Fixed
+- MailArchiver doesn't correctly restore handler (thanks to [ajoah](https://github.com/ajoah)).
 - In Site Health section, Opcache status may be wrong (or generates PHP warnings) if OPcache API usage is restricted.
 
 ## [2.1.0] - 2020-11-23
