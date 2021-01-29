@@ -87,7 +87,7 @@ class Role {
 	 *
 	 * @param   integer $user_id         Optional. The user id.
 	 * @return  boolean  True if privileges can be overridded, false otherwise.
-	 * @since   1.0.0
+	 * @since   2.2.0
 	 */
 	public static function override_privileges( $user_id = false ) {
 		if ( ! function_exists( 'wp_get_environment_type' ) ) {
