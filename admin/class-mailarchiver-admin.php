@@ -493,6 +493,7 @@ class Mailarchiver_Admin {
 				Option::network_set( 'use_cdn', array_key_exists( 'mailarchiver_plugin_options_usecdn', $_POST ) );
 				Option::network_set( 'display_nag', array_key_exists( 'mailarchiver_plugin_options_nag', $_POST ) );
 				Option::network_set( 'archiver_autostart', array_key_exists( 'mailarchiver_archivers_options_autostart', $_POST ) );
+				Option::network_set( 'privileges', array_key_exists( 'mailarchiver_plugin_options_privileges', $_POST ) ? (string) filter_input( INPUT_POST, 'mailarchiver_plugin_options_privileges', FILTER_SANITIZE_NUMBER_INT ) : Option::network_get( 'privileges' ) );
 				$message = esc_html__( 'Plugin settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
@@ -726,13 +727,32 @@ class Mailarchiver_Admin {
 	}
 
 	/**
+	 * Get the available privileges overriding.
+	 *
+	 * @return array An array containing the privileges overriding.
+	 * @since  2.2.0
+	 */
+	protected function get_privileges_array() {
+		$result = [];
+		for ( $i = 1; $i < 7; $i++ ) {
+			// phpcs:ignore
+			$result[] = [ (int) ( 30 * $i ), esc_html( sprintf( _n( '%d month', '%d months', $i, 'sessions' ), $i ) ) ];
+		}
+		for ( $i = 1; $i < 7; $i++ ) {
+			// phpcs:ignore
+			$result[] = [ (int) ( 365 * $i ), esc_html( sprintf( _n( '%d year', '%d years', $i, 'sessions' ), $i ) ) ];
+		}
+		return $result;
+	}
+
+	/**
 	 * Callback for plugin options section.
 	 *
 	 * @since 1.0.0
 	 */
 	public function plugin_options_section_callback() {
 		$form = new Form();
-		if ( defined( 'MAILARCHIVER_VERSION' ) ) {
+		if ( defined( 'DECALOG_VERSION' ) ) {
 			$help  = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'thumbs-up', 'none', '#00C800' ) . '" />&nbsp;';
 			$help .= sprintf( esc_html__('Your site is currently using %s.', 'mailarchiver' ), '<em>DecaLog v' . DECALOG_VERSION .'</em>' );
 		} else {
@@ -750,6 +770,28 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_logger' );
+
+
+		if ( function_exists( 'wp_get_environment_type' ) ) {
+			add_settings_field(
+				'mailarchiver_plugin_options_privileges',
+				esc_html__( 'Historical data', 'mailarchiver' ),
+				[ $form, 'echo_field_select' ],
+				'mailarchiver_plugin_options_section',
+				'mailarchiver_plugin_options_section',
+				[
+					'list'        => $this->get_privileges_array(),
+					'id'          => 'mailarchiver_plugin_options_privileges',
+					'value'       => Option::network_get( 'privileges' ),
+					'description' => esc_html__( 'Maximum age of data to keep for statistics.', 'mailarchiver' ),
+					'full_width'  => false,
+					'enabled'     => true,
+				]
+			);
+			register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_privileges' );
+		}
+
+
 		add_settings_field(
 			'mailarchiver_plugin_options_usecdn',
 			__( 'Resources', 'mailarchiver' ),
