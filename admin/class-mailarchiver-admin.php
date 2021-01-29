@@ -154,7 +154,7 @@ class Mailarchiver_Admin {
 				'post_callback' => [ $this, 'set_settings_help' ],
 			];
 		}
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
+		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() || Role::override_privileges() ) {
 			if ( Events::archivers_count() > 0 ) {
 				$perfops['records'][] = [
 					'name'          => esc_html__( 'Archived Emails', 'mailarchiver' ),
@@ -165,7 +165,7 @@ class Mailarchiver_Admin {
 					/* translators: as in the sentence "Mailarchiver Viewer" */
 					'page_title'    => sprintf( esc_html__( '%s Viewer', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ),
 					'menu_title'    => esc_html__( 'Archived Mails', 'mailarchiver' ),
-					'capability'    => 'manage_options',
+					'capability'    => 'read_private_pages',
 					'callback'      => [ $this, 'get_tools_page' ],
 					'position'      => 50,
 					'plugin'        => MAILARCHIVER_SLUG,
@@ -201,7 +201,7 @@ class Mailarchiver_Admin {
 	 * @since 1.2.0
 	 */
 	public function blog_action( $actions, $user_blog ) {
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
+		if ( Role::override_privileges() || Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
 			$actions .= " | <a href='" . esc_url( admin_url( 'admin.php?page=mailarchiver-viewer&site_id=' . $user_blog->userblog_id ) ) . "'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
@@ -218,7 +218,7 @@ class Mailarchiver_Admin {
 	 * @since 1.2.0
 	 */
 	public function site_action( $actions, $blog_id, $blogname ) {
-		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
+		if ( Role::override_privileges() || Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() && Events::archivers_count() > 0 ) {
 			$actions['mail_archive'] = "<a href='" . esc_url( admin_url( 'admin.php?page=mailarchiver-viewer&site_id=' . $blog_id ) ) . "' rel='bookmark'>" . __( 'Archived emails', 'mailarchiver' ) . '</a>';
 		}
 		return $actions;
@@ -733,15 +733,11 @@ class Mailarchiver_Admin {
 	 * @since  2.2.0
 	 */
 	protected function get_privileges_array() {
-		$result = [];
-		for ( $i = 1; $i < 7; $i++ ) {
-			// phpcs:ignore
-			$result[] = [ (int) ( 30 * $i ), esc_html( sprintf( _n( '%d month', '%d months', $i, 'sessions' ), $i ) ) ];
-		}
-		for ( $i = 1; $i < 7; $i++ ) {
-			// phpcs:ignore
-			$result[] = [ (int) ( 365 * $i ), esc_html( sprintf( _n( '%d year', '%d years', $i, 'sessions' ), $i ) ) ];
-		}
+		$result   = [];
+		$result[] = [ 0, esc_html__( 'Never override privileges', 'mailarchiver' ) ];
+		$result[] = [ 1, esc_html__( 'Override privileges for development environments', 'mailarchiver' ) ];
+		$result[] = [ 2, esc_html__( 'Override privileges for staging environments', 'mailarchiver' ) ];
+		$result[] = [ 3, esc_html__( 'Override privileges for staging and development environments', 'mailarchiver' ) ];
 		return $result;
 	}
 
@@ -770,12 +766,10 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_logger' );
-
-
 		if ( function_exists( 'wp_get_environment_type' ) ) {
 			add_settings_field(
 				'mailarchiver_plugin_options_privileges',
-				esc_html__( 'Historical data', 'mailarchiver' ),
+				esc_html__( 'Archives accesses', 'mailarchiver' ),
 				[ $form, 'echo_field_select' ],
 				'mailarchiver_plugin_options_section',
 				'mailarchiver_plugin_options_section',
@@ -783,15 +777,13 @@ class Mailarchiver_Admin {
 					'list'        => $this->get_privileges_array(),
 					'id'          => 'mailarchiver_plugin_options_privileges',
 					'value'       => Option::network_get( 'privileges' ),
-					'description' => esc_html__( 'Maximum age of data to keep for statistics.', 'mailarchiver' ),
+					'description' => esc_html__( 'Allows other users than administrators to access local archives depending of environments.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: choosing something other than "Never override privileges" grants access to all users having "read_private_pages" capability and may have privacy and security implications.', 'mailarchiver' ),
 					'full_width'  => false,
 					'enabled'     => true,
 				]
 			);
 			register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_privileges' );
 		}
-
-
 		add_settings_field(
 			'mailarchiver_plugin_options_usecdn',
 			__( 'Resources', 'mailarchiver' ),

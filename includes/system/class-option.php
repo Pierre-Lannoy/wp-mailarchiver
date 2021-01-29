@@ -70,13 +70,14 @@ class Option {
 		self::$defaults['download_favicons']  = false;
 		self::$defaults['script_in_footer']   = false;
 		self::$defaults['display_nag']        = false;  // In plugin settings.
+		self::$defaults['privileges']         = 0;
 		self::$defaults['nags']               = [];
 		self::$defaults['version']            = '0.0.0';
 		self::$defaults['archivers']          = [];
 		self::$defaults['archiver_autostart'] = true;  // In plugin settings.
 		self::$defaults['autolisteners']      = true;  // In plugin settings.
 		self::$defaults['listeners']          = [];    // In plugin settings.
-		self::$network                        = [ 'version', 'use_cdn', 'download_favicons', 'script_in_footer', 'display_nag', 'archiver_autostart', 'autolisteners' ];
+		self::$network                        = [ 'version', 'use_cdn', 'download_favicons', 'script_in_footer', 'display_nag', 'archiver_autostart', 'autolisteners', 'privileges' ];
 	}
 
 	/**
