@@ -100,7 +100,7 @@ class Watchdog {
 		if ( $this->previous_exception_handler && is_callable( $this->previous_exception_handler ) ) {
 			call_user_func( $this->previous_exception_handler, $exception );
 		} else {
-			exit( 255 );
+			exit( 254 );
 		}
 	}
 }
