@@ -67,7 +67,7 @@ function mailarchiver_uninstall() {
  * @since 1.0.0
  */
 function mailarchiver_run() {
-	if ( ! Mailarchiver\System\Environment::is_editor_scrapping() ) {
+	if ( ! Mailarchiver\System\Environment::is_sandboxed() ) {
 		require_once __DIR__ . '/includes/features/class-watchdog.php';
 		require_once __DIR__ . '/includes/features/class-wpcli.php';
 		\Mailarchiver\System\Logger::init();
