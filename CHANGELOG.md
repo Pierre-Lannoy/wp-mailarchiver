@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Consistent reset for settings.
 - Improved translation loading.
 - [WP_CLI] `m-archive` command have now a definition and all synopsis are up to date.
+- Improved self monitoring to handle archivers internal errors.
 
 ### Fixed
 - MailArchiver doesn't correctly honour previous error handler calls (thanks to [ajoah](https://github.com/ajoah)).
