@@ -7,8 +7,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - Compatibility with WordPress 5.7.
-
-### Added
 - New setting to override local access privileges when in development or staging environments (thanks to [sebastienserre](https://github.com/sebastienserre) for the suggestion).
 
 ### Changed
@@ -16,12 +14,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improved translation loading.
 - [WP_CLI] `m-archive` command have now a definition and all synopsis are up to date.
 - Improved self monitoring to handle archivers internal errors.
+- Code refactoring led to a huge execution speed gain: MailArchiver is now 40% faster.
 
 ### Fixed
 - MailArchiver doesn't correctly honour previous error handler calls (thanks to [ajoah](https://github.com/ajoah)).
 - MailArchiver jams the plugin/theme editor while editing PHP files (thanks to [ajoah](https://github.com/ajoah)).
 - In Site Health section, Opcache status may be wrong (or generates PHP warnings) if OPcache API usage is restricted.
 - The activation status of DecaLog (as logger) may be wrongly detected.
+
+### Removed
+- MailArchiver internal watchdog as it was no longer necessary.
 
 ## [2.1.0] - 2020-11-23
 
