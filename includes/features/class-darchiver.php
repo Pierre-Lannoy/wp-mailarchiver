@@ -262,6 +262,9 @@ class DArchiver {
 		} catch ( \Throwable $t ) {
 			$result = false;
 		} finally {
+			if ( ! $result ) {
+				InternalLogger::error( 'Unable to archive an email.' );
+			}
 			return $result;
 		}
 	}
@@ -292,6 +295,9 @@ class DArchiver {
 		} catch ( \Throwable $t ) {
 			$result = false;
 		} finally {
+			if ( ! $result ) {
+				InternalLogger::error( 'Unable to archive an email.' );
+			}
 			return $result;
 		}
 	}
