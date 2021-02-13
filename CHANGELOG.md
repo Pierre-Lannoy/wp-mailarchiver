@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [WP_CLI] `m-archive` command have now a definition and all synopsis are up to date.
 - Improved self monitoring to handle archivers internal errors.
 - Code refactoring led to a huge execution speed gain: MailArchiver is now 40% faster.
+- Upgraded Monolog library from version 2.0.2 to version 2.2.0.
 
 ### Fixed
 - MailArchiver doesn't correctly honour previous error handler calls (thanks to [ajoah](https://github.com/ajoah)).
@@ -23,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - The activation status of DecaLog (as logger) may be wrongly detected.
 
 ### Removed
-- MailArchiver internal watchdog as it was no longer necessary.
+- MailArchiver internal watchdog as it is no longer necessary.
 
 ## [2.1.0] - 2020-11-23
 
