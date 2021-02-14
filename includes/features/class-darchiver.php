@@ -144,15 +144,13 @@ class DArchiver {
 			}
 			$handler_def      = $handlers->get( $archiver['handler'] );
 			$archiver['uuid'] = $key;
-			if ( $this->in_test ) {
-				if ( $diagnosis->check( $handler_def['id'] ) ) {
-					$handler = $factory->create_archiver( $archiver );
-					if ( $handler ) {
-						$this->archiver->pushHandler( $handler );
-					}
-				} else {
-					$unloadable[] = sprintf( 'Unable to load a %s archiver. %s', $handler_def['name'], $diagnosis->error_string( $handler_def['id'] ) );
+			if ( $diagnosis->check( $handler_def['id'] ) ) {
+				$handler = $factory->create_archiver( $archiver );
+				if ( $handler ) {
+					$this->archiver->pushHandler( $handler );
 				}
+			} else {
+				$unloadable[] = sprintf( 'Unable to load a %s archiver. %s', $handler_def['name'], $diagnosis->error_string( $handler_def['id'] ) );
 			}
 		}
 		if ( count( $unloadable ) > 0 ) {
