@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MailArchiver\n"
-"POT-Creation-Date: 2020-11-28 15:16+0100\n"
+"POT-Creation-Date: 2021-02-23 23:48+0100\n"
 "PO-Revision-Date: 2019-07-08 14:07+0200\n"
 "Last-Translator: Pierre Lannoy <pierre@lannoy.fr>\n"
 "Language-Team: Pierre Lannoy <pierre@lannoy.fr>\n"
@@ -59,7 +59,7 @@ msgid "Archived Mails"
 msgstr ""
 
 #: admin/class-mailarchiver-admin.php:205 admin/class-mailarchiver-admin.php:222
-#: admin/class-mailarchiver-admin.php:815 admin/class-mailarchiver-admin.php:859
+#: admin/class-mailarchiver-admin.php:849 admin/class-mailarchiver-admin.php:893
 msgid "Archived emails"
 msgstr ""
 
@@ -91,8 +91,8 @@ msgstr ""
 msgid "GitHub repository"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:331 admin/class-mailarchiver-admin.php:712
-#: includes/features/class-wpcli.php:301
+#: admin/class-mailarchiver-admin.php:331 admin/class-mailarchiver-admin.php:713
+#: includes/features/class-wpcli.php:299
 msgid "New archiver"
 msgstr ""
 
@@ -122,84 +122,100 @@ msgstr ""
 msgid "Listeners settings have not been reset to defaults. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:496
+#: admin/class-mailarchiver-admin.php:497
 msgid "Plugin settings have been saved."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:501
+#: admin/class-mailarchiver-admin.php:502
 msgid "Plugin settings have not been saved. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:518
+#: admin/class-mailarchiver-admin.php:519
 msgid "Plugin settings have been reset to defaults."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:523
+#: admin/class-mailarchiver-admin.php:524
 msgid "Plugin settings have not been reset to defaults. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:577
+#: admin/class-mailarchiver-admin.php:578
 #, php-format
 msgid "Archiver %s has been saved."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:583
+#: admin/class-mailarchiver-admin.php:584
 #, php-format
 msgid "Archiver %s has not been saved. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:606
+#: admin/class-mailarchiver-admin.php:607
 #, php-format
 msgid "Archiver %s has been removed."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:612
+#: admin/class-mailarchiver-admin.php:613
 #, php-format
 msgid "Archiver %s has not been removed. Please try again."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:629
+#: admin/class-mailarchiver-admin.php:630
 msgid "Activate"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:635
+#: admin/class-mailarchiver-admin.php:636
 msgid "Selected listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:636
+#: admin/class-mailarchiver-admin.php:637
 msgid "All available listeners (recommended)"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:640
+#: admin/class-mailarchiver-admin.php:641
 msgid "Automatically or selectively choose which sources to listen."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:674
+#: admin/class-mailarchiver-admin.php:675
 msgid "Standard listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:675
+#: admin/class-mailarchiver-admin.php:676
 msgid "Plugin listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:676
+#: admin/class-mailarchiver-admin.php:677
 msgid "Theme listeners"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:717
+#: admin/class-mailarchiver-admin.php:718
 msgid "Auto-start"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:720
+#: admin/class-mailarchiver-admin.php:721
 msgid "If checked, when a new archiver is added it automatically starts."
 msgstr ""
 
 #: admin/class-mailarchiver-admin.php:737
+msgid "Never override privileges"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:738
+msgid "Override privileges for development environments"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:739
+msgid "Override privileges for staging environments"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:740
+msgid "Override privileges for staging and development environments"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:753
 #, php-format
 msgid "Your site is currently using %s."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:740
+#: admin/class-mailarchiver-admin.php:756
 #, php-format
 msgid ""
 "Your site does not use any logging plugin. To log all events triggered in "
@@ -207,107 +223,124 @@ msgid ""
 "not mandatory."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:744 includes/features/class-inlinehelp.php:176
+#: admin/class-mailarchiver-admin.php:760 includes/features/class-inlinehelp.php:176
 msgid "Logging"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:755
+#: admin/class-mailarchiver-admin.php:772
+msgid "Archives accesses"
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:780
+msgid ""
+"Allows other users than administrators to access local archives depending of "
+"environments."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:780
+msgid ""
+"Note: choosing something other than \"Never override privileges\" grants access "
+"to all users having \"read_private_pages\" capability and may have privacy and "
+"security implications."
+msgstr ""
+
+#: admin/class-mailarchiver-admin.php:789
 msgid "Resources"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:760
+#: admin/class-mailarchiver-admin.php:794
 msgid "Use public CDN"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:763
+#: admin/class-mailarchiver-admin.php:797
 msgid "Use CDN (jsDelivr) to serve MailArchiver scripts and stylesheets."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:771
+#: admin/class-mailarchiver-admin.php:805
 msgid "Admin notices"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:776
+#: admin/class-mailarchiver-admin.php:810
 msgid "Display"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:779
+#: admin/class-mailarchiver-admin.php:813
 msgid "Allows MailArchiver to display admin notices throughout the admin dashboard."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:779
+#: admin/class-mailarchiver-admin.php:813
 msgid "Note: MailArchiver respects DISABLE_NAG_NOTICES flag."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:800 admin/class-mailarchiver-admin.php:844
+#: admin/class-mailarchiver-admin.php:834 admin/class-mailarchiver-admin.php:878
 msgid "Name"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:807
+#: admin/class-mailarchiver-admin.php:841
 msgid "Used only in admin dashboard."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:823
+#: admin/class-mailarchiver-admin.php:857
 msgid "What kind of emails should be archived."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:889
+#: admin/class-mailarchiver-admin.php:923
 msgid "Enabled"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:923
+#: admin/class-mailarchiver-admin.php:957
 msgid "Remote IPs"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:928
+#: admin/class-mailarchiver-admin.php:962
 msgid "Obfuscation"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:931
+#: admin/class-mailarchiver-admin.php:965
 msgid "If checked, recorded fields will contain hashes instead of real IPs."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:931 admin/class-mailarchiver-admin.php:947
+#: admin/class-mailarchiver-admin.php:965 admin/class-mailarchiver-admin.php:981
 msgid "Note: it concerns all fields except email content."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:939
+#: admin/class-mailarchiver-admin.php:973
 msgid "Users"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:944
+#: admin/class-mailarchiver-admin.php:978
 msgid "Pseudonymisation"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:947
+#: admin/class-mailarchiver-admin.php:981
 msgid "If checked, recorded fields will contain hashes instead of user IDs & names."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:955
+#: admin/class-mailarchiver-admin.php:989
 msgid "Email adresses"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:960
+#: admin/class-mailarchiver-admin.php:994
 msgid "Masking"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:963
+#: admin/class-mailarchiver-admin.php:997
 msgid "If checked, recorded fields will contain hashes instead of email adresses."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:963
+#: admin/class-mailarchiver-admin.php:997
 msgid "Note: it concerns only \"to\" and \"from\" fields."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:997 includes/features/class-archivers.php:204
+#: admin/class-mailarchiver-admin.php:1031 includes/features/class-archivers.php:204
 msgid "Standard"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:1002 admin/class-mailarchiver-admin.php:1021
+#: admin/class-mailarchiver-admin.php:1036 admin/class-mailarchiver-admin.php:1055
 msgid "Included"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:1005
+#: admin/class-mailarchiver-admin.php:1039
 msgid "Allows to record standard MailArchiver information."
 msgstr ""
 
@@ -1382,19 +1415,19 @@ msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/system/class-environment.php:194
+#: includes/system/class-environment.php:228
 msgid "log"
 msgstr ""
 
-#: includes/system/class-environment.php:199
+#: includes/system/class-environment.php:233
 msgid "display"
 msgstr ""
 
-#: includes/system/class-environment.php:205
+#: includes/system/class-environment.php:239
 msgid "Debug enabled"
 msgstr ""
 
-#: includes/system/class-environment.php:205
+#: includes/system/class-environment.php:239
 msgid "Debug disabled"
 msgstr ""
 
