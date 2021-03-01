@@ -37,6 +37,17 @@ class EventTypes {
 	];
 
 	/**
+	 * List of the levels colors.
+	 *
+	 * @since    3.0.0
+	 * @var string[] $levels_colors Logging levels colors.
+	 */
+	public static $levels_colors = [
+		'info'  => [ '#EEEEFF', '#9999FF' ],
+		'error' => [ '#FFD2A8', '#FB7B00' ],
+	];
+
+	/**
 	 * List of the available icons.
 	 *
 	 * @since    1.0.0

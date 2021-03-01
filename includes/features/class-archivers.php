@@ -167,7 +167,7 @@ class Archivers extends \WP_List_Table {
 			)
 		);
 		$handler           = $this->handler_types->get( $item['handler'] );
-		$icon              = '<img style="width:34px;float:left;padding-right:6px;" src="' . $handler['icon'] . '" />';
+		$icon              = '<img style="width:38px;float:left;padding-right:6px;" src="' . $handler['icon'] . '" />';
 		$actions['edit']   = sprintf( '<a href="%s">' . esc_html__( 'Edit', 'mailarchiver' ) . '</a>', $edit );
 		$actions['delete'] = sprintf( '<a href="%s">' . esc_html__( 'Remove', 'mailarchiver' ) . '</a>', $delete );
 		if ( $item['running'] ) {
@@ -189,8 +189,9 @@ class Archivers extends \WP_List_Table {
 	 * @since    1.0.0
 	 */
 	protected function column_status( $item ) {
-		$status = ( $item['running'] ? '▶&nbsp;' . esc_html__( 'Running', 'mailarchiver' ) : '❙❙&nbsp;' . esc_html__( 'Paused', 'mailarchiver' ) );
-		return $status;
+		$running = '<span style="vertical-align: middle;font-size:10px;padding:2px 6px;display: inline-block;text-transform:uppercase;font-weight: bold;background-color:#4AA03E;color:#F9F9F9;border-radius:2px;cursor: default;word-break: break-word;">▶&nbsp;' . esc_html__( 'Running', 'mailarchiver' ) . '</span>';
+		$paused  = '<span style="vertical-align: middle;font-size:10px;padding:2px 6px;display: inline-block;text-transform:uppercase;font-weight: bold;background-color:#E0E0E0;color:#AAAAAA;border-radius:2px;cursor: default;word-break: break-word;">❙❙&nbsp;' . esc_html__( 'Paused', 'mailarchiver' ) . '</span>';
+		return ( $item['running'] ? $running : $paused );
 	}
 
 	/**
@@ -201,13 +202,17 @@ class Archivers extends \WP_List_Table {
 	 * @since    1.0.0
 	 */
 	protected function column_details( $item ) {
-		$list = [ esc_html__( 'Standard', 'mailarchiver' ) ];
+		$result = '';
+		$list[] = '<span style="vertical-align: middle;font-size:9px;padding:2px 6px;text-transform:uppercase;font-weight: bold;background-color:#9999BB;color:#F9F9F9;border-radius:2px;cursor: default;word-break: break-word;">' . esc_html__( 'Standard', 'mailarchiver' ) . '</span>';
 		foreach ( $item['processors'] as $processor ) {
 			if ( 'MailProcessor' !== $this->processor_types->get( $processor )['id'] ) {
-				$list[] = $this->processor_types->get( $processor )['name'];
+				$list[] = '<span style="vertical-align: middle;font-size:9px;padding:2px 6px;text-transform:uppercase;font-weight: bold;background-color:#9999BB;color:#F9F9F9;border-radius:2px;cursor: default;word-break: break-word;">' . str_replace( ' ', '&nbsp;', $this->processor_types->get( $processor )['name'] ) . '</span>';
 			}
 		}
-		return implode( ', ', $list );
+		$level   = strtolower( EventTypes::$level_names[ $item['level'] ] );
+		$result .= '<span style="margin-bottom: 6px;vertical-align: middle;font-size:10px;display: inline-block;text-transform:uppercase;font-weight: 900;background-color:' . EventTypes::$levels_colors[ $level ][0] . ';color:' . EventTypes::$levels_colors[ $level ][1] . ';border-radius:2px;border: 1px solid ' . EventTypes::$levels_colors[ $level ][1] . ';cursor: default;word-break: break-word;">&nbsp;&nbsp;&nbsp;' . strtolower( Archive::level_name( $item['level'] ) ) . '&nbsp;&nbsp;&nbsp;</span>';
+		$result .= '<br/>' . implode( ' ', $list );
+		return $result;
 	}
 
 	/**
@@ -232,8 +237,7 @@ class Archivers extends \WP_List_Table {
 		$columns = [
 			'name'    => esc_html__( 'Archiver', 'mailarchiver' ),
 			'status'  => esc_html__( 'Status', 'mailarchiver' ),
-			'level'   => esc_html__( 'Records', 'mailarchiver' ),
-			'details' => esc_html__( 'Reported details', 'mailarchiver' ),
+			'details' => esc_html__( 'Settings', 'mailarchiver' ),
 		];
 		return $columns;
 	}
