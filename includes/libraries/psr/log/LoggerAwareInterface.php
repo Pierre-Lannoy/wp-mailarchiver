@@ -3,12 +3,12 @@
 namespace Psr\Log;
 
 /**
- * Describes an logger-aware instance.
+ * Describes a logger-aware instance.
  */
 interface LoggerAwareInterface
 {
     /**
-     * Sets an logger instance on the object.
+     * Sets a logger instance on the object.
      *
      * @param LoggerInterface $logger
      *

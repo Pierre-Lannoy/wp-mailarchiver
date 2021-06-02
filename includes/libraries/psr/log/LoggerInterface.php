@@ -3,7 +3,7 @@
 namespace Psr\Log;
 
 /**
- * Describes an logger instance.
+ * Describes a logger instance.
  *
  * The message MUST be a string or object implementing __toString().
  *

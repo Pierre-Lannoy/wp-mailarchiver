@@ -15,7 +15,7 @@ trait LoggerAwareTrait
     protected $logger;
 
     /**
-     * Sets an logger.
+     * Sets a logger.
      *
      * @param LoggerInterface $logger
      */
