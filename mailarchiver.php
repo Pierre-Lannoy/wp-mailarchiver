@@ -68,7 +68,7 @@ function mailarchiver_uninstall() {
  * @since 1.0.0
  */
 function mailarchiver_run() {
-	\DecaLog\Engine::initPlugin( MAILARCHIVER_SLUG, MAILARCHIVER_PRODUCT_NAME, MAILARCHIVER_VERSION );
+	\DecaLog\Engine::initPlugin( MAILARCHIVER_SLUG, MAILARCHIVER_PRODUCT_NAME, MAILARCHIVER_VERSION, \Mailarchiver\Plugin\Core::get_base64_logo() );
 	$plugin = new Mailarchiver\Plugin\Core();
 	$plugin->run();
 }
