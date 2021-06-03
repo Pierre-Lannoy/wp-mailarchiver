@@ -12,7 +12,7 @@
 namespace Mailarchiver\Listener;
 
 use Mailarchiver\Plugin\Feature\Archive;
-use Mailarchiver\System\Logger;
+
 use Mailarchiver\System\Option;
 use Mailarchiver\System\User;
 use WP_User;
@@ -92,7 +92,7 @@ abstract class AbstractListener {
 				}
 			}
 			if ( $launch && $this->launch() && ! ( 'Mailarchiver\Listener\SelfListener' === get_class( $this ) ) ) {
-				Logger::debug( sprintf( 'Listener for %s is launched.', $this->name ) );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( sprintf( 'Listener for %s is launched.', $this->name ) );
 			}
 		}
 	}

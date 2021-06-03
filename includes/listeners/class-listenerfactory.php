@@ -13,7 +13,7 @@ namespace Mailarchiver\Listener;
 
 use Mailarchiver\Plugin\Feature\Archive;
 use Mailarchiver\System\Option;
-use Mailarchiver\System\Logger;
+
 
 /**
  * Define the listeners handling functionality.
@@ -80,9 +80,9 @@ class ListenerFactory {
 				$instance  = $this->create_listener_instance( $classname );
 				if ( $instance ) {
 					self::$infos[] = $instance->get_info();
-					Logger::debug( sprintf( '"%s" loaded.', $classname ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( sprintf( '"%s" loaded.', $classname ) );
 				} else {
-					Logger::error( sprintf( 'Unable to load "%s".', $classname ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( sprintf( 'Unable to load "%s".', $classname ) );
 				}
 			}
 		}
@@ -103,9 +103,9 @@ class ListenerFactory {
 				$instance  = $this->create_listener_instance( $classname );
 				if ( $instance ) {
 					self::$infos[] = $instance->get_info();
-					Logger::debug( sprintf( '"%s" loaded.', $classname ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( sprintf( '"%s" loaded.', $classname ) );
 				} else {
-					Logger::error( sprintf( 'Unable to load "%s".', $classname ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( sprintf( 'Unable to load "%s".', $classname ) );
 				}
 			}
 		}

@@ -12,7 +12,7 @@
 
 namespace Mailarchiver\Listener;
 
-use Mailarchiver\System\Logger;
+
 use Mailarchiver\Plugin\Feature\Capture;
 
 /**

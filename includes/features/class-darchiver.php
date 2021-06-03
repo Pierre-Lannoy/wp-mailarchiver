@@ -18,7 +18,6 @@ use Mailarchiver\Plugin\Feature\ArchiverFactory;
 use Mailarchiver\Plugin\Feature\ClassTypes;
 use Mailarchiver\Plugin\Feature\ChannelTypes;
 use Mailarchiver\Plugin\Feature\HandlerDiagnosis;
-use Mailarchiver\System\Logger as InternalLogger;
 
 /**
  * Main MailArchiver archiver class.
@@ -117,7 +116,7 @@ class DArchiver {
 		}
 		$this->psr3 = $psr3;
 		$this->init( $test );
-		InternalLogger::debug( 'A new instance of MailArchiver archiver is initialized and operational.' );
+		\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( 'A new instance of MailArchiver archiver is initialized and operational.' );
 	}
 
 	/**
@@ -155,7 +154,7 @@ class DArchiver {
 		}
 		if ( count( $unloadable ) > 0 ) {
 			foreach ( $unloadable as $item ) {
-				InternalLogger::error( $item, 666 );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( $item, [ 'code' => 666 ] );
 			}
 		}
 	}
@@ -261,7 +260,7 @@ class DArchiver {
 			$result = false;
 		} finally {
 			if ( ! $result ) {
-				InternalLogger::error( 'Unable to archive an email.' );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( 'Unable to archive an email.' );
 			}
 			return $result;
 		}
@@ -294,7 +293,7 @@ class DArchiver {
 			$result = false;
 		} finally {
 			if ( ! $result ) {
-				InternalLogger::error( 'Unable to archive an email.' );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( 'Unable to archive an email.' );
 			}
 			return $result;
 		}

@@ -12,7 +12,7 @@
 namespace Mailarchiver\Plugin\Feature;
 
 use Mailarchiver\System\Date;
-use Mailarchiver\System\Logger;
+
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Role;
 use Mailarchiver\System\Timezone;

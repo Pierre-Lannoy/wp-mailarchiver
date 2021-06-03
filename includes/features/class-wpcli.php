@@ -21,7 +21,7 @@ use Mailarchiver\System\Option;
 use Mailarchiver\System\Timezone;
 use Mailarchiver\System\UUID;
 use Mailarchiver\Plugin\Feature\EventTypes;
-use Mailarchiver\System\Logger;
+
 use Mailarchiver\Plugin\Feature\ArchiverFactory;
 use Monolog\Logger as Mnlg;
 use Spyc;
@@ -731,7 +731,7 @@ class Wpcli {
 				} else {
 					$loggers_list[$uuid]['running'] = true;
 					Option::network_set( 'archivers', $loggers_list );
-					Logger::info( sprintf( 'Archiver "%s" has started.', $loggers_list[ $uuid ]['name'] ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Archiver "%s" has started.', $loggers_list[ $uuid ]['name'] ) );
 					$this->success( sprintf( 'archiver %s is now running.', $uuid ), $uuid, $stdout );
 				}
 				break;
@@ -740,7 +740,7 @@ class Wpcli {
 					$this->line( sprintf( 'The archiver %s is already paused.', $uuid ), $uuid, $stdout );
 				} else {
 					$loggers_list[$uuid]['running'] = false;
-					Logger::info( sprintf( 'Archiver "%s" has been paused.', $loggers_list[ $uuid ]['name'] ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Archiver "%s" has been paused.', $loggers_list[ $uuid ]['name'] ) );
 					Option::network_set( 'archivers', $loggers_list );
 					$this->success( sprintf( 'archiver %s is now paused.', $uuid ), $uuid, $stdout );
 				}
@@ -753,7 +753,7 @@ class Wpcli {
 					\WP_CLI::confirm( sprintf( 'Are you sure you want to purge archiver %s?', $uuid ), $assoc_args );
 					$factory = new ArchiverFactory();
 					$factory->purge( $loggers_list[$uuid] );
-					Logger::notice( sprintf( 'Archiver "%s" has been purged.', $loggers_list[ $uuid ]['name'] ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been purged.', $loggers_list[ $uuid ]['name'] ) );
 					$this->success( sprintf( 'archiver %s successfully purged.', $uuid ), $uuid, $stdout );
 				}
 				break;
@@ -773,7 +773,7 @@ class Wpcli {
 				\WP_CLI::confirm( sprintf( 'Are you sure you want to remove archiver %s?', $uuid ), $assoc_args );
 				$factory = new ArchiverFactory();
 				$factory->destroy( $loggers_list[$uuid] );
-				Logger::notice( sprintf( 'Archiver "%s" has been removed.', $loggers_list[ $uuid ]['name'] ) );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been removed.', $loggers_list[ $uuid ]['name'] ) );
 				unset( $loggers_list[$uuid] );
 				Option::network_set( 'archivers', $loggers_list );
 				$this->success( sprintf( 'archiver %s successfully removed.', $uuid ), $uuid, $stdout );
@@ -781,22 +781,22 @@ class Wpcli {
 			case 'add':
 				$result = $this->archiver_add( $uuid, $assoc_args );
 				if ( '' === $result ) {
-					Logger::error( 'Unable to add a archiver.', 1 );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( 'Unable to add a archiver.', [ 'code' => 1 ] );
 					$this->error( 4, $stdout );
 				} else {
 					$loggers_list = Option::network_get( 'archivers' );
-					Logger::notice( sprintf( 'Archiver "%s" has been saved.', $loggers_list[ $result ]['name'] ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been saved.', $loggers_list[ $result ]['name'] ) );
 					$this->success( sprintf( 'archiver %s successfully created.', $result ), $result, $stdout );
 				}
 				break;
 			case 'set':
 				$result = $this->archiver_modify( $uuid, $assoc_args );
 				if ( '' === $result ) {
-					Logger::error( 'Unable to modify a archiver.', 1 );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( 'Unable to modify a archiver.', [ 'code' => 1 ] );
 					$this->error( 5, $stdout );
 				} else {
 					$loggers_list = Option::network_get( 'archivers' );
-					Logger::notice( sprintf( 'Archiver "%s" has been saved.', $loggers_list[ $result ]['name'] ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been saved.', $loggers_list[ $result ]['name'] ) );
 					$this->success( sprintf( 'archiver %s successfully saved.', $result ), $result, $stdout );
 				}
 				break;

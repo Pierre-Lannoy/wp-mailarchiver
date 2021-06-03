@@ -15,7 +15,7 @@ use Mailarchiver\Plugin\Feature\DArchiver;
 use Mailarchiver\Plugin\Feature\Archive;
 use Mailarchiver\System\Database;
 use Mailarchiver\System\Http;
-use Mailarchiver\System\Logger;
+
 
 /**
  * Define the WordPress handler functionality.
@@ -115,7 +115,7 @@ class WordpressHandler {
 			$sql            .= ") $charset_collate;";
 			// phpcs:ignore
 			$wpdb->query( $sql );
-			Logger::debug( sprintf( 'Table "%s" updated or created.', $this->table ) );
+			\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( sprintf( 'Table "%s" updated or created.', $this->table ) );
 		}
 	}
 
@@ -142,7 +142,7 @@ class WordpressHandler {
 		// phpcs:ignore
 		$wpdb->query( $sql );
 
-		Logger::debug( sprintf( 'Table "%s" updated.', $this->table ) );
+		\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( sprintf( 'Table "%s" updated.', $this->table ) );
 	}
 
 	/**
@@ -156,7 +156,7 @@ class WordpressHandler {
 			$sql = 'DROP TABLE IF EXISTS ' . $this->table;
 			// phpcs:ignore
 			$wpdb->query( $sql );
-			Logger::emergency( sprintf( 'Table "%s" dropped.', $this->table ) );
+			\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->emergency( sprintf( 'Table "%s" dropped.', $this->table ) );
 		}
 	}
 
@@ -168,7 +168,7 @@ class WordpressHandler {
 	public function force_purge() {
 		global $wpdb;
 		if ( '' !== $this->table ) {
-			Logger::debug( sprintf( 'Table "%s" purged.', $this->table ) );
+			\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( sprintf( 'Table "%s" purged.', $this->table ) );
 			$sql = 'TRUNCATE TABLE ' . $this->table;
 			// phpcs:ignore
 			$wpdb->query( $sql );
@@ -198,11 +198,11 @@ class WordpressHandler {
 				}
 			}
 			if ( 0 === $count ) {
-				Logger::info( sprintf( 'No old records to delete for archiver "%s".', $this->archiver['name'] ) );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'No old records to delete for archiver "%s".', $this->archiver['name'] ) );
 			} elseif ( 1 === $count ) {
-				Logger::info( sprintf( '1 old record deleted for archiver "%s".', $this->archiver['name'] ) );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( '1 old record deleted for archiver "%s".', $this->archiver['name'] ) );
 			} else {
-				Logger::info( sprintf( '%1$s old records deleted for archiver "%2$s".', $count, $this->archiver['name'] ) );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( '%1$s old records deleted for archiver "%2$s".', $count, $this->archiver['name'] ) );
 			}
 		}
 	}

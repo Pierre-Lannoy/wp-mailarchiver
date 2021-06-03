@@ -22,7 +22,7 @@ use Mailarchiver\System\UUID;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Form;
 use Mailarchiver\System\Role;
-use Mailarchiver\System\Logger;
+
 use Mailarchiver\System\Secret;
 use Mailarchiver\System\Environment;
 use PerfOpsOne\AdminMenus;
@@ -378,7 +378,7 @@ class Mailarchiver_Admin {
 										$message = sprintf( esc_html__( 'Archiver %s has started.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
 										$code    = 0;
 										add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-										Logger::info( sprintf( 'Archiver "%s" has started.', $archivers[ $uuid ]['name'] ), $code );
+										\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Archiver "%s" has started.', $archivers[ $uuid ]['name'] ), [ 'code' => $code ] );
 									}
 								}
 							}
@@ -390,7 +390,7 @@ class Mailarchiver_Admin {
 									if ( array_key_exists( $uuid, $archivers ) ) {
 										$message = sprintf( esc_html__( 'Archiver %s has been paused.', 'mailarchiver' ), '<em>' . $archivers[ $uuid ]['name'] . '</em>' );
 										$code    = 0;
-										Logger::notice( sprintf( 'Archiver "%s" has been paused.', $archivers[ $uuid ]['name'] ), $code );
+										\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been paused.', $archivers[ $uuid ]['name'] ), [ 'code' => $code ] );
 										$archivers[ $uuid ]['running'] = false;
 										Option::network_set( 'archivers', $archivers );
 										add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
@@ -450,12 +450,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Listeners settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				Logger::info( 'Listeners settings updated.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( 'Listeners settings updated.', [ 'code' => $code ] );
 			} else {
 				$message = esc_html__( 'Listeners settings have not been saved. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				Logger::warning( 'Listeners settings not updated.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( 'Listeners settings not updated.', [ 'code' => $code ] );
 			}
 		}
 	}
@@ -472,12 +472,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Listeners settings have been reset to defaults.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				Logger::info( 'Listeners settings reset to defaults.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( 'Listeners settings reset to defaults.', [ 'code' => $code ] );
 			} else {
 				$message = esc_html__( 'Listeners settings have not been reset to defaults. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				Logger::warning( 'Listeners settings not reset to defaults.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( 'Listeners settings not reset to defaults.', [ 'code' => $code ] );
 			}
 		}
 	}
@@ -497,12 +497,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Plugin settings have been saved.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				Logger::info( 'Plugin settings updated.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( 'Plugin settings updated.', [ 'code' => $code ] );
 			} else {
 				$message = esc_html__( 'Plugin settings have not been saved. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				Logger::warning( 'Plugin settings not updated.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( 'Plugin settings not updated.', [ 'code' => $code ] );
 			}
 		}
 	}
@@ -519,12 +519,12 @@ class Mailarchiver_Admin {
 				$message = esc_html__( 'Plugin settings have been reset to defaults.', 'mailarchiver' );
 				$code    = 0;
 				add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-				Logger::info( 'Plugin settings reset to defaults.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( 'Plugin settings reset to defaults.', [ 'code' => $code ] );
 			} else {
 				$message = esc_html__( 'Plugin settings have not been reset to defaults. Please try again.', 'mailarchiver' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				Logger::warning( 'Plugin settings not reset to defaults.', $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( 'Plugin settings not reset to defaults.', [ 'code' => $code ] );
 			}
 		}
 	}
@@ -578,13 +578,13 @@ class Mailarchiver_Admin {
 					$message = sprintf( esc_html__( 'Archiver %s has been saved.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 					$code    = 0;
 					add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-					Logger::info( sprintf( 'Archiver "%s" has been saved.', $this->current_archiver['name'] ), $code );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Archiver "%s" has been saved.', $this->current_archiver['name'] ), [ 'code' => $code ] );
 				}
 			} else {
 				$message = sprintf( esc_html__( 'Archiver %s has not been saved. Please try again.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				Logger::warning( sprintf( 'Archiver "%s" has not been saved.', $this->current_archiver['name'] ), $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( sprintf( 'Archiver "%s" has not been saved.', $this->current_archiver['name'] ), [ 'code' => $code ] );
 			}
 		}
 	}
@@ -607,13 +607,13 @@ class Mailarchiver_Admin {
 					$message = sprintf( esc_html__( 'Archiver %s has been removed.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 					$code    = 0;
 					add_settings_error( 'mailarchiver_no_error', $code, $message, 'updated' );
-					Logger::notice( sprintf( 'Archiver "%s" has been removed.', $this->current_archiver['name'] ), $code );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been removed.', $this->current_archiver['name'] ), [ 'code' => $code ] );
 				}
 			} else {
 				$message = sprintf( esc_html__( 'Archiver %s has not been removed. Please try again.', 'mailarchiver' ), '<em>' . $this->current_archiver['name'] . '</em>' );
 				$code    = 2;
 				add_settings_error( 'mailarchiver_nonce_error', $code, $message, 'error' );
-				Logger::warning( sprintf( 'Archiver "%s" has not been removed.', $this->current_archiver['name'] ), $code );
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( sprintf( 'Archiver "%s" has not been removed.', $this->current_archiver['name'] ), [ 'code' => $code ] );
 			}
 		}
 	}

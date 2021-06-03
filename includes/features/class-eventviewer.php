@@ -15,7 +15,7 @@ use Mailarchiver\System\Date;
 use Mailarchiver\System\Timezone;
 use Feather;
 use Mailarchiver\System\Database;
-use Mailarchiver\System\Logger;
+
 use Mailarchiver\System\User;
 
 /**
@@ -284,7 +284,7 @@ class EventViewer {
 			echo '<li>' . sprintf( esc_html__( 'Email: %s', 'mailarchiver' ), '<code>' . $this->eventid . '</code>' ) . '</li>';
 			echo '</ul>';
 			echo '</p>';
-			Logger::warning( sprintf( 'Trying to access out of scope email #%s from archive {%s}.', $this->eventid, $this->logid ), 403 );
+			\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( sprintf( 'Trying to access out of scope email #%s from archive {%s}.', $this->eventid, $this->logid ), [ 'code' => 403 ] );
 		}
 		echo '</div>';
 	}

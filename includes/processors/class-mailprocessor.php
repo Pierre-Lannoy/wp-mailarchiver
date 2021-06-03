@@ -13,7 +13,7 @@ namespace Mailarchiver\Processor;
 
 use Monolog\Processor\ProcessorInterface;
 use Mailarchiver\System\Hash;
-use Mailarchiver\System\Logger;
+
 
 /**
  * Define the Mail processor functionality.

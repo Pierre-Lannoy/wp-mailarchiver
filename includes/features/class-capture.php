@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Plugin\Feature;
 
-use Mailarchiver\System\Logger;
+
 use Mailarchiver\System\Hash;
 use Mailarchiver\Plugin\Feature\Archive;
 
@@ -190,7 +190,7 @@ class Capture {
 			self::$mails[ $key ]['listener']['version'] = $version;
 
 		} else {
-			Logger::error( 'Unable to archive a malformed email.' );
+			\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( 'Unable to archive a malformed email.' );
 		}
 	}
 
@@ -205,10 +205,10 @@ class Capture {
 			foreach ( self::$mails as $mail ) {
 				$archiver = Archive::bootstrap( $mail['listener']['class'], $mail['listener']['product'], $mail['listener']['version'] );
 				if ( array_key_exists( 'message', $mail ) && '' !== $mail['message'] ) {
-					Logger::warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
 					$archiver->error( $mail['raw'], $mail['message'] );
 				} else {
-					Logger::info( sprintf( 'Mail "%s" sent from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Mail "%s" sent from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
 					$archiver->success( $mail['raw'] );
 				}
 			}
