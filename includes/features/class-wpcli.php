@@ -340,8 +340,8 @@ class Wpcli {
 		} else {
 			\WP_CLI::line( 'Auto-Start: disabled.' );
 		}
-		if ( defined( 'DECALOG_VERSION' ) ) {
-			\WP_CLI::line( 'Logging support: yes (DecaLog v' . DECALOG_VERSION . ').');
+		if ( \DecaLog\Engine::isDecalogActivated() ) {
+			\WP_CLI::line( 'Logging support: ' . \DecaLog\Engine::getVersionString() . '.');
 		} else {
 			\WP_CLI::line( 'Logging support: no.' );
 		}
