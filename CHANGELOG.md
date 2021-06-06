@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - Redesigned archivers list.
-- [WP-CLI] `apwd status` command now displays DecaLog SDK version too.
+- [WP-CLI] `m-archive status` command now displays DecaLog SDK version too.
 
 ## [2.2.0] - 2021-02-24
 
