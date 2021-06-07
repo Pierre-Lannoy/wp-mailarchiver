@@ -63,21 +63,20 @@ class Environment {
 	 * @since 1.0.0
 	 */
 	public static function exec_mode() {
-		$id      = 0;
 		$req_uri = filter_input( INPUT_SERVER, 'REQUEST_URI' );
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			$id = 1;
-		} elseif (wp_doing_cron()){
+		} elseif ( wp_doing_cron() ) {
 			$id = 2;
-		} elseif (wp_doing_ajax()){
+		} elseif ( wp_doing_ajax() ) {
 			$id = 3;
-		} elseif ( defined('XMLRPC_REQUEST') && XMLRPC_REQUEST ){
+		} elseif ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
 			$id = 4;
 		} elseif ( defined( 'REST_REQUEST ' ) && REST_REQUEST ) {
 			$id = 5;
-		} elseif ( $req_uri ? 0 === strpos(strtolower($req_uri), '/wp-json/') : false ) {
+		} elseif ( $req_uri ? 0 === strpos( strtolower( $req_uri ), '/wp-json/' ) : false ) {
 			$id = 5;
-		} elseif ( $req_uri ? 0 === strpos(strtolower($req_uri), '/feed/') : false ) {
+		} elseif ( $req_uri ? 0 === strpos( strtolower( $req_uri ), '/feed/' ) : false ) {
 			$id = 6;
 		} elseif ( is_admin() ) {
 			$id = 7;
@@ -85,6 +84,16 @@ class Environment {
 			$id = 8;
 		}
 		return $id;
+	}
+
+	/**
+	 * Get the current execution mode.
+	 *
+	 * @return  boolean True if metrics are available.
+	 * @since 1.0.0
+	 */
+	public static function exec_mode_for_metrics() {
+		return in_array( self::exec_mode(), [ 1, 5, 7 ], true );
 	}
 
 	/**
