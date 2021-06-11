@@ -6,7 +6,7 @@
 
 Automatically archive all emails sent from your site. Store them in your WordPress database or send them to external services.
 
-See [WordPress directory page](https://wordpress.org/plugins/mailarchiver/). 
+See [WordPress directory page](https://wordpress.org/plugins/mailarchiver/) or [official website](https://perfops.one/mailarchiver). 
 
 __MailArchiver__ is a tool that allows you to:
 
@@ -24,6 +24,8 @@ At this time, __MailArchiver__ can archive emails:
 * to external alerting services, like Pushover or Slack;
 * to external logging services, like Logentries / insightOps or Loggly;
 * to system loggers, like Syslog or Fluentd;
+
+> __MailArchiver__ is part of [PerfOps One](https://perfops.one/), a suite of free and open source WordPress plugins dedicated to observability and operations performance.
 
 __MailArchiver__ is a free and open source plugin for WordPress. It integrates many other free and open source works (as-is or modified). Please, see 'about' tab in the plugin settings to see the details.
 

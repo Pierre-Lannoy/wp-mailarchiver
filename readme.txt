@@ -37,7 +37,9 @@ At this time, **MailArchiver** can archive emails:
 * manage archivers (list, start, pause, clean, purge, remove, add and set) - see `wp help m-archive archiver` for details;
 * view available archiver types (list and describe) - see `wp help m-archive type` for details.
 
-For a full help on WP-CLI commands in MailArchiver, please [read this guide](https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md).
+For a full help on WP-CLI commands in MailArchiver, please [read this guide](https://perfops.one/mailarchiver-wpcli).
+
+> **MailArchiver** is part of [PerfOps One](https://perfops.one/), a suite of free and open source WordPress plugins dedicated to observability and operations performance.
 
 **MailArchiver** is a free and open source plugin for WordPress. It integrates many other free and open source works (as-is or modified). Please, see 'about' tab in the plugin settings to see the details.
 
@@ -103,7 +105,7 @@ You can report bugs and suggest ideas via the [GitHub issue tracker](https://git
 
 == Changelog ==
 
-Please, see [full changelog](https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/CHANGELOG.md) on GitHub.
+Please, see [full changelog](https://perfops.one/mailarchiver-changelog).
 
 == Upgrade Notice ==
 
