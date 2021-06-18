@@ -30,7 +30,7 @@ $brands     = array( 'Automattic', 'Fluentd Project', 'Pushover', 'Rapid7', 'Sla
 $official   = sprintf( esc_html__( 'This plugin is not an official software from %s and, as such, is not endorsed or supported by these companies.', 'mailarchiver' ), implode( ', ', $brands ) );
 
 ?>
-<h2><?php echo esc_html( MAILARCHIVER_PRODUCT_NAME . ' ' . MAILARCHIVER_VERSION ); ?></h2>
+<h2><?php echo esc_html( MAILARCHIVER_PRODUCT_NAME . ' ' . MAILARCHIVER_VERSION ); ?> / <a href="https://perfops.one">PerfOps One</a></h2>
 <?php echo $icon; ?>
 <?php echo $warning; ?>
 <p><?php echo $intro; ?></p>

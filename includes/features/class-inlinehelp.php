@@ -93,7 +93,7 @@ class InlineHelp {
 		$content  = '<p><strong>' . esc_html__( 'For more help:', 'mailarchiver' ) . '</strong></p>';
 		$content .= '<p><a href="https://wordpress.org/support/plugin/mailarchiver/">' . esc_html__( 'User support', 'mailarchiver' ) . '</a>' . L10n::get_language_markup( [ 'en' ] ) . '</p>';
 		$content .= '<br/><p><strong>' . __( 'See also:', 'mailarchiver' ) . '</strong></p>';
-		// $content .= '<p><a href="https://mailarchiver.io/">' . esc_html__( 'Official website', 'mailarchiver' ) . '</a>' . L10n::get_language_markup( [ 'en' ] ) . '</p>';
+		$content .= '<p><a href="https://perfops.one/">' . esc_html__( 'Official website', 'mailarchiver' ) . '</a>' . L10n::get_language_markup( [ 'en' ] ) . '</p>';
 		$content .= '<p><a href="https://github.com/Pierre-Lannoy/wp-mailarchiver">' . esc_html__( 'GitHub repository', 'mailarchiver' ) . '</a>' . L10n::get_language_markup( [ 'en' ] ) . '</p>';
 		$this->screen->set_help_sidebar( $content );
 	}
