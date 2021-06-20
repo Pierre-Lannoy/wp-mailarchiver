@@ -202,7 +202,7 @@ class Capture {
 	public static function store_archives() {
 		global $wp_version;
 		if ( 0 < count( self::$mails ) ) {
-			$span = \DecaLog\Engine::tracesLogger( MAILARCHIVER_SLUG )->start_span( 'Archiving' );
+			$span = \DecaLog\Engine::tracesLogger( MAILARCHIVER_SLUG )->start_span( 'Archiving', DECALOG_SPAN_SHUTDOWN );
 			foreach ( self::$mails as $mail ) {
 				$archiver = Archive::bootstrap( $mail['listener']['class'], $mail['listener']['product'], $mail['listener']['version'] );
 				if ( array_key_exists( 'message', $mail ) && '' !== $mail['message'] ) {
