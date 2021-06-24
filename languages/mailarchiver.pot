@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MailArchiver\n"
-"POT-Creation-Date: 2021-02-23 23:48+0100\n"
+"POT-Creation-Date: 2021-06-24 15:06+0200\n"
 "PO-Revision-Date: 2019-07-08 14:07+0200\n"
 "Last-Translator: Pierre Lannoy <pierre@lannoy.fr>\n"
 "Language-Team: Pierre Lannoy <pierre@lannoy.fr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: mailarchiver.php\n"
@@ -75,20 +75,16 @@ msgstr ""
 msgid "Privacy options"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:241 includes/features/class-archivers.php:236
+#: admin/class-mailarchiver-admin.php:241
 msgid "Reported details"
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:257
+#: admin/class-mailarchiver-admin.php:257 includes/features/class-archivers.php:240
 msgid "Settings"
 msgstr ""
 
 #: admin/class-mailarchiver-admin.php:274
 msgid "Support"
-msgstr ""
-
-#: admin/class-mailarchiver-admin.php:275 includes/features/class-inlinehelp.php:97
-msgid "GitHub repository"
 msgstr ""
 
 #: admin/class-mailarchiver-admin.php:331 admin/class-mailarchiver-admin.php:713
@@ -332,7 +328,7 @@ msgstr ""
 msgid "Note: it concerns only \"to\" and \"from\" fields."
 msgstr ""
 
-#: admin/class-mailarchiver-admin.php:1031 includes/features/class-archivers.php:204
+#: admin/class-mailarchiver-admin.php:1031 includes/features/class-archivers.php:206
 msgid "Standard"
 msgstr ""
 
@@ -485,20 +481,16 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-#: includes/features/class-archivers.php:192
+#: includes/features/class-archivers.php:193
 msgid "Paused"
 msgstr ""
 
-#: includes/features/class-archivers.php:233
+#: includes/features/class-archivers.php:238
 msgid "Archiver"
 msgstr ""
 
-#: includes/features/class-archivers.php:234
+#: includes/features/class-archivers.php:239
 msgid "Status"
-msgstr ""
-
-#: includes/features/class-archivers.php:235
-msgid "Records"
 msgstr ""
 
 #: includes/features/class-channeltypes.php:47
@@ -634,15 +626,15 @@ msgstr ""
 msgid "Remote IP"
 msgstr ""
 
-#: includes/features/class-eventtypes.php:86
+#: includes/features/class-eventtypes.php:97
 msgid "The sent status of the email is unknown."
 msgstr ""
 
-#: includes/features/class-eventtypes.php:87
+#: includes/features/class-eventtypes.php:98
 msgid "The email was successfully sent."
 msgstr ""
 
-#: includes/features/class-eventtypes.php:88
+#: includes/features/class-eventtypes.php:99
 msgid "The email was not sent, an error was generated."
 msgstr ""
 
@@ -990,6 +982,14 @@ msgstr ""
 msgid "See also:"
 msgstr ""
 
+#: includes/features/class-inlinehelp.php:96
+msgid "Official website"
+msgstr ""
+
+#: includes/features/class-inlinehelp.php:97
+msgid "GitHub repository"
+msgstr ""
+
 #: includes/features/class-inlinehelp.php:108
 #, php-format
 msgid ""
@@ -1253,33 +1253,33 @@ msgstr ""
 
 #: includes/libraries/class-libraries.php:65
 #: includes/libraries/class-libraries.php:76
-#: includes/libraries/class-libraries.php:97
+#: includes/libraries/class-libraries.php:87
 #, php-format
 msgid "%s & contributors"
 msgstr ""
 
-#: includes/libraries/class-libraries.php:147
+#: includes/libraries/class-libraries.php:177
 msgid "MIT license"
 msgstr ""
 
-#: includes/libraries/class-libraries.php:150
+#: includes/libraries/class-libraries.php:180
 msgid "Apache license, version 2.0"
 msgstr ""
 
-#: includes/libraries/class-libraries.php:153
+#: includes/libraries/class-libraries.php:183
 msgid "GPL-2.0 license"
 msgstr ""
 
-#: includes/libraries/class-libraries.php:156
+#: includes/libraries/class-libraries.php:186
 msgid "GPL-3.0 license"
 msgstr ""
 
-#: includes/libraries/class-libraries.php:159
+#: includes/libraries/class-libraries.php:189
 msgid "unknown license"
 msgstr ""
 
 #. translators: as in the sentence "Product W version X by author Y (license Z)"
-#: includes/libraries/class-libraries.php:211
+#: includes/libraries/class-libraries.php:241
 #, php-format
 msgid "<a href=\"%1$s\">%2$s %3$s</a>%4$s by %5$s (%6$s)"
 msgstr ""
@@ -1415,19 +1415,19 @@ msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/system/class-environment.php:228
+#: includes/system/class-environment.php:237
 msgid "log"
 msgstr ""
 
-#: includes/system/class-environment.php:233
+#: includes/system/class-environment.php:242
 msgid "display"
 msgstr ""
 
-#: includes/system/class-environment.php:239
+#: includes/system/class-environment.php:248
 msgid "Debug enabled"
 msgstr ""
 
-#: includes/system/class-environment.php:239
+#: includes/system/class-environment.php:248
 msgid "Debug disabled"
 msgstr ""
 
