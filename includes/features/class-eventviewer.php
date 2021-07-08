@@ -93,6 +93,7 @@ class EventViewer {
 			}
 		}
 		$this->prepare_body();
+		wp_enqueue_script( 'postbox' );
 	}
 
 	/**
