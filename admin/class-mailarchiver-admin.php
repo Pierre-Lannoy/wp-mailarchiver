@@ -25,7 +25,7 @@ use Mailarchiver\System\Role;
 
 use Mailarchiver\System\Secret;
 use Mailarchiver\System\Environment;
-use PerfOpsOne\AdminMenus;
+use PerfOpsOne\Menus;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -133,7 +133,7 @@ class Mailarchiver_Admin {
 	 * @return array    The completed menus array.
 	 * @since 1.0.0
 	 */
-	public function init_perfops_admin_menus( $perfops ) {
+	public function init_perfopsone_admin_menus( $perfops ) {
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::SINGLE_ADMIN === Role::admin_type() ) {
 			$perfops['settings'][] = [
 				'name'          => MAILARCHIVER_PRODUCT_NAME,
@@ -145,7 +145,6 @@ class Mailarchiver_Admin {
 				'menu_title'    => MAILARCHIVER_PRODUCT_NAME,
 				'capability'    => 'manage_options',
 				'callback'      => [ $this, 'get_settings_page' ],
-				'position'      => 50,
 				'plugin'        => MAILARCHIVER_SLUG,
 				'version'       => MAILARCHIVER_VERSION,
 				'activated'     => true,
@@ -167,7 +166,6 @@ class Mailarchiver_Admin {
 					'menu_title'    => esc_html__( 'Archived Mails', 'mailarchiver' ),
 					'capability'    => 'read_private_pages',
 					'callback'      => [ $this, 'get_tools_page' ],
-					'position'      => 50,
 					'plugin'        => MAILARCHIVER_SLUG,
 					'activated'     => true,
 					'remedy'        => '',
@@ -176,6 +174,15 @@ class Mailarchiver_Admin {
 			}
 		}
 		return $perfops;
+	}
+
+	/**
+	 * Dispatch the items in the settings menu.
+	 *
+	 * @since 2.0.0
+	 */
+	public function finalize_admin_menus() {
+		Menus::finalize();
 	}
 
 	/**
@@ -188,8 +195,8 @@ class Mailarchiver_Admin {
 			remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 			remove_action( 'admin_print_styles', 'print_emoji_styles' );
 		}
-		add_filter( 'init_perfops_admin_menus', [ $this, 'init_perfops_admin_menus' ] );
-		AdminMenus::initialize();
+		add_filter( 'init_perfopsone_admin_menus', [ $this, 'init_perfopsone_admin_menus' ] );
+		Menus::initialize();
 	}
 
 	/**
