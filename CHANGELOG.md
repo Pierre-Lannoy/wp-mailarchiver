@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - New redesigned UI for Perfops One plugins management and menus.
 
 ### Fixed
+- In some conditions, the plugin may be in the default site language rather than the user's language.
 - With WordPress 5.8 it is impossible to move and close boxes.
 
 ## [2.3.0] - 2021-06-22
