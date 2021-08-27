@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [2.3.2] - Unreleased
 
 ### Changed
-- Designed has been improved pour the archiver selector.
+- Designed has been improved for the archiver selector.
+
+### Fixed
+- There may be name collisions for some functions if version of WordPress is lower than 5.6.
 
 ## [2.3.1] - 2021-08-11
 
