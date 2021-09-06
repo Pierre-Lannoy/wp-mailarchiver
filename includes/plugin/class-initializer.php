@@ -38,10 +38,10 @@ class Initializer {
 		\Mailarchiver\System\Cache::init();
 		\Mailarchiver\System\Sitehealth::init();
 		\Mailarchiver\System\APCu::init();
-		if ( 'en_US' !== determine_locale() ) {
+		//if ( 'en_US' !== determine_locale() ) {
 			unload_textdomain( MAILARCHIVER_SLUG );
 			load_plugin_textdomain( MAILARCHIVER_SLUG );
-		}
+		//}
 	}
 
 	/**
