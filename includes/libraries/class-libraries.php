@@ -129,6 +129,28 @@ class Libraries {
 			'license' => 'mit',
 			'langs'   => 'en',
 		];
+		self::$psr4_libraries['elasticsearch']   = [
+			'name'    => 'Elasticsearch',
+			'prefix'  => 'Elasticsearch',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'elasticsearch/',
+			'version' => '7.6.1',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Elastic' ),
+			'url'     => 'https://github.com/elastic/elasticsearch-php',
+			'license' => 'apl2',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['guzzlehttp']   = [
+			'name'    => 'GuzzleHttp',
+			'prefix'  => 'MAGuzzleHttp',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'guzzlehttp/',
+			'version' => '',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Michael Dowling' ),
+			'url'     => 'https://github.com/elastic/elasticsearch-php',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
 		self::$mono_libraries             = [];
 	}
 
