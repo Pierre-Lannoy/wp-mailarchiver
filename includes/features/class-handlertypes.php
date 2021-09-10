@@ -627,6 +627,184 @@ class HandlerTypes {
 			],
 		];
 
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'ElasticCloudHandler',
+			'namespace'     => 'Mailarchiver\\Handler',
+			'class'         => 'storing',
+			'minimal'       => Logger::INFO,
+			'name'          => 'Elastic Cloud',
+			'help'          => esc_html__( 'Archives sent to Elastic Cloud.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_elasticcloud_icon(),
+			'needs'         => [],
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'cloudid' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Cloud ID', 'mailarchiver' ),
+					'help'    => esc_html__( 'The generated cloud ID.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'user'    => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Username', 'mailarchiver' ),
+					'help'    => esc_html__( 'The username of the instance.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'pass'    => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Password', 'mailarchiver' ),
+					'help'    => esc_html__( 'The password of the instance.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'index'   => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Index', 'mailarchiver' ),
+					'help'    => esc_html__( 'The index name.', 'mailarchiver' ),
+					'default' => '_index',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'cloudid',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'user',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'pass',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'index',
+				],
+				[ 'type' => 'level' ],
+				[
+					'type'  => 'literal',
+					'value' => true,
+				],
+			],
+		];
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'ElasticHandler',
+			'namespace'     => 'Mailarchiver\\Handler',
+			'class'         => 'storing',
+			'minimal'       => Logger::INFO,
+			'name'          => 'Elasticsearch',
+			'help'          => esc_html__( 'Archives sent to Elasticsearch.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_elasticsearch_icon(),
+			'needs'         => [],
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'url'   => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Service URL', 'mailarchiver' ),
+					'help'    => sprintf( esc_html__( 'URL where to send archives. Format: %s.', 'mailarchiver' ), '<code>' . htmlentities( '<proto>://<host>:<port>' ) . '</code>' ),
+					'default' => 'http://localhost:9200',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'user'  => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Username', 'mailarchiver' ),
+					'help'    => esc_html__( 'The username of the instance.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'pass'  => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Password', 'mailarchiver' ),
+					'help'    => esc_html__( 'The password of the instance.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'index' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Index', 'mailarchiver' ),
+					'help'    => esc_html__( 'The index name.', 'mailarchiver' ),
+					'default' => '_index',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'url',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'user',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'pass',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'index',
+				],
+				[ 'type' => 'level' ],
+				[
+					'type'  => 'literal',
+					'value' => true,
+				],
+			],
+		];
+
+		uasort(
+			$this->handlers,
+			function ( $a, $b ) {
+				return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );
+			}
+		);
+
 	}
 
 	/**

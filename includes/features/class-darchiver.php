@@ -18,6 +18,7 @@ use Mailarchiver\Plugin\Feature\ArchiverFactory;
 use Mailarchiver\Plugin\Feature\ClassTypes;
 use Mailarchiver\Plugin\Feature\ChannelTypes;
 use Mailarchiver\Plugin\Feature\HandlerDiagnosis;
+use Mailarchiver\System\UUID;
 
 /**
  * Main MailArchiver archiver class.
@@ -105,6 +106,9 @@ class DArchiver {
 	 * @since   1.0.0
 	 */
 	public function __construct( $class, $name = null, $version = null, $test = null, $psr3 = false ) {
+		if ( ! defined( 'DECALOG_TRACEID' ) ) {
+			define( 'DECALOG_TRACEID', UUID::generate_unique_id( 32 ) );
+		}
 		if ( in_array( $class, ClassTypes::$classes, true ) ) {
 			$this->class = $class;
 		}
@@ -195,6 +199,7 @@ class DArchiver {
 			'class'     => (string) $this->class,
 			'component' => (string) $this->name,
 			'version'   => (string) $this->version,
+			'traceID'   => (string) DECALOG_TRACEID,
 		];
 		if ( is_array( $mail ) ) {
 			foreach ( [ 'to', 'from', 'subject' ] as $field ) {

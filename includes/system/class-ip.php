@@ -61,13 +61,13 @@ class IP {
 	public static function maybe_extract_ip( $iplist, $include_private = false ) {
 		if ( $include_private ) {
 			foreach ( $iplist as $ip ) {
-				if ( filter_var( trim( $ip ), FILTER_VALIDATE_IP ) ) {
+				if ( false !== filter_var( trim( $ip ), FILTER_VALIDATE_IP ) ) {
 					return self::expand( $ip );
 				}
 			}
 		}
 		foreach ( $iplist as $ip ) {
-			if ( filter_var( trim( $ip ), FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+			if ( false !== filter_var( trim( $ip ), FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
 				return self::expand( $ip );
 			}
 		}
@@ -81,7 +81,7 @@ class IP {
 	 * @since 1.0.0
 	 */
 	public static function get_current() {
-		for ( $i = 0 ; $i < 2 ; $i++ ) {
+		for ( $i = 0; $i < 2; $i++ ) {
 			foreach (
 				[
 					'HTTP_FORWARDED',
@@ -89,17 +89,6 @@ class IP {
 					'HTTP_X_FORWARDED',
 					'HTTP_CLIENT_IP',
 					'HTTP_X_FORWARDED_FOR',
-				] as $field
-			) {
-				if ( array_key_exists( $field, $_SERVER ) ) {
-					$ip = self::maybe_extract_ip( array_reverse( explode( ',', filter_input( INPUT_SERVER, $field ) ) ), 1 === $i );
-					if ( '' !== $ip ) {
-						return $ip;
-					}
-				}
-			}
-			foreach (
-				[
 					'HTTP_X_CLUSTER_CLIENT_IP',
 					'HTTP_CF_CONNECTING_IP',
 					'HTTP_X_REAL_IP',
@@ -113,7 +102,6 @@ class IP {
 					}
 				}
 			}
-
 		}
 		return '127.0.0.1';
 	}

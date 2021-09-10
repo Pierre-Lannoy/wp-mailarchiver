@@ -15,6 +15,7 @@ use Monolog\Processor\ProcessorInterface;
 use Mailarchiver\System\Blog;
 use Mailarchiver\System\Hash;
 use Mailarchiver\System\User;
+use Mailarchiver\System\IP;
 
 /**
  * Define the WordPress processor functionality.
@@ -67,18 +68,10 @@ class WordpressProcessor implements ProcessorInterface {
 		$record['extra']['sitename'] = Blog::get_current_blog_name();
 		$record['extra']['userid']   = User::get_current_user_id( 0 );
 		$record['extra']['username'] = User::get_current_user_name();
-		$ip                          = filter_input( INPUT_SERVER, 'REMOTE_ADDR' );
-		if ( array_key_exists( 'HTTP_X_REAL_IP', $_SERVER ) ) {
-			$ip = filter_input( INPUT_SERVER, 'HTTP_X_REAL_IP' );
+		if ( 0 !== (int) $record['extra']['userid'] ) {
+			$record['extra']['usersession'] = Hash::simple_hash( wp_get_session_token(), false );
 		}
-		if ( array_key_exists( 'X-FORWARDED_FOR', $_SERVER ) ) {
-			$ip = filter_input( INPUT_SERVER, 'FORWARDED_FOR' );
-		}
-		if ( ! empty( $ip ) ) {
-			$record['extra']['ip'] = $ip;
-		} else {
-			$record['extra']['ip'] = '127.0.0.1';
-		}
+		$record['extra']['ip'] = IP::get_current();
 		if ( $this->obfuscation ) {
 			if ( array_key_exists( 'ip', $record['extra'] ) ) {
 				$record['extra']['ip'] = Hash::simple_hash( $record['extra']['ip'] );
