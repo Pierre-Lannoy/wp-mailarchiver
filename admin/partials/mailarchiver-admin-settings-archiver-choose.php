@@ -25,7 +25,7 @@ $archiver_types = new HandlerTypes();
                     .actionable {border-radius:6px;cursor:pointer; -moz-transition: all .2s ease-in; -o-transition: all .2s ease-in; -webkit-transition: all .2s ease-in; transition: all .2s ease-in; background: transparent;border:1px solid transparent;}
                 </style>
 				<?php foreach ( $archiver_types->get_all() as $archiver ) { ?>
-					<?php if ( 'null' !== $archiver['class'] ) { ?>
+					<?php if ( 'system' !== $archiver['class'] ) { ?>
 						<div><img id="<?php echo $archiver['id']; ?>" class="actionable" style="width:80px;" src="<?php echo $archiver['icon']; ?>"/></div>
 					<?php } ?>
 				<?php } ?>
