@@ -7,8 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - Compatibility with WordPress 5.9.
-- New archiver to send archives to an Elasticsearch instance.
-- New archiver to send archives to Elastic Cloud.
+- New archiver to store archives in an Elasticsearch instance.
+- New archiver to store archives in Elastic Cloud.
 
 ### Changed
 - MailArchiver now propagates `traceID` and `sessionID` for all archiver supporting it.
