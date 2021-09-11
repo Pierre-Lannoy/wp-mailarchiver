@@ -40,7 +40,7 @@ class ElasticHandler extends ElasticsearchHandler {
 	 *
 	 * @since   2.4.0
 	 */
-	public function __construct( string $url, string $user, string $pass, string $index = '', $level = Logger::DEBUG, bool $bubble = true ) {
+	public function __construct( string $url, string $user, string $pass, string $index = '', $level = Logger::INFO, bool $bubble = true ) {
 		if ( '' === $index ) {
 			$index = 'mailarchiver';
 		}

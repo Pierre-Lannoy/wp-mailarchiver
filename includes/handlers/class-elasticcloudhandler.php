@@ -39,7 +39,7 @@ class ElasticCloudHandler extends ElasticsearchHandler {
 	 * @param bool       $bubble    Whether the messages that are handled can bubble up the stack or not.
 	 * @since   2.5.0
 	 */
-	public function __construct( string $cloudid, string $user, string $pass, string $index = '', $level = Logger::DEBUG, bool $bubble = true ) {
+	public function __construct( string $cloudid, string $user, string $pass, string $index = '', $level = Logger::INFO, bool $bubble = true ) {
 		if ( '' === $index ) {
 			$index = 'mailarchiver';
 		}
