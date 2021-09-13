@@ -72,7 +72,9 @@ function mailarchiver_run() {
 	$plugin = new Mailarchiver\Plugin\Core();
 	$plugin->run();
 }
-
+if ( ! defined( 'MAILARCHIVER_MAX_SHUTDOWN_PRIORITY' ) ) {
+	define( 'MAILARCHIVER_MAX_SHUTDOWN_PRIORITY', PHP_INT_MAX - 2000 );
+}
 register_activation_hook( __FILE__, 'mailarchiver_activate' );
 register_deactivation_hook( __FILE__, 'mailarchiver_deactivate' );
 register_uninstall_hook( __FILE__, 'mailarchiver_uninstall' );
