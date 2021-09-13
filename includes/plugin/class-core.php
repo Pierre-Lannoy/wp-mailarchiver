@@ -75,7 +75,7 @@ class Core {
 		$this->loader->add_action( 'plugins_loaded', $listeners, 'launch', 1 );
 		$this->loader->add_action( 'plugins_loaded', $listeners, 'launch_late_init', PHP_INT_MAX );
 		$this->loader->add_action( 'wp_head', $assets, 'prefetch' );
-		$this->loader->add_action( 'shutdown', 'Mailarchiver\Plugin\Feature\Capture', 'store_archives', DECALOG_MAX_SHUTDOWN_PRIORITY, 0 );
+		$this->loader->add_action( 'shutdown', 'Mailarchiver\Plugin\Feature\Capture', 'store_archives', MAILARCHIVER_MAX_SHUTDOWN_PRIORITY, 0 );
 		add_shortcode( 'mailarchiver-changelog', [ $updater, 'sc_get_changelog' ] );
 		add_shortcode( 'mailarchiver-libraries', [ $libraries, 'sc_get_list' ] );
 		add_shortcode( 'mailarchiver-statistics', [ 'Mailarchiver\System\Statistics', 'sc_get_raw' ] );
