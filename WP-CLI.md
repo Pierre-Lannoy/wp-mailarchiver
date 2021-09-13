@@ -4,8 +4,9 @@ MailArchiver is fully usable from command-line, thanks to [WP-CLI](https://wp-cl
 2. [Using archiver types](#managing-archivers) - `wp m-archive type`
 3. [Getting MailArchiver status](#getting-mailachiver-status) - `wp m-archive status`
 4. [Managing main settings](#managing-main-settings) - `wp m-archive settings`
-5. [Misc flags](#misc-flags)
-6. [Piping and storing](#piping-and-storing)
+5. [Dsecrypting content](#decrypting-content) - `wp m-archive decrypt`
+6. [Misc flags](#misc-flags)
+7. [Piping and storing](#piping-and-storing)
 
 ## Managing archivers
 
@@ -206,6 +207,18 @@ To disable auto-start without confirmation prompt, type the following command:
 ```console
 pierre@dev:~$ wp m-archive settings disable auto-start --yes
 Success: auto-start is now deactivated.
+```
+
+## Decrypting content
+
+With the `wp m-archive decrypt <password> <encrypted-content> [--stdout]` command you can decrypt a mail body previously encrypted by MailArchiver.
+
+### Examples
+
+To decrypt the specified content (encrypted by MailArchiver with the password "password"), type the following command:
+```console
+pierre@dev:~$ wp m-archive decrypt "password" "IBP50CCSNgUIMVf99HKZ5n6FpaMY8WVUJNZvF5PZW1vofcqotHX/IZeCT1BmFCA9+qpR1vsZKRyNyWacEeQl/sNpww4tZnq/Yoh4dMzqkETfUQv0/LmvhuV258dMRqRGHzYhcbvzxUXX1vhVNRLv3g=="
+Success: decrypted content is "MailArchiver rocks!".
 ```
 
 ## Misc flags

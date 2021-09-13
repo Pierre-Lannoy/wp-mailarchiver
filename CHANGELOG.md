@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - New archiver to store archives in Elastic Cloud.
 - New archiver to store archives in a Loki instance.
 - New archiver to store archives in Grafana Cloud service.
+- Privacy option for loggers allows now to encrypt the mail body.
+- [WP-CLI] The new command `decrypt` allows to decrypt a mail body previously encrypted by MailArchiver.
 
 ### Changed
 - MailArchiver now propagates `traceID` and `sessionID` for all archiver supporting it.
@@ -18,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improved internal IP detection: support for cloud load balancers.
 - Improved hash handling and reporting for users and IPs.
 - The archived metadata contains now a message "Mail sent." when sending is not in error.
+- [WP-CLI] The command `status` now displays encryption details.
 
 ### Fixed
 - System archivers are visible from the archiver selector.

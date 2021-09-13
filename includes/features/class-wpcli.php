@@ -21,7 +21,7 @@ use Mailarchiver\System\Option;
 use Mailarchiver\System\Timezone;
 use Mailarchiver\System\UUID;
 use Mailarchiver\Plugin\Feature\EventTypes;
-
+use Mailarchiver\System\PwdProtect;
 use Mailarchiver\Plugin\Feature\ArchiverFactory;
 use Monolog\Logger as Mnlg;
 use Spyc;
@@ -50,6 +50,8 @@ class Wpcli {
 		5   => 'unable to modify this archiver.',
 		6   => 'unrecognized setting.',
 		7   => 'unrecognized action.',
+		8   => 'encryption features are not available.',
+		9   => 'wrong password.',
 		255 => 'unknown error.',
 	];
 
@@ -81,7 +83,7 @@ class Wpcli {
 			if ( '' === $field ) {
 				$result .= $key;
 			} else {
-				$result .= $id[$field];
+				$result .= $id[ $field ];
 			}
 			if ( $id !== $last ) {
 				$result .= ' ';
@@ -217,7 +219,7 @@ class Wpcli {
 				$processors[] = $key;
 			}
 			if ( ! $value && in_array( $key, $processors, true ) ) {
-				$processors = array_diff( $processors, [$key] );
+				$processors = array_diff( $processors, [ $key ] );
 			}
 		}
 		return $processors;
@@ -235,16 +237,19 @@ class Wpcli {
 	private function archiver_modify( $uuid, $args, $start = false ) {
 		$params        = $this->get_params( $args );
 		$loggers       = Option::network_get( 'archivers' );
-		$logger        = $loggers[$uuid];
+		$logger        = $loggers[ $uuid ];
 		$handler_types = new HandlerTypes();
 		$handler       = $handler_types->get( $logger['handler'] );
-		unset ( $loggers[$uuid] );
+		unset( $loggers[ $uuid ] );
 		foreach ( $params as $param => $value ) {
 			switch ( $param ) {
 				case 'obfuscation':
 				case 'pseudonymization':
 				case 'mailanonymization':
-					$logger['privacy'][$param] = (bool) $value;
+					$logger['privacy'][ $param ] = (bool) $value;
+					break;
+				case 'encryption':
+					$logger['privacy'][ $param ] = (string) $value;
 					break;
 				case 'proc_wp':
 					$logger['processors'] = $this->updated_proc( $logger['processors'], $param, (bool) $value );
@@ -257,19 +262,19 @@ class Wpcli {
 					}
 					break;
 				case 'name':
-					$logger['name'] = esc_html( (string) $value) ;
+					$logger['name'] = esc_html( (string) $value );
 					break;
 				default:
 					if ( array_key_exists( $param, $handler['configuration'] ) ) {
-						switch ( $handler['configuration'][$param]['control']['cast'] ) {
+						switch ( $handler['configuration'][ $param ]['control']['cast'] ) {
 							case 'boolean':
-								$logger['configuration'][$param] = (bool) $value;
+								$logger['configuration'][ $param ] = (bool) $value;
 								break;
 							case 'integer':
-								$logger['configuration'][$param] = (integer) $value;
+								$logger['configuration'][ $param ] = (int) $value;
 								break;
 							case 'string':
-								$logger['configuration'][$param] = (string) $value;
+								$logger['configuration'][ $param ] = (string) $value;
 								break;
 						}
 					}
@@ -279,7 +284,7 @@ class Wpcli {
 		if ( $start ) {
 			$logger['running'] = true;
 		}
-		$loggers[$uuid] = $logger;
+		$loggers[ $uuid ] = $logger;
 		Option::network_set( 'archivers', $loggers );
 		return $uuid;
 	}
@@ -328,9 +333,9 @@ class Wpcli {
 				$run++;
 			}
 		}
-		if ( 0 === $run) {
+		if ( 0 === $run ) {
 			\WP_CLI::line( sprintf( '%s running.', Environment::plugin_version_text() ) );
-		} elseif ( 1 === $run) {
+		} elseif ( 1 === $run ) {
 			\WP_CLI::line( sprintf( '%s running 1 archiver.', Environment::plugin_version_text() ) );
 		} else {
 			\WP_CLI::line( sprintf( '%s running %d archivers.', Environment::plugin_version_text(), $run ) );
@@ -341,9 +346,15 @@ class Wpcli {
 			\WP_CLI::line( 'Auto-Start: disabled.' );
 		}
 		if ( \DecaLog\Engine::isDecalogActivated() ) {
-			\WP_CLI::line( 'Logging support: ' . \DecaLog\Engine::getVersionString() . '.');
+			\WP_CLI::line( 'Logging support: ' . \DecaLog\Engine::getVersionString() . '.' );
 		} else {
 			\WP_CLI::line( 'Logging support: no.' );
+		}
+		if ( PwdProtect::is_available() ) {
+			\WP_CLI::line( 'Encryption support: ' . PwdProtect::get_openssl_version() . '.' );
+			\WP_CLI::line( 'Encryption type: ' . PwdProtect::get_encryption_details() . '.' );
+		} else {
+			\WP_CLI::line( 'Encryption support: no.' );
 		}
 	}
 
@@ -396,14 +407,14 @@ class Wpcli {
 		$handlers      = [];
 		foreach ( $handler_types->get_all() as $key => $handler ) {
 			if ( 'system' !== $handler['class'] ) {
-				$handler['type']                        = $handler['id'];
-				$handlers[strtolower( $handler['id'] )] = $handler;
+				$handler['type']                          = $handler['id'];
+				$handlers[ strtolower( $handler['id'] ) ] = $handler;
 			}
 		}
 		uasort(
 			$handlers,
 			function ( $a, $b ) {
-				return strcmp( strtolower( $a[ 'name' ] ), strtolower( $b[ 'name' ] ) );
+				return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );
 			}
 		);
 		$uuid   = '';
@@ -434,7 +445,7 @@ class Wpcli {
 				} elseif ( 'yaml' === $format ) {
 					$details = Spyc::YAMLDump( $details, true, true, true );
 					$this->line( $details, $details, $stdout );
-				}  elseif ( 'json' === $format ) {
+				} elseif ( 'json' === $format ) {
 					$details = wp_json_encode( $details );
 					$this->line( $details, $details, $stdout );
 				} else {
@@ -443,14 +454,14 @@ class Wpcli {
 				break;
 			case 'describe':
 				$example = [];
-				$handler = $handlers[$uuid];
+				$handler = $handlers[ $uuid ];
 				\WP_CLI::line( '' );
 				\WP_CLI::line( \WP_CLI::colorize( '%8' . $handler['name'] . ' - ' . $handler['id'] . '%n' ) );
 				\WP_CLI::line( $handler['help'] );
 				\WP_CLI::line( '' );
 				\WP_CLI::line( \WP_CLI::colorize( '%UMinimal Level%n' ) );
 				\WP_CLI::line( '' );
-				\WP_CLI::line( '  ' .  strtolower( Archive::level_name( $handler['minimal'] ) ) );
+				\WP_CLI::line( '  ' . strtolower( Archive::level_name( $handler['minimal'] ) ) );
 				\WP_CLI::line( '' );
 				\WP_CLI::line( \WP_CLI::colorize( '%UParameters%n' ) );
 				\WP_CLI::line( '' );
@@ -507,10 +518,10 @@ class Wpcli {
 							foreach ( $conf['control']['list'] as $point ) {
 								switch ( $conf['control']['cast'] ) {
 									case 'integer':
-										\WP_CLI::line( $list . $point[0] . ': ' . $point[1]);
+										\WP_CLI::line( $list . $point[0] . ': ' . $point[1] );
 										break;
 									case 'string':
-										\WP_CLI::line( $list . '"' . $point[0] . '": ' . $point[1]);
+										\WP_CLI::line( $list . '"' . $point[0] . '": ' . $point[1] );
 										break;
 								}
 							}
@@ -545,6 +556,48 @@ class Wpcli {
 				break;
 		}
 
+	}
+
+	/**
+	 * Decrypt a previously encrypted mail body.
+	 *
+	 * ## OPTIONS
+	 *
+	 * <password>
+	 * : The password to use.
+	 *
+	 * <encrypted-content>
+	 * : The encrypted content to decrypt.
+	 *
+	 * [--stdout]
+	 * : Use clean STDOUT output to use results in scripts. Unnecessary when piping commands because piping is detected by MailArchiver.
+	 *
+	 * ## NOTES
+	 *
+	 *   <password> and <encrypted-content> must be surrounded by double-quotes.
+	 *
+	 * ## EXAMPLES
+	 *
+	 * Decrypt a content protected by the password "password":
+	 * + wp m-archive decrypt "password" "IBP50CCSNgUIMVf99HKZ5n6FpaMY8WVUJNZvF5PZW1vofcqotHX/IZeCT1BmFCA9+qpR1vsZKRyNyWacEeQl/sNpww4tZnq/Yoh4dMzqkETfUQv0/LmvhuV258dMRqRGHzYhcbvzxUXX1vhVNRLv3g=="
+	 *
+	 *
+	 *   === For other examples and recipes, visit https://github.com/Pierre-Lannoy/wp-mailarchiver/blob/master/WP-CLI.md ===
+	 *
+	 */
+	public function decrypt( $args, $assoc_args ) {
+		$stdout = \WP_CLI\Utils\get_flag_value( $assoc_args, 'stdout', false );
+		if ( PwdProtect::is_available() ) {
+			$pwp = new \Mailarchiver\System\PwdProtect( isset( $args[0] ) ? $args[0] : '' );
+			$txt = $pwp->decrypt( isset( $args[1] ) ? $args[1] : '' );
+			if ( $txt ) {
+				$this->success( sprintf( 'decrypted content is "%s".', $txt ), $txt, $stdout );
+			} else {
+				$this->error( 9, $stdout );
+			}
+		} else {
+			$this->error( 8, $stdout );
+		}
 	}
 
 	/**
@@ -666,7 +719,7 @@ class Wpcli {
 				} else {
 					$handler_types = new HandlerTypes();
 					foreach ( $handler_types->get_all() as $handler ) {
-						if ( 'system' === $handler['class'] && $loggers_list[$uuid]['handler'] === $handler['id'] ) {
+						if ( 'system' === $handler['class'] && $loggers_list[ $uuid ]['handler'] === $handler['id'] ) {
 							$uuid = 'system';
 						}
 					}
@@ -699,13 +752,13 @@ class Wpcli {
 						}
 						$list[] = $name;
 					}
-					$logger['processors'] =  implode( ', ', $list );
-					$loggers[$key]        = $logger;
+					$logger['processors'] = implode( ', ', $list );
+					$loggers[ $key ]      = $logger;
 				}
 				usort(
 					$loggers,
 					function ( $a, $b ) {
-						return strcmp( strtolower( $a[ 'name' ] ), strtolower( $b[ 'name' ] ) );
+						return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );
 					}
 				);
 				if ( 'full' === $detail ) {
@@ -718,7 +771,7 @@ class Wpcli {
 				} elseif ( 'yaml' === $format ) {
 					$details = Spyc::YAMLDump( $loggers_list, true, true, true );
 					$this->line( $details, $details, $stdout );
-				}  elseif ( 'json' === $format ) {
+				} elseif ( 'json' === $format ) {
 					$details = wp_json_encode( $loggers_list );
 					$this->line( $details, $details, $stdout );
 				} else {
@@ -726,55 +779,55 @@ class Wpcli {
 				}
 				break;
 			case 'start':
-				if ( $loggers_list[$uuid]['running'] ) {
+				if ( $loggers_list[ $uuid ]['running'] ) {
 					$this->line( sprintf( 'The archiver %s is already running.', $uuid ), $uuid, $stdout );
 				} else {
-					$loggers_list[$uuid]['running'] = true;
+					$loggers_list[ $uuid ]['running'] = true;
 					Option::network_set( 'archivers', $loggers_list );
 					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Archiver "%s" has started.', $loggers_list[ $uuid ]['name'] ) );
 					$this->success( sprintf( 'archiver %s is now running.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'pause':
-				if ( ! $loggers_list[$uuid]['running'] ) {
+				if ( ! $loggers_list[ $uuid ]['running'] ) {
 					$this->line( sprintf( 'The archiver %s is already paused.', $uuid ), $uuid, $stdout );
 				} else {
-					$loggers_list[$uuid]['running'] = false;
+					$loggers_list[ $uuid ]['running'] = false;
 					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Archiver "%s" has been paused.', $loggers_list[ $uuid ]['name'] ) );
 					Option::network_set( 'archivers', $loggers_list );
 					$this->success( sprintf( 'archiver %s is now paused.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'purge':
-				$loggers_list[$uuid]['uuid'] = $uuid;
-				if ( 'WordpressHandler' !== $loggers_list[$uuid]['handler'] ) {
+				$loggers_list[ $uuid ]['uuid'] = $uuid;
+				if ( 'WordpressHandler' !== $loggers_list[ $uuid ]['handler'] ) {
 					$this->warning( sprintf( 'archiver %s can\'t be purged.', $uuid ), $uuid, $stdout );
 				} else {
 					\WP_CLI::confirm( sprintf( 'Are you sure you want to purge archiver %s?', $uuid ), $assoc_args );
 					$factory = new ArchiverFactory();
-					$factory->purge( $loggers_list[$uuid] );
+					$factory->purge( $loggers_list[ $uuid ] );
 					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been purged.', $loggers_list[ $uuid ]['name'] ) );
 					$this->success( sprintf( 'archiver %s successfully purged.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'clean':
-				$loggers_list[$uuid]['uuid'] = $uuid;
-				if ( 'WordpressHandler' !== $loggers_list[$uuid]['handler'] ) {
+				$loggers_list[ $uuid ]['uuid'] = $uuid;
+				if ( 'WordpressHandler' !== $loggers_list[ $uuid ]['handler'] ) {
 					$this->warning( sprintf( 'archiver %s can\'t be cleaned.', $uuid ), $uuid, $stdout );
 				} else {
 					$factory = new ArchiverFactory();
-					$count   = $factory->clean( $loggers_list[$uuid] );
+					$count   = $factory->clean( $loggers_list[ $uuid ] );
 					$this->log( sprintf( '%d record(s) deleted.', $count ), $stdout );
 					$this->success( sprintf( 'archiver %s successfully cleaned.', $uuid ), $uuid, $stdout );
 				}
 				break;
 			case 'remove':
-				$loggers_list[$uuid]['uuid'] = $uuid;
+				$loggers_list[ $uuid ]['uuid'] = $uuid;
 				\WP_CLI::confirm( sprintf( 'Are you sure you want to remove archiver %s?', $uuid ), $assoc_args );
 				$factory = new ArchiverFactory();
-				$factory->destroy( $loggers_list[$uuid] );
+				$factory->destroy( $loggers_list[ $uuid ] );
 				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->notice( sprintf( 'Archiver "%s" has been removed.', $loggers_list[ $uuid ]['name'] ) );
-				unset( $loggers_list[$uuid] );
+				unset( $loggers_list[ $uuid ] );
 				Option::network_set( 'archivers', $loggers_list );
 				$this->success( sprintf( 'archiver %s successfully removed.', $uuid ), $uuid, $stdout );
 				break;
@@ -901,7 +954,10 @@ class Wpcli {
 		$action = isset( $args[0] ) ? $args[0] : 'list';
 		$codes  = [];
 		foreach ( $this->exit_codes as $key => $msg ) {
-			$codes[ $key ] = [ 'code' => $key, 'meaning' => ucfirst( $msg ) ];
+			$codes[ $key ] = [
+				'code'    => $key,
+				'meaning' => ucfirst( $msg ),
+			];
 		}
 		switch ( $action ) {
 			case 'list':
@@ -924,7 +980,7 @@ class Wpcli {
 	 */
 	public static function sc_get_helpfile( $attributes ) {
 		$md = new Markdown();
-		return $md->get_shortcode(  'WP-CLI.md', $attributes  );
+		return $md->get_shortcode( 'WP-CLI.md', $attributes );
 	}
 
 }
