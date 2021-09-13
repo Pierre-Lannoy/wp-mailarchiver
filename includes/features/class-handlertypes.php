@@ -33,25 +33,26 @@ class HandlerTypes {
 	private $handlers = [];
 
 	/**
+	 * The array of available class names.
+	 *
+	 * @since  2.5.0
+	 * @var    array    $handlers_class    The available class names.
+	 */
+	private $handlers_class = [];
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		$this->handlers[] = [
-			'version'       => MAILARCHIVER_VERSION,
-			'id'            => 'NullHandler',
-			'ancestor'      => 'NullHandler',
-			'namespace'     => 'Monolog\Handler',
-			'class'         => 'system',
-			'minimal'       => Logger::INFO,
-			'name'          => esc_html__( 'Blackhole', 'mailarchiver' ),
-			'help'          => esc_html__( 'Any email it can handle will be thrown away.', 'mailarchiver' ),
-			'icon'          => $this->get_base64_php_icon(),
-			'params'        => [],
-			'configuration' => [],
-			'init'          => [],
+		$this->handlers_class = [
+			'alerting' => esc_html__( 'Alerting', 'mailarchiver' ),
+			'logging'  => esc_html__( 'Logging', 'mailarchiver' ),
+			'storing'  => esc_html__( 'Storing', 'mailarchiver' ),
 		];
+
+		// LOGGING
 		$this->handlers[] = [
 			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'FluentHandler',
@@ -211,236 +212,6 @@ class HandlerTypes {
 			],
 		];
 		$this->handlers[] = [
-			'version'       => MAILARCHIVER_VERSION,
-			'id'            => 'PshHandler',
-			'ancestor'      => 'SocketHandler',
-			'namespace'     => 'Mailarchiver\\Handler',
-			'class'         => 'alerting',
-			'minimal'       => Logger::ERROR,
-			'name'          => esc_html__( 'Pushover', 'mailarchiver' ),
-			'help'          => esc_html__( 'Emails in error signaled to Pushover service.', 'mailarchiver' ),
-			'icon'          => $this->get_base64_pushover_icon(),
-			'params'        => [ 'processors', 'privacy' ],
-			'configuration' => [
-				'token' => [
-					'type'    => 'string',
-					'show'    => true,
-					'name'    => esc_html__( 'Application token', 'mailarchiver' ),
-					'help'    => esc_html__( 'The token of the Pushover application.', 'mailarchiver' ),
-					'default' => '',
-					'control' => [
-						'type'    => 'field_input_text',
-						'cast'    => 'string',
-						'enabled' => true,
-					],
-				],
-				'users' => [
-					'type'    => 'string',
-					'show'    => true,
-					'name'    => esc_html__( 'Recipient', 'mailarchiver' ),
-					'help'    => esc_html__( 'The recipient key. It can be a "user key" or a "group key".', 'mailarchiver' ),
-					'default' => '',
-					'control' => [
-						'type'    => 'field_input_text',
-						'cast'    => 'string',
-						'enabled' => true,
-					],
-				],
-				'title' => [
-					'type'    => 'string',
-					'show'    => true,
-					'name'    => esc_html__( 'Message title', 'mailarchiver' ),
-					'help'    => esc_html__( 'The title of the message which will be sent.', 'mailarchiver' ),
-					'default' => '',
-					'control' => [
-						'type'    => 'field_input_text',
-						'cast'    => 'string',
-						'enabled' => true,
-					],
-				],
-				'timeout' => [
-					'type'    => 'integer',
-					'show'    => true,
-					'name'    => esc_html__( 'Socket timeout', 'mailarchiver' ),
-					'help'    => esc_html__( 'Max number of milliseconds to wait for the socket.', 'mailarchiver' ),
-					'default' => 800,
-					'control' => [
-						'type'    => 'field_input_integer',
-						'cast'    => 'integer',
-						'min'     => 100,
-						'max'     => 10000,
-						'step'    => 100,
-						'enabled' => true,
-					],
-				],
-			],
-			'init'          => [
-				[
-					'type'  => 'configuration',
-					'value' => 'token',
-				],
-				[
-					'type'  => 'configuration',
-					'value' => 'users',
-				],
-				[
-					'type'  => 'configuration',
-					'value' => 'title',
-				],
-				[
-					'type'  => 'configuration',
-					'value' => 'timeout',
-				],
-				[ 'type' => 'level' ],
-			],
-		];
-		$this->handlers[] = [
-			'version'       => MAILARCHIVER_MONOLOG_VERSION,
-			'id'            => 'RotatingFileHandler',
-			'ancestor'      => 'StreamHandler',
-			'namespace'     => 'Monolog\Handler',
-			'class'         => 'storing',
-			'minimal'       => Logger::INFO,
-			'name'          => esc_html__( 'Rotating files', 'mailarchiver' ),
-			'help'          => esc_html__( 'An archive sent to files that are rotated every day and a limited number of files are kept.', 'mailarchiver' ),
-			'icon'          => $this->get_base64_rotatingfiles_icon(),
-			'params'        => [ 'processors', 'privacy' ],
-			'configuration' => [
-				'filename' => [
-					'type'    => 'string',
-					'show'    => true,
-					'name'    => esc_html__( 'File', 'mailarchiver' ),
-					'help'    => esc_html__( 'The full absolute path and filename, like "/path/to/file".', 'mailarchiver' ),
-					'default' => '',
-					'control' => [
-						'type'    => 'field_input_text',
-						'cast'    => 'string',
-						'enabled' => true,
-					],
-				],
-				'maxfiles' => [
-					'type'    => 'integer',
-					'show'    => true,
-					'name'    => esc_html__( 'Maximum', 'mailarchiver' ),
-					'help'    => esc_html__( 'The maximal number of files to keep (0 means unlimited).', 'mailarchiver' ),
-					'default' => 60,
-					'control' => [
-						'type'    => 'field_input_integer',
-						'cast'    => 'integer',
-						'min'     => 0,
-						'max'     => 730,
-						'step'    => 1,
-						'enabled' => true,
-					],
-				],
-			],
-			'init'          => [
-				[
-					'type'  => 'configuration',
-					'value' => 'filename',
-				],
-				[
-					'type'  => 'configuration',
-					'value' => 'maxfiles',
-				],
-				[ 'type' => 'level' ],
-				[
-					'type'  => 'literal',
-					'value' => true,
-				],
-
-				[
-					'type'  => 'literal',
-					'value' => 0666,
-				],
-			],
-		];
-		$this->handlers[] = [
-			'version'       => MAILARCHIVER_MONOLOG_VERSION,
-			'id'            => 'SlackWebhookHandler',
-			'ancestor'      => 'SlackWebhookHandler',
-			'namespace'     => 'Monolog\Handler',
-			'class'         => 'alerting',
-			'minimal'       => Logger::ERROR,
-			'name'          => esc_html__( 'Slack', 'mailarchiver' ),
-			'help'          => esc_html__( 'Emails in error signaled through Slack Webhooks.', 'mailarchiver' ),
-			'icon'          => $this->get_base64_slack_icon(),
-			'params'        => [ 'processors', 'privacy' ],
-			'configuration' => [
-				'webhook' => [
-					'type'    => 'string',
-					'show'    => true,
-					'name'    => esc_html__( 'Webhook URL', 'mailarchiver' ),
-					'help'    => esc_html__( 'The Webhook URL set in the Slack application.', 'mailarchiver' ),
-					'default' => 'https://hooks.slack.com/services/...',
-					'control' => [
-						'type'    => 'field_input_text',
-						'cast'    => 'string',
-						'enabled' => true,
-					],
-				],
-				'short'   => [
-					'type'    => 'boolean',
-					'show'    => true,
-					'name'    => esc_html__( 'Short version', 'mailarchiver' ),
-					'help'    => esc_html__( 'Use a shortened version of details sent in channel.', 'mailarchiver' ),
-					'default' => false,
-					'control' => [
-						'type'    => 'field_checkbox',
-						'cast'    => 'boolean',
-						'enabled' => true,
-					],
-				],
-				'data'    => [
-					'type'    => 'boolean',
-					'show'    => true,
-					'name'    => esc_html__( 'Full data', 'mailarchiver' ),
-					'help'    => esc_html__( 'Whether the sent details should include context and extra data.', 'mailarchiver' ),
-					'default' => true,
-					'control' => [
-						'type'    => 'field_checkbox',
-						'cast'    => 'boolean',
-						'enabled' => true,
-					],
-				],
-			],
-			'init'          => [
-				[
-					'type'  => 'configuration',
-					'value' => 'webhook',
-				],
-				[
-					'type'  => 'literal',
-					'value' => null,
-				],
-				[
-					'type'  => 'literal',
-					'value' => null,
-				],
-				[
-					'type'  => 'literal',
-					'value' => true,
-				],
-				[
-					'type'  => 'literal',
-					'value' => null,
-				],
-				[
-					'type'  => 'configuration',
-					'value' => 'short',
-				],
-				[
-					'type'  => 'configuration',
-					'value' => 'data',
-				],
-				[ 'type' => 'level' ],
-				[
-					'type'  => 'literal',
-					'value' => true,
-				],
-			],
-		];
-		$this->handlers[] = [
 			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'SyslogUdpHandler',
 			'ancestor'      => 'UdpSocket',
@@ -560,6 +331,404 @@ class HandlerTypes {
 		];
 		$this->handlers[] = [
 			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'GrafanaHandler',
+			'namespace'     => 'Mailarchiver\\Handler',
+			'class'         => 'logging',
+			'minimal'       => Logger::INFO,
+			'name'          => 'Grafana Cloud',
+			'help'          => esc_html__( 'An archive sent to Grafana Cloud.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_grafana_icon(),
+			'needs'         => [],
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'host'  => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Loki host', 'mailarchiver' ),
+					'help'    => sprintf( esc_html__( 'The host name portion of the Loki instance url. Something like %s.', 'mailarchiver' ), '<code>logs-prod-us-central1</code>' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'user'  => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Username', 'mailarchiver' ),
+					'help'    => sprintf( esc_html__( 'The user name for Basic Auth authentication. Something like %s.', 'mailarchiver' ), '<code>21087</code>' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'key'   => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'API key', 'mailarchiver' ),
+					'help'    => esc_html__( 'The Grafana.com API Key.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'model' => [
+					'type'    => 'integer',
+					'show'    => true,
+					'name'    => esc_html__( 'Labels', 'mailarchiver' ),
+					'help'    => esc_html__( 'Template for labels. If you are unsure of the implications on cardinality, choose the first one.', 'mailarchiver' ),
+					'default' => 0,
+					'control' => [
+						'type'    => 'field_select',
+						'cast'    => 'string',
+						'enabled' => true,
+						'list'    => [ [ 0, '{job="x", instance="y"} - ' . esc_html__( 'Recommended in most cases', 'mailarchiver' ) ], [ 1, '{job="x", instance="y", level="z"} - ' . esc_html__( 'Classical level segmentation', 'mailarchiver' ) ], [ 2, '{job="x", instance="y", env="z"} - ' . esc_html__( 'Classical environment segmentation', 'mailarchiver' ) ], [ 3, '{job="x", instance="y", version="z"} - ' . esc_html__( 'Classical version segmentation', 'mailarchiver' ) ], [ 4, '{job="x", level="y", env="z"} - ' . esc_html__( 'Double level / environment segmentation', 'mailarchiver' ) ], [ 5, '{job="x", site="y"} - ' . esc_html__( 'WordPress Multisite segmentation', 'mailarchiver' ) ] ],
+					],
+				],
+				'id'    => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Job', 'mailarchiver' ),
+					'help'    => esc_html__( 'The fixed job name for some templates.', 'mailarchiver' ),
+					'default' => 'wp_mailarchiver',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'host',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'user',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'key',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'model',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'id',
+				],
+				[ 'type' => 'level' ],
+			],
+		];
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'LokiHandler',
+			'namespace'     => 'Mailarchiver\\Handler',
+			'class'         => 'logging',
+			'minimal'       => Logger::INFO,
+			'name'          => 'Loki',
+			'help'          => esc_html__( 'An archive sent to a Loki instance.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_loki_icon(),
+			'needs'         => [],
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'url'   => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Service URL', 'mailarchiver' ),
+					'help'    => sprintf( esc_html__( 'URL where to send archives. Format: %s.', 'mailarchiver' ), '<code>' . htmlentities( '<proto>://<host>:<port>' ) . '</code>' ),
+					'default' => 'http://localhost:3100',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'model' => [
+					'type'    => 'integer',
+					'show'    => true,
+					'name'    => esc_html__( 'Labels', 'mailarchiver' ),
+					'help'    => esc_html__( 'Template for labels. If you are unsure of the implications on cardinality, choose the first one.', 'mailarchiver' ),
+					'default' => 0,
+					'control' => [
+						'type'    => 'field_select',
+						'cast'    => 'string',
+						'enabled' => true,
+						'list'    => [ [ 0, '{job="x", instance="y"} - ' . esc_html__( 'Recommended in most cases', 'mailarchiver' ) ], [ 1, '{job="x", instance="y", level="z"} - ' . esc_html__( 'Classical level segmentation', 'mailarchiver' ) ], [ 2, '{job="x", instance="y", env="z"} - ' . esc_html__( 'Classical environment segmentation', 'mailarchiver' ) ], [ 3, '{job="x", instance="y", version="z"} - ' . esc_html__( 'Classical version segmentation', 'mailarchiver' ) ], [ 4, '{job="x", level="y", env="z"} - ' . esc_html__( 'Double level / environment segmentation', 'mailarchiver' ) ], [ 5, '{job="x", site="y"} - ' . esc_html__( 'WordPress Multisite segmentation', 'mailarchiver' ) ] ],
+					],
+				],
+				'id'    => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Job', 'mailarchiver' ),
+					'help'    => esc_html__( 'The fixed job name for some templates.', 'mailarchiver' ),
+					'default' => 'wp_mailarchiver',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'url',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'model',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'id',
+				],
+				[ 'type' => 'level' ],
+			],
+		];
+
+		// ALERTING
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'PshHandler',
+			'ancestor'      => 'SocketHandler',
+			'namespace'     => 'Mailarchiver\\Handler',
+			'class'         => 'alerting',
+			'minimal'       => Logger::ERROR,
+			'name'          => esc_html__( 'Pushover', 'mailarchiver' ),
+			'help'          => esc_html__( 'Emails in error signaled to Pushover service.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_pushover_icon(),
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'token' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Application token', 'mailarchiver' ),
+					'help'    => esc_html__( 'The token of the Pushover application.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'users' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Recipient', 'mailarchiver' ),
+					'help'    => esc_html__( 'The recipient key. It can be a "user key" or a "group key".', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'title' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Message title', 'mailarchiver' ),
+					'help'    => esc_html__( 'The title of the message which will be sent.', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'timeout' => [
+					'type'    => 'integer',
+					'show'    => true,
+					'name'    => esc_html__( 'Socket timeout', 'mailarchiver' ),
+					'help'    => esc_html__( 'Max number of milliseconds to wait for the socket.', 'mailarchiver' ),
+					'default' => 800,
+					'control' => [
+						'type'    => 'field_input_integer',
+						'cast'    => 'integer',
+						'min'     => 100,
+						'max'     => 10000,
+						'step'    => 100,
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'token',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'users',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'title',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'timeout',
+				],
+				[ 'type' => 'level' ],
+			],
+		];
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_MONOLOG_VERSION,
+			'id'            => 'SlackWebhookHandler',
+			'ancestor'      => 'SlackWebhookHandler',
+			'namespace'     => 'Monolog\Handler',
+			'class'         => 'alerting',
+			'minimal'       => Logger::ERROR,
+			'name'          => esc_html__( 'Slack', 'mailarchiver' ),
+			'help'          => esc_html__( 'Emails in error signaled through Slack Webhooks.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_slack_icon(),
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'webhook' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Webhook URL', 'mailarchiver' ),
+					'help'    => esc_html__( 'The Webhook URL set in the Slack application.', 'mailarchiver' ),
+					'default' => 'https://hooks.slack.com/services/...',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'short'   => [
+					'type'    => 'boolean',
+					'show'    => true,
+					'name'    => esc_html__( 'Short version', 'mailarchiver' ),
+					'help'    => esc_html__( 'Use a shortened version of details sent in channel.', 'mailarchiver' ),
+					'default' => false,
+					'control' => [
+						'type'    => 'field_checkbox',
+						'cast'    => 'boolean',
+						'enabled' => true,
+					],
+				],
+				'data'    => [
+					'type'    => 'boolean',
+					'show'    => true,
+					'name'    => esc_html__( 'Full data', 'mailarchiver' ),
+					'help'    => esc_html__( 'Whether the sent details should include context and extra data.', 'mailarchiver' ),
+					'default' => true,
+					'control' => [
+						'type'    => 'field_checkbox',
+						'cast'    => 'boolean',
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'webhook',
+				],
+				[
+					'type'  => 'literal',
+					'value' => null,
+				],
+				[
+					'type'  => 'literal',
+					'value' => null,
+				],
+				[
+					'type'  => 'literal',
+					'value' => true,
+				],
+				[
+					'type'  => 'literal',
+					'value' => null,
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'short',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'data',
+				],
+				[ 'type' => 'level' ],
+				[
+					'type'  => 'literal',
+					'value' => true,
+				],
+			],
+		];
+
+		// STORING
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_MONOLOG_VERSION,
+			'id'            => 'RotatingFileHandler',
+			'ancestor'      => 'StreamHandler',
+			'namespace'     => 'Monolog\Handler',
+			'class'         => 'storing',
+			'minimal'       => Logger::INFO,
+			'name'          => esc_html__( 'Rotating files', 'mailarchiver' ),
+			'help'          => esc_html__( 'An archive sent to files that are rotated every day and a limited number of files are kept.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_rotatingfiles_icon(),
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'filename' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'File', 'mailarchiver' ),
+					'help'    => esc_html__( 'The full absolute path and filename, like "/path/to/file".', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+				'maxfiles' => [
+					'type'    => 'integer',
+					'show'    => true,
+					'name'    => esc_html__( 'Maximum', 'mailarchiver' ),
+					'help'    => esc_html__( 'The maximal number of files to keep (0 means unlimited).', 'mailarchiver' ),
+					'default' => 60,
+					'control' => [
+						'type'    => 'field_input_integer',
+						'cast'    => 'integer',
+						'min'     => 0,
+						'max'     => 730,
+						'step'    => 1,
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'filename',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'maxfiles',
+				],
+				[ 'type' => 'level' ],
+				[
+					'type'  => 'literal',
+					'value' => true,
+				],
+
+				[
+					'type'  => 'literal',
+					'value' => 0666,
+				],
+			],
+		];
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'WordpressHandler',
 			'ancestor'      => 'WordpressHandler',
 			'namespace'     => 'Mailarchiver\Handler',
@@ -626,7 +795,6 @@ class HandlerTypes {
 
 			],
 		];
-
 		$this->handlers[] = [
 			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'ElasticCloudHandler',
@@ -680,7 +848,7 @@ class HandlerTypes {
 					'show'    => true,
 					'name'    => esc_html__( 'Index', 'mailarchiver' ),
 					'help'    => esc_html__( 'The index name.', 'mailarchiver' ),
-					'default' => '_index',
+					'default' => 'mailarchiver',
 					'control' => [
 						'type'    => 'field_input_text',
 						'cast'    => 'string',
@@ -765,7 +933,7 @@ class HandlerTypes {
 					'show'    => true,
 					'name'    => esc_html__( 'Index', 'mailarchiver' ),
 					'help'    => esc_html__( 'The index name.', 'mailarchiver' ),
-					'default' => '_index',
+					'default' => 'mailarchiver',
 					'control' => [
 						'type'    => 'field_input_text',
 						'cast'    => 'string',
@@ -798,6 +966,22 @@ class HandlerTypes {
 			],
 		];
 
+		// SYSTEM
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'NullHandler',
+			'ancestor'      => 'NullHandler',
+			'namespace'     => 'Monolog\Handler',
+			'class'         => 'system',
+			'minimal'       => Logger::INFO,
+			'name'          => esc_html__( 'Blackhole', 'mailarchiver' ),
+			'help'          => esc_html__( 'Any email it can handle will be thrown away.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_php_icon(),
+			'params'        => [],
+			'configuration' => [],
+			'init'          => [],
+		];
+
 		uasort(
 			$this->handlers,
 			function ( $a, $b ) {
@@ -815,6 +999,21 @@ class HandlerTypes {
 	 */
 	public function get_all() {
 		return $this->handlers;
+	}
+
+	/**
+	 * Get the name for a specific class.
+	 *
+	 * @param   string $class  The class of loggers ( 'alerting', 'debugging', 'logging').
+	 * @return  string   The name of the class.
+	 * @since    2.5.0
+	 */
+	public function get_class_name( $class ) {
+		$result = '-';
+		if ( array_key_exists( $class, $this->handlers_class ) ) {
+			$result = $this->handlers_class[ $class ];
+		}
+		return $result;
 	}
 
 	/**
