@@ -68,6 +68,7 @@ class WordpressFormatter implements FormatterInterface {
 			if ( array_key_exists( 'from', $context ) ) {
 				$values['from'] = substr( $context['from'], 0, 256 );
 			}
+			unset( $context['body']['text'] );
 			foreach ( [ 'to', 'headers', 'attachments', 'body' ] as $field ) {
 				if ( array_key_exists( $field, $context ) ) {
 					// phpcs:ignore

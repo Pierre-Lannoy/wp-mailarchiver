@@ -13,6 +13,7 @@ namespace Mailarchiver\Processor;
 
 use Monolog\Processor\ProcessorInterface;
 use Mailarchiver\System\Hash;
+use Mailarchiver\System\PwdProtect;
 
 
 /**
@@ -46,12 +47,12 @@ class MailProcessor implements ProcessorInterface {
 	 * Initializes the class and set its properties.
 	 *
 	 * @since   1.0.0
-	 * @param   boolean $mailanonymize Optional. Is mailanonymization activated?
-	 * @param   string  $encrypte      Optional. Encryption key.
+	 * @param   boolean $mailanonymize  Optional. Is mailanonymization activated?
+	 * @param   string  $encryption     Optional. Encryption key.
 	 */
-	public function __construct( $mailanonymize = true, $encrypte = '' ) {
+	public function __construct( $mailanonymize = true, $encryption = '' ) {
 		$this->mailanonymization = $mailanonymize;
-		$this->encryption        = $encrypte;
+		$this->encryption        = $encryption;
 	}
 
 	/**
@@ -69,6 +70,16 @@ class MailProcessor implements ProcessorInterface {
 				$tos[] = Hash::simple_hash( (string) $to );
 			}
 			$record['context']['to'] = $tos;
+		}
+		if ( 0 < strlen( $this->encryption ) ) {
+			if ( PwdProtect::is_available() ) {
+				$pwd                               = new PwdProtect( $this->encryption );
+				$record['context']['body']['type'] = 'encrypted';
+				$record['context']['body']['raw']  = $pwd->encrypt( (string) $record['context']['body']['raw'] );
+				$record['context']['body']['text'] = $pwd->encrypt( (string) $record['context']['body']['text'] );
+			} else {
+				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( 'OpenSSL is not available to encrypt mail body.', [ 'code' => 503 ] );
+			}
 		}
 		return $record;
 	}

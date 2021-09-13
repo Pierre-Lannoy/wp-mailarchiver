@@ -22,7 +22,7 @@ use Mailarchiver\System\UUID;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Form;
 use Mailarchiver\System\Role;
-
+use Mailarchiver\System\PwdProtect;
 use Mailarchiver\System\Secret;
 use Mailarchiver\System\Environment;
 use PerfOpsOne\Menus;
@@ -766,10 +766,10 @@ class Mailarchiver_Admin {
 		$form = new Form();
 		if ( \DecaLog\Engine::isDecalogActivated() ) {
 			$help  = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'thumbs-up', 'none', '#00C800' ) . '" />&nbsp;';
-			$help .= sprintf( esc_html__('Your site is currently using %s.', 'mailarchiver' ), '<em>' . \DecaLog\Engine::getVersionString() .'</em>' );
+			$help .= sprintf( esc_html__( 'Your site is currently using %s.', 'mailarchiver' ), '<em>' . \DecaLog\Engine::getVersionString() . '</em>' );
 		} else {
 			$help  = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'alert-triangle', 'none', '#FF8C00' ) . '" />&nbsp;';
-			$help .= sprintf( esc_html__('Your site does not use any logging plugin. To log all events triggered in MailArchiver, I recommend you to install the excellent (and free) %s. But it is not mandatory.', 'mailarchiver' ), '<a href="https://wordpress.org/plugins/decalog/">DecaLog</a>' );
+			$help .= sprintf( esc_html__( 'Your site does not use any logging plugin. To log all events triggered in MailArchiver, I recommend you to install the excellent (and free) %s. But it is not mandatory.', 'mailarchiver' ), '<a href="https://wordpress.org/plugins/decalog/">DecaLog</a>' );
 		}
 		add_settings_field(
 			'mailarchiver_plugin_options_logger',
@@ -778,10 +778,28 @@ class Mailarchiver_Admin {
 			'mailarchiver_plugin_options_section',
 			'mailarchiver_plugin_options_section',
 			[
-				'text' => $help
+				'text' => $help,
 			]
 		);
 		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_logger' );
+		if ( PwdProtect::is_available() ) {
+			$help  = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'thumbs-up', 'none', '#00C800' ) . '" />&nbsp;';
+			$help .= sprintf( esc_html__( 'Your server is currently using %s. Mail body encryption is available.', 'mailarchiver' ), '<em>' . PwdProtect::get_openssl_version() . '</em>' );
+		} else {
+			$help  = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'alert-triangle', 'none', '#FF8C00' ) . '" />&nbsp;';
+			$help .= esc_html__( 'Your server does not have OpenSSL installed. Mail body encryption is unavailable.', 'mailarchiver' );
+		}
+		add_settings_field(
+			'mailarchiver_plugin_options_ssl',
+			esc_html__( 'Encryption', 'mailarchiver' ),
+			[ $form, 'echo_field_simple_text' ],
+			'mailarchiver_plugin_options_section',
+			'mailarchiver_plugin_options_section',
+			[
+				'text' => $help,
+			]
+		);
+		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_ssl' );
 		if ( function_exists( 'wp_get_environment_type' ) ) {
 			add_settings_field(
 				'mailarchiver_plugin_options_privileges',
@@ -1016,7 +1034,13 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_mail' );
-		/*add_settings_field(
+		if ( PwdProtect::is_available() ) {
+			$description  = esc_html__( 'Note: this is NOT a strong security feature; it\'s just a simple way to protect privacy in case of data leaks from external services. Think about it as a simple "password protection", with the password stored in plain text in your WordPress database.', 'mailarchiver' );
+			$description .= '<br/>' . esc_html__( 'Encryption: ', 'mailarchiver' ) . PwdProtect::get_encryption_details();
+		} else {
+			$description = esc_html__( 'Your server does not have OpenSSL installed. Mail body encryption is unavailable.', 'mailarchiver' );
+		}
+		add_settings_field(
 			'mailarchiver_archiver_privacy_encryption',
 			__( 'Encryption key', 'mailarchiver' ),
 			[ $form, 'echo_field_input_text' ],
@@ -1024,14 +1048,13 @@ class Mailarchiver_Admin {
 			'mailarchiver_archiver_privacy_section',
 			[
 				'id'          => 'mailarchiver_archiver_privacy_encryption',
-				'value'       => Secret::get( $this->current_archiver['privacy']['encryption'] ),
-				'description' => esc_html__( 'Key used to encrypt mail body. Let blank to not encrypt it.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: XXXXXXXXXXXXXXXXXXXXXXXX.', 'mailarchiver' ),
+				'value'       => PwdProtect::is_available() ? Secret::get( $this->current_archiver['privacy']['encryption'] ) : '',
+				'description' => esc_html__( 'Key used to encrypt mail body. Let blank to not encrypt it.', 'mailarchiver' ) . '<br/>' . $description,
 				'full_width'  => false,
-				'enabled'     => true,
+				'enabled'     => PwdProtect::is_available(),
 			]
 		);
 		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_encryption' );
-		*/
 	}
 
 	/**

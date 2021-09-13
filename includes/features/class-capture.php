@@ -146,6 +146,19 @@ class Capture {
 	}
 
 	/**
+	 * Textualize message.
+	 *
+	 * @param   string  $message    The message.
+	 * @return  string  The textualized message.
+	 * @since    2.5.0
+	 */
+	private static function textualize( $message ) {
+		$message = wp_strip_all_tags( $message, true );
+		$message = preg_replace( '/[\x00-\x1F\x7F\xA0\s+]/u', ' ', $message );
+		return $message;
+	}
+
+	/**
 	 * Put the mail in the store queue.
 	 *
 	 * @param array  $mail      The raw mail.
@@ -155,6 +168,7 @@ class Capture {
 	public static function put( $mail, $message = '' ) {
 		if ( is_array( $mail ) ) {
 			$mail['body']['raw']  = $mail['message'];
+			$mail['body']['text'] = self::textualize( $mail['message'] );
 			$mail['body']['type'] = 'raw';
 			if ( ! array_key_exists( 'from', $mail ) ) {
 				$mail['from'] = self::from( $mail['headers'] );
@@ -169,6 +183,8 @@ class Capture {
 			}
 			if ( '' !== $message ) {
 				self::$mails[ $key ]['message'] = $message;
+			} else {
+				self::$mails[ $key ]['message'] = 'Mail sent.';
 			}
 			$class   = 'unknown';
 			$product = 'generic';
@@ -200,17 +216,16 @@ class Capture {
 	 * @since    1.0.0
 	 */
 	public static function store_archives() {
-		global $wp_version;
 		if ( 0 < count( self::$mails ) ) {
 			$span = \DecaLog\Engine::tracesLogger( MAILARCHIVER_SLUG )->startSpan( 'Archiving', DECALOG_SPAN_SHUTDOWN );
 			foreach ( self::$mails as $mail ) {
 				$archiver = Archive::bootstrap( $mail['listener']['class'], $mail['listener']['product'], $mail['listener']['version'] );
-				if ( array_key_exists( 'message', $mail ) && '' !== $mail['message'] ) {
+				if ( array_key_exists( 'message', $mail ) && 'Mail sent.' !== $mail['message'] ) {
 					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
 					$archiver->error( $mail['raw'], $mail['message'] );
 				} else {
 					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Mail "%s" sent from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
-					$archiver->success( $mail['raw'] );
+					$archiver->success( $mail['raw'], $mail['message'] );
 				}
 			}
 			\DecaLog\Engine::tracesLogger( MAILARCHIVER_SLUG )->endSpan( $span );

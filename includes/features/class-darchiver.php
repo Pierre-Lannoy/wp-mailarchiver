@@ -130,11 +130,11 @@ class DArchiver {
 	 * @since 1.0.0
 	 */
 	private function init( $test = null ) {
-		if ( $this->psr3 ) {
+		/*if ( $this->psr3 ) {
 			if ( ! Option::network_get( 'autolisteners' ) ) {
 				$this->allowed = in_array( 'psr3', Option::network_get( 'listeners' ), true );
 			}
-		}
+		}*/
 		$this->in_test  = isset( $test );
 		$factory        = new ArchiverFactory();
 		$this->archiver = new Logger( $this->current_channel_tag(), [], [], Timezone::network_get() );

@@ -228,6 +228,17 @@ class Archivers extends \WP_List_Table {
 	}
 
 	/**
+	 * "minimal level" column formatter.
+	 *
+	 * @param   array $item   The current item.
+	 * @return  string  The cell formatted, ready to print.
+	 * @since    2.5.0
+	 */
+	protected function column_type( $item ) {
+		return $this->handler_types->get_class_name( ( $this->handler_types->get( $item['handler'] ) )['class'] );
+	}
+
+	/**
 	 * Enumerates columns.
 	 *
 	 * @return      array   The columns.
@@ -237,6 +248,7 @@ class Archivers extends \WP_List_Table {
 		$columns = [
 			'name'    => esc_html__( 'Archiver', 'mailarchiver' ),
 			'status'  => esc_html__( 'Status', 'mailarchiver' ),
+			'type'    => esc_html__( 'Type', 'mailarchiver' ),
 			'details' => esc_html__( 'Settings', 'mailarchiver' ),
 		];
 		return $columns;
