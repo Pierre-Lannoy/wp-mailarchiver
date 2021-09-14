@@ -157,7 +157,7 @@ class InlineHelp {
 		$content  = '<p>' . sprintf( esc_html__( 'This screen allows you to set the %s archivers.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ) . '</p>';
 		$content .= '<p>' . esc_html__( 'An archiver is a recorder of emails. It can filter them (accept or refuse to record the email based on settings) then store them or transmit them to logging/alerting services.', 'mailarchiver' );
 		$content .= ' ' . esc_html__( 'You can set as many archivers as you want. All the set archivers will receive all emails and, regarding their own settings, will enrich them and record them or not.', 'mailarchiver' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'Archivers are classified in three main categories: alerting, logging and storing. You can find details on these categories on the corresponding tabs of this help.', 'mailarchiver' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'Archivers are classified in three main categories: alerting, logging and archive or individual storing. You can find details on these categories on the corresponding tabs of this help.', 'mailarchiver' ) . '</p>';
 		$tabs[]   = [
 			'title'   => esc_html__( 'Overview', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-overview',
@@ -177,12 +177,19 @@ class InlineHelp {
 			'id'      => 'mailarchiver-contextual-settings-archivers-logging',
 			'content' => $content . $this->get_archivers( 'logging' ),
 		];
-		// Logging.
-		$content = '<p>' . esc_html__( 'These archivers store archived emails for future reference:', 'mailarchiver' ) . '</p>';
+		// Storing.
+		$content = '<p>' . esc_html__( 'These archivers store archived emails in bulk:', 'mailarchiver' ) . '</p>';
 		$tabs[]  = [
-			'title'   => esc_html__( 'Storing', 'mailarchiver' ),
+			'title'   => esc_html__( 'Archive storing', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-storing',
 			'content' => $content . $this->get_archivers( 'storing' ),
+		];
+		// Istoring.
+		$content = '<p>' . esc_html__( 'These archivers store each email as individual files:', 'mailarchiver' ) . '</p>';
+		$tabs[]  = [
+			'title'   => esc_html__( 'Individual storing', 'mailarchiver' ),
+			'id'      => 'mailarchiver-contextual-settings-archivers-istoring',
+			'content' => $content . $this->get_archivers( 'istoring' ),
 		];
 		// Admin Rights.
 		if ( Role::SUPER_ADMIN === Role::admin_type() || Role::LOCAL_ADMIN === Role::admin_type() ) {
