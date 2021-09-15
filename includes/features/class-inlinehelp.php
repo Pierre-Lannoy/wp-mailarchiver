@@ -157,7 +157,7 @@ class InlineHelp {
 		$content  = '<p>' . sprintf( esc_html__( 'This screen allows you to set the %s archivers.', 'mailarchiver' ), MAILARCHIVER_PRODUCT_NAME ) . '</p>';
 		$content .= '<p>' . esc_html__( 'An archiver is a recorder of emails. It can filter them (accept or refuse to record the email based on settings) then store them or transmit them to logging/alerting services.', 'mailarchiver' );
 		$content .= ' ' . esc_html__( 'You can set as many archivers as you want. All the set archivers will receive all emails and, regarding their own settings, will enrich them and record them or not.', 'mailarchiver' ) . '</p>';
-		$content .= '<p>' . esc_html__( 'Archivers are classified in three main categories: alerting, logging and archive or individual storing. You can find details on these categories on the corresponding tabs of this help.', 'mailarchiver' ) . '</p>';
+		$content .= '<p>' . esc_html__( 'Archivers are classified in five main categories: alerting, forwarding, logging and archive or individual storing. You can find details on these categories on the corresponding tabs of this help.', 'mailarchiver' ) . '</p>';
 		$tabs[]   = [
 			'title'   => esc_html__( 'Overview', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-overview',
@@ -170,6 +170,13 @@ class InlineHelp {
 			'id'      => 'mailarchiver-contextual-settings-archivers-alerting',
 			'content' => $content . $this->get_archivers( 'alerting' ),
 		];
+		// Forwarding.
+		$content = '<p>' . esc_html__( 'These archivers allow you to forward sent emails:', 'mailarchiver' ) . '</p>';
+		$tabs[]  = [
+			'title'   => esc_html__( 'Forwarding', 'mailarchiver' ),
+			'id'      => 'mailarchiver-contextual-settings-archivers-forwarding',
+			'content' => $content . $this->get_archivers( 'forwarding' ),
+		];
 		// Logging.
 		$content = '<p>' . esc_html__( 'These archivers send archived emails to logging services. It may be local or SaaS, free or paid services:', 'mailarchiver' ) . '</p>';
 		$tabs[]  = [
@@ -178,7 +185,7 @@ class InlineHelp {
 			'content' => $content . $this->get_archivers( 'logging' ),
 		];
 		// Storing.
-		$content = '<p>' . esc_html__( 'These archivers store archived emails in bulk:', 'mailarchiver' ) . '</p>';
+		$content = '<p>' . esc_html__( 'These archivers store emails in bulk:', 'mailarchiver' ) . '</p>';
 		$tabs[]  = [
 			'title'   => esc_html__( 'Archive storing', 'mailarchiver' ),
 			'id'      => 'mailarchiver-contextual-settings-archivers-storing',

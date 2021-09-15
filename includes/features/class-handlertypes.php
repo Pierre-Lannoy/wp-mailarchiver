@@ -49,7 +49,8 @@ class HandlerTypes {
 		$this->handlers_class = [
 			'alerting' => esc_html__( 'Alerting', 'mailarchiver' ),
 			'logging'  => esc_html__( 'Logging', 'mailarchiver' ),
-			'storing'  => esc_html__( 'Storing', 'mailarchiver' ),
+			'storing'  => esc_html__( 'Archive storing', 'mailarchiver' ),
+			'istoring' => esc_html__( 'Individual storing', 'mailarchiver' ),
 		];
 
 		// LOGGING
@@ -665,7 +666,63 @@ class HandlerTypes {
 			],
 		];
 
-		// STORING
+		// INDIVIDUAL STORING
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'IndividualFileHandler',
+			'ancestor'      => 'IndividualFileHandler',
+			'namespace'     => 'Mailarchiver\Handler',
+			'class'         => 'istoring',
+			'minimal'       => Logger::INFO,
+			'name'          => esc_html__( 'Local files', 'mailarchiver' ),
+			'help'          => esc_html__( 'Each mail stored on your server as an individual file.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_files_icon(),
+			'params'        => [],
+			'configuration' => [
+				'format'   => [
+					'type'    => 'integer',
+					'show'    => true,
+					'name'    => esc_html__( 'Format', 'mailarchiver' ),
+					'help'    => esc_html__( 'The format in which the file is saved.', 'mailarchiver' ),
+					'default' => 100,
+					'control' => [
+						'type'    => 'field_select',
+						'cast'    => 'integer',
+						'enabled' => true,
+						'list'    => [ [ 100, 'Electronic Mail Format (.eml)' ], [ 200, 'JavaScript Object Notation (.json)' ] ],
+					],
+				],
+				'filename' => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Path', 'mailarchiver' ),
+					'help'    => esc_html__( 'The full absolute path, like "/path/to/files/".', 'mailarchiver' ),
+					'default' => '',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'filename',
+				],
+				[
+					'type'  => 'configuration',
+					'value' => 'format',
+				],
+				[ 'type' => 'level' ],
+				[
+					'type'  => 'literal',
+					'value' => true,
+				],
+			],
+		];
+
+		// ARCHIVE STORING
 		$this->handlers[] = [
 			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'RotatingFileHandler',
@@ -1756,7 +1813,7 @@ class HandlerTypes {
 	 * @param string $color1 Optional. Color 1 of the icon.
 	 * @param string $color2 Optional. Color 2 of the icon.
 	 * @return string The svg resource as a base64.
-	 * @since 3.2.0
+	 * @since 2.5.0
 	 */
 	private function get_base64_newrelic_icon( $color1 = '#008c99', $color2 = '#70ccd3' ) {
 		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256px" height="256px" viewBox="0 0 256 256">';
@@ -1770,12 +1827,31 @@ class HandlerTypes {
 	}
 
 	/**
+	 * Returns a base64 svg resource for the files icon.
+	 *
+	 * @param string $color1 Optional. Color 1 of the icon.
+	 * @param string $color2 Optional. Color 2 of the icon.
+	 * @return string The svg resource as a base64.
+	 * @since 2.5.0
+	 */
+	private function get_base64_files_icon( $color1 = '#cd377c', $color2 = '#cd375c' ) {
+		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">';
+		$source .= '<g transform="translate(64,64) scale(0.74,0.74)">';
+		$source .= '<path fill="' . $color1 . '" d="M153.6,460.8a64,64,0,0,1-64-64V78.09A64,64,0,0,0,38.4,140.8V448a64,64,0,0,0,64,64H332.8a64,64,0,0,0,62.71-51.2Z"/>';
+		$source .= '<path fill="' . $color2 . '" d="M320,0H179.2a64,64,0,0,0-64,64V371.2a64,64,0,0,0,64,64H409.6a64,64,0,0,0,64-64V153.6ZM230.4,204.8h76.8a12.8,12.8,0,0,1,0,25.6H230.4a12.8,12.8,0,1,1,0-25.6ZM358,332.8H230.4a12.8,12.8,0,1,1,0-25.6H358a12.8,12.8,0,0,1,0,25.6Zm.38-51.2h-128a12.8,12.8,0,1,1,0-25.6h128a12.8,12.8,0,1,1,0,25.6Zm12.8-115.2a64,64,0,0,1-64-64V25.6L448,166.4Z"/>';
+		$source .= '</g>';
+		$source .= '</svg>';
+		// phpcs:ignore
+		return 'data:image/svg+xml;base64,' . base64_encode( $source );
+	}
+
+	/**
 	 * Returns a base64 svg resource for the Tracy icon.
 	 *
 	 * @param string $color1 Optional. Color 1 of the icon.
 	 * @param string $color2 Optional. Color 2 of the icon.
 	 * @return string The svg resource as a base64.
-	 * @since 3.2.0
+	 * @since 2.5.0
 	 */
 	private function get_base64_tracy_icon( $color1 = '#cc1817', $color2 = '#ebacac', $color3 = '#fbfaf9', $color4 = '#5fade9', $color5 = '#9da09f', $color6 = '#faf4ce' ) {
 		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500">';

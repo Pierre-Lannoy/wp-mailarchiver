@@ -30,8 +30,10 @@
 	" method="POST">
 		<?php do_settings_sections( 'mailarchiver_archiver_misc_section' ); ?>
 		<?php do_settings_sections( 'mailarchiver_archiver_specific_section' ); ?>
-		<?php do_settings_sections( 'mailarchiver_archiver_privacy_section' ); ?>
-		<?php do_settings_sections( 'mailarchiver_archiver_details_section' ); ?>
+		<?php if ( in_array( $current_handler['class'], [ 'alerting', 'logging', 'storing' ], true ) ) { ?>
+            <?php do_settings_sections( 'mailarchiver_archiver_privacy_section' ); ?>
+            <?php do_settings_sections( 'mailarchiver_archiver_details_section' ); ?>
+		<?php } ?>
 		<?php wp_nonce_field( 'mailarchiver-archiver-edit' ); ?>
 		<p><?php echo get_submit_button( esc_html__( 'Cancel', 'mailarchiver' ), 'secondary', 'cancel', false ); ?>&nbsp;&nbsp;&nbsp;<?php echo get_submit_button( null, 'primary', 'submit', false ); ?></p>
 	</form>
