@@ -167,6 +167,22 @@ class Capture {
 	 */
 	public static function put( $mail, $message = '' ) {
 		if ( is_array( $mail ) ) {
+			if ( array_key_exists( 'headers', $mail ) ) {
+				if ( is_array( $mail['headers'] ) ) {
+					foreach ( $mail['headers'] as $header ) {
+						if ( false !== strpos( $header, 'X-Simulator: ' . MAILARCHIVER_PRODUCT_SHORTNAME ) ) {
+							\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( 'Skip archiving.' );
+							return;
+						}
+					}
+				}
+				if ( is_string( $mail['headers'] ) ) {
+					if ( false !== strpos( $mail['headers'], 'X-Simulator: ' . MAILARCHIVER_PRODUCT_SHORTNAME ) ) {
+						\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( 'Skip archiving.' );
+						return;
+					}
+				}
+			}
 			$mail['body']['raw']  = $mail['message'];
 			$mail['body']['text'] = self::textualize( $mail['message'] );
 			$mail['body']['type'] = 'raw';
