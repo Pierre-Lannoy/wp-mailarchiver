@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improved hash handling and reporting for users and IPs.
 - The archived metadata contains now a message "Mail sent." when sending is not in error.
 - [WP-CLI] The command `status` now displays encryption details.
+- Upgraded Monolog library from version 2.2.0 to version 2.3.4.
 
 ### Fixed
 - System archivers are visible from the archiver selector.
