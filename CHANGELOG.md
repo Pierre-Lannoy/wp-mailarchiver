@@ -12,6 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - New archiver to store archives in Elastic Cloud.
 - New archiver to store archives in a Loki instance.
 - New archiver to store archives in Grafana Cloud service.
+- New archiver to test and preview mails with Litmus service.
+- New archiver to test and preview mails with Email on Acid service.
+- New archiver to test mails with MailerCheck service.
 - Privacy option for loggers allows now to encrypt the mail body.
 - [WP-CLI] The new command `decrypt` allows to decrypt a mail body previously encrypted by MailArchiver.
 

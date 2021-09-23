@@ -141,6 +141,36 @@ class Form {
 	}
 
 	/**
+	 * Get a text form field.
+	 *
+	 * @param   string  $id The id (and the name) of the control.
+	 * @param   string  $value  The string to put in the text field.
+	 * @param   string  $description    Optional. A description to display.
+	 * @param   integer $columns     Optional. Number of columns.
+	 * @param   integer $lines     Optional. Number of lines.
+	 * @param   boolean $enabled     Optional. Is the control enabled?
+	 * @return  string The HTML string ready to print.
+	 * @since   1.0.0
+	 */
+	public function field_input_textarea( $id, $value = '', $description = null, $columns = 80, $lines = 3, $enabled = true ) {
+		$html = '<textarea' . ( $enabled ? '' : ' disabled' ) . ' name="' . $id . '" id="' . $id . '" cols="' . $columns . '" rows="' . $lines . '" class="regular-text code">' . $value . '</textarea>';
+		if ( isset( $description ) ) {
+			$html .= '<p class="description">' . $description . '</p>';
+		}
+		return $html;
+	}
+
+	/**
+	 * Echoes a text form field.
+	 *
+	 * @param   array $args   The call arguments.
+	 * @since   1.0.0
+	 */
+	public function echo_field_input_textarea( $args ) {
+		echo $this->field_input_textarea( $args['id'], $args['value'], $args['description'], $args['columns'], $args['lines'], $args['enabled'] );
+	}
+
+	/**
 	 * Get a select form field.
 	 *
 	 * @param   array      $list   The list of options.
