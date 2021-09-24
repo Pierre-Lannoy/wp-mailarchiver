@@ -12,10 +12,10 @@
 namespace Mailarchiver\Handler;
 
 use Mailarchiver\Formatter\ElasticCloudFormatter;
-use Monolog\Logger;
-use Monolog\Handler\ElasticsearchHandler;
-use Monolog\Handler\HandlerInterface;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\Handler\ElasticsearchHandler;
+use MAMonolog\Handler\HandlerInterface;
+use MAMonolog\Formatter\FormatterInterface;
 use Elasticsearch\Common\Exceptions\RuntimeException as ElasticsearchRuntimeException;
 use Elasticsearch\Client;
 

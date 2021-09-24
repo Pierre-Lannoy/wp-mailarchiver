@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Processor;
 
-use Monolog\Processor\ProcessorInterface;
+use MAMonolog\Processor\ProcessorInterface;
 use Mailarchiver\System\Hash;
 use Mailarchiver\System\PwdProtect;
 

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\LogglyFormatter;
+use MAMonolog\Logger;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\LogglyFormatter;
 use function array_key_exists;
 use CurlHandle;
 

@@ -13,7 +13,7 @@ namespace Mailarchiver\Formatter;
 
 use Mailarchiver\Plugin\Feature\ClassTypes;
 use Mailarchiver\Plugin\Feature\EventTypes;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\FormatterInterface;
 
 /**
  * Define the Monolog WordPress formatter.

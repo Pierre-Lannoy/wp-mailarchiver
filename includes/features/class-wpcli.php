@@ -23,7 +23,7 @@ use Mailarchiver\System\UUID;
 use Mailarchiver\Plugin\Feature\EventTypes;
 use Mailarchiver\System\PwdProtect;
 use Mailarchiver\Plugin\Feature\ArchiverFactory;
-use Monolog\Logger as Mnlg;
+use MAMonolog\Logger as Mnlg;
 use Spyc;
 
 /**

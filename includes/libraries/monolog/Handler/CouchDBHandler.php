@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\JsonFormatter;
-use Monolog\Logger;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\JsonFormatter;
+use MAMonolog\Logger;
 
 /**
  * CouchDB handler

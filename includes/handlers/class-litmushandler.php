@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Handler;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 
 /**
  * Define the Monolog Litmus handler.

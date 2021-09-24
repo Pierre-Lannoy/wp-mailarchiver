@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
 use RuntimeException;
-use Monolog\Logger;
+use MAMonolog\Logger;
 
 /**
  * Handler send logs to Telegram using Telegram Bot API.

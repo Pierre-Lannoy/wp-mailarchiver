@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Utils;
-use Monolog\Formatter\NormalizerFormatter;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\Utils;
+use MAMonolog\Formatter\NormalizerFormatter;
+use MAMonolog\Formatter\FormatterInterface;
 
 /**
  * Class to record a log on a NewRelic application.

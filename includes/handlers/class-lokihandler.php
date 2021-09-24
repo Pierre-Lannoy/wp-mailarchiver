@@ -11,8 +11,8 @@
 
 namespace Mailarchiver\Handler;
 
-use Monolog\Logger;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\Formatter\FormatterInterface;
 use Mailarchiver\Formatter\LokiFormatter;
 
 /**

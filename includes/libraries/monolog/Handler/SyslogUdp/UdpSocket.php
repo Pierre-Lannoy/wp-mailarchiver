@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler\SyslogUdp;
+namespace MAMonolog\Handler\SyslogUdp;
 
-use Monolog\Utils;
+use MAMonolog\Utils;
 use Socket;
 
 class UdpSocket

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Processor\ProcessorInterface;
+use MAMonolog\Processor\ProcessorInterface;
 
 /**
  * Interface to describe loggers that have processors

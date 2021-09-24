@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
-use Monolog\ResettableInterface;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\ResettableInterface;
+use MAMonolog\Formatter\FormatterInterface;
 use Psr\Log\LogLevel;
 
 /**
@@ -73,7 +73,7 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
         $this->setAcceptedLevels($minLevelOrList, $maxLevel);
 
         if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
-            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a MAMonolog\Handler\HandlerInterface object");
         }
     }
 
@@ -95,7 +95,7 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
     public function setAcceptedLevels($minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY): self
     {
         if (is_array($minLevelOrList)) {
-            $acceptedLevels = array_map('Monolog\Logger::toMonologLevel', $minLevelOrList);
+            $acceptedLevels = array_map('MAMonolog\Logger::toMonologLevel', $minLevelOrList);
         } else {
             $minLevelOrList = Logger::toMonologLevel($minLevelOrList);
             $maxLevel = Logger::toMonologLevel($maxLevel);

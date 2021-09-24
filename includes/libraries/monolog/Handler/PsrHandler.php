@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Psr\Log\LoggerInterface;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\FormatterInterface;
 
 /**
  * Proxies log messages to an existing PSR-3 compliant logger.

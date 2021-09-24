@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace MAMonolog\Formatter;
 
 /**
  * Serializes a log message to Logstash Event Format

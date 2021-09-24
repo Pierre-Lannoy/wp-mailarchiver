@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Processor;
+namespace MAMonolog\Processor;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Psr\Log\LogLevel;
 
 /**

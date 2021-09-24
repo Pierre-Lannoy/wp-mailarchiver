@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Plugin\Feature;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Feather;
 
 /**

@@ -12,8 +12,8 @@
 namespace Mailarchiver\Handler;
 
 use Mailarchiver\System\Http;
-use Monolog\Logger;
-use Monolog\Handler\AbstractProcessingHandler;
+use MAMonolog\Logger;
+use MAMonolog\Handler\AbstractProcessingHandler;
 
 /**
  * Define the Monolog abstract HTTP handler.

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Processor;
+namespace MAMonolog\Processor;
 
 /**
  * An optional interface to allow labelling Monolog processors.

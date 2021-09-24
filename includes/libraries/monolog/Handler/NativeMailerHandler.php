@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Formatter\LineFormatter;
+use MAMonolog\Logger;
+use MAMonolog\Formatter\LineFormatter;
 
 /**
  * NativeMailerHandler uses the mail() function to send the emails

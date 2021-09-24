@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler\FingersCrossed;
+namespace MAMonolog\Handler\FingersCrossed;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Psr\Log\LogLevel;
 
 /**
@@ -60,7 +60,7 @@ class ChannelLevelActivationStrategy implements ActivationStrategyInterface
     public function __construct($defaultActionLevel, array $channelToActionLevel = [])
     {
         $this->defaultActionLevel = Logger::toMonologLevel($defaultActionLevel);
-        $this->channelToActionLevel = array_map('Monolog\Logger::toMonologLevel', $channelToActionLevel);
+        $this->channelToActionLevel = array_map('MAMonolog\Logger::toMonologLevel', $channelToActionLevel);
     }
 
     /**

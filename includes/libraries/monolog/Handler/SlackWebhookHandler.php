@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Logger;
-use Monolog\Utils;
-use Monolog\Handler\Slack\SlackRecord;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\Utils;
+use MAMonolog\Handler\Slack\SlackRecord;
 
 /**
  * Sends notifications through Slack Webhooks

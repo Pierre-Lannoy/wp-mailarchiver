@@ -14,7 +14,7 @@ namespace Mailarchiver\Formatter;
 use Mailarchiver\Plugin\Feature\ClassTypes;
 use Mailarchiver\System\Http;
 use Mailarchiver\Formatter\WordpressFormatter;
-use Monolog\Logger;
+use MAMonolog\Logger;
 
 /**
  * Define the Monolog WordPress formatter.

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Formatter\LineFormatter;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Utils;
+use MAMonolog\Formatter\LineFormatter;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Utils;
 
 /**
  * Handler sending logs to browser's javascript console with no browser extension required
@@ -105,7 +105,7 @@ class BrowserConsoleHandler extends AbstractProcessingHandler
     protected function registerShutdownFunction(): void
     {
         if (PHP_SAPI !== 'cli') {
-            register_shutdown_function(['Monolog\Handler\BrowserConsoleHandler', 'send']);
+            register_shutdown_function(['MAMonolog\Handler\BrowserConsoleHandler', 'send']);
         }
     }
 

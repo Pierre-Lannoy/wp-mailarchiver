@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
 use Gelf\PublisherInterface;
-use Monolog\Logger;
-use Monolog\Formatter\GelfMessageFormatter;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\Formatter\GelfMessageFormatter;
+use MAMonolog\Formatter\FormatterInterface;
 
 /**
  * Handler to send messages to a Graylog2 (http://www.graylog2.org) server

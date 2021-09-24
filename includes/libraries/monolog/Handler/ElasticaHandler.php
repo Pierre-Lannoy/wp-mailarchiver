@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
 use Elastica\Document;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\ElasticaFormatter;
-use Monolog\Logger;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\ElasticaFormatter;
+use MAMonolog\Logger;
 use Elastica\Client;
 use Elastica\Exception\ExceptionInterface;
 

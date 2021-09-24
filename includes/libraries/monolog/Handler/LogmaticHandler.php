@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\LogmaticFormatter;
+use MAMonolog\Logger;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\LogmaticFormatter;
 
 /**
  * @author Julien Breux <julien.breux@gmail.com>

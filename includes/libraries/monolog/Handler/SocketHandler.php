@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 
 /**
  * Stores to any socket - uses fsockopen() or pfsockopen().

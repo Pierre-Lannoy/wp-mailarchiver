@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\ResettableInterface;
-use Monolog\Processor\ProcessorInterface;
+use MAMonolog\ResettableInterface;
+use MAMonolog\Processor\ProcessorInterface;
 
 /**
  * Helper trait for implementing ProcessableInterface

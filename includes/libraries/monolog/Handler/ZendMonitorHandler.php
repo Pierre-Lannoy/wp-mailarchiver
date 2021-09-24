@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\NormalizerFormatter;
-use Monolog\Logger;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\NormalizerFormatter;
+use MAMonolog\Logger;
 
 /**
  * Handler sending logs to Zend Monitor

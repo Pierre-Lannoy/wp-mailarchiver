@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Formatter\LineFormatter;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Logger;
-use Monolog\Utils;
+use MAMonolog\Formatter\LineFormatter;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\Utils;
 use PhpConsole\Connector;
 use PhpConsole\Handler as VendorPhpConsoleHandler;
 use PhpConsole\Helper;
@@ -45,7 +45,7 @@ class PHPConsoleHandler extends AbstractProcessingHandler
     /** @var array<string, mixed> */
     private $options = [
         'enabled' => true, // bool Is PHP Console server enabled
-        'classesPartialsTraceIgnore' => ['Monolog\\'], // array Hide calls of classes started with...
+        'classesPartialsTraceIgnore' => ['MAMonolog\\'], // array Hide calls of classes started with...
         'debugTagsKeysInContext' => [0, 'tag'], // bool Is PHP Console server enabled
         'useOwnErrorsHandler' => false, // bool Enable errors handling
         'useOwnExceptionsHandler' => false, // bool Enable exceptions handling

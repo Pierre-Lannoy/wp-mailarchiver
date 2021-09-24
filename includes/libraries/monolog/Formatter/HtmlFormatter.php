@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace MAMonolog\Formatter;
 
-use Monolog\Logger;
-use Monolog\Utils;
+use MAMonolog\Logger;
+use MAMonolog\Utils;
 
 /**
  * Formats incoming records into an HTML table

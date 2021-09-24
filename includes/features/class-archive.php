@@ -10,7 +10,7 @@
 namespace Mailarchiver\Plugin\Feature;
 
 use Mailarchiver\Plugin\Feature\DArchiver;
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Mailarchiver\Plugin\Feature\EventTypes;
 
 

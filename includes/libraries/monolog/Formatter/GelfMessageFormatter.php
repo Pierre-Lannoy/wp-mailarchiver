@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace MAMonolog\Formatter;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Gelf\Message;
-use Monolog\Utils;
+use MAMonolog\Utils;
 
 /**
  * Serializes a log message to GELF

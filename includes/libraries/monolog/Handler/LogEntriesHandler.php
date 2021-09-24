@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 
 /**
  * @author Robert Kaufmann III <rok3@rok3.me>

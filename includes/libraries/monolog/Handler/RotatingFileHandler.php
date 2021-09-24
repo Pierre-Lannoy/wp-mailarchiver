@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
 use InvalidArgumentException;
-use Monolog\Logger;
-use Monolog\Utils;
+use MAMonolog\Logger;
+use MAMonolog\Utils;
 
 /**
  * Stores logs to files that are rotated every day and a limited number of files are kept.

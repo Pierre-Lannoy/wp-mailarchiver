@@ -12,7 +12,7 @@
 namespace Mailarchiver\Formatter;
 
 use Mailarchiver\System\Http;
-use Monolog\Formatter\ElasticsearchFormatter;
+use MAMonolog\Formatter\ElasticsearchFormatter;
 use Mailarchiver\Plugin\Feature\EventTypes;
 
 /**

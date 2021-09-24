@@ -58,7 +58,7 @@ class Libraries {
 		self::$psr4_libraries              = [];
 		self::$psr4_libraries['monolog']   = [
 			'name'    => 'Monolog',
-			'prefix'  => 'Monolog',
+			'prefix'  => 'MAMonolog',
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'monolog/',
 			'version' => MAILARCHIVER_MONOLOG_VERSION,
 			// phpcs:ignore

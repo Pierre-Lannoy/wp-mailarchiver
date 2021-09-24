@@ -11,8 +11,8 @@
 
 namespace Mailarchiver\Handler;
 
-use Monolog\Logger;
-use Monolog\Handler\PushoverHandler;
+use MAMonolog\Logger;
+use MAMonolog\Handler\PushoverHandler;
 
 /**
  * Define the Monolog Pushover handler.

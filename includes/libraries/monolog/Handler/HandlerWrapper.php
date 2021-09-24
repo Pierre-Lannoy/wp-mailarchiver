@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\ResettableInterface;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\ResettableInterface;
+use MAMonolog\Formatter\FormatterInterface;
 
 /**
  * This simple wrapper class can be used to extend handlers functionality.

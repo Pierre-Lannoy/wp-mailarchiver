@@ -12,9 +12,9 @@
 namespace Mailarchiver\Handler;
 
 use Mailarchiver\Plugin\Feature\EventTypes;
-use Monolog\Logger;
-use Monolog\Handler\AbstractProcessingHandler;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
+use MAMonolog\Handler\AbstractProcessingHandler;
+use MAMonolog\Formatter\FormatterInterface;
 use Mailarchiver\Formatter\NewlineFormatter;
 
 /**

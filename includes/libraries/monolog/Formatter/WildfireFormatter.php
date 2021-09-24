@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace MAMonolog\Formatter;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 
 /**
  * Serializes a log message according to Wildfire's header requirements

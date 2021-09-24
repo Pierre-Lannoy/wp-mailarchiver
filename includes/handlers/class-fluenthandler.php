@@ -11,10 +11,10 @@
 
 namespace Mailarchiver\Handler;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Mailarchiver\Plugin\Feature\DArchiver;
-use Monolog\Handler\SocketHandler;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Handler\SocketHandler;
+use MAMonolog\Formatter\FormatterInterface;
 use Mailarchiver\Formatter\FluentFormatter;
 
 /**

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
-use Monolog\Handler\FingersCrossed\ActivationStrategyInterface;
-use Monolog\Logger;
-use Monolog\ResettableInterface;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
+use MAMonolog\Handler\FingersCrossed\ActivationStrategyInterface;
+use MAMonolog\Logger;
+use MAMonolog\ResettableInterface;
+use MAMonolog\Formatter\FormatterInterface;
 use Psr\Log\LogLevel;
 
 /**
@@ -100,7 +100,7 @@ class FingersCrossedHandler extends Handler implements ProcessableHandlerInterfa
         }
 
         if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
-            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a MAMonolog\Handler\HandlerInterface object");
         }
     }
 

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Formatter\WildfireFormatter;
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\WildfireFormatter;
+use MAMonolog\Formatter\FormatterInterface;
 
 /**
  * Simple FirePHP Handler (http://www.firephp.org/), which uses the Wildfire protocol.

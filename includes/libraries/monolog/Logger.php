@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog;
+namespace MAMonolog;
 
 use DateTimeZone;
-use Monolog\Handler\HandlerInterface;
+use MAMonolog\Handler\HandlerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;

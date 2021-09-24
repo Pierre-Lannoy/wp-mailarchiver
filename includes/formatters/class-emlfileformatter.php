@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Formatter;
 
-use Monolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\FormatterInterface;
 use Mailarchiver\Plugin\Feature\EventTypes;
 
 /**

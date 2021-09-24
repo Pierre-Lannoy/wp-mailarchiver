@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace MAMonolog\Formatter;
 
 use MongoDB\BSON\UTCDateTime;
-use Monolog\Utils;
+use MAMonolog\Utils;
 
 /**
  * Formats a record for use with the MongoDBHandler.

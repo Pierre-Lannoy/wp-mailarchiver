@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler\FingersCrossed;
+namespace MAMonolog\Handler\FingersCrossed;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Psr\Log\LogLevel;
 
 /**

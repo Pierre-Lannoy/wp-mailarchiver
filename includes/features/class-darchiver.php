@@ -10,7 +10,7 @@
 namespace Mailarchiver\Plugin\Feature;
 
 use Mailarchiver\Plugin\Feature\HandlerTypes;
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Mailarchiver\System\Environment;
 use Mailarchiver\System\Option;
 use Mailarchiver\System\Timezone;

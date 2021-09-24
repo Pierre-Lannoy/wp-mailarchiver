@@ -19,8 +19,8 @@ use Mailarchiver\System\Environment;
 use Mailarchiver\System\Http;
 use Mailarchiver\System\User;
 use Mailarchiver\System\UserAgent;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Logger;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Logger;
 use Mailarchiver\System\Hash;
 
 /**

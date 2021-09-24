@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Processor;
+namespace MAMonolog\Processor;
 
-use Monolog\ResettableInterface;
+use MAMonolog\ResettableInterface;
 
 /**
  * Adds a unique identifier into records

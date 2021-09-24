@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace MAMonolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\HtmlFormatter;
+use MAMonolog\Formatter\FormatterInterface;
+use MAMonolog\Formatter\HtmlFormatter;
 
 /**
  * Base class for all mail handlers

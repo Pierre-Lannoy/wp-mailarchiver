@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Processor;
+namespace MAMonolog\Processor;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 use Psr\Log\LogLevel;
 
 /**
@@ -51,7 +51,7 @@ class IntrospectionProcessor implements ProcessorInterface
     public function __construct($level = Logger::DEBUG, array $skipClassesPartials = [], int $skipStackFramesCount = 0)
     {
         $this->level = Logger::toMonologLevel($level);
-        $this->skipClassesPartials = array_merge(['Monolog\\'], $skipClassesPartials);
+        $this->skipClassesPartials = array_merge(['MAMonolog\\'], $skipClassesPartials);
         $this->skipStackFramesCount = $skipStackFramesCount;
     }
 

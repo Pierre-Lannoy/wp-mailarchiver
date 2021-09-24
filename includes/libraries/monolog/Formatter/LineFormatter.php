@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace MAMonolog\Formatter;
 
-use Monolog\Utils;
+use MAMonolog\Utils;
 
 /**
  * Formats incoming records into a one-line string

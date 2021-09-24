@@ -11,7 +11,7 @@
 
 namespace Mailarchiver\Plugin\Feature;
 
-use Monolog\Logger;
+use MAMonolog\Logger;
 
 /**
  * Define the archiver types functionality.
@@ -333,7 +333,7 @@ class HandlerTypes {
 			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'LogglyHandler',
 			'ancestor'      => 'LogglyHandler',
-			'namespace'     => 'Monolog\\Handler',
+			'namespace'     => 'MAMonolog\\Handler',
 			'class'         => 'logging',
 			'minimal'       => Logger::ERROR,
 			'name'          => esc_html__( 'Loggly', 'mailarchiver' ),
@@ -366,7 +366,7 @@ class HandlerTypes {
 			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'SyslogUdpHandler',
 			'ancestor'      => 'UdpSocket',
-			'namespace'     => 'Monolog\Handler',
+			'namespace'     => 'MAMonolog\Handler',
 			'class'         => 'logging',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Syslog', 'mailarchiver' ),
@@ -734,7 +734,7 @@ class HandlerTypes {
 			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'SlackWebhookHandler',
 			'ancestor'      => 'SlackWebhookHandler',
-			'namespace'     => 'Monolog\Handler',
+			'namespace'     => 'MAMonolog\Handler',
 			'class'         => 'alerting',
 			'minimal'       => Logger::ERROR,
 			'name'          => esc_html__( 'Slack', 'mailarchiver' ),
@@ -877,7 +877,7 @@ class HandlerTypes {
 			'version'       => MAILARCHIVER_MONOLOG_VERSION,
 			'id'            => 'RotatingFileHandler',
 			'ancestor'      => 'StreamHandler',
-			'namespace'     => 'Monolog\Handler',
+			'namespace'     => 'MAMonolog\Handler',
 			'class'         => 'storing',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Rotating files', 'mailarchiver' ),
@@ -1178,7 +1178,7 @@ class HandlerTypes {
 			'version'       => MAILARCHIVER_VERSION,
 			'id'            => 'NullHandler',
 			'ancestor'      => 'NullHandler',
-			'namespace'     => 'Monolog\Handler',
+			'namespace'     => 'MAMonolog\Handler',
 			'class'         => 'system',
 			'minimal'       => Logger::INFO,
 			'name'          => esc_html__( 'Blackhole', 'mailarchiver' ),
