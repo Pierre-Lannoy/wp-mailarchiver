@@ -25,10 +25,10 @@ use MAMonolog\Logger;
 class EOAHandler extends AbstractBufferedMailHandler {
 
 	/**
-	 * The path where to write.
+	 * The new recipients().
 	 *
 	 * @since  2.5.0
-	 * @var    string    $path    The path.
+	 * @var    string    $to    The new recipient(s).
 	 */
 	private $to = [];
 
