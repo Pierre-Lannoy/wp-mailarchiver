@@ -70,7 +70,6 @@ class EmlFileFormatter implements FormatterInterface {
 	 */
 	private function simulate_wp_mail( $to, $subject, $message, $headers = '', $attachments = [] ) {
 		$phpmailer = mailarchiver_wp_mail( $to, $subject, $message, $headers, $attachments );
-		$phpmailer->getMailMIME();
 		$phpmailer->preSend();
 		return $phpmailer->getSentMIMEMessage();
 	}
