@@ -25,6 +25,7 @@ use Mailarchiver\System\Role;
 use Mailarchiver\System\PwdProtect;
 use Mailarchiver\System\Secret;
 use Mailarchiver\System\Environment;
+use Mailarchiver\System\Imap;
 use PerfOpsOne\Menus;
 
 /**
@@ -800,6 +801,26 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_ssl' );
+
+		if ( Imap::is_available() ) {
+			$help  = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'thumbs-up', 'none', '#00C800' ) . '" />&nbsp;';
+			$help .= esc_html__('Imap features are available on your server. Email archiving via Imap is available.', 'decalog' );
+		} else {
+			$help  = '<img style="width:16px;vertical-align:text-bottom;" src="' . \Feather\Icons::get_base64( 'alert-triangle', 'none', '#FF8C00' ) . '" />&nbsp;';
+			$help .= sprintf( esc_html__('Imap features are not activated on your server. To allow Imap archiving you must activate %s PHP module.', 'decalog' ), '<code>imap</code>' );
+		}
+		add_settings_field(
+			'mailarchiver_plugin_options_imap',
+			'Imap',
+			[ $form, 'echo_field_simple_text' ],
+			'mailarchiver_plugin_options_section',
+			'mailarchiver_plugin_options_section',
+			[
+				'text' => $help,
+			]
+		);
+		register_setting( 'mailarchiver_plugin_options_section', 'mailarchiver_plugin_options_imap' );
+		
 		if ( function_exists( 'wp_get_environment_type' ) ) {
 			add_settings_field(
 				'mailarchiver_plugin_options_privileges',
