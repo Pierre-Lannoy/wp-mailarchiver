@@ -47,11 +47,12 @@ class HandlerTypes {
 	 */
 	public function __construct() {
 		$this->handlers_class = [
-			'alerting' => esc_html__( 'Alerting', 'mailarchiver' ),
-			'logging'  => esc_html__( 'Logging', 'mailarchiver' ),
-			'storing'  => esc_html__( 'Archive storing', 'mailarchiver' ),
-			'istoring' => esc_html__( 'Individual storing', 'mailarchiver' ),
-			'testing'  => esc_html__( 'Testing & Preview', 'mailarchiver' ),
+			'alerting'   => esc_html__( 'Alerting', 'mailarchiver' ),
+			'forwarding' => esc_html__( 'Forwarding', 'mailarchiver' ),
+			'logging'    => esc_html__( 'Logging', 'mailarchiver' ),
+			'storing'    => esc_html__( 'Archive storing', 'mailarchiver' ),
+			'istoring'   => esc_html__( 'Individual storing', 'mailarchiver' ),
+			'testing'    => esc_html__( 'Testing & Preview', 'mailarchiver' ),
 		];
 
 		// TESTING
@@ -187,6 +188,45 @@ class HandlerTypes {
 						'enabled' => true,
 						'lines'   => 5,
 						'columns' => 200,
+					],
+				],
+			],
+			'init'          => [
+				[
+					'type'  => 'configuration',
+					'value' => 'box',
+				],
+				[ 'type' => 'level' ],
+				[
+					'type'  => 'literal',
+					'value' => true,
+				],
+			],
+		];
+
+		// FORWARDING
+		$this->handlers[] = [
+			'version'       => MAILARCHIVER_VERSION,
+			'id'            => 'MailForwardHandler',
+			'ancestor'      => 'MailForwardHandler',
+			'namespace'     => 'Mailarchiver\\Handler',
+			'class'         => 'forwarding',
+			'minimal'       => Logger::INFO,
+			'name'          => 'Mail forwarder',
+			'help'          => esc_html__( 'A mail copy sent to an email address.', 'mailarchiver' ),
+			'icon'          => $this->get_base64_mail_icon(),
+			'params'        => [ 'processors', 'privacy' ],
+			'configuration' => [
+				'box'     => [
+					'type'    => 'string',
+					'show'    => true,
+					'name'    => esc_html__( 'Mailbox', 'mailarchiver' ),
+					'help'    => esc_html__( 'The email address to which forward the copy.', 'mailarchiver' ),
+					'default' => 'name@example.com',
+					'control' => [
+						'type'    => 'field_input_text',
+						'cast'    => 'string',
+						'enabled' => true,
 					],
 				],
 			],
