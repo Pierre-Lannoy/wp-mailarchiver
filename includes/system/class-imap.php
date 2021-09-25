@@ -11,6 +11,8 @@
 
 namespace Mailarchiver\System;
 
+use Mailarchiver\System\Blog;
+
 /**
  * Define the imap functionality.
  *
@@ -31,6 +33,19 @@ class Imap {
 	public static function is_available() {
 		return ( function_exists( 'imap_open' ) &&
 				 function_exists( 'imap_createmailbox' ) &&
+		         function_exists( 'imap_utf7_encode' ) &&
 				 function_exists( 'imap_append' ) );
+	}
+
+	/**
+	 * Get a full mailbox name.
+	 *
+	 * @param   string  $root   Optional. Root (path) of the mailbox.
+	 * @param   string  $sep    Optional. The separator character.
+	 * @return   string  The full mailbox name.
+	 * @since    2.5.0
+	 */
+	public static function get_mailbox_name( $root = 'INBOX', $sep = '/' ) {
+		return $root . $sep . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . $sep . imap_utf7_encode( str_replace( [ '.', '/', '\\' ], '-', Blog::get_current_blog_url() ) );
 	}
 }
