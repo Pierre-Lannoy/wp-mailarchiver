@@ -1064,7 +1064,7 @@ class Mailarchiver_Admin {
 		add_settings_field(
 			'mailarchiver_archiver_privacy_encryption',
 			__( 'Encryption key', 'mailarchiver' ),
-			[ $form, 'echo_field_input_text' ],
+			[ $form, 'echo_field_input_password' ],
 			'mailarchiver_archiver_privacy_section',
 			'mailarchiver_archiver_privacy_section',
 			[
