@@ -28,7 +28,7 @@ class MailForwardHandler extends AbstractBufferedMailHandler {
 	 * The new recipients().
 	 *
 	 * @since  2.5.0
-	 * @var    string    $to    The new recipient(s).
+	 * @var    array    $to    The new recipient(s).
 	 */
 	private $to = [];
 
