@@ -123,7 +123,7 @@ class Form {
 		} else {
 			$width = '';
 		}
-		$html = '<input' . ( $enabled ? '' : ' disabled' ) . ' name="' . $id . '" type="text" id="' . $id . '" value="' . $value . '"' . $width . '/>';
+		$html = '<input' . ( $enabled ? '' : ' disabled' ) . ' name="' . $id . '" type="password" id="' . $id . '" value="' . $value . '"' . $width . '/>';
 		if ( isset( $description ) ) {
 			$html .= '<p class="description">' . $description . '</p>';
 		}
