@@ -11,8 +11,6 @@
 
 namespace Mailarchiver\System;
 
-
-
 /**
  * Define the imap functionality.
  *
@@ -158,7 +156,6 @@ class Imap {
 	 * @since    2.5.0
 	 */
 	public static function open_mailbox( $server, $root, $user, $pwd, $options = [] ) {
-		//$options = array('DISABLE_AUTHENTICATOR' => 'LOGIN');
 		switch ( $root ) {
 			case 'GMAIL':
 			case 'OVH':
@@ -169,9 +166,6 @@ class Imap {
 			default:
 				$conn = $server . $root;
 		}
-		//$conn = str_replace( '}', '/authuser=weather@station.software}', $conn);
-
-
 		// phpcs:ignore
 		set_error_handler( null );
 		// phpcs:ignore
