@@ -12,6 +12,7 @@
 namespace Mailarchiver\Plugin\Feature;
 
 use MAMonolog\Logger;
+use Mailarchiver\System\Imap;
 
 /**
  * Define the archiver types functionality.
@@ -1212,6 +1213,184 @@ class HandlerTypes {
 				],
 			],
 		];
+		if ( Imap::is_available() ) {
+			$this->handlers[] = [
+				'version'       => MAILARCHIVER_VERSION,
+				'id'            => 'ImapHandler',
+				'namespace'     => 'Mailarchiver\\Handler',
+				'class'         => 'storing',
+				'minimal'       => Logger::INFO,
+				'name'          => 'Imap',
+				'help'          => esc_html__( 'An archive stored on a remote Imap server.', 'mailarchiver' ),
+				'icon'          => $this->get_base64_imap_icon(),
+				'needs'         => [],
+				'params'        => [ 'processors', 'privacy' ],
+				'configuration' => [
+					'url'   => [
+						'type'    => 'string',
+						'show'    => true,
+						'name'    => esc_html__( 'Host', 'mailarchiver' ),
+						'help'    => sprintf( esc_html__( 'URL where to send archives. Format: %s.', 'mailarchiver' ), '<code>' . htmlentities( '<host>:<port>' ) . '</code>' ),
+						'default' => 'imap.example.org:143',
+						'control' => [
+							'type'    => 'field_input_text',
+							'cast'    => 'string',
+							'enabled' => true,
+						],
+					],
+					'index' => [
+						'type'    => 'string',
+						'show'    => true,
+						'name'    => esc_html__( 'Root', 'mailarchiver' ),
+						'help'    => esc_html__( 'The root\'s mailbox. Do not change it if you don\'t know what it is.', 'mailarchiver' ) . '<br/>' . sprintf( esc_html__( 'Note: the archives will be stored in %s.', 'mailarchiver' ), '<code>' . Imap::get_mailbox_name( '{root}', '/' ) . '</code>' ),
+						'default' => 'INBOX',
+						'control' => [
+							'type'    => 'field_input_text',
+							'cast'    => 'string',
+							'enabled' => true,
+						],
+					],
+					'encryption' => [
+						'type'    => 'string',
+						'show'    => true,
+						'name'    => esc_html__( 'Encryption', 'mailarchiver' ),
+						'help'    => esc_html__( 'Method to use for session\'s encryption.', 'mailarchiver' ),
+						'default' => 'notls',
+						'control' => [
+							'type'    => 'field_select',
+							'cast'    => 'string',
+							'enabled' => Imap::is_openssl_available(),
+							'list'    => [ [ 'notls', esc_html__( 'None', 'mailarchiver' ) ], [ 'ssl', esc_html__( 'SSL/TLS', 'mailarchiver' ) ], [ 'tls', esc_html__( 'start-TLS', 'mailarchiver' ) ] ],
+						],
+					],
+					'validation' => [
+						'type'    => 'string',
+						'show'    => true,
+						'name'    => esc_html__( 'Certificate', 'mailarchiver' ),
+						'help'    => esc_html__( 'Does the server certificate need to be validated.', 'mailarchiver' ) . '<br/>' . esc_html__( 'Note: if the Imap server uses self-signed certificate, choose "no validation".', 'mailarchiver' ),
+						'default' => 'validate-cert',
+						'control' => [
+							'type'    => 'field_select',
+							'cast'    => 'string',
+							'enabled' => Imap::is_openssl_available(),
+							'list'    => [ [ 'novalidate-cert', esc_html__( 'No validation', 'mailarchiver' ) ], [ 'validate-cert', esc_html__( 'Full validation', 'mailarchiver' ) ] ],
+						],
+					],
+					'user'  => [
+						'type'    => 'string',
+						'show'    => true,
+						'name'    => esc_html__( 'Username', 'mailarchiver' ),
+						'help'    => esc_html__( 'The username of the mailbox.', 'mailarchiver' ),
+						'default' => '',
+						'control' => [
+							'type'    => 'field_input_text',
+							'cast'    => 'string',
+							'enabled' => true,
+						],
+					],
+					'pass'  => [
+						'type'    => 'string',
+						'show'    => true,
+						'name'    => esc_html__( 'Password', 'mailarchiver' ),
+						'help'    => esc_html__( 'The password of the mailbox.', 'mailarchiver' ),
+						'default' => '',
+						'control' => [
+							'type'    => 'field_input_password',
+							'cast'    => 'string',
+							'enabled' => true,
+						],
+					],
+
+				],
+				'init'          => [
+					[
+						'type'  => 'configuration',
+						'value' => 'url',
+					],
+					[
+						'type'  => 'configuration',
+						'value' => 'index',
+					],
+					[
+						'type'  => 'configuration',
+						'value' => 'encryption',
+					],
+					[
+						'type'  => 'configuration',
+						'value' => 'validation',
+					],
+					[
+						'type'  => 'configuration',
+						'value' => 'user',
+					],
+					[
+						'type'  => 'configuration',
+						'value' => 'pass',
+					],
+					[ 'type' => 'level' ],
+					[
+						'type'  => 'literal',
+						'value' => true,
+					],
+				],
+			];
+			if ( Imap::is_openssl_available() ) {
+				$this->handlers[] = [
+					'version'       => MAILARCHIVER_VERSION,
+					'id'            => 'GMailHandler',
+					'namespace'     => 'Mailarchiver\\Handler',
+					'class'         => 'storing',
+					'minimal'       => Logger::INFO,
+					'name'          => 'GMail',
+					'help'          => esc_html__( 'An archive stored on GMail via Imap.', 'mailarchiver' ),
+					'icon'          => $this->get_base64_gmail_icon(),
+					'needs'         => [],
+					'params'        => [ 'processors', 'privacy' ],
+					'configuration' => [
+						'user'  => [
+							'type'    => 'string',
+							'show'    => true,
+							'name'    => esc_html__( 'Username', 'mailarchiver' ),
+							'help'    => esc_html__( 'The username of the mailbox.', 'mailarchiver' ),
+							'default' => '',
+							'control' => [
+								'type'    => 'field_input_text',
+								'cast'    => 'string',
+								'enabled' => true,
+							],
+						],
+						'pass'  => [
+							'type'    => 'string',
+							'show'    => true,
+							'name'    => esc_html__( 'Password', 'mailarchiver' ),
+							'help'    => esc_html__( 'The password of the mailbox.', 'mailarchiver' ),
+							'default' => '',
+							'control' => [
+								'type'    => 'field_input_password',
+								'cast'    => 'string',
+								'enabled' => true,
+							],
+						],
+
+					],
+					'init'          => [
+						[
+							'type'  => 'configuration',
+							'value' => 'user',
+						],
+						[
+							'type'  => 'configuration',
+							'value' => 'pass',
+						],
+						[ 'type' => 'level' ],
+						[
+							'type'  => 'literal',
+							'value' => true,
+						],
+					],
+				];
+			}
+		}
 
 		// SYSTEM
 		$this->handlers[] = [
@@ -2147,6 +2326,53 @@ class HandlerTypes {
 		$source .= '<g transform="scale(13,13) translate(3,4)">';
 		$source .= '<path d="M5.73338394,12.289647 L12.9220887,12.2811531 L15.8354142,16.34256 C12.7938089,18.6822768 10.9336776,20.0266856 10.2550204,20.3757864 C9.5763632,20.7248872 8.85725395,20.9371537 8.09769265,21.012586 L5.86759381,21.0077206 C2.22189424,20.8833734 1.20024661,17.8426226 1.29733652,16.6285146 C1.26414909,15.1219682 2.40554081,12.4878636 5.73338394,12.289647 Z" id="Rectangle" fill="' . $color1 . '" transform="translate(8.563275, 16.646870) rotate(44.000000) translate(-8.563275, -16.646870) "></path>';
 		$source .= '<path d="M9.60566159,8.0802605 L27.6828642,8.0802605 C30.2397134,8.10086632 32.4780711,10.1173763 32.4901961,12.9322082 L32.5505842,16.8370236 L32.6435176,20.0622137 C31.8518245,17.9867939 30.4638771,16.877343 28.4796753,16.7338611 C27.4418755,16.5713035 21.2226412,16.4310142 9.82197249,16.3129933 C6.7856776,16.3281542 5.44074836,13.801684 5.44240625,12.163585 C5.35084825,10.5345429 6.66555818,8.0264458 9.60566159,8.0802605 Z" id="Rectangle" fill="' . $color2 . '" transform="translate(19.040730, 14.070811) rotate(135.000000) translate(-19.040730, -14.070811) "></path>';
+		$source .= '</g>';
+		$source .= '</svg>';
+		// phpcs:ignore
+		return 'data:image/svg+xml;base64,' . base64_encode( $source );
+	}
+
+	/**
+	 * Returns a base64 svg resource for the Imap icon.
+	 *
+	 * @param string $color1 Optional. Color 1 of the icon.
+	 * @return string The svg resource as a base64.
+	 * @since 2.5.0
+	 */
+	private function get_base64_imap_icon( $color1 = '#58BCB2' ) {
+		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid">';
+		$source .= '<g transform="scale(5,5) translate(0,0)">';
+		$source .= '<g transform="matrix(0.075,0,0,0.075,12,14)">';
+		$source .= '<path d="M537.9,603.6L537.9,706.5C558,712.4 576.4,723.6 590.9,738.6C605.4,752.8 616.3,770.2 622.5,790.3L952.3,790.3C973.2,790.3 990,806.6 990,828C990,848.6 973.2,865.5 952.3,865.5L623.5,865.5C617.3,886.6 606.4,905.6 590.8,920.4C567.8,944.2 535.7,958.4 499.8,958.4C464.5,958.4 431.8,944.2 408.8,920.4C393.8,905.6 382.6,886.7 376.1,865.5L47.5,865.5C26.6,865.5 10,848.7 10,828C10,806.6 26.6,790.3 47.5,790.3L377.3,790.3C383.7,770.2 394.9,752.8 408.9,738.6C423.6,723.6 441.8,712.4 462.1,706.5L462.1,603.7L537.9,603.6ZM558.8,770.2C543.8,755.2 523.5,745.8 499.9,745.8C476.9,745.8 456,755.2 441,770.2C426,785.5 416.4,806.1 416.4,829.4C416.4,852.7 426,873.6 441,888.5C456,903.5 476.9,912.9 499.9,912.9C523.5,912.9 543.8,903.5 558.8,888.5C574.3,873.5 583.4,852.7 583.4,829.4C583.4,806.1 574.3,785.5 558.8,770.2Z" fill="' . $color1 . '"/>';
+		$source .= '<g transform="matrix(0.465104,0,0,0.360754,81.0077,3.48146)">';
+		$source .= '<path d="M1792,710L1792,1504C1792,1548 1776.33,1585.67 1745,1617C1713.67,1648.33 1676,1664 1632,1664L160,1664C116,1664 78.333,1648.33 47,1617C15.667,1585.67 0,1548 0,1504L0,710C29.333,742.667 63,771.667 101,797C342.333,961 508,1076 598,1142C636,1170 666.833,1191.83 690.5,1207.5C714.167,1223.17 745.667,1239.17 785,1255.5C824.333,1271.83 861,1280 895,1280L897,1280C931,1280 967.667,1271.83 1007,1255.5C1046.33,1239.17 1077.83,1223.17 1101.5,1207.5C1125.17,1191.83 1156,1170 1194,1142C1307.33,1060 1473.33,945 1692,797C1730,771 1763.33,742 1792,710ZM1792,416C1792,468.667 1775.67,519 1743,567C1710.33,615 1669.67,656 1621,690C1370.33,864 1214.33,972.333 1153,1015C1146.33,1019.67 1132.17,1029.83 1110.5,1045.5C1088.83,1061.17 1070.83,1073.83 1056.5,1083.5C1042.17,1093.17 1024.83,1104 1004.5,1116C984.167,1128 965,1137 947,1143C929,1149 912.333,1152 897,1152L895,1152C879.667,1152 863,1149 845,1143C827,1137 807.833,1128 787.5,1116C767.167,1104 749.833,1093.17 735.5,1083.5C721.167,1073.83 703.167,1061.17 681.5,1045.5C659.833,1029.83 645.667,1019.67 639,1015C578.333,972.333 491,911.5 377,832.5C263,753.5 194.667,706 172,690C130.667,662 91.667,623.5 55,574.5C18.333,525.5 0,480 0,438C0,386 13.833,342.667 41.5,308C69.167,273.333 108.667,256 160,256L1632,256C1675.33,256 1712.83,271.667 1744.5,303C1776.17,334.333 1792,372 1792,416Z" fill="' . $color1 . '"/>';
+		$source .= '</g>';
+		$source .= '</g>';
+		$source .= '</g>';
+		$source .= '</svg>';
+		// phpcs:ignore
+		return 'data:image/svg+xml;base64,' . base64_encode( $source );
+	}
+
+	/**
+	 * Returns a base64 svg resource for the Litmus icon.
+	 *
+	 * @param string $color1 Optional. Color 1 of the icon.
+	 * @param string $color2 Optional. Color 2 of the icon.
+	 * @param string $color3 Optional. Color 3 of the icon.
+	 * @param string $color4 Optional. Color 4 of the icon.
+	 * @param string $color5 Optional. Color 5 of the icon.
+	 * @return string The svg resource as a base64.
+	 * @since 2.5.0
+	 */
+	private function get_base64_gmail_icon( $color1 = '#4285f4', $color2 = '#34a853', $color3 = '#fbbc04', $color4 = '#ea4335', $color5 = '#c5221f' ) {
+		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid">';
+		$source .= '<g transform="scale(4.4,4.4) translate(-37,-19)">';
+		$source .= '<path fill="' . $color1 . '" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/>';
+		$source .= '<path fill="' . $color2 . '" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/>';
+		$source .= '<path fill="' . $color3 . '" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/>';
+		$source .= '<path fill="' . $color4 . '" d="M72 74V48l24 18 24-18v26L96 92"/>';
+		$source .= '<path fill="' . $color5 . '" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/>';
 		$source .= '</g>';
 		$source .= '</svg>';
 		// phpcs:ignore
