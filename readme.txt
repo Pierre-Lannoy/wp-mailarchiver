@@ -27,12 +27,16 @@ At this time, **MailArchiver** can archive emails:
 
 * to its internal archiving storage and viewer;
 * to local or network storage (with file rotation);
+* to Imap servers, like GMail, Gandi, OVH or Outlook.Com;
+* to external storage services, like Elasticsearch, Elastic Cloud, Loki or Grafana Cloud;
 * to external alerting services, like Pushover or Slack;
+* to external testing & previewing services, like Litmus, MailerCheck or Email on Acid;
 * to external logging services, like Logentries / insightOps or Loggly;
 * to system loggers, like Syslog or Fluentd;
 
 **MailArchiver** supports an extensive set of WP-CLI commands to:
 
+* decrypt a previously encrypted mail body - see `wp help m-archive decrypt` for details;
 * toggle on/off main settings - see `wp help m-archive settings` for details;
 * manage archivers (list, start, pause, clean, purge, remove, add and set) - see `wp help m-archive archiver` for details;
 * view available archiver types (list and describe) - see `wp help m-archive type` for details.
