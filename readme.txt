@@ -112,5 +112,6 @@ Please, see [full changelog](https://perfops.one/mailarchiver-changelog).
 == Screenshots ==
 
 1. Set Archivers
-2. Internal Viewer
-3. Email Details in Internal Viewer
+2. Available Archivers Types
+3. Internal Viewer
+4. Email Details in Internal Viewer
