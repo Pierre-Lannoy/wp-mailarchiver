@@ -77,6 +77,7 @@ class Imap {
 			case 'GMAIL':
 			case 'OVH':
 			case 'GANDI':
+			case 'MICROSOFT':
 				return '';
 			default:
 				return $root . $sep . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . $sep;
@@ -96,6 +97,7 @@ class Imap {
 			case 'GMAIL':
 			case 'OVH':
 			case 'GANDI':
+			case 'MICROSOFT':
 				return '*';
 			default:
 				return $root . $sep . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . $sep . '*';
@@ -115,6 +117,7 @@ class Imap {
 				return imap_utf7_encode( Blog::get_current_blog_url() ) . ' (' . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . ')';
 			case 'OVH':
 			case 'GANDI':
+			case 'MICROSOFT':
 				return imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . '/' . imap_utf7_encode( Blog::get_current_blog_url() );
 			default:
 				return imap_utf7_encode( str_replace( [ '.', '/', '\\' ], '-', Blog::get_current_blog_url() ) );
@@ -160,6 +163,7 @@ class Imap {
 			case 'GMAIL':
 			case 'OVH':
 			case 'GANDI':
+			case 'MICROSOFT':
 				$conn = $server;
 				break;
 			default:

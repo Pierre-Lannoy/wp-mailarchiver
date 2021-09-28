@@ -1497,6 +1497,60 @@ class HandlerTypes {
 						],
 					],
 				];
+				$this->handlers[] = [
+					'version'       => MAILARCHIVER_VERSION,
+					'id'            => 'MicrosoftHandler',
+					'namespace'     => 'Mailarchiver\\Handler',
+					'class'         => 'storing',
+					'minimal'       => Logger::INFO,
+					'name'          => 'Microsoft',
+					'help'          => esc_html__( 'An archive stored on Outlook.Com via Imap.', 'mailarchiver' ),
+					'icon'          => $this->get_base64_microsoft_icon(),
+					'needs'         => [],
+					'params'        => [ 'processors', 'privacy' ],
+					'configuration' => [
+						'user'  => [
+							'type'    => 'string',
+							'show'    => true,
+							'name'    => esc_html__( 'Username', 'mailarchiver' ),
+							'help'    => esc_html__( 'The username of the mailbox.', 'mailarchiver' ),
+							'default' => '',
+							'control' => [
+								'type'    => 'field_input_text',
+								'cast'    => 'string',
+								'enabled' => true,
+							],
+						],
+						'pass'  => [
+							'type'    => 'string',
+							'show'    => true,
+							'name'    => esc_html__( 'Password', 'mailarchiver' ),
+							'help'    => esc_html__( 'The password of the mailbox.', 'mailarchiver' ),
+							'default' => '',
+							'control' => [
+								'type'    => 'field_input_password',
+								'cast'    => 'string',
+								'enabled' => true,
+							],
+						],
+
+					],
+					'init'          => [
+						[
+							'type'  => 'configuration',
+							'value' => 'user',
+						],
+						[
+							'type'  => 'configuration',
+							'value' => 'pass',
+						],
+						[ 'type' => 'level' ],
+						[
+							'type'  => 'literal',
+							'value' => true,
+						],
+					],
+				];
 			}
 		}
 
@@ -2447,7 +2501,7 @@ class HandlerTypes {
 	 * @return string The svg resource as a base64.
 	 * @since 2.5.0
 	 */
-	private function get_base64_imap_icon( $color1 = '#58BCB2' ) {
+	private function get_base64_imap_icon( $color1 = '#51575D' ) {
 		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid">';
 		$source .= '<g transform="scale(5,5) translate(0,0)">';
 		$source .= '<g transform="matrix(0.075,0,0,0.075,12,14)">';
@@ -2517,6 +2571,29 @@ class HandlerTypes {
 		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid">';
 		$source .= '<g transform="scale(2,2) translate(50,26)">';
 		$source .= '<path fill="' . $color1 . '" d="M125.657,51.037C120.536,47.412 113.447,48.625 109.823,53.745C105.374,60.035 100.449,64.698 94.844,67.918C94.327,68.215 93.803,68.499 93.274,68.773C92.786,69.026 92.291,69.268 91.793,69.498C86.56,71.923 80.732,73.197 73.994,73.399C67.255,73.197 61.424,71.922 56.189,69.497C49.295,66.302 43.396,61.15 38.155,53.745C34.531,48.625 27.442,47.412 22.323,51.037C17.202,54.659 15.988,61.748 19.613,66.869C27.101,77.45 36.194,85.27 46.64,90.109C48.691,91.06 50.784,91.896 52.93,92.619C44.057,99.026 34.464,108.006 29.869,120.317C25.099,133.093 25.159,146.925 30.035,159.268C34.714,171.109 43.374,180.739 54.422,186.387C66.73,192.68 82.398,192.694 96.332,186.418C110.955,179.837 120.492,167.786 121.848,154.176C123.271,139.851 116.403,127.096 104.348,121.682C91.861,116.074 77.775,120.077 68.464,131.877C64.577,136.8 65.42,143.944 70.343,147.83C75.268,151.717 82.411,150.874 86.296,145.95C89.063,142.445 92.252,141.152 95.045,142.406C97.425,143.476 99.777,146.54 99.242,151.93C98.709,157.266 94.022,162.547 87.008,165.705C79.419,169.118 70.894,169.293 64.76,166.159C58.638,163.028 53.809,157.616 51.163,150.919C49.176,145.893 47.561,137.877 51.152,128.262C53.845,121.05 60.633,114.245 72.515,106.852C77.559,103.711 82.969,100.785 88.198,97.955C94.229,94.69 99.945,91.596 104.965,88.282C113.899,83.397 121.756,76.208 128.366,66.869C131.991,61.748 130.777,54.659 125.657,51.037L125.657,51.037ZM67.916,29.653C69.37,28.198 71.305,27.396 73.361,27.396C75.42,27.396 77.355,28.198 78.809,29.652C80.264,31.109 81.066,33.042 81.066,35.099C81.066,37.158 80.264,39.092 78.81,40.545C77.355,42.002 75.42,42.803 73.361,42.803C71.305,42.803 69.37,42.002 67.916,40.548C66.461,39.092 65.659,37.158 65.659,35.099C65.659,33.042 66.461,31.109 67.916,29.653ZM73.361,61.316C80.364,61.316 86.949,58.588 91.9,53.636C96.85,48.686 99.577,42.104 99.577,35.099C99.577,28.097 96.85,21.514 91.898,16.562C86.949,11.612 80.364,8.884 73.361,8.884C66.36,8.884 59.776,11.612 54.825,16.564C49.873,21.514 47.147,28.097 47.147,35.099C47.147,42.102 49.873,48.686 54.825,53.636C59.776,58.588 66.36,61.316 73.361,61.316Z"/>';
+		$source .= '</g>';
+		$source .= '</svg>';
+		// phpcs:ignore
+		return 'data:image/svg+xml;base64,' . base64_encode( $source );
+	}
+
+	/**
+	 * Returns a base64 svg resource for the Litmus icon.
+	 *
+	 * @param string $color1 Optional. Color 1 of the icon.
+	 * @param string $color2 Optional. Color 2 of the icon.
+	 * @param string $color3 Optional. Color 3 of the icon.
+	 * @param string $color4 Optional. Color 4 of the icon.
+	 * @return string The svg resource as a base64.
+	 * @since 2.5.0
+	 */
+	private function get_base64_microsoft_icon( $color1 = '#4285f4', $color2 = '#34a853', $color3 = '#fbbc04', $color4 = '#ea4335' ) {
+		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid">';
+		$source .= '<g transform="scale(5.4,5.4) translate(15,15)">';
+		$source .= '<rect fill="' . $color1 . '" width="30" height="30"/>';
+		$source .= '<rect fill="' . $color2 . '" x="34" width="30" height="30"/>';
+		$source .= '<rect fill="' . $color3 . '" x="34" y="34" width="30" height="30"/>';
+		$source .= '<rect fill="' . $color4 . '" y="34"  width="30" height="30"/>';
 		$source .= '</g>';
 		$source .= '</svg>';
 		// phpcs:ignore

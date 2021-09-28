@@ -11,7 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - New archiver to forward each mail to a specified email address.
 - New archiver to store archives in GMail.
 - New archiver to store archives in Gandi Mail.
-- New archiver to store archives in OVH (thanks to [Frank Bergère]()).
+- New archiver to store archives in OVH (thanks to [Frank Bergère](https://profiles.wordpress.org/frank4/)).
+- New archiver to store archives in Outlook.Com.
 - New archiver to store archives in an Imap server.
 - New archiver to store archives in an Elasticsearch instance.
 - New archiver to store archives in Elastic Cloud.
