@@ -37,7 +37,7 @@ class GMailHandler extends ImapHandler {
 	 * @since    1.0.0
 	 */
 	public function __construct( $user, $pwd, $level = Logger::INFO, bool $bubble = true ) {
-		parent::__construct( 'imap.gmail.com:993', 'GMAIL', 'ssl', 'novalidate-cert', $user, $pwd, $level, true, $bubble );
+		parent::__construct( 'imap.gmail.com:993', 'GMAIL', 'ssl', 'novalidate-cert', $user, $pwd, $level, $bubble );
 	}
 
 }
