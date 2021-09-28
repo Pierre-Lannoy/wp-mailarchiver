@@ -76,6 +76,7 @@ class Imap {
 		switch ( $root ) {
 			case 'GMAIL':
 			case 'OVH':
+			case 'GANDI':
 				return '';
 			default:
 				return $root . $sep . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . $sep;
@@ -94,6 +95,7 @@ class Imap {
 		switch ( $root ) {
 			case 'GMAIL':
 			case 'OVH':
+			case 'GANDI':
 				return '*';
 			default:
 				return $root . $sep . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . $sep . '*';
@@ -112,6 +114,7 @@ class Imap {
 			case 'GMAIL':
 				return imap_utf7_encode( Blog::get_current_blog_url() ) . ' (' . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . ')';
 			case 'OVH':
+			case 'GANDI':
 				return imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . '/' . imap_utf7_encode( Blog::get_current_blog_url() );
 			default:
 				return imap_utf7_encode( str_replace( [ '.', '/', '\\' ], '-', Blog::get_current_blog_url() ) );
@@ -152,15 +155,19 @@ class Imap {
 	 * @since    2.5.0
 	 */
 	public static function open_mailbox( $server, $root, $user, $pwd, $options = [] ) {
-		//$options = array('DISABLE_AUTHENTICATOR' => 'PLAIN');
+		//$options = array('DISABLE_AUTHENTICATOR' => 'LOGIN');
 		switch ( $root ) {
 			case 'GMAIL':
 			case 'OVH':
+			case 'GANDI':
 				$conn = $server;
 				break;
 			default:
 				$conn = $server . $root;
 		}
+		//$conn = str_replace( '}', '/authuser=weather@station.software}', $conn);
+
+
 		// phpcs:ignore
 		set_error_handler( null );
 		// phpcs:ignore
