@@ -75,6 +75,7 @@ class Imap {
 	public static function get_mailbox_fullpath( $root = 'INBOX', $sep = '.' ) {
 		switch ( $root ) {
 			case 'GMAIL':
+			case 'OVH':
 				return '';
 			default:
 				return $root . $sep . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . $sep;
@@ -92,6 +93,7 @@ class Imap {
 	public static function get_mailbox_search( $root = 'INBOX', $sep = '.' ) {
 		switch ( $root ) {
 			case 'GMAIL':
+			case 'OVH':
 				return '*';
 			default:
 				return $root . $sep . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . $sep . '*';
@@ -109,6 +111,8 @@ class Imap {
 		switch ( $root ) {
 			case 'GMAIL':
 				return imap_utf7_encode( Blog::get_current_blog_url() ) . ' (' . imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . ')';
+			case 'OVH':
+				return imap_utf7_encode( MAILARCHIVER_PRODUCT_NAME ) . '/' . imap_utf7_encode( Blog::get_current_blog_url() );
 			default:
 				return imap_utf7_encode( str_replace( [ '.', '/', '\\' ], '-', Blog::get_current_blog_url() ) );
 		}
@@ -148,8 +152,10 @@ class Imap {
 	 * @since    2.5.0
 	 */
 	public static function open_mailbox( $server, $root, $user, $pwd, $options = [] ) {
+		//$options = array('DISABLE_AUTHENTICATOR' => 'PLAIN');
 		switch ( $root ) {
 			case 'GMAIL':
+			case 'OVH':
 				$conn = $server;
 				break;
 			default:

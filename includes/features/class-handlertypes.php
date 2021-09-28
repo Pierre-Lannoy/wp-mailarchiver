@@ -1389,6 +1389,60 @@ class HandlerTypes {
 						],
 					],
 				];
+				$this->handlers[] = [
+					'version'       => MAILARCHIVER_VERSION,
+					'id'            => 'OVHHandler',
+					'namespace'     => 'Mailarchiver\\Handler',
+					'class'         => 'storing',
+					'minimal'       => Logger::INFO,
+					'name'          => 'OVH',
+					'help'          => esc_html__( 'An archive stored on OVH via Imap.', 'mailarchiver' ),
+					'icon'          => $this->get_base64_ovh_icon(),
+					'needs'         => [],
+					'params'        => [ 'processors', 'privacy' ],
+					'configuration' => [
+						'user'  => [
+							'type'    => 'string',
+							'show'    => true,
+							'name'    => esc_html__( 'Username', 'mailarchiver' ),
+							'help'    => esc_html__( 'The username of the mailbox.', 'mailarchiver' ),
+							'default' => '',
+							'control' => [
+								'type'    => 'field_input_text',
+								'cast'    => 'string',
+								'enabled' => true,
+							],
+						],
+						'pass'  => [
+							'type'    => 'string',
+							'show'    => true,
+							'name'    => esc_html__( 'Password', 'mailarchiver' ),
+							'help'    => esc_html__( 'The password of the mailbox.', 'mailarchiver' ),
+							'default' => '',
+							'control' => [
+								'type'    => 'field_input_password',
+								'cast'    => 'string',
+								'enabled' => true,
+							],
+						],
+
+					],
+					'init'          => [
+						[
+							'type'  => 'configuration',
+							'value' => 'user',
+						],
+						[
+							'type'  => 'configuration',
+							'value' => 'pass',
+						],
+						[ 'type' => 'level' ],
+						[
+							'type'  => 'literal',
+							'value' => true,
+						],
+					],
+				];
 			}
 		}
 
@@ -2367,12 +2421,31 @@ class HandlerTypes {
 	 */
 	private function get_base64_gmail_icon( $color1 = '#4285f4', $color2 = '#34a853', $color3 = '#fbbc04', $color4 = '#ea4335', $color5 = '#c5221f' ) {
 		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid">';
-		$source .= '<g transform="scale(4.4,4.4) translate(-37,-19)">';
+		$source .= '<g transform="scale(4.4,4.4) translate(-39,-19)">';
 		$source .= '<path fill="' . $color1 . '" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/>';
 		$source .= '<path fill="' . $color2 . '" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/>';
 		$source .= '<path fill="' . $color3 . '" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/>';
 		$source .= '<path fill="' . $color4 . '" d="M72 74V48l24 18 24-18v26L96 92"/>';
 		$source .= '<path fill="' . $color5 . '" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/>';
+		$source .= '</g>';
+		$source .= '</svg>';
+		// phpcs:ignore
+		return 'data:image/svg+xml;base64,' . base64_encode( $source );
+	}
+
+	/**
+	 * Returns a base64 svg resource for the Litmus icon.
+	 *
+	 * @param string $color1 Optional. Color 1 of the icon.
+	 * @param string $color2 Optional. Color 2 of the icon.
+	 * @return string The svg resource as a base64.
+	 * @since 2.5.0
+	 */
+	private function get_base64_ovh_icon( $color1 = '#123F6D', $color2 = '#FFFFFF' ) {
+		$source  = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid">';
+		$source .= '<g transform="scale(0.39,0.39) translate(130,130)">';
+		$source .= '<circle fill="' . $color1 . '" cx="512" cy="512" r="512"/>';
+		$source .= '<path fill="' . $color2 . '" d="M700.2,466.5l61.2-106.3c23.6,41.6,37.2,89.8,37.2,141.1c0,68.8-24.3,131.9-64.7,181.4H575.8l48.7-84.6h-64.4 l75.8-131.7L700.2,466.5z M644.8,341.3L448.3,682.5l0.1,0.2H290.1c-40.5-49.5-64.7-112.6-64.7-181.4c0-51.4,13.6-99.6,37.3-141.3 l102.5,178.2l113.3-197H644.8z"/>';
 		$source .= '</g>';
 		$source .= '</svg>';
 		// phpcs:ignore
