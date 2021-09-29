@@ -4,7 +4,7 @@ MailArchiver is fully usable from command-line, thanks to [WP-CLI](https://wp-cl
 2. [Using archiver types](#managing-archivers) - `wp m-archive type`
 3. [Getting MailArchiver status](#getting-mailachiver-status) - `wp m-archive status`
 4. [Managing main settings](#managing-main-settings) - `wp m-archive settings`
-5. [Dsecrypting content](#decrypting-content) - `wp m-archive decrypt`
+5. [Decrypting content](#decrypting-content) - `wp m-archive decrypt`
 6. [Misc flags](#misc-flags)
 7. [Piping and storing](#piping-and-storing)
 
