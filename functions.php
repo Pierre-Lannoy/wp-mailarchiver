@@ -224,6 +224,15 @@ function mailarchiver_wp_mail( $to, $subject, $message, $headers = '', $attachme
 	 */
 	$from_name = apply_filters( 'wp_mail_from_name', $from_name );
 
+	if ( class_exists( 'PostmanOptions' ) ) {
+		if ( \PostmanOptions::getInstance()->isPluginSenderEmailEnforced() ) {
+			$from_email = \PostmanOptions::getInstance()->getMessageSenderEmail();
+		}
+		if ( \PostmanOptions::getInstance()->isPluginSenderNameEnforced() ) {
+			$from_name = \PostmanOptions::getInstance()->getMessageSenderName();
+		}
+	}
+
 	try {
 		$phpmailer->setFrom( $from_email, $from_name, false );
 	} catch ( \PHPMailer\PHPMailer\Exception $e ) {
