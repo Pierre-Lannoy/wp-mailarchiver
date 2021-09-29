@@ -4,7 +4,7 @@ Tags: archive, email, email log, log, mail
 Requires at least: 5.2
 Requires PHP: 7.2
 Tested up to: 5.8
-Stable tag: 2.4.0
+Stable tag: 2.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -32,7 +32,9 @@ At this time, **MailArchiver** can archive emails:
 * to external alerting services, like Pushover or Slack;
 * to external testing & previewing services, like Litmus, MailerCheck or Email on Acid;
 * to external logging services, like Logentries / insightOps or Loggly;
-* to system loggers, like Syslog or Fluentd;
+* to system loggers, like Syslog or Fluentd.
+
+For a full list of supported - internal or third-party - services please, jump to the official [supported services list](https://perfops.one/mailarchiver#services).
 
 **MailArchiver** supports an extensive set of WP-CLI commands to:
 
