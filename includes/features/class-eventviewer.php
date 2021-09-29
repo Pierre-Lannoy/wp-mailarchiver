@@ -138,7 +138,7 @@ class EventViewer {
 				$content = '<html><body style=\"padding:10px;font-family:\'Lucida Console\', Monaco, monospace;font-size: 14px;background-color:#F1F1F1;\">' . $content . '</body></html>';
 			}
 		} elseif ( 'encrypted' === $body['type'] ) {
-			$content = '<html><body>' . esc_html__( 'encrypted', 'mailarchiver' ) . '</body></html>';
+			$content = '<html><body><p>' . esc_html__( 'This content is encrypted', 'mailarchiver' ) . '</p><textarea style="font-family:\'Lucida Console\', Monaco, monospace;resize:none;width:100%;height:84%;border:none;border-radius:4px;padding:10px;background-color: #D0D0DE">' . $content . '</textarea></body></html>';
 			$is_html = true;
 		} else {
 			$content = '<html><body>' . esc_html__( 'unknown', 'mailarchiver' ) . '</body></html>';
