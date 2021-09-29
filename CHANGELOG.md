@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [2.5.0] - Not yet released
 
 ### Added
+- A new "operation mode" allows to not send emails but archive them as if they had been sent - see settings (thanks to [Loïc Antignac](https://github.com/webaxones) and [Xuan Nguyen](https://profiles.wordpress.org/xuxufr/) for the suggestion).
 - New archiver to store individually each email as **json** or **eml** file, on server filesystem (local hard-drive or mounted storage).
 - New archiver to forward each mail to a specified email address.
 - New archiver to store archives in GMail.

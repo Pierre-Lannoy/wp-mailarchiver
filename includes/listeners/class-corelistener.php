@@ -14,6 +14,7 @@ namespace Mailarchiver\Listener;
 
 
 use Mailarchiver\Plugin\Feature\Capture;
+use Mailarchiver\System\Option;
 
 /**
  * WP core listener for MailArchiver.
@@ -100,6 +101,10 @@ class CoreListener extends AbstractListener {
 		add_filter( 'wp_mail', [ $this, 'wp_mail' ], PHP_INT_MAX );
 		add_action( 'wp_mail_failed', [ $this, 'wp_mail_failed' ], PHP_INT_MAX );
 		add_action( 'phpmailer_init', [ $this, 'phpmailer_init' ], PHP_INT_MAX );
+		if ( 1 < (int) Option::network_get( 'mode' ) ) {
+			add_filter( 'pre_wp_mail', '__return_false', PHP_INT_MIN );
+			add_filter( 'post_smtp_do_send_email', '__return_false', PHP_INT_MIN );
+		}
 		return true;
 	}
 

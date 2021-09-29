@@ -23,7 +23,7 @@ use Mailarchiver\System\UUID;
 /**
  * Main MailArchiver archiver class.
  *
- * This class defines all code necessary to log events with MailArchiver.
+ * This class defines all code necessary to archive mails with MailArchiver.
  *
  * @package Features
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
@@ -118,7 +118,8 @@ class DArchiver {
 		if ( $version && is_string( $version ) ) {
 			$this->version = $version;
 		}
-		$this->psr3 = $psr3;
+		$this->psr3    = $psr3;
+		$this->allowed = isset( $test ) || 0 === (int) Option::network_get( 'mode' ) || 2 === (int) Option::network_get( 'mode' );
 		$this->init( $test );
 		\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->debug( 'A new instance of MailArchiver archiver is initialized and operational.' );
 	}
@@ -130,35 +131,32 @@ class DArchiver {
 	 * @since 1.0.0
 	 */
 	private function init( $test = null ) {
-		/*if ( $this->psr3 ) {
-			if ( ! Option::network_get( 'autolisteners' ) ) {
-				$this->allowed = in_array( 'psr3', Option::network_get( 'listeners' ), true );
-			}
-		}*/
-		$this->in_test  = isset( $test );
-		$factory        = new ArchiverFactory();
-		$this->archiver = new Logger( $this->current_channel_tag(), [], [], Timezone::network_get() );
-		$handlers       = new HandlerTypes();
-		$diagnosis      = new HandlerDiagnosis();
-		$unloadable     = [];
-		foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
-			if ( $this->in_test && $key !== $test ) {
-				continue;
-			}
-			$handler_def      = $handlers->get( $archiver['handler'] );
-			$archiver['uuid'] = $key;
-			if ( $diagnosis->check( $handler_def['id'] ) ) {
-				$handler = $factory->create_archiver( $archiver );
-				if ( $handler ) {
-					$this->archiver->pushHandler( $handler );
+		if ( $this->allowed ) {
+			$this->in_test  = isset( $test );
+			$factory        = new ArchiverFactory();
+			$this->archiver = new Logger( $this->current_channel_tag(), [], [], Timezone::network_get() );
+			$handlers       = new HandlerTypes();
+			$diagnosis      = new HandlerDiagnosis();
+			$unloadable     = [];
+			foreach ( Option::network_get( 'archivers' ) as $key => $archiver ) {
+				if ( $this->in_test && $key !== $test ) {
+					continue;
 				}
-			} else {
-				$unloadable[] = sprintf( 'Unable to load a %s archiver. %s', $handler_def['name'], $diagnosis->error_string( $handler_def['id'] ) );
+				$handler_def      = $handlers->get( $archiver['handler'] );
+				$archiver['uuid'] = $key;
+				if ( $diagnosis->check( $handler_def['id'] ) ) {
+					$handler = $factory->create_archiver( $archiver );
+					if ( $handler ) {
+						$this->archiver->pushHandler( $handler );
+					}
+				} else {
+					$unloadable[] = sprintf( 'Unable to load a %s archiver. %s', $handler_def['name'], $diagnosis->error_string( $handler_def['id'] ) );
+				}
 			}
-		}
-		if ( count( $unloadable ) > 0 ) {
-			foreach ( $unloadable as $item ) {
-				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( $item, [ 'code' => 666 ] );
+			if ( count( $unloadable ) > 0 ) {
+				foreach ( $unloadable as $item ) {
+					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( $item, [ 'code' => 666 ] );
+				}
 			}
 		}
 	}

@@ -13,6 +13,8 @@
 
 namespace Mailarchiver\System;
 
+use Mailarchiver\System\Option;
+
 /**
  * Define the nag functionality.
  *
@@ -96,11 +98,26 @@ class Nag {
 	}
 
 	/**
+	 * Show critical notice if needed.
+	 *
+	 * @since 2.5.0
+	 */
+	private function critical() {
+		if ( 1 < Option::network_get( 'mode' ) ) {
+			$text = __( 'MailArchiver is currently set to block all outgoing emails. This means that no more emails are sent by WordPress and its plugins.', 'mailarchiver ' );
+			$html = '<div id="mailarchiver-debugging-critical" class="notice notice-error"><p>' . $text . '</p></div>';
+			// phpcs:ignore
+			print( $html );
+		}
+	}
+
+	/**
 	 * Show all available notices.
 	 *
 	 * @since 1.0.0
 	 */
 	public function display() {
+		$this->critical();
 		if ( self::$allowed ) {
 			foreach ( self::$nags as $key => $nag ) {
 				$nonce_action = sanitize_key( $key );

@@ -247,6 +247,7 @@ class Mailarchiver_Admin {
 	 * @since 1.0.0
 	 */
 	public function init_settings_sections() {
+		add_settings_section( 'mailarchiver_plugin_features_section', esc_html__( 'Plugin Features', 'mailarchiver' ), [ $this, 'plugin_features_section_callback' ], 'mailarchiver_plugin_features_section' );
 		add_settings_section( 'mailarchiver_archivers_options_section', esc_html__( 'Archivers options', 'mailarchiver' ), [ $this, 'archivers_options_section_callback' ], 'mailarchiver_archivers_options_section' );
 		add_settings_section( 'mailarchiver_plugin_options_section', esc_html__( 'Plugin options', 'mailarchiver' ), [ $this, 'plugin_options_section_callback' ], 'mailarchiver_plugin_options_section' );
 		add_settings_section( 'mailarchiver_listeners_options_section', null, [ $this, 'listeners_options_section_callback' ], 'mailarchiver_listeners_options_section' );
@@ -507,6 +508,7 @@ class Mailarchiver_Admin {
 	private function save_options() {
 		if ( ! empty( $_POST ) ) {
 			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-plugin-options' ) ) {
+				Option::network_set( 'mode', array_key_exists( 'mailarchiver_plugin_features_mode', $_POST ) ? (string) filter_input( INPUT_POST, 'mailarchiver_plugin_features_mode', FILTER_SANITIZE_NUMBER_INT ) : Option::network_get( 'mode' ) );
 				Option::network_set( 'use_cdn', array_key_exists( 'mailarchiver_plugin_options_usecdn', $_POST ) );
 				Option::network_set( 'display_nag', array_key_exists( 'mailarchiver_plugin_options_nag', $_POST ) );
 				Option::network_set( 'archiver_autostart', array_key_exists( 'mailarchiver_archivers_options_autostart', $_POST ) );
@@ -716,6 +718,36 @@ class Mailarchiver_Admin {
 				$title = false;
 			}
 		}
+	}
+
+	/**
+	 * Callback for plugin features section.
+	 *
+	 * @since 1.0.0
+	 */
+	public function plugin_features_section_callback() {
+		$form   = new Form();
+		$mode   = [];
+		$mode[] = [ 0, esc_html__( 'Send emails normally, then archive them', 'mailarchiver' ) ];
+		$mode[] = [ 1, esc_html__( 'Send emails normally, but do not archive them', 'mailarchiver' ) ];
+		$mode[] = [ 2, esc_html__( 'Do not send emails, but archive them as if they had been sent', 'mailarchiver' ) ];
+		$mode[] = [ 3, esc_html__( 'Do not send emails and do not archive them', 'mailarchiver' ) ];
+		add_settings_field(
+			'mailarchiver_plugin_features_mode',
+			esc_html__( 'Operation mode', 'mailarchiver' ),
+			[ $form, 'echo_field_select' ],
+			'mailarchiver_plugin_features_section',
+			'mailarchiver_plugin_features_section',
+			[
+				'list'        => $mode,
+				'id'          => 'mailarchiver_plugin_features_mode',
+				'value'       => Option::network_get( 'mode' ),
+				'description' => esc_html__( 'Operation mode of mail sending and archiving.', 'mailarchiver' ),
+				'full_width'  => false,
+				'enabled'     => true,
+			]
+		);
+		register_setting( 'mailarchiver_plugin_features_section', 'mailarchiver_plugin_features_mode' );
 	}
 
 	/**

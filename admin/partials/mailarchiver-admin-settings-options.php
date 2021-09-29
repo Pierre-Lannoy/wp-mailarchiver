@@ -25,6 +25,7 @@
 		);
 		?>
 	" method="POST">
+	<?php do_settings_sections( 'mailarchiver_plugin_features_section' ); ?>
 	<?php do_settings_sections( 'mailarchiver_archivers_options_section' ); ?>
 	<?php do_settings_sections( 'mailarchiver_plugin_options_section' ); ?>
 	<?php wp_nonce_field( 'mailarchiver-plugin-options' ); ?>

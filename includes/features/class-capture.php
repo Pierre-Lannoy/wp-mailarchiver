@@ -14,6 +14,7 @@ namespace Mailarchiver\Plugin\Feature;
 
 use Mailarchiver\System\Hash;
 use Mailarchiver\Plugin\Feature\Archive;
+use Mailarchiver\System\Option;
 
 /**
  * Define the captures functionality.
@@ -240,7 +241,11 @@ class Capture {
 					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( sprintf( 'Unable to send mail "%s" from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
 					$archiver->error( $mail['raw'], $mail['message'] );
 				} else {
-					\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Mail "%s" sent from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
+					if ( 1 < Option::network_get( 'mode' ) ) {
+						\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Mail "%s" not sent from %s to %s because MailArchiver settings doesn\'t allow it.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
+					} else {
+						\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->info( sprintf( 'Mail "%s" sent from %s to %s.', esc_html( $mail['raw']['subject'] ), $mail['raw']['from'], implode( ', ', $mail['raw']['to'] ) ) );
+					}
 					$archiver->success( $mail['raw'], $mail['message'] );
 				}
 			}
