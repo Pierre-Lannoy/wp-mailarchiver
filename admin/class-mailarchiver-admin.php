@@ -1089,7 +1089,7 @@ class Mailarchiver_Admin {
 		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_mail' );
 		if ( PwdProtect::is_available() ) {
 			$description  = esc_html__( 'Note: this is NOT a strong security feature; it\'s just a simple way to protect privacy in case of data leaks from external services. Think about it as a simple "password protection", with the password stored in plain text in your WordPress database.', 'mailarchiver' );
-			$description .= '<br/>' . esc_html__( 'Encryption used: ', 'mailarchiver' ) . PwdProtect::get_encryption_details();
+			$description .= '<br/>' . esc_html__( 'Encryption used:', 'mailarchiver' ) . ' ' . PwdProtect::get_encryption_details();
 		} else {
 			$description = esc_html__( 'Your server does not have OpenSSL installed. Mail body encryption is unavailable.', 'mailarchiver' );
 		}
