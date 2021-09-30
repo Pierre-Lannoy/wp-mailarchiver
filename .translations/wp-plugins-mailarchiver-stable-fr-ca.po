@@ -2,43 +2,524 @@
 # This file is distributed under the same license as the Plugins - MailArchiver - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-02-25 16:18+0100\n"
+"PO-Revision-Date: 2021-09-30 11:40+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0\n"
 "Language: fr_CA\n"
 "Project-Id-Version: Plugins - MailArchiver - Stable (latest release)\n"
 "POT-Creation-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 
-#: admin/class-mailarchiver-admin.php:780
+#: includes/system/class-pwdprotect.php:72
+msgid "%1$s cypher / %2$s hash"
+msgstr "chiffrement %1$s / hachage %2$s"
+
+#: includes/system/class-pwdprotect.php:61
+#: includes/system/class-pwdprotect.php:74
+msgid "OpenSSL is not installed"
+msgstr "OpenSSL n’est pas installé"
+
+#: includes/system/class-nag.php:107
+msgid "MailArchiver is currently set to block all outgoing emails. This means that no more emails are sent by WordPress and its plugins."
+msgstr "MailArchiver est actuellement configuré pour bloquer tous les courriels sortants. Cela signifie que plus aucun courriel n’est envoyé par WordPress ou ses extensions."
+
+#: includes/features/class-inlinehelp.php:204
+msgid "Testing & preview"
+msgstr "Tests & prévisualisation"
+
+#: includes/features/class-inlinehelp.php:202
+msgid "These archivers copy emails to testing and preview services:"
+msgstr "Ces archiveurs copient les courriels vers les services de test et de prévisualisation :"
+
+#: includes/features/class-inlinehelp.php:195
+msgid "These archivers store each email as individual files:"
+msgstr "Ces archiveurs stockent chaque courriel sous forme de fichiers individuels :"
+
+#: includes/features/class-inlinehelp.php:188
+msgid "These archivers store emails in bulk:"
+msgstr "Ces archiveurs stockent les courriels en masse :"
+
+#: includes/features/class-inlinehelp.php:174
+msgid "These archivers allow you to forward sent emails:"
+msgstr "Ces archiveurs vous permettent de transférer les courriels envoyés :"
+
+#: includes/features/class-inlinehelp.php:160
+msgid "Archivers are classified in six main categories: alerting, forwarding, logging, archive or individual storing and testing & preview. You can find details on these categories on the corresponding tabs of this help."
+msgstr "Les archiveurs sont classés en six catégories principales : alerte, transfert, enregistrement, archivage ou stockage individuel et test & prévisualisation. Vous trouverez des détails sur ces catégories dans les onglets correspondants de cette aide."
+
+#: includes/features/class-handlertypes.php:1507
+msgid "An archive stored on Outlook.Com via Imap."
+msgstr "Une archive stockée sur Outlook.Com via Imap."
+
+#: includes/features/class-handlertypes.php:1453
+msgid "An archive stored on Gandi Mail via Imap."
+msgstr "Une archive stockée sur Gandi Mail via Imap."
+
+#: includes/features/class-handlertypes.php:1399
+msgid "An archive stored on OVH via Imap."
+msgstr "Une archive stockée sur OVH via Imap."
+
+#: includes/features/class-handlertypes.php:1345
+msgid "An archive stored on GMail via Imap."
+msgstr "Une archive stockée sur GMail via Imap."
+
+#: includes/features/class-handlertypes.php:1295
+#: includes/features/class-handlertypes.php:1366
+#: includes/features/class-handlertypes.php:1420
+#: includes/features/class-handlertypes.php:1474
+#: includes/features/class-handlertypes.php:1528
+msgid "The password of the mailbox."
+msgstr "Mot de passe de la boîte aux lettres."
+
+#: includes/features/class-handlertypes.php:1283
+#: includes/features/class-handlertypes.php:1354
+#: includes/features/class-handlertypes.php:1408
+#: includes/features/class-handlertypes.php:1462
+#: includes/features/class-handlertypes.php:1516
+msgid "The username of the mailbox."
+msgstr "Nom de compte de la boîte aux lettres."
+
+#: includes/features/class-handlertypes.php:1276
+msgid "Full validation"
+msgstr "Validation complète"
+
+#: includes/features/class-handlertypes.php:1276
+msgid "No validation"
+msgstr "Aucune validation"
+
+#: includes/features/class-handlertypes.php:1270
+msgid "Note: if the Imap server uses self-signed certificate, choose \"no validation\"."
+msgstr "Remarque : si le serveur Imap utilise un certificat auto-signé, choisissez « aucune validation »."
+
+#: includes/features/class-handlertypes.php:1270
+msgid "Does the server certificate need to be validated."
+msgstr "Le certificat de serveur doit-il être validé ?"
+
+#: includes/features/class-handlertypes.php:1269
+msgid "Certificate"
+msgstr "Certificat"
+
+#: includes/features/class-handlertypes.php:1263
+msgid "start-TLS"
+msgstr "start-TLS"
+
+#: includes/features/class-handlertypes.php:1263
+msgid "SSL/TLS"
+msgstr "SSL/TLS"
+
+#: includes/features/class-handlertypes.php:1263
+msgid "None"
+msgstr "Aucun"
+
+#: includes/features/class-handlertypes.php:1257
+msgid "Method to use for session's encryption."
+msgstr "Méthode à utiliser pour le chiffrement de la session."
+
+#: includes/features/class-handlertypes.php:1245
+msgid "Note: the archives will be stored in %s."
+msgstr "Remarque : les archives seront stockées dans %s."
+
+#: includes/features/class-handlertypes.php:1245
+msgid "The root's mailbox. Do not change it if you don't know what it is."
+msgstr "Racine de la boîte aux lettres. Ne la modifiez pas si vous ne savez pas de quoi il s’agit."
+
+#: includes/features/class-handlertypes.php:1244
+msgid "Root"
+msgstr "Racine"
+
+#: includes/features/class-handlertypes.php:1224
+msgid "An archive stored on a remote Imap server."
+msgstr "Archive stockée sur un serveur Imap distant."
+
+#: includes/features/class-handlertypes.php:1138
+msgid "An archive stored in Elasticsearch."
+msgstr "Une archive stockée dans Elasticsearch."
+
+#: includes/features/class-handlertypes.php:1098
+#: includes/features/class-handlertypes.php:1183
+msgid "The index name."
+msgstr "Le nom de l’index."
+
+#: includes/features/class-handlertypes.php:1097
+#: includes/features/class-handlertypes.php:1182
+msgid "Index"
+msgstr "Index"
+
+#: includes/features/class-handlertypes.php:1086
+#: includes/features/class-handlertypes.php:1171
+msgid "The password of the instance."
+msgstr "Le mot de passe de l’instance."
+
+#: includes/features/class-handlertypes.php:1085
+#: includes/features/class-handlertypes.php:1170
+#: includes/features/class-handlertypes.php:1294
+#: includes/features/class-handlertypes.php:1365
+#: includes/features/class-handlertypes.php:1419
+#: includes/features/class-handlertypes.php:1473
+#: includes/features/class-handlertypes.php:1527
+msgid "Password"
+msgstr "Mot de passe"
+
+#: includes/features/class-handlertypes.php:1074
+#: includes/features/class-handlertypes.php:1159
+msgid "The username of the instance."
+msgstr "Le nom d’utilisateur·ice de l’instance."
+
+#: includes/features/class-handlertypes.php:1062
+msgid "The generated cloud ID."
+msgstr "Le cloud ID généré."
+
+#: includes/features/class-handlertypes.php:1061
+msgid "Cloud ID"
+msgstr "Cloud ID"
+
+#: includes/features/class-handlertypes.php:1053
+msgid "An archive stored in Elastic Cloud."
+msgstr "Une archive stockée dans Elastic Cloud."
+
+#: includes/features/class-handlertypes.php:890
+msgid "The full absolute path, like \"/path/to/files/\"."
+msgstr "Le chemin absolu complet, comme « /path/to/files/ »."
+
+#: includes/features/class-handlertypes.php:889
+msgid "Path"
+msgstr "Chemin"
+
+#: includes/features/class-handlertypes.php:877
+msgid "The format in which the file is saved."
+msgstr "Le format dans lequel le fichier est enregistré."
+
+#: includes/features/class-handlertypes.php:876
+msgid "Format"
+msgstr "Format"
+
+#: includes/features/class-handlertypes.php:869
+msgid "Each mail stored on your server as an individual file."
+msgstr "Chaque courriel stocké sur votre serveur sous forme de fichier individuel."
+
+#: includes/features/class-handlertypes.php:868
+msgid "Local files"
+msgstr "Fichiers locaux"
+
+#: includes/features/class-handlertypes.php:638
+#: includes/features/class-handlertypes.php:1147
+#: includes/features/class-handlertypes.php:1233
+msgid "URL where to send archives. Format: %s."
+msgstr "URL où envoyer des archives. Format: %s."
+
+#: includes/features/class-handlertypes.php:637
+#: includes/features/class-handlertypes.php:1146
+msgid "Service URL"
+msgstr "URL du service"
+
+#: includes/features/class-handlertypes.php:629
+msgid "An archive sent to a Loki instance."
+msgstr "Une archive envoyée à une instance Loki."
+
+#: includes/features/class-handlertypes.php:589
+#: includes/features/class-handlertypes.php:663
+msgid "The fixed job name for some templates."
+msgstr "Le nom de tâche fixe pour certains modèles."
+
+#: includes/features/class-handlertypes.php:588
+#: includes/features/class-handlertypes.php:662
+msgid "Job"
+msgstr "Tâche"
+
+#: includes/features/class-handlertypes.php:582
+#: includes/features/class-handlertypes.php:656
+msgid "WordPress Multisite segmentation"
+msgstr "Segmentation pour WordPress Multisite"
+
+#: includes/features/class-handlertypes.php:582
+#: includes/features/class-handlertypes.php:656
+msgid "Double level / environment segmentation"
+msgstr "Segmentation double par le niveau et l’environnement"
+
+#: includes/features/class-handlertypes.php:582
+#: includes/features/class-handlertypes.php:656
+msgid "Classical version segmentation"
+msgstr "Segmentation classique par la version"
+
+#: includes/features/class-handlertypes.php:582
+#: includes/features/class-handlertypes.php:656
+msgid "Classical environment segmentation"
+msgstr "Segmentation classique par l’environnement"
+
+#: includes/features/class-handlertypes.php:582
+#: includes/features/class-handlertypes.php:656
+msgid "Classical level segmentation"
+msgstr "Segmentation classique par le niveau"
+
+#: includes/features/class-handlertypes.php:582
+#: includes/features/class-handlertypes.php:656
+msgid "Recommended in most cases"
+msgstr "Recommandé dans la plupart des cas"
+
+#: includes/features/class-handlertypes.php:576
+#: includes/features/class-handlertypes.php:650
+msgid "Template for labels. If you are unsure of the implications on cardinality, choose the first one."
+msgstr "Modèle pour les étiquettes. Si vous n’êtes pas certain des implications sur la cardinalité, choisissez le premier."
+
+#: includes/features/class-handlertypes.php:575
+#: includes/features/class-handlertypes.php:649
+msgid "Labels"
+msgstr "Étiquettes"
+
+#: includes/features/class-handlertypes.php:564
+msgid "The Grafana.com API Key."
+msgstr "La clé d’API Grafana.com."
+
+#: includes/features/class-handlertypes.php:563
+msgid "API key"
+msgstr "Clé d’API"
+
+#: includes/features/class-handlertypes.php:552
+msgid "The user name for Basic Auth authentication. Something like %s."
+msgstr "Le nom d’utilisateur·ice pour l’authentification Basic Auth. Quelque chose comme %s."
+
+#: includes/features/class-handlertypes.php:551
+#: includes/features/class-handlertypes.php:1073
+#: includes/features/class-handlertypes.php:1158
+#: includes/features/class-handlertypes.php:1282
+#: includes/features/class-handlertypes.php:1353
+#: includes/features/class-handlertypes.php:1407
+#: includes/features/class-handlertypes.php:1461
+#: includes/features/class-handlertypes.php:1515
+msgid "Username"
+msgstr "Nom de compte"
+
+#: includes/features/class-handlertypes.php:540
+msgid "The host name portion of the Loki instance url. Something like %s."
+msgstr "La partie nom d’hôte de l’url de l’instance Loki. Quelque chose comme %s."
+
+#: includes/features/class-handlertypes.php:539
+msgid "Loki host"
+msgstr "Hôte Loki"
+
+#: includes/features/class-handlertypes.php:531
+msgid "An archive sent to Grafana Cloud."
+msgstr "Une archive envoyée à Grafana Cloud."
+
+#: includes/features/class-handlertypes.php:225
+msgid "The email address to which forward the copy."
+msgstr "Adresse de messagerie à laquelle transférer la copie."
+
+#: includes/features/class-handlertypes.php:217
+msgid "A mail copy sent to an email address."
+msgstr "Une copie de courriel envoyée à une adresse de messagerie."
+
+#: includes/features/class-handlertypes.php:184
+msgid "The seed list given by the service."
+msgstr "Liste d’envoi indiquée par le service."
+
+#: includes/features/class-handlertypes.php:183
+msgid "Seed list"
+msgstr "Liste d’envoi"
+
+#: includes/features/class-handlertypes.php:176
+msgid "A mail copy sent to MailerCheck service."
+msgstr "Une copie de courriel envoyée au service MailerCheck."
+
+#: includes/features/class-handlertypes.php:122
+msgid "A mail copy sent to Email on Acid service."
+msgstr "Une copie de courriel envoyée au service Email on Acid."
+
+#: includes/features/class-handlertypes.php:88
+#: includes/features/class-handlertypes.php:142
+msgid "The email domain to which send the copy."
+msgstr "Domaine de messagerie vers lequel envoyer la copie."
+
+#: includes/features/class-handlertypes.php:87
+#: includes/features/class-handlertypes.php:141
+msgid "Email domain"
+msgstr "Domaine de l’adresse de messagerie"
+
+#: includes/features/class-handlertypes.php:76
+#: includes/features/class-handlertypes.php:130
+msgid "The mailbox to which send the copy."
+msgstr "Boîte aux lettres à laquelle envoyer la copie."
+
+#: includes/features/class-handlertypes.php:75
+#: includes/features/class-handlertypes.php:129
+#: includes/features/class-handlertypes.php:224
+msgid "Mailbox"
+msgstr "Boîtes aux lettres"
+
+#: includes/features/class-handlertypes.php:68
+msgid "A mail copy sent to Litmus service."
+msgstr "Une copie de courriel envoyée au service Litmus."
+
+#: includes/features/class-handlertypes.php:56
+msgid "Testing & Preview"
+msgstr "Tests & prévisualisation"
+
+#: includes/features/class-handlertypes.php:55
+#: includes/features/class-inlinehelp.php:197
+msgid "Individual storing"
+msgstr "Stockage individuel"
+
+#: includes/features/class-handlertypes.php:54
+#: includes/features/class-inlinehelp.php:190
+msgid "Archive storing"
+msgstr "Stockage d’archives"
+
+#: includes/features/class-handlertypes.php:52
+#: includes/features/class-inlinehelp.php:176
+msgid "Forwarding"
+msgstr "Transfert"
+
+#: includes/features/class-eventviewer.php:141
+msgid "This content is encrypted"
+msgstr "Ce contenu est chiffré"
+
+#: includes/features/class-archivers.php:251
+msgid "Type"
+msgstr "Type"
+
+#: admin/class-mailarchiver-admin.php:1105
+msgid "Key used to encrypt mail body. Let blank to not encrypt it."
+msgstr "Clé utilisée pour chiffrer le corps du courriel. Laissez vide pour ne pas le chiffrer."
+
+#: admin/class-mailarchiver-admin.php:1098
+msgid "Encryption key"
+msgstr "Clé de chiffrement"
+
+#: admin/class-mailarchiver-admin.php:1092
+msgid "Encryption used: "
+msgstr "Chiffrement utilisé : "
+
+#: admin/class-mailarchiver-admin.php:1091
+msgid "Note: this is NOT a strong security feature; it's just a simple way to protect privacy in case of data leaks from external services. Think about it as a simple \"password protection\", with the password stored in plain text in your WordPress database."
+msgstr "Remarque : ceci n’est PAS une fonctionnalité forte de sécurité ; il s’agit juste d’un moyen simple de protéger la vie privée en cas de fuites de données provenant de services externes. Considérez cela comme une simple « protection par mot de passe », avec le mot de passe stocké en texte brut dans votre base de données WordPress."
+
+#: admin/class-mailarchiver-admin.php:842
+msgid "Imap features are not activated on your server. To allow Imap archiving you must activate %s PHP module."
+msgstr "Les fonctionnalités Imap ne sont pas activées sur votre serveur. Pour permettre l’archivage Imap, vous devez activer le module PHP %s."
+
+#: admin/class-mailarchiver-admin.php:839
+msgid "Imap features are available on your server. Email archiving via Imap is available."
+msgstr "Les fonctionnalités Imap sont disponibles sur votre serveur. L’archivage des courriels via Imap est disponible."
+
+#: admin/class-mailarchiver-admin.php:827
+#: includes/features/class-handlertypes.php:1256
+msgid "Encryption"
+msgstr "Chiffrement"
+
+#: admin/class-mailarchiver-admin.php:823
+#: admin/class-mailarchiver-admin.php:1094
+msgid "Your server does not have OpenSSL installed. Mail body encryption is unavailable."
+msgstr "OpenSSL n’est pas installé sur votre serveur. Le chiffrement du corps du courriel n’est pas disponible."
+
+#: admin/class-mailarchiver-admin.php:820
+msgid "Your server is currently using %s. Mail body encryption is available."
+msgstr "Votre serveur utilise actuellement %s. Le chiffrement du corps du courriel est disponible."
+
+#: admin/class-mailarchiver-admin.php:745
+msgid "Operation mode of mail sending and archiving."
+msgstr "Mode de fonctionnement de l’envoi et de l’archivage de courriels."
+
+#: admin/class-mailarchiver-admin.php:737
+msgid "Operation mode"
+msgstr "Mode de fonctionnement"
+
+#: admin/class-mailarchiver-admin.php:734
+msgid "Do not send emails and do not archive them"
+msgstr "Ne pas envoyer les courriels et ne pas les archiver"
+
+#: admin/class-mailarchiver-admin.php:733
+msgid "Do not send emails, but archive them as if they had been sent"
+msgstr "Ne pas envoyer les courriels, mais les archiver"
+
+#: admin/class-mailarchiver-admin.php:732
+msgid "Send emails normally, but do not archive them"
+msgstr "Envoyer les courriels normalement, mais ne pas les archiver"
+
+#: admin/class-mailarchiver-admin.php:731
+msgid "Send emails normally, then archive them"
+msgstr "Envoyer les courriels normalement, puis les archiver"
+
+#: admin/class-mailarchiver-admin.php:250
+msgid "Plugin Features"
+msgstr "Fonctionnalités"
+
+#: perfopsone/class-menus.php:448
+msgid "all plugins"
+msgstr "extensions"
+
+#: perfopsone/class-menus.php:427
+msgid "Make a review"
+msgstr "Laisser un avis"
+
+#: perfopsone/class-menus.php:426
+msgid "Contribute"
+msgstr "Contribuer"
+
+#: perfopsone/class-menus.php:425
+msgid "Get support"
+msgstr "Obtenir de l’aide"
+
+#: perfopsone/class-menus.php:421
+msgid "auto-update"
+msgstr "MÀJ auto"
+
+#: perfopsone/class-menus.php:410 perfopsone/class-menus.php:416
+msgid "Up to date"
+msgstr "À jour"
+
+#: perfopsone/class-menus.php:167
+msgid "Consoles"
+msgstr "Consoles"
+
+#: perfopsone/class-menus.php:164
+msgid "Catalogs"
+msgstr "Catalogues"
+
+#: perfopsone/class-menus.php:161
+msgid "Reports"
+msgstr "Rapports"
+
+#: perfopsone/class-menus.php:158
+msgid "Tools"
+msgstr "Outils"
+
+#: perfopsone/class-menus.php:155
+msgid "Analytics"
+msgstr "Statistiques"
+
+#: includes/features/class-inlinehelp.php:96
+msgid "Official website"
+msgstr "Site officiel"
+
+#: admin/class-mailarchiver-admin.php:867
 msgid "Note: choosing something other than \"Never override privileges\" grants access to all users having \"read_private_pages\" capability and may have privacy and security implications."
 msgstr "Remarque : le choix de quelque chose d’autre que « Ne jamais outrepasser les privilèges » donne accès à tous les utilisateurs ayant la permission « read_private_pages » et peut avoir des répercussions sur la vie privée et la sécurité."
 
-#: admin/class-mailarchiver-admin.php:780
+#: admin/class-mailarchiver-admin.php:867
 msgid "Allows other users than administrators to access local archives depending of environments."
 msgstr "Permet à d’autres comptes que ceux d’administration d’accéder aux archives locales en fonction des environnements."
 
-#: admin/class-mailarchiver-admin.php:772
+#: admin/class-mailarchiver-admin.php:859
 msgid "Archives accesses"
 msgstr "Accès aux archives"
 
-#: admin/class-mailarchiver-admin.php:740
+#: admin/class-mailarchiver-admin.php:789
 msgid "Override privileges for staging and development environments"
 msgstr "Outrepasser les privilèges pour les environnements de staging et de développement"
 
-#: admin/class-mailarchiver-admin.php:739
+#: admin/class-mailarchiver-admin.php:788
 msgid "Override privileges for staging environments"
 msgstr "Outrepasser les privilèges pour les environnements de staging"
 
-#: admin/class-mailarchiver-admin.php:738
+#: admin/class-mailarchiver-admin.php:787
 msgid "Override privileges for development environments"
 msgstr "Outrepasser les privilèges pour les environnements de développement"
 
-#: admin/class-mailarchiver-admin.php:737
+#: admin/class-mailarchiver-admin.php:786
 msgid "Never override privileges"
 msgstr "Ne jamais outrepasser les privilèges"
 
@@ -66,14 +547,6 @@ msgstr "Votre site peut utiliser la mémoire partagée"
 msgid "Shared Memory Test"
 msgstr "Test de mémoire partagée"
 
-#: perfopsone/class-adminmenus.php:74
-msgid "%s Consoles"
-msgstr "Consoles %s"
-
-#: perfopsone/class-adminmenus.php:74 perfopsone/class-adminmenus.php:75
-msgid "Available Consoles"
-msgstr "Consoles disponibles"
-
 #. translators: as in the sentence "Access the emails sent from your network."
 #. or "Access the emails sent from your website."
 #: admin/class-mailarchiver-admin.php:162
@@ -96,93 +569,25 @@ msgstr "Accédez aux courriels envoyés à partir de votre %s."
 msgid "Archived Mails"
 msgstr "Courriels archivés"
 
-#: perfopsone/class-adminmenus.php:406
-msgid "Requires at least PHP %1$s%2$s and WordPress %3$s%4$s."
-msgstr "Nécessite au moins PHP %1$s%2$s et WordPress %3$s%4$s."
-
-#: perfopsone/class-adminmenus.php:397
-msgid "contribution"
-msgstr "contribution"
-
-#: perfopsone/class-adminmenus.php:396
-msgid "support"
-msgstr "assistance"
-
-#: perfopsone/class-adminmenus.php:395
+#: perfopsone/class-menus.php:429
 msgid "about"
 msgstr "à propos"
 
-#: perfopsone/class-adminmenus.php:394
+#: perfopsone/class-menus.php:428
 msgid "settings"
 msgstr "réglages"
 
-#: perfopsone/class-adminmenus.php:268
-msgid "No review yet."
-msgstr "Pas encore d’avis."
+#: perfopsone/class-menus.php:413
+msgid "Need update"
+msgstr "MÀJ requise"
 
-#: perfopsone/class-adminmenus.php:265
-msgid "%s reviews."
-msgstr "%s avis."
-
-#: perfopsone/class-adminmenus.php:260
-msgid "%s downloads."
-msgstr "%s téléchargements."
-
-#: perfopsone/class-adminmenus.php:255
-msgid "%s+ installs."
-msgstr "%s+ installations."
-
-#: perfopsone/class-adminmenus.php:238 perfopsone/class-adminmenus.php:245
-msgid "need update"
-msgstr "nécessite une mise à jour"
-
-#: perfopsone/class-adminmenus.php:236 perfopsone/class-adminmenus.php:243
-msgid "OK"
-msgstr "OK"
-
-#: perfopsone/class-adminmenus.php:230
-msgid "Need to be updated to %s."
-msgstr "Nécessite d’être mis à jour vers %s."
-
-#: perfopsone/class-adminmenus.php:112
+#: perfopsone/class-menus.php:227
 msgid "This analytics feature is currently disabled. Click here to activate it."
 msgstr "Cette fonctionnalité d’analyse est actuellement désactivée. Cliquez ici pour l’activer."
 
-#: perfopsone/class-adminmenus.php:70 perfopsone/class-adminmenus.php:71
+#: perfopsone/class-menus.php:140
 msgid "Control Center"
 msgstr "Centre de contrôle"
-
-#: perfopsone/class-adminmenus.php:66
-msgid "%s Records"
-msgstr "Enregistrements %s"
-
-#: perfopsone/class-adminmenus.php:66 perfopsone/class-adminmenus.php:67
-msgid "Available Catalogues"
-msgstr "Catalogues disponibles"
-
-#: perfopsone/class-adminmenus.php:62
-msgid "%s Insights"
-msgstr "Idées %s"
-
-#: perfopsone/class-adminmenus.php:62 perfopsone/class-adminmenus.php:63
-msgid "Available Reports"
-msgstr "Rapports disponibles"
-
-#: perfopsone/class-adminmenus.php:58
-msgid "%s Tools"
-msgstr "Outils %s"
-
-#: perfopsone/class-adminmenus.php:58 perfopsone/class-adminmenus.php:59
-msgid "Available Tools"
-msgstr "Outils disponibles"
-
-#: perfopsone/class-adminmenus.php:54
-msgid "%s Analytics"
-msgstr "Statistiques %s"
-
-#: perfopsone/class-adminmenus.php:54 perfopsone/class-adminmenus.php:55
-msgid "Dashboard"
-msgstr "Tableau de bord"
 
 #: includes/system/class-sitehealth.php:395
 msgid "You should consider using PHP Intl extension. It would improve localization features on your site."
@@ -304,239 +709,240 @@ msgstr "Extension"
 msgid "Core"
 msgstr "Cœur"
 
-#: admin/class-mailarchiver-admin.php:1039
+#: admin/class-mailarchiver-admin.php:1131
 msgid "Allows to record standard MailArchiver information."
 msgstr "Permet de consigner les informations standards fournies par MailArchiver."
 
-#: admin/class-mailarchiver-admin.php:1036
-#: admin/class-mailarchiver-admin.php:1055
+#: admin/class-mailarchiver-admin.php:1128
+#: admin/class-mailarchiver-admin.php:1147
 msgid "Included"
 msgstr "Inclus"
 
-#: admin/class-mailarchiver-admin.php:997
+#: admin/class-mailarchiver-admin.php:1084
 msgid "Note: it concerns only \"to\" and \"from\" fields."
 msgstr "Remarque : cela concerne uniquement les champs « à » et « de »."
 
-#: admin/class-mailarchiver-admin.php:997
+#: admin/class-mailarchiver-admin.php:1084
 msgid "If checked, recorded fields will contain hashes instead of email adresses."
 msgstr "Si coché, les champs enregistrés vont contenir des clés de hachage à la place des adresses courriel."
 
-#: admin/class-mailarchiver-admin.php:994
+#: admin/class-mailarchiver-admin.php:1081
 msgid "Masking"
 msgstr "Masquage"
 
-#: admin/class-mailarchiver-admin.php:989
+#: admin/class-mailarchiver-admin.php:1076
 msgid "Email adresses"
 msgstr "Adresse courriel"
 
-#: admin/class-mailarchiver-admin.php:981
+#: admin/class-mailarchiver-admin.php:1068
 msgid "If checked, recorded fields will contain hashes instead of user IDs & names."
 msgstr "Si coché, les champs enregistrés vont contenir des clés de hachage à la place des noms et ID de comptes."
 
-#: admin/class-mailarchiver-admin.php:978
+#: admin/class-mailarchiver-admin.php:1065
 msgid "Pseudonymisation"
 msgstr "Pseudonymisation"
 
-#: admin/class-mailarchiver-admin.php:973
+#: admin/class-mailarchiver-admin.php:1060
 msgid "Users"
 msgstr "Comptes"
 
-#: admin/class-mailarchiver-admin.php:965
-#: admin/class-mailarchiver-admin.php:981
+#: admin/class-mailarchiver-admin.php:1052
+#: admin/class-mailarchiver-admin.php:1068
 msgid "Note: it concerns all fields except email content."
 msgstr "Remarque : cela concerne tous les champs sauf le contenu du courriel."
 
-#: admin/class-mailarchiver-admin.php:965
+#: admin/class-mailarchiver-admin.php:1052
 msgid "If checked, recorded fields will contain hashes instead of real IPs."
 msgstr "Si coché, les champs enregistrés vont contenir des clés de hachage à la place des IPs réelles."
 
-#: admin/class-mailarchiver-admin.php:962
+#: admin/class-mailarchiver-admin.php:1049
 msgid "Obfuscation"
 msgstr "Obscurcissement"
 
-#: admin/class-mailarchiver-admin.php:957
+#: admin/class-mailarchiver-admin.php:1044
 msgid "Remote IPs"
 msgstr "IPs distantes"
 
-#: admin/class-mailarchiver-admin.php:923
+#: admin/class-mailarchiver-admin.php:1010
 msgid "Enabled"
 msgstr "Activé"
 
-#: admin/class-mailarchiver-admin.php:857
+#: admin/class-mailarchiver-admin.php:944
 msgid "What kind of emails should be archived."
 msgstr "Quel genre de courriels doivent être archivés."
 
-#: admin/class-mailarchiver-admin.php:841
+#: admin/class-mailarchiver-admin.php:928
 msgid "Used only in admin dashboard."
 msgstr "Utilisé uniquement dans le Tableau de bord d’administration."
 
-#: admin/class-mailarchiver-admin.php:834
-#: admin/class-mailarchiver-admin.php:878
+#: admin/class-mailarchiver-admin.php:921
+#: admin/class-mailarchiver-admin.php:965
 msgid "Name"
 msgstr "Nom"
 
-#: admin/class-mailarchiver-admin.php:813
+#: admin/class-mailarchiver-admin.php:900
 msgid "Note: MailArchiver respects DISABLE_NAG_NOTICES flag."
 msgstr "Note : MailArchiver respecte l’indicateur DISABLE_NAG_NOTICES."
 
-#: admin/class-mailarchiver-admin.php:813
+#: admin/class-mailarchiver-admin.php:900
 msgid "Allows MailArchiver to display admin notices throughout the admin dashboard."
 msgstr "Autoriser MailArchiver à afficher les avis d’administration dans le Tableau de bord."
 
-#: admin/class-mailarchiver-admin.php:810
+#: admin/class-mailarchiver-admin.php:897
 msgid "Display"
 msgstr "Affichage"
 
-#: admin/class-mailarchiver-admin.php:805
+#: admin/class-mailarchiver-admin.php:892
 msgid "Admin notices"
 msgstr "Avis d’administration"
 
-#: admin/class-mailarchiver-admin.php:797
+#: admin/class-mailarchiver-admin.php:884
 msgid "Use CDN (jsDelivr) to serve MailArchiver scripts and stylesheets."
 msgstr "Utiliser un CDN (jsDelivr) pour la distribution des feuilles de styles et scripts MailArchiver."
 
-#: admin/class-mailarchiver-admin.php:794
+#: admin/class-mailarchiver-admin.php:881
 msgid "Use public CDN"
 msgstr "Utiliser un CDN public"
 
-#: admin/class-mailarchiver-admin.php:789
+#: admin/class-mailarchiver-admin.php:876
 msgid "Resources"
 msgstr "Ressources"
 
-#: admin/class-mailarchiver-admin.php:756
+#: admin/class-mailarchiver-admin.php:805
 msgid "Your site does not use any logging plugin. To log all events triggered in MailArchiver, I recommend you to install the excellent (and free) %s. But it is not mandatory."
 msgstr "Votre site n’utilise aucune extension d’enregistrement. Pour enregistrer tous les évènements déclenchés par MailArchiver, je vous recommande d’installer l’excellent (et gratuit) %s. Mais ce n’est pas obligatoire."
 
-#: admin/class-mailarchiver-admin.php:753
+#: admin/class-mailarchiver-admin.php:802
 msgid "Your site is currently using %s."
 msgstr "Votre site utilise actuellement %s."
 
-#: admin/class-mailarchiver-admin.php:721
+#: admin/class-mailarchiver-admin.php:770
 msgid "If checked, when a new archiver is added it automatically starts."
 msgstr "Si coché, lorsqu’un nouvel archiveur est ajouté, il démarre automatiquement."
 
-#: admin/class-mailarchiver-admin.php:718
+#: admin/class-mailarchiver-admin.php:767
 msgid "Auto-start"
 msgstr "Démarrage automatique"
 
-#: admin/class-mailarchiver-admin.php:677
+#: admin/class-mailarchiver-admin.php:696
 msgid "Theme listeners"
 msgstr "Observateurs de thèmes"
 
-#: admin/class-mailarchiver-admin.php:676
+#: admin/class-mailarchiver-admin.php:695
 msgid "Plugin listeners"
 msgstr "Observateurs d’extensions"
 
-#: admin/class-mailarchiver-admin.php:675
+#: admin/class-mailarchiver-admin.php:694
 msgid "Standard listeners"
 msgstr "Observateurs standards"
 
-#: admin/class-mailarchiver-admin.php:641
+#: admin/class-mailarchiver-admin.php:660
 msgid "Automatically or selectively choose which sources to listen."
 msgstr "Choisissez automatiquement ou sélectivement les sources à observer."
 
-#: admin/class-mailarchiver-admin.php:637
+#: admin/class-mailarchiver-admin.php:656
 msgid "All available listeners (recommended)"
 msgstr "Tous les observateurs disponibles (recommandé)"
 
-#: admin/class-mailarchiver-admin.php:636
+#: admin/class-mailarchiver-admin.php:655
 msgid "Selected listeners"
 msgstr "Observateurs sélectionnés"
 
-#: admin/class-mailarchiver-admin.php:630
+#: admin/class-mailarchiver-admin.php:649
 msgid "Activate"
 msgstr "Activer"
 
-#: admin/class-mailarchiver-admin.php:613
+#: admin/class-mailarchiver-admin.php:632
 msgid "Archiver %s has not been removed. Please try again."
 msgstr "L’archiveur %s n’a pas été supprimé. Veuillez réessayer."
 
-#: admin/class-mailarchiver-admin.php:607
+#: admin/class-mailarchiver-admin.php:626
 msgid "Archiver %s has been removed."
 msgstr "L’archiveur %s a été supprimé."
 
-#: admin/class-mailarchiver-admin.php:584
+#: admin/class-mailarchiver-admin.php:603
 msgid "Archiver %s has not been saved. Please try again."
 msgstr "L’archiveur %s n’a pas été mis à jour. Veuillez réessayer."
 
-#: admin/class-mailarchiver-admin.php:578
+#: admin/class-mailarchiver-admin.php:597
 msgid "Archiver %s has been saved."
 msgstr "L’archiveur %s a été mis à jour."
 
-#: admin/class-mailarchiver-admin.php:524
+#: admin/class-mailarchiver-admin.php:543
 msgid "Plugin settings have not been reset to defaults. Please try again."
 msgstr "Les réglages n’ont pas été réinitialisés à leurs valeurs par défaut. Veuillez réessayer."
 
-#: admin/class-mailarchiver-admin.php:519
+#: admin/class-mailarchiver-admin.php:538
 msgid "Plugin settings have been reset to defaults."
 msgstr "Le réglages ont été réinitialisées aux valeurs par défaut."
 
-#: admin/class-mailarchiver-admin.php:502
+#: admin/class-mailarchiver-admin.php:521
 msgid "Plugin settings have not been saved. Please try again."
 msgstr "Les réglages n’ont pas été mis à jour. Veuillez réessayer."
 
-#: admin/class-mailarchiver-admin.php:497
+#: admin/class-mailarchiver-admin.php:516
 msgid "Plugin settings have been saved."
 msgstr "Les réglages ont été mis à jour."
 
-#: admin/class-mailarchiver-admin.php:477
+#: admin/class-mailarchiver-admin.php:495
 msgid "Listeners settings have not been reset to defaults. Please try again."
 msgstr "Les réglages des observateurs n’ont pas été réinitialisés à leurs valeurs par défaut. Veuillez réessayer."
 
-#: admin/class-mailarchiver-admin.php:472
+#: admin/class-mailarchiver-admin.php:490
 msgid "Listeners settings have been reset to defaults."
 msgstr "Les réglages des observateurs ont été réinitialisés à leurs valeurs par défaut."
 
-#: admin/class-mailarchiver-admin.php:455
+#: admin/class-mailarchiver-admin.php:473
 msgid "Listeners settings have not been saved. Please try again."
 msgstr "Les réglages des observateurs n’ont pas été mis à jour. Veuillez réessayer."
 
-#: admin/class-mailarchiver-admin.php:450
+#: admin/class-mailarchiver-admin.php:468
 msgid "Listeners settings have been saved."
 msgstr "Les réglages des observateurs ont été mis à jour."
 
-#: admin/class-mailarchiver-admin.php:391
+#: admin/class-mailarchiver-admin.php:409
 msgid "Archiver %s has been paused."
 msgstr "L’archiveur %s a été mis en pause."
 
-#: admin/class-mailarchiver-admin.php:378
+#: admin/class-mailarchiver-admin.php:396
 msgid "Archiver %s has started."
 msgstr "L’archiveur %s a démarré."
 
-#: includes/features/class-wpcli.php:299 admin/class-mailarchiver-admin.php:331
-#: admin/class-mailarchiver-admin.php:713
+#: admin/class-mailarchiver-admin.php:349
+#: admin/class-mailarchiver-admin.php:762 includes/features/class-wpcli.php:304
 msgid "New archiver"
 msgstr "Nouvel archiveur"
 
-#: admin/class-mailarchiver-admin.php:274
+#: admin/class-mailarchiver-admin.php:292
 msgid "Support"
 msgstr "Assistance"
 
 #: admin/class-mailarchiver-admin.php:160
-#: admin/class-mailarchiver-admin.php:259
+#: admin/class-mailarchiver-admin.php:277
 msgid "Archived Emails"
 msgstr "Courriels archivés"
 
-#: admin/class-mailarchiver-admin.php:257
+#: admin/class-mailarchiver-admin.php:275
+#: includes/features/class-archivers.php:252
 msgid "Settings"
 msgstr "Réglages"
 
-#: admin/class-mailarchiver-admin.php:240
+#: admin/class-mailarchiver-admin.php:258
 msgid "Privacy options"
 msgstr "Options de confidentialité"
 
-#: admin/class-mailarchiver-admin.php:234
+#: admin/class-mailarchiver-admin.php:252
 msgid "Plugin options"
 msgstr "Options de l’extension"
 
-#: admin/class-mailarchiver-admin.php:233
+#: admin/class-mailarchiver-admin.php:251
 msgid "Archivers options"
 msgstr "Options d’archivage"
 
-#: admin/class-mailarchiver-admin.php:205
 #: admin/class-mailarchiver-admin.php:222
-#: admin/class-mailarchiver-admin.php:849
-#: admin/class-mailarchiver-admin.php:893
+#: admin/class-mailarchiver-admin.php:239
+#: admin/class-mailarchiver-admin.php:936
+#: admin/class-mailarchiver-admin.php:980
 msgid "Archived emails"
 msgstr "Courriels archivés"
 
@@ -544,7 +950,7 @@ msgstr "Courriels archivés"
 msgid "Number of lines to display"
 msgstr "Nombre de lignes à afficher"
 
-#: admin/partials/mailarchiver-admin-settings-archiver-edit.php:36
+#: admin/partials/mailarchiver-admin-settings-archiver-edit.php:38
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -556,16 +962,15 @@ msgstr "À propos"
 msgid "Options"
 msgstr "Options"
 
-#: includes/system/class-sitehealth.php:166
 #: admin/partials/mailarchiver-admin-settings-main.php:35
+#: includes/system/class-sitehealth.php:166
 msgid "Archivers"
 msgstr "Archiveurs"
 
 #. translators: as in the sentence "Mailarchiver Settings" or "WordPress
 #. Settings"
-#: perfopsone/class-adminmenus.php:70
+#: admin/class-mailarchiver-admin.php:145
 #: admin/partials/mailarchiver-admin-settings-main.php:19
-#: admin/class-mailarchiver-admin.php:144
 msgid "%s Settings"
 msgstr "Réglages %s"
 
@@ -578,8 +983,8 @@ msgid "Add an Archiver"
 msgstr "Ajouter un archiveur"
 
 #. translators: as in the sentence "Mailarchiver Viewer"
-#: admin/partials/mailarchiver-admin-view-events.php:20
 #: admin/class-mailarchiver-admin.php:166
+#: admin/partials/mailarchiver-admin-view-events.php:20
 msgid "%s Viewer"
 msgstr "Visualiseur %s"
 
@@ -596,7 +1001,7 @@ msgid "Choose events log to display"
 msgstr "Choisissez le registre d’évènements à afficher"
 
 #: admin/partials/mailarchiver-admin-settings-listeners.php:33
-#: admin/partials/mailarchiver-admin-settings-options.php:31
+#: admin/partials/mailarchiver-admin-settings-options.php:32
 msgid "Reset to Defaults"
 msgstr "Réinitialiser les paramètres par défaut"
 
@@ -709,148 +1114,142 @@ msgstr "Interface de ligne de commande"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: includes/features/class-inlinehelp.php:358
+#: includes/features/class-inlinehelp.php:379
 msgid "Click the title bar of the box to expand or collapse it."
 msgstr "Cliquez sur la barre de titre d’un bloc pour l’ouvrir ou la fermer."
 
-#: includes/features/class-inlinehelp.php:358
+#: includes/features/class-inlinehelp.php:379
 msgid "Box Controls"
 msgstr "Contrôles des blocs"
 
-#: includes/features/class-inlinehelp.php:357
+#: includes/features/class-inlinehelp.php:378
 msgid "To rearrange the boxes, drag and drop by clicking on the title bar of the selected box and releasing when you see a gray dotted-line rectangle appear in the location you want to place the box."
 msgstr "Pour réarranger les blocs, glissez/déposez-les en cliquant sur la barre de titre du bloc sélectionné, et relâchez-la lorsque vous apercevez un rectangle avec une bordure grise à l’emplacement où vous souhaitez placer le bloc."
 
-#: includes/features/class-inlinehelp.php:357
+#: includes/features/class-inlinehelp.php:378
 msgid "Drag and Drop"
 msgstr "Glisser/déposer"
 
-#: includes/features/class-inlinehelp.php:356
+#: includes/features/class-inlinehelp.php:377
 msgid "Use the Screen Options tab to choose which boxes to show."
 msgstr "Utilisez l’onglet Options de l’écran pour choisir les blocs à afficher."
 
-#: includes/features/class-inlinehelp.php:348
+#: includes/features/class-inlinehelp.php:369
 msgid "The content of the email itself."
 msgstr "Le contenu du courriel en lui-même."
 
-#: includes/features/class-inlinehelp.php:347
+#: includes/features/class-inlinehelp.php:368
 msgid "List of the email headers."
 msgstr "Liste des en-têtes du courriel."
 
-#: includes/features/class-inlinehelp.php:346
+#: includes/features/class-inlinehelp.php:367
 msgid "List of the email attachements."
 msgstr "Liste des pièces jointes au courriel."
 
-#: includes/features/class-inlinehelp.php:345
+#: includes/features/class-inlinehelp.php:366
 msgid "Process, user and site from where the email was sent."
 msgstr "Processus, compte et site d’où le courriel a été envoyé."
 
-#: includes/features/class-inlinehelp.php:344
+#: includes/features/class-inlinehelp.php:365
 msgid "List of recipients."
 msgstr "Liste des destinataires."
 
-#: includes/features/class-inlinehelp.php:343
+#: includes/features/class-inlinehelp.php:364
 msgid "General information about the email."
 msgstr "Informations générales sur le courriel."
 
-#: includes/features/class-inlinehelp.php:342
+#: includes/features/class-inlinehelp.php:363
 msgid "It consists of four to six boxes, depending on your settings, which give specific details of the email:"
 msgstr "Il se compose de quatre à six boîtes, selon vos réglages, qui donnent des informations spécifiques sur le courriel :"
 
-#: includes/features/class-inlinehelp.php:342
+#: includes/features/class-inlinehelp.php:363
 msgid "This screen displays the details of a specific email."
 msgstr "Cet écran affiche les détails d’un courriel spécifique."
 
-#: includes/features/class-inlinehelp.php:360
+#: includes/features/class-inlinehelp.php:381
 msgid "Layout"
 msgstr "Disposition"
 
-#: includes/features/class-inlinehelp.php:356
+#: includes/features/class-inlinehelp.php:377
 msgid "Screen Options"
 msgstr "Options de l’écran"
 
-#: includes/features/class-inlinehelp.php:355
+#: includes/features/class-inlinehelp.php:376
 msgid "You can use the following controls to arrange the screen to suit your usage preferences:"
 msgstr "Vous pouvez utiliser les contrôles suivants pour organiser l’écran en fonction de vos préférences d’utilisation :"
 
-#: includes/features/class-inlinehelp.php:308
+#: includes/features/class-inlinehelp.php:329
 msgid "Note these filters are effective even on pseudonymized or obfuscated fields."
 msgstr "Notez que ces filtres sont effectifs même sur les champs pseudonymisés ou obscurcies."
 
-#: includes/features/class-inlinehelp.php:307
+#: includes/features/class-inlinehelp.php:328
 msgid "To filter the displayed emails, use the small blue funnel next to the filterable items. These filters are cumulative, you can activate simultaneously several filters."
 msgstr "Pour filtrer les courriels affichés, utilisez le petit entonnoir bleu à côté des éléments filtrables. Ces filtres sont cumulables, vous pouvez activer simultanément plusieurs filtres."
 
-#: includes/features/class-inlinehelp.php:306
+#: includes/features/class-inlinehelp.php:327
 msgid "You can change the archive being viewed (if you have set more than one WordPress archiver) with the selector at the top left of the list (don't forget to click on the \"apply\" button)."
 msgstr "Vous pouvez sélectionner l’archive affichée (si vous avez réglé plus d’un archiveur WordPress) avec le sélecteur en haut à gauche de la liste (n’oubliez pas de cliquer sur le bouton « Appliquer »)."
 
-#: includes/features/class-inlinehelp.php:305
+#: includes/features/class-inlinehelp.php:326
 msgid "You can restrict the display of emails according to their status levels. To do so, use the two links at the top left of the list."
 msgstr "Vous pouvez restreindre l’affichage des courriels en fonction de leur niveaux d’état. Pour ce faire, utilisez les deux liens en haut à gauche de la liste."
 
-#: includes/features/class-inlinehelp.php:304
+#: includes/features/class-inlinehelp.php:325
 msgid "To move forward or backward in time, use the navigation buttons at the top or bottom right of this list."
 msgstr "Pour avancer ou reculer dans le temps, utilisez les boutons de navigation en haut ou en bas à droite de cette liste."
 
-#: includes/features/class-inlinehelp.php:303
+#: includes/features/class-inlinehelp.php:324
 msgid "This screen displays the list of archived emails. This list is sorted with the most recent email at the top."
 msgstr "Cet écran affiche la liste des courriels appartenant à une archive WordPress particulière. Cette liste est triée de telles sorte que le courriel le plus récent soit en haut."
 
-#: includes/features/class-inlinehelp.php:249
+#: includes/features/class-inlinehelp.php:270
 msgid "Note these options are global. They are set for all archivers."
 msgstr "Notez que ces options sont globales. Elles sont réglées pour tous les archiveurs."
 
-#: includes/features/class-inlinehelp.php:247
+#: includes/features/class-inlinehelp.php:268
 msgid "Note these options are global. They are set for all archivers, for all sites in your network."
 msgstr "Notez que ces options sont globales. Elles sont réglées pour tous les archiveurs, pour tous les sites de votre réseau."
 
-#: includes/features/class-inlinehelp.php:245
+#: includes/features/class-inlinehelp.php:266
 msgid "This screen allows you to set misc options of %s."
 msgstr "Cet écran vous permet de définir les réglages généraux de %s."
 
-#: includes/features/class-inlinehelp.php:217
+#: includes/features/class-inlinehelp.php:238
 msgid "You can choose to tell %s to activate all the available listeners, or you can manually select the sources to listen."
 msgstr "Vous pouvez choisir de demander à %s d’activer tous les observateurs disponibles, ou vous pouvez sélectionner manuellement les sources à observer."
 
-#: includes/features/class-inlinehelp.php:216
+#: includes/features/class-inlinehelp.php:237
 msgid "A listener, as its name suggests, listen to a specific component (a \"source\") of your WordPress instance."
 msgstr "Un observateur, comme son nom l’indique, observe un composant particulier (une « source ») de votre instance WordPress."
 
-#: includes/features/class-inlinehelp.php:215
+#: includes/features/class-inlinehelp.php:236
 msgid "This screen allows you to set the way %s uses listeners."
 msgstr "Cet écran vous permet de définir la façon dont %s utilise les observateurs."
 
-#: includes/features/class-inlinehelp.php:197
-#: includes/features/class-inlinehelp.php:324
-#: includes/features/class-inlinehelp.php:366
+#: includes/features/class-inlinehelp.php:218
+#: includes/features/class-inlinehelp.php:345
+#: includes/features/class-inlinehelp.php:387
 msgid "Status levels"
 msgstr "Niveaux des états"
 
-#: includes/features/class-inlinehelp.php:190
-#: includes/features/class-inlinehelp.php:226
-#: includes/features/class-inlinehelp.php:259
-#: includes/features/class-inlinehelp.php:317
+#: includes/features/class-inlinehelp.php:211
+#: includes/features/class-inlinehelp.php:247
+#: includes/features/class-inlinehelp.php:280
+#: includes/features/class-inlinehelp.php:338
 msgid "Admin rights"
 msgstr "Droits d’administration"
 
+#: admin/class-mailarchiver-admin.php:809
+#: includes/features/class-handlertypes.php:53
 #: includes/features/class-inlinehelp.php:183
-msgid "Storing"
-msgstr "Stockage"
-
-#: includes/features/class-inlinehelp.php:181
-msgid "These archivers store archived emails for future reference:"
-msgstr "Ces archivers stockent des courriels pour référence future :"
-
-#: includes/features/class-inlinehelp.php:176
-#: admin/class-mailarchiver-admin.php:760
 msgid "Logging"
 msgstr "Enregistrement"
 
-#: includes/features/class-inlinehelp.php:174
+#: includes/features/class-inlinehelp.php:181
 msgid "These archivers send archived emails to logging services. It may be local or SaaS, free or paid services:"
 msgstr "Ces archiveurs envoient des courriels à des services d’enregistrement. Il peut s’agir de services locaux ou SaaS, gratuits ou payants :"
 
+#: includes/features/class-handlertypes.php:51
 #: includes/features/class-inlinehelp.php:169
 msgid "Alerting"
 msgstr "Alerte"
@@ -860,16 +1259,12 @@ msgid "These archivers allow you to send alerts:"
 msgstr "Ces archiveurs vous permettent d’envoyer des alertes :"
 
 #: includes/features/class-inlinehelp.php:162
-#: includes/features/class-inlinehelp.php:219
-#: includes/features/class-inlinehelp.php:252
-#: includes/features/class-inlinehelp.php:310
-#: includes/features/class-inlinehelp.php:350
+#: includes/features/class-inlinehelp.php:240
+#: includes/features/class-inlinehelp.php:273
+#: includes/features/class-inlinehelp.php:331
+#: includes/features/class-inlinehelp.php:371
 msgid "Overview"
 msgstr "Vue d’ensemble"
-
-#: includes/features/class-inlinehelp.php:160
-msgid "Archivers are classified in three main categories: alerting, logging and storing. You can find details on these categories on the corresponding tabs of this help."
-msgstr "Les archiveurs sont classés selon trois catégories principales : alerte, enregistrement et stockage. Vous trouverez des détails sur ces catégories dans les onglets correspondants de cette aide."
 
 #: includes/features/class-inlinehelp.php:159
 msgid "You can set as many archivers as you want. All the set archivers will receive all emails and, regarding their own settings, will enrich them and record them or not."
@@ -915,7 +1310,6 @@ msgid "The status of an email is indicated by a \"level\". %s uses the following
 msgstr "L’état d’un courriel est indiquée par un « niveau ». %s utilise la classification suivante pour les niveaux :"
 
 #: includes/features/class-inlinehelp.php:97
-#: admin/class-mailarchiver-admin.php:275
 msgid "GitHub repository"
 msgstr "Dépôt GitHub"
 
@@ -941,363 +1335,355 @@ msgstr "Seulement les courriels en erreur"
 msgid "All emails"
 msgstr "Tous les courriels"
 
-#: includes/features/class-handlertypes.php:607
+#: includes/features/class-handlertypes.php:1024
 msgid "Local administrators can view emails sent via their site."
-msgstr "Les administratrices et administrateurs locaux peuvent consulter les courriels envoyés via leur site."
+msgstr "Les administrateur·ice·s locaux peuvent consulter les courriels envoyés via leur site."
 
-#: includes/features/class-handlertypes.php:606
+#: includes/features/class-handlertypes.php:1023
 msgid "Multisite partitioning"
 msgstr "Partitionnement multisite"
 
-#: includes/features/class-handlertypes.php:592
+#: includes/features/class-handlertypes.php:1009
 msgid "Maximum age of emails stored in this archive (0 for no limit)."
 msgstr "Âge maximal des courriels conservés dans cette archive (0 pour aucune limite)."
 
-#: includes/features/class-handlertypes.php:591
+#: includes/features/class-handlertypes.php:1008
 msgid "Days"
 msgstr "Jours"
 
-#: includes/features/class-handlertypes.php:577
+#: includes/features/class-handlertypes.php:994
 msgid "Maximum number of emails stored in this archive (0 for no limit)."
 msgstr "Nombre maximal de courriels conservés dans cette archive (0 pour aucune limite)."
 
-#: includes/features/class-handlertypes.php:576
+#: includes/features/class-handlertypes.php:993
 msgid "Mails"
 msgstr "Courriels"
 
-#: includes/features/class-handlertypes.php:569
+#: includes/features/class-handlertypes.php:986
 msgid "An archive stored in your WordPress database and available right in your admin dashboard."
 msgstr "Une archive stockée dans votre base de données WordPress et disponible directement dans votre Tableau de bord."
 
-#: includes/features/class-handlertypes.php:568
+#: includes/features/class-handlertypes.php:985
 msgid "WordPress archiver"
 msgstr "Archiveur WordPress"
 
-#: includes/features/class-handlertypes.php:522
+#: includes/features/class-handlertypes.php:485
 msgid "The time format standard to use."
 msgstr "Le format horaire à utiliser."
 
-#: includes/features/class-handlertypes.php:521
+#: includes/features/class-handlertypes.php:484
 msgid "Time format"
 msgstr "Format de l’heure"
 
-#: includes/features/class-handlertypes.php:510
+#: includes/features/class-handlertypes.php:473
 msgid "The program identifier for archive sent by MailArchiver."
 msgstr "L’identifiant d’application pour les messages envoyés par MailArchiver."
 
-#: includes/features/class-handlertypes.php:509
+#: includes/features/class-handlertypes.php:472
 msgid "Identifier"
 msgstr "Identifiant"
 
-#: includes/features/class-handlertypes.php:498
+#: includes/features/class-handlertypes.php:461
 msgid "The syslog facility for messages sent by MailArchiver."
 msgstr "L’identifiant d’équipement pour les messages envoyés par MailArchiver."
 
-#: includes/features/class-handlertypes.php:497
+#: includes/features/class-handlertypes.php:460
 msgid "Facility"
 msgstr "Équipement"
 
-#: includes/features/class-handlertypes.php:483
+#: includes/features/class-handlertypes.php:446
 msgid "The opened port on remote host to receive syslog messages."
 msgstr "Le port ouvert sur l’hôte distant permettant de recevoir les messages syslog."
 
-#: includes/features/class-handlertypes.php:482
+#: includes/features/class-handlertypes.php:445
 msgid "Port"
 msgstr "Port"
 
-#: includes/features/class-handlertypes.php:471
+#: includes/features/class-handlertypes.php:434
 msgid "The used syslog protocol."
 msgstr "Le protocole utilisé pour syslogd."
 
-#: includes/features/class-handlertypes.php:470
+#: includes/features/class-handlertypes.php:433
 msgid "Protocol"
 msgstr "Protocole"
 
-#: includes/features/class-handlertypes.php:459
+#: includes/features/class-handlertypes.php:422
 msgid "The remote host receiving syslog messages."
 msgstr "L’hôte distant recevant les messages syslog."
 
-#: includes/features/class-handlertypes.php:458
+#: includes/features/class-handlertypes.php:421
+#: includes/features/class-handlertypes.php:1232
 msgid "Host"
 msgstr "Hôte"
 
-#: includes/features/class-handlertypes.php:451
+#: includes/features/class-handlertypes.php:414
 msgid "An archive sent to a remote syslogd server."
 msgstr "Une archive envoyée à un serveur syslogd."
 
-#: includes/features/class-handlertypes.php:450
+#: includes/features/class-handlertypes.php:413
 msgid "Syslog"
 msgstr "Syslog"
 
-#: includes/features/class-handlertypes.php:398
+#: includes/features/class-handlertypes.php:814
 msgid "Whether the sent details should include context and extra data."
 msgstr "Indique si les pièces jointes doivent inclure le contexte et les données supplémentaires."
 
-#: includes/features/class-handlertypes.php:397
+#: includes/features/class-handlertypes.php:813
 msgid "Full data"
 msgstr "Données complètes"
 
-#: includes/features/class-handlertypes.php:386
+#: includes/features/class-handlertypes.php:802
 msgid "Use a shortened version of details sent in channel."
 msgstr "Utiliser une version simple pour les pièces jointes envoyées dans le canal."
 
-#: includes/features/class-handlertypes.php:385
+#: includes/features/class-handlertypes.php:801
 msgid "Short version"
 msgstr "Pièce jointe simple"
 
-#: includes/features/class-handlertypes.php:374
+#: includes/features/class-handlertypes.php:790
 msgid "The Webhook URL set in the Slack application."
 msgstr "L’URL du Webhook fixée dans l’application Slack."
 
-#: includes/features/class-handlertypes.php:373
+#: includes/features/class-handlertypes.php:789
 msgid "Webhook URL"
 msgstr "URL Webhook"
 
-#: includes/features/class-handlertypes.php:366
+#: includes/features/class-handlertypes.php:782
 msgid "Emails in error signaled through Slack Webhooks."
 msgstr "Courriels en erreur signalés via Slack Webhooks."
 
-#: includes/features/class-handlertypes.php:365
+#: includes/features/class-handlertypes.php:781
 msgid "Slack"
 msgstr "Slack"
 
-#: includes/features/class-handlertypes.php:325
+#: includes/features/class-handlertypes.php:945
 msgid "The maximal number of files to keep (0 means unlimited)."
 msgstr "Le nombre maximum de fichiers à conserver (0 signifie illimité)."
 
-#: includes/features/class-handlertypes.php:324
+#: includes/features/class-handlertypes.php:944
 msgid "Maximum"
 msgstr "Maximum"
 
-#: includes/features/class-handlertypes.php:313
+#: includes/features/class-handlertypes.php:933
 msgid "The full absolute path and filename, like \"/path/to/file\"."
 msgstr "Le chemin absolu complet et le nom de fichier, comme « /chemin/complet/du/fichier »."
 
-#: includes/features/class-handlertypes.php:312
+#: includes/features/class-handlertypes.php:932
 msgid "File"
 msgstr "Fichier"
 
-#: includes/features/class-handlertypes.php:305
+#: includes/features/class-handlertypes.php:925
 msgid "An archive sent to files that are rotated every day and a limited number of files are kept."
 msgstr "Une archive envoyée dans des fichiers différents tous les jours et dont un nombre limité est conservé."
 
-#: includes/features/class-handlertypes.php:304
+#: includes/features/class-handlertypes.php:924
 msgid "Rotating files"
 msgstr "Fichiers en rotation"
 
-#: includes/features/class-handlertypes.php:253
+#: includes/features/class-handlertypes.php:730
 msgid "The title of the message which will be sent."
 msgstr "Le titre du message qui sera envoyé."
 
-#: includes/features/class-handlertypes.php:252
+#: includes/features/class-handlertypes.php:729
 msgid "Message title"
 msgstr "Titre du message"
 
-#: includes/features/class-handlertypes.php:241
+#: includes/features/class-handlertypes.php:718
 msgid "The recipient key. It can be a \"user key\" or a \"group key\"."
 msgstr "La clé du destinataire. Il peut s’agir d’une « clé d’utilisateur·ice » ou d’une « clé de groupe »."
 
-#: includes/features/class-handlertypes.php:240
+#: includes/features/class-handlertypes.php:717
 msgid "Recipient"
 msgstr "Destinataire"
 
-#: includes/features/class-handlertypes.php:229
+#: includes/features/class-handlertypes.php:706
 msgid "The token of the Pushover application."
 msgstr "Le jeton d’application Pushover."
 
-#: includes/features/class-handlertypes.php:221
+#: includes/features/class-handlertypes.php:698
 msgid "Emails in error signaled to Pushover service."
 msgstr "Courriels en erreur signalés au service Pushover."
 
-#: includes/features/class-handlertypes.php:220
+#: includes/features/class-handlertypes.php:697
 msgid "Pushover"
 msgstr "Pushover"
 
-#: includes/features/class-handlertypes.php:196
+#: includes/features/class-handlertypes.php:389
 msgid "The token of the Solawinds Loggly application."
 msgstr "Le jeton d’application Solawinds Loggly."
 
-#: includes/features/class-handlertypes.php:195
-#: includes/features/class-handlertypes.php:228
+#: includes/features/class-handlertypes.php:388
+#: includes/features/class-handlertypes.php:705
 msgid "Application token"
 msgstr "Jeton d’application"
 
-#: includes/features/class-handlertypes.php:188
+#: includes/features/class-handlertypes.php:381
 msgid "An archive sent to Solawinds Loggly service."
 msgstr "Une archive envoyée envoyé au service Solawinds Loggly."
 
-#: includes/features/class-handlertypes.php:187
+#: includes/features/class-handlertypes.php:380
 msgid "Loggly"
 msgstr "Loggly"
 
-#: includes/features/class-handlertypes.php:140
+#: includes/features/class-handlertypes.php:333
 msgid "The token of the Logentries/insightOps log."
 msgstr "Le jeton du registre Logentries/insightOps."
 
-#: includes/features/class-handlertypes.php:139
+#: includes/features/class-handlertypes.php:332
 msgid "Log token"
 msgstr "Jeton de l’enregistreur"
 
-#: includes/features/class-handlertypes.php:133
+#: includes/features/class-handlertypes.php:326
 msgid "USA"
 msgstr "États-Unis"
 
-#: includes/features/class-handlertypes.php:133
+#: includes/features/class-handlertypes.php:326
 msgid "Europe"
 msgstr "Europe"
 
-#: includes/features/class-handlertypes.php:127
+#: includes/features/class-handlertypes.php:320
 msgid "The region of remote host receiving messages."
 msgstr "La région de l’hôte distant recevant les messages."
 
-#: includes/features/class-handlertypes.php:126
+#: includes/features/class-handlertypes.php:319
 msgid "Log endpoint region"
 msgstr "Région du registre"
 
-#: includes/features/class-handlertypes.php:119
+#: includes/features/class-handlertypes.php:312
 msgid "An archive sent to Logentries & insightOps service."
 msgstr "Une archive envoyée au service Logentries & insightOps."
 
-#: includes/features/class-handlertypes.php:118
+#: includes/features/class-handlertypes.php:311
 msgid "Logentries & insightOps"
 msgstr "Logentries & insightOps"
 
-#: includes/features/class-handlertypes.php:83
-#: includes/features/class-handlertypes.php:152
-#: includes/features/class-handlertypes.php:265
+#: includes/features/class-handlertypes.php:276
+#: includes/features/class-handlertypes.php:345
+#: includes/features/class-handlertypes.php:742
 msgid "Max number of milliseconds to wait for the socket."
 msgstr "Nombre maximal de millisecondes que le socket doit attendre."
 
-#: includes/features/class-handlertypes.php:82
-#: includes/features/class-handlertypes.php:151
-#: includes/features/class-handlertypes.php:264
+#: includes/features/class-handlertypes.php:275
+#: includes/features/class-handlertypes.php:344
+#: includes/features/class-handlertypes.php:741
 msgid "Socket timeout"
 msgstr "Délai d’attente du socket"
 
-#: includes/features/class-handlertypes.php:71
+#: includes/features/class-handlertypes.php:264
 msgid "Connection string to Fluentd. Can be something like \"tcp://127.0.0.1:24224\" or something like \"unix:///var/run/td-agent/td-agent.sock\"."
 msgstr "Chaîne de connexion à Fluentd. Peut être quelque chose comme « tcp://127.0.0.1:24224 » ou « unix:///var/run/td-agent/td-agent.sock »."
 
-#: includes/features/class-handlertypes.php:70
+#: includes/features/class-handlertypes.php:263
 msgid "Connection string"
 msgstr "Chaîne de connexion"
 
-#: includes/features/class-handlertypes.php:63
+#: includes/features/class-handlertypes.php:256
 msgid "An archive sent to a Fluentd collector."
 msgstr "Une archive envoyée à un collecteur Fluentd."
 
-#: includes/features/class-handlertypes.php:62
+#: includes/features/class-handlertypes.php:255
 msgid "Fluentd"
 msgstr "Fluentd"
 
-#: includes/features/class-handlertypes.php:49
+#: includes/features/class-handlertypes.php:1566
 msgid "Any email it can handle will be thrown away."
 msgstr "Tout courriel qu’il peut gérer sera oublié aussitôt."
 
-#: includes/features/class-handlertypes.php:48
+#: includes/features/class-handlertypes.php:1565
 msgid "Blackhole"
 msgstr "Trou noir"
 
-#: includes/features/class-eventviewer.php:444
+#: includes/features/class-eventviewer.php:445
 msgid "Deleted user"
 msgstr "Compte supprimé"
 
-#: includes/features/class-eventviewer.php:327
-#: includes/features/class-inlinehelp.php:348
+#: includes/features/class-eventviewer.php:328
+#: includes/features/class-inlinehelp.php:369
 msgid "Content"
 msgstr "Contenu"
 
-#: includes/features/class-eventviewer.php:325
-#: includes/features/class-inlinehelp.php:347
+#: includes/features/class-eventviewer.php:326
+#: includes/features/class-inlinehelp.php:368
 msgid "Headers"
 msgstr "En-têtes"
 
-#: includes/features/class-eventviewer.php:322
-#: includes/features/class-inlinehelp.php:345
+#: includes/features/class-eventviewer.php:323
+#: includes/features/class-inlinehelp.php:366
 msgid "Request details"
 msgstr "Détails de la requête"
 
-#: includes/features/class-eventviewer.php:321
-#: includes/features/class-inlinehelp.php:344
+#: includes/features/class-eventviewer.php:322
+#: includes/features/class-inlinehelp.php:365
 msgid "Recipients"
 msgstr "Destinataires"
 
-#: includes/features/class-eventviewer.php:320
-#: includes/features/class-inlinehelp.php:343
+#: includes/features/class-eventviewer.php:321
+#: includes/features/class-inlinehelp.php:364
 msgid "Message details"
 msgstr "Détails du courriel"
 
-#: includes/features/class-eventviewer.php:284
+#: includes/features/class-eventviewer.php:285
 msgid "Email: %s"
 msgstr "Courriel : %s"
 
-#: includes/features/class-eventviewer.php:282
+#: includes/features/class-eventviewer.php:283
 msgid "Archive: %s"
 msgstr "Archive : %s"
 
-#: includes/features/class-eventviewer.php:279
+#: includes/features/class-eventviewer.php:280
 msgid "If you think this is an error, please contact the network administrator with these details:"
-msgstr "Si vous pensez qu’il s’agit d’une erreur, veuillez contacter l’administratrice ou administrateur du réseau avec ces informations :"
+msgstr "Si vous pensez qu’il s’agit d’une erreur, veuillez contacter l’administrateur·ice du réseau avec ces informations :"
 
-#: includes/features/class-eventviewer.php:278
+#: includes/features/class-eventviewer.php:279
 msgid "The email archive you tried to access is out of your scope."
 msgstr "Le courriel archivé auquel vous avez tenté d’accéder est hors de votre portée."
 
-#: includes/features/class-eventviewer.php:276
+#: includes/features/class-eventviewer.php:277
 msgid "Forbidden"
 msgstr "Interdit"
 
-#: includes/features/class-eventviewer.php:196
+#: includes/features/class-eventviewer.php:197
 msgid "Boxes"
 msgstr "Blocs"
 
-#: includes/features/class-eventviewer.php:143
+#: includes/features/class-eventviewer.php:144
 msgid "unknown"
 msgstr "inconnu"
 
-#: includes/features/class-eventviewer.php:140
-msgid "encrypted"
-msgstr "chiffré"
-
-#: includes/features/class-eventviewer.php:108
+#: includes/features/class-eventviewer.php:109
 msgid "malformed"
 msgstr "malformé"
 
-#: includes/features/class-eventtypes.php:88
+#: includes/features/class-eventtypes.php:99
 msgid "The email was not sent, an error was generated."
 msgstr "Ce courriel n’a pas été envoyé, une erreur s’est produite."
 
-#: includes/features/class-eventtypes.php:87
+#: includes/features/class-eventtypes.php:98
 msgid "The email was successfully sent."
 msgstr "Ce courriel a été envoyé."
 
-#: includes/features/class-eventtypes.php:86
+#: includes/features/class-eventtypes.php:97
 msgid "The sent status of the email is unknown."
 msgstr "L’état d’envoi du courriel est inconnu."
 
-#: includes/features/class-archivers.php:236
-#: admin/class-mailarchiver-admin.php:241
+#: admin/class-mailarchiver-admin.php:259
 msgid "Reported details"
 msgstr "Détails consignés"
 
-#: includes/features/class-archivers.php:235
-msgid "Records"
-msgstr "Enregistrements"
-
-#: includes/features/class-archivers.php:234
+#: includes/features/class-archivers.php:250
 msgid "Status"
 msgstr "État"
 
-#: includes/features/class-archivers.php:233
+#: includes/features/class-archivers.php:249
 msgid "Archiver"
 msgstr "Archiveur"
 
-#: includes/features/class-archivers.php:204
-#: admin/class-mailarchiver-admin.php:1031
+#: admin/class-mailarchiver-admin.php:1123
+#: includes/features/class-archivers.php:206
 msgid "Standard"
 msgstr "Standard"
 
-#: includes/features/class-archivers.php:192
+#: includes/features/class-archivers.php:193
 msgid "Paused"
 msgstr "En pause"
 
@@ -1338,8 +1724,8 @@ msgid "Site"
 msgstr "Site"
 
 #: includes/features/class-events.php:637
-#: includes/features/class-eventviewer.php:324
-#: includes/features/class-inlinehelp.php:346
+#: includes/features/class-eventviewer.php:325
+#: includes/features/class-inlinehelp.php:367
 msgid "Attachments"
 msgstr "Pièces jointes"
 
@@ -1355,8 +1741,8 @@ msgstr "À"
 msgid "Email"
 msgstr "Courriel"
 
-#: admin/partials/mailarchiver-admin-view-events-top.php:21
 #: admin/partials/mailarchiver-admin-view-events-bottom.php:21
+#: admin/partials/mailarchiver-admin-view-events-top.php:21
 msgid "Apply"
 msgstr "Appliquer"
 
@@ -1389,12 +1775,12 @@ msgid "User ID %s"
 msgstr "ID de compte %s"
 
 #: includes/features/class-events.php:251
-#: includes/features/class-eventviewer.php:440
+#: includes/features/class-eventviewer.php:441
 msgid "Pseudonymized user"
 msgstr "Compte pseudonymisé"
 
 #: includes/features/class-events.php:247
-#: includes/features/class-eventviewer.php:438
+#: includes/features/class-eventviewer.php:439
 msgid "Anonymous user"
 msgstr "Anonyme"
 
@@ -1403,27 +1789,27 @@ msgid "Site ID %s"
 msgstr "Site ID %s"
 
 #: includes/features/class-events.php:176
-#: includes/features/class-eventviewer.php:406
+#: includes/features/class-eventviewer.php:407
 msgid "Masked address"
 msgstr "Adresse masquée"
 
-#: includes/listeners/class-corelistener.php:38
+#: includes/listeners/class-corelistener.php:39
 msgid "WordPress core"
 msgstr "Cœur de WordPress"
 
-#: includes/system/class-environment.php:239
+#: includes/system/class-environment.php:248
 msgid "Debug disabled"
 msgstr "Débogage désactivé"
 
-#: includes/system/class-environment.php:239
+#: includes/system/class-environment.php:248
 msgid "Debug enabled"
 msgstr "Débogage activé"
 
-#: includes/system/class-environment.php:233
+#: includes/system/class-environment.php:242
 msgid "display"
 msgstr "affichage"
 
-#: includes/system/class-environment.php:228
+#: includes/system/class-environment.php:237
 msgid "log"
 msgstr "registre"
 
@@ -1539,33 +1925,35 @@ msgstr "il y a %s"
 
 #. translators: as in the sentence "Product W version X by author Y (license
 #. Z)"
-#: includes/libraries/class-libraries.php:211
+#: includes/libraries/class-libraries.php:263
 msgid "<a href=\"%1$s\">%2$s %3$s</a>%4$s by %5$s (%6$s)"
 msgstr "<a href=\"%1$s\">%2$s %3$s</a>%4$s par %5$s (%6$s)"
 
-#: includes/libraries/class-libraries.php:159
+#: includes/libraries/class-libraries.php:211
 msgid "unknown license"
 msgstr "licence inconnue"
 
-#: includes/libraries/class-libraries.php:156
+#: includes/libraries/class-libraries.php:208
 msgid "GPL-3.0 license"
 msgstr "Licence GPL-3.0"
 
-#: includes/libraries/class-libraries.php:153
+#: includes/libraries/class-libraries.php:205
 msgid "GPL-2.0 license"
 msgstr "Licence GPL-2.0"
 
-#: includes/libraries/class-libraries.php:150
+#: includes/libraries/class-libraries.php:202
 msgid "Apache license, version 2.0"
 msgstr "Licence Apache, version 2.0"
 
-#: includes/libraries/class-libraries.php:147
+#: includes/libraries/class-libraries.php:199
 msgid "MIT license"
 msgstr "Licence MIT"
 
 #: includes/libraries/class-libraries.php:65
 #: includes/libraries/class-libraries.php:76
-#: includes/libraries/class-libraries.php:97
+#: includes/libraries/class-libraries.php:87
+#: includes/libraries/class-libraries.php:138
+#: includes/libraries/class-libraries.php:149
 msgid "%s & contributors"
 msgstr "%s et contributeurs"
 

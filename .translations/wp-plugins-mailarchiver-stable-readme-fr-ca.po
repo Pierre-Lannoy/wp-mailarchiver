@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MailArchiver - Stable Readme (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-06-24 15:29+0200\n"
+"PO-Revision-Date: 2021-09-30 10:41+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,6 +21,30 @@ msgstr "Archivez automatiquement tous les courriels envoyés à partir de votre 
 #. Plugin name.
 msgid "MailArchiver"
 msgstr "MailArchiver"
+
+#. Found in description paragraph.
+msgid "For a full list of supported - internal or third-party - services please, jump to the official <a href=\"https://perfops.one/mailarchiver#services\">supported services list</a>."
+msgstr "Pour une liste complète des services utilisables - internes ou tiers - merci de consulter la liste officielle des <a href=\"https://perfops.one/mailarchiver#services\">services pris en charge</a>."
+
+#. Found in description list item.
+msgid "decrypt a previously encrypted mail body - see <code>wp help m-archive decrypt</code> for details;"
+msgstr "déchiffrer un corps de courrier précédemment chiffré - voir <code>wp help m-archive decrypt</code> pour plus de détails ;"
+
+#. Found in description list item.
+msgid "to external testing &amp; previewing services, like Litmus, MailerCheck or Email on Acid;"
+msgstr "à des services externes de test et de prévisualisation, comme Litmus, MailerCheck ou Email on Acid ;"
+
+#. Found in description list item.
+msgid "to external storage services, like Elasticsearch, Elastic Cloud, Loki or Grafana Cloud;"
+msgstr "à des services de stockage externes, comme Elasticsearch, Elastic Cloud, Loki ou Grafana Cloud ;"
+
+#. Found in description list item.
+msgid "to Imap servers, like GMail, Gandi, OVH or Outlook.Com;"
+msgstr "à des serveurs Imap, tels que GMail, Gandi, OVH ou Outlook.Com ;"
+
+#. Screenshot description.
+msgid "Available Archivers Types"
+msgstr "Types d’archiveurs disponibles"
 
 #. Found in description paragraph.
 msgid "<strong>MailArchiver</strong> is part of <a href=\"https://perfops.one/\">PerfOps One</a>, a suite of free and open source WordPress plugins dedicated to observability and operations performance."
@@ -183,8 +207,8 @@ msgid "<strong>Automatically archive all emails sent from your site. Store them 
 msgstr "<strong>Archivez automatiquement tous les courriels envoyés à partir de votre site. Stockez-les dans votre base de données WordPress ou envoyez-les à des services externes.</strong>"
 
 #. Found in description list item.
-msgid "to system loggers, like Syslog or Fluentd;"
-msgstr "avec des enregistreurs systèmes, comme Syslog ou Fluentd ;"
+msgid "to system loggers, like Syslog or Fluentd."
+msgstr "avec des enregistreurs systèmes, comme Syslog ou Fluentd."
 
 #. Found in description list item.
 msgid "to external logging services, like Logentries / insightOps or Loggly;"
