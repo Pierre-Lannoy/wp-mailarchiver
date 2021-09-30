@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [2.5.1] - Not yet Released
 
 ### Fixed
+- Content type parsing may produce PHP errors in some cases.
 - There's some typos in the admin UI.
 
 ## [2.5.0] - 2021-09-29

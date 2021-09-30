@@ -77,6 +77,8 @@ function mailarchiver_wp_mail( $to, $subject, $message, $headers = '', $attachme
 		$attachments = explode( "\n", str_replace( "\r\n", "\n", $attachments ) );
 	}
 
+	$content_type = '';
+
 	// Create the PHPMailer instance.
 	require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
 	require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
