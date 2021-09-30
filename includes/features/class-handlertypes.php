@@ -1242,7 +1242,7 @@ class HandlerTypes {
 						'type'    => 'string',
 						'show'    => true,
 						'name'    => esc_html__( 'Root', 'mailarchiver' ),
-						'help'    => esc_html__( 'The root\'s mailbox. Do not change it if you don\'t know what it is.', 'mailarchiver' ) . '<br/>' . sprintf( esc_html__( 'Note: the archives will be stored in %s.', 'mailarchiver' ), '<code>' . Imap::get_mailbox_name( '{root}', '/' ) . '</code>' ),
+						'help'    => esc_html__( 'The mailbox\s root. Do not change it if you don\'t know what it is.', 'mailarchiver' ) . '<br/>' . sprintf( esc_html__( 'Note: the archives will be stored in %s.', 'mailarchiver' ), '<code>' . Imap::get_mailbox_name( '{root}', '/' ) . '</code>' ),
 						'default' => 'INBOX',
 						'control' => [
 							'type'    => 'field_input_text',
