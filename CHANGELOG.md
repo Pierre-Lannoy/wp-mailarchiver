@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Content type parsing may produce PHP errors in some cases.
 - There's some typos in the admin UI.
+- [SEC002] The password for some services are in plain text in "Site Health Info" page.
 
 ## [2.5.0] - 2021-09-29
 
