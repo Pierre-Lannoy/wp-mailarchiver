@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Content type parsing may produce PHP errors in some cases.
 - There's some typos in the admin UI.
 - [SEC002] The password for some services are in plain text in "Site Health Info" page.
+- There's typos in `CHANGELOG.md`.
 
 ## [2.5.0] - 2021-09-29
 
@@ -207,7 +208,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [1.4.0] - 2020-03-01
 
 ### Added
-- Full integration with PerfOps.One suite.
+- Full integration with PerfOps One suite.
 - Full compatibility with [APCu Manager](https://wordpress.org/plugins/apcu-manager/).
 - Compatibility with WordPress 5.4.
 
