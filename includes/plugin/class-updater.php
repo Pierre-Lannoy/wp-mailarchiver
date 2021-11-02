@@ -38,6 +38,7 @@ class Updater {
 	 */
 	public function __construct() {
 		$old = Option::network_get( 'version' );
+		Option::network_set( 'version', MAILARCHIVER_VERSION );
 		if ( MAILARCHIVER_VERSION !== $old ) {
 			if ( '0.0.0' === $old ) {
 				$this->install();
@@ -52,7 +53,6 @@ class Updater {
 				$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'mailarchiver' ), admin_url( 'admin.php?page=mailarchiver-settings&tab=about' ) );
 			}
 			Nag::add( 'update', 'info', $message );
-			Option::network_set( 'version', MAILARCHIVER_VERSION );
 		}
 	}
 
