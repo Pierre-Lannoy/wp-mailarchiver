@@ -303,19 +303,19 @@ class Events extends \WP_List_Table {
 			$this->limit = 25;
 		}
 		$this->force_siteid = null;
-		$this->archiver     = filter_input( INPUT_GET, 'archiver_id', FILTER_SANITIZE_STRING );
+		$this->archiver     = filter_input( INPUT_GET, 'archiver_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		if ( $this->archiver ) {
 			$this->set_level_access();
 		} else {
 			$this->set_first_available();
 		}
 		$this->filters = [];
-		$level         = filter_input( INPUT_GET, 'level', FILTER_SANITIZE_STRING );
+		$level         = filter_input( INPUT_GET, 'level', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		if ( $level && array_key_exists( strtolower( $level ), EventTypes::$levels ) && 'debug' !== strtolower( $level ) ) {
 			$this->filters['level'] = strtolower( $level );
 		}
 		foreach ( [ 'to', 'site_id', 'user_id', 'remote_ip' ] as $f ) {
-			$v = filter_input( INPUT_GET, $f, FILTER_SANITIZE_STRING );
+			$v = filter_input( INPUT_GET, $f, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			if ( $v ) {
 				$this->filters[ $f ] = strtolower( $v );
 			}

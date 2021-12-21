@@ -116,9 +116,9 @@ class Mailarchiver_Admin {
 	public function set_viewer_help( $hook_suffix ) {
 		$this->current_view = null;
 		add_action( 'load-' . $hook_suffix, [ new InlineHelp(), 'set_contextual_viewer' ] );
-		$logid   = filter_input( INPUT_GET, 'logid', FILTER_SANITIZE_STRING );
+		$logid   = filter_input( INPUT_GET, 'logid', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$eventid = filter_input( INPUT_GET, 'eventid', FILTER_SANITIZE_NUMBER_INT );
-		if ( 'mailarchiver-viewer' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
+		if ( 'mailarchiver-viewer' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
 			if ( isset( $logid ) && isset( $eventid ) && 0 !== $eventid ) {
 				$this->current_view = new EventViewer( $logid, $eventid );
 				add_action( 'load-' . $hook_suffix, [ $this->current_view, 'add_metaboxes_options' ] );
@@ -202,7 +202,7 @@ class Mailarchiver_Admin {
 	 * @since 1.0.0
 	 */
 	public function init_admin_menus() {
-		if ( 'mailarchiver-settings' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
+		if ( 'mailarchiver-settings' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
 			remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 			remove_action( 'admin_print_styles', 'print_emoji_styles' );
 		}
@@ -568,7 +568,7 @@ class Mailarchiver_Admin {
 		if ( ! empty( $_POST ) ) {
 			if ( array_key_exists( '_wpnonce', $_POST ) && wp_verify_nonce( $_POST['_wpnonce'], 'mailarchiver-archiver-edit' ) ) {
 				if ( array_key_exists( 'submit', $_POST ) ) {
-					$this->current_archiver['name']                         = ( array_key_exists( 'mailarchiver_archiver_misc_name', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_name', FILTER_SANITIZE_STRING ) : $this->current_archiver['name'] );
+					$this->current_archiver['name']                         = ( array_key_exists( 'mailarchiver_archiver_misc_name', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) : $this->current_archiver['name'] );
 					$this->current_archiver['level']                        = ( array_key_exists( 'mailarchiver_archiver_misc_level', $_POST ) ? filter_input( INPUT_POST, 'mailarchiver_archiver_misc_level', FILTER_SANITIZE_NUMBER_INT ) : $this->current_archiver['level'] );
 					$this->current_archiver['privacy']['obfuscation']       = ( array_key_exists( 'mailarchiver_archiver_privacy_ip', $_POST ) ? true : false );
 					$this->current_archiver['privacy']['pseudonymization']  = ( array_key_exists( 'mailarchiver_archiver_privacy_name', $_POST ) ? true : false );
@@ -591,7 +591,7 @@ class Mailarchiver_Admin {
 							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_SANITIZE_NUMBER_INT ) : $this->current_archiver['configuration'][ $key ] );
 						}
 						if ( 'string' === $configuration['control']['cast'] ) {
-							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_SANITIZE_STRING ) : $this->current_archiver['configuration'][ $key ] );
+							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_SANITIZE_FULL_SPECIAL_CHARS ) : $this->current_archiver['configuration'][ $key ] );
 						}
 						if ( 'password' === $configuration['control']['cast'] ) {
 							$this->current_archiver['configuration'][ $key ] = ( array_key_exists( $id, $_POST ) ? filter_input( INPUT_POST, $id, FILTER_UNSAFE_RAW ) : $this->current_archiver['configuration'][ $key ] );

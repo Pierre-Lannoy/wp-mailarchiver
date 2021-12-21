@@ -256,7 +256,7 @@ class DArchiver {
 			$result = true;
 			// phpcs:ignore
 			set_error_handler( function () use (&$result) {$result = false;} );
-			$this->archiver->info( filter_var( $message, FILTER_SANITIZE_STRING ), $this->context( $mail ) );
+			$this->archiver->info( filter_var( $message, FILTER_SANITIZE_FULL_SPECIAL_CHARS ), $this->context( $mail ) );
 			// phpcs:ignore
 			restore_error_handler();
 		} catch ( \Throwable $t ) {
@@ -289,7 +289,7 @@ class DArchiver {
 			$result = true;
 			// phpcs:ignore
 			set_error_handler( function () use (&$result) {$result = false;} );
-			$this->archiver->error( filter_var( $message, FILTER_SANITIZE_STRING ), $this->context( $mail ) );
+			$this->archiver->error( filter_var( $message, FILTER_SANITIZE_FULL_SPECIAL_CHARS ), $this->context( $mail ) );
 			// phpcs:ignore
 			restore_error_handler();
 		} catch ( \Throwable $t ) {
