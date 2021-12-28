@@ -66,6 +66,7 @@ class Option {
 	 * @since 1.0.0
 	 */
 	public static function init() {
+		self::$defaults['use_apcu']         = true;
 		self::$defaults['use_cdn']            = false;
 		self::$defaults['download_favicons']  = false;
 		self::$defaults['script_in_footer']   = false;
@@ -78,7 +79,7 @@ class Option {
 		self::$defaults['archiver_autostart'] = true;  // In plugin settings.
 		self::$defaults['autolisteners']      = true;  // In plugin settings.
 		self::$defaults['listeners']          = [];    // In plugin settings.
-		self::$network                        = [ 'version', 'use_cdn', 'download_favicons', 'script_in_footer', 'display_nag', 'archiver_autostart', 'autolisteners', 'privileges', 'mode' ];
+		self::$network                        = [ 'version', 'use_cdn', 'use_apcu',  'download_favicons', 'script_in_footer', 'display_nag', 'archiver_autostart', 'autolisteners', 'privileges', 'mode' ];
 	}
 
 	/**
