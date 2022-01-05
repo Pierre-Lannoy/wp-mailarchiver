@@ -119,7 +119,10 @@ class Cache {
 		if ( wp_using_ext_object_cache() ) {
 			wp_cache_add_global_groups( self::$pool_name );
 		}
-		self::$apcu_pool_prefix = md5( ABSPATH ) . '_';
+		if ( ! defined( 'APCU_CACHE_PREFIX' ) ) {
+			define( 'APCU_CACHE_PREFIX', '_' . md5( ABSPATH ) . '_' );
+		}
+		self::$apcu_pool_prefix = APCU_CACHE_PREFIX;
 		self::$apcu_available = function_exists( 'apcu_delete' ) && function_exists( 'apcu_fetch' ) && function_exists( 'apcu_store' );
 		add_action( 'shutdown', [ 'MailArchiver\System\Cache', 'log_debug' ], 10, 0 );
 		add_filter( 'perfopsone_icache_introspection', [ 'MailArchiver\System\Cache', 'introspection' ] );
@@ -208,7 +211,7 @@ class Cache {
 		$item_name = self::normalized_item_name( $item_name );
 		$found     = false;
 		if ( self::$apcu_available && Option::network_get( 'use_apcu', true ) ) {
-			$result = apcu_fetch( self::$apcu_pool_prefix . self::$pool_name . '_' . $item_name, $found );
+			$result = apcu_fetch(  self::$pool_name . self::$apcu_pool_prefix . $item_name, $found );
 		} elseif ( wp_using_ext_object_cache() ) {
 			$result = wp_cache_get( $item_name, self::$pool_name, false, $found );
 		} else {
@@ -283,7 +286,7 @@ class Cache {
 		}
 		if ( $expiration > 0 ) {
 			if ( self::$apcu_available && Option::network_get( 'use_apcu', true ) ) {
-				$result = apcu_store( self::$apcu_pool_prefix . self::$pool_name . '_' . $item_name, $value, $expiration );
+				$result = apcu_store( self::$pool_name . self::$apcu_pool_prefix . $item_name, $value, $expiration );
 			}  elseif ( wp_using_ext_object_cache() ) {
 				$result = wp_cache_set( $item_name, $value, self::$pool_name, $expiration );
 			} else {
@@ -356,7 +359,7 @@ class Cache {
 			if ( strlen( $item_name ) - 1 === strpos( $item_name, '_*' ) ) {
 				return false;
 			} else {
-				return apcu_delete( self::$apcu_pool_prefix . self::$pool_name . '_' . $item_name );
+				return apcu_delete( self::$pool_name . self::$apcu_pool_prefix . $item_name );
 			}
 		}
 		if ( wp_using_ext_object_cache() ) {
@@ -398,7 +401,7 @@ class Cache {
 					$infos = apcu_cache_info( false );
 					if ( array_key_exists( 'cache_list', $infos ) && is_array( $infos['cache_list'] ) ) {
 						foreach ( $infos['cache_list'] as $script ) {
-							if ( 0 === strpos( $script['info'], self::$apcu_pool_prefix . self::$pool_name . '_' ) ) {
+							if ( 0 === strpos( $script['info'], self::$pool_name . self::$apcu_pool_prefix ) ) {
 								apcu_delete( $script['info'] );
 								$result++;
 							}
