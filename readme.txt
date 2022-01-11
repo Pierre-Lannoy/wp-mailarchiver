@@ -4,7 +4,7 @@ Tags: archive, email, email log, log, mail
 Requires at least: 5.2
 Requires PHP: 7.2
 Tested up to: 5.9
-Stable tag: 2.6.0
+Stable tag: 2.7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,6 +13,8 @@ Automatically archive all emails sent from your site. Store them in your WordPre
 == Description ==
 
 **Automatically archive all emails sent from your site. Store them in your WordPress database or send them to external services.**
+
+> 🎁 Give this plugin a drive test on a free dummy site: [One-Click Test!](https://tastewp.com/new/?pre-installed-plugin-slug=mailarchiver)
 
 **MailArchiver** is a tool that allows you to:
 
