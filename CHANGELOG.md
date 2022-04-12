@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [2.8.0] - Not Yet Released
 
 ### Added
+- Compatibility with WordPress 6.0.
 
 ### Changed
 - Site Health page now presents a much more realistic test about object caching.
