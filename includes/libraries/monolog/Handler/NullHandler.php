@@ -22,8 +22,8 @@ use Psr\Log\LogLevel;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  *
- * @phpstan-import-type Level from \Monolog\Logger
- * @phpstan-import-type LevelName from \Monolog\Logger
+ * @phpstan-import-type Level from \MAMonolog\Logger
+ * @phpstan-import-type LevelName from \MAMonolog\Logger
  */
 class NullHandler extends Handler
 {

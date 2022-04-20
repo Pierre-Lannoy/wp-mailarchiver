@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Site Health page now presents a much more realistic test about object caching.
 - Improved favicon handling for new Google API specifications.
 - Updated DecaLog SDK from version 2.0.2 to version 3.0.0.
+- Upgraded Monolog library from version 2.3.4 to version 2.5.0.
 
 ### Fixed
 

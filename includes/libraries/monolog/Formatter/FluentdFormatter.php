@@ -27,9 +27,9 @@ use MAMonolog\Utils;
  *
  * Monolog setup:
  *
- * $logger = new Monolog\Logger('fluent.tag');
- * $fluentHandler = new Monolog\Handler\SocketHandler('unix:///var/run/td-agent/td-agent.sock');
- * $fluentHandler->setFormatter(new Monolog\Formatter\FluentdFormatter());
+ * $logger = new MAMonolog\Logger('fluent.tag');
+ * $fluentHandler = new MAMonolog\Handler\SocketHandler('unix:///var/run/td-agent/td-agent.sock');
+ * $fluentHandler->setFormatter(new MAMonolog\Formatter\FluentdFormatter());
  * $logger->pushHandler($fluentHandler);
  *
  * @author Andrius Putna <fordnox@gmail.com>

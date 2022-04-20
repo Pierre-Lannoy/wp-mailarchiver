@@ -16,7 +16,7 @@ namespace MAMonolog\Formatter;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  *
- * @phpstan-import-type Record from \Monolog\Logger
+ * @phpstan-import-type Record from \MAMonolog\Logger
  */
 interface FormatterInterface
 {

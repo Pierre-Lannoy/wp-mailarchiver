@@ -23,9 +23,9 @@ use MAMonolog\Formatter\MongoDBFormatter;
  *
  * Usage example:
  *
- *   $log = new \Monolog\Logger('application');
+ *   $log = new \MAMonolog\Logger('application');
  *   $client = new \MongoDB\Client('mongodb://localhost:27017');
- *   $mongodb = new \Monolog\Handler\MongoDBHandler($client, 'logs', 'prod');
+ *   $mongodb = new \MAMonolog\Handler\MongoDBHandler($client, 'logs', 'prod');
  *   $log->pushHandler($mongodb);
  *
  * The above examples uses the MongoDB PHP library's client class; however, the

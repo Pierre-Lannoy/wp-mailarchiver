@@ -19,7 +19,7 @@ use MAMonolog\Formatter\HtmlFormatter;
  *
  * @author Gyula Sallai
  *
- * @phpstan-import-type Record from \Monolog\Logger
+ * @phpstan-import-type Record from \MAMonolog\Logger
  */
 abstract class MailHandler extends AbstractProcessingHandler
 {

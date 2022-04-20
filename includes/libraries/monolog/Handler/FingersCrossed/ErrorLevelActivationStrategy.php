@@ -19,8 +19,8 @@ use Psr\Log\LogLevel;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  *
- * @phpstan-import-type Level from \Monolog\Logger
- * @phpstan-import-type LevelName from \Monolog\Logger
+ * @phpstan-import-type Level from \MAMonolog\Logger
+ * @phpstan-import-type LevelName from \MAMonolog\Logger
  */
 class ErrorLevelActivationStrategy implements ActivationStrategyInterface
 {

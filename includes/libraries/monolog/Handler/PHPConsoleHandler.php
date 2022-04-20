@@ -30,15 +30,15 @@ use PhpConsole\Helper;
  * 3. Install PHP Console library https://github.com/barbushin/php-console#installation
  * 4. Example (result will looks like http://i.hizliresim.com/vg3Pz4.png)
  *
- *      $logger = new \Monolog\Logger('all', array(new \Monolog\Handler\PHPConsoleHandler()));
- *      \Monolog\ErrorHandler::register($logger);
+ *      $logger = new \MAMonolog\Logger('all', array(new \MAMonolog\Handler\PHPConsoleHandler()));
+ *      \MAMonolog\ErrorHandler::register($logger);
  *      echo $undefinedVar;
  *      $logger->debug('SELECT * FROM users', array('db', 'time' => 0.012));
  *      PC::debug($_SERVER); // PHP Console debugger for any type of vars
  *
  * @author Sergey Barbushin https://www.linkedin.com/in/barbushin
  *
- * @phpstan-import-type Record from \Monolog\Logger
+ * @phpstan-import-type Record from \MAMonolog\Logger
  */
 class PHPConsoleHandler extends AbstractProcessingHandler
 {
@@ -70,7 +70,7 @@ class PHPConsoleHandler extends AbstractProcessingHandler
     private $connector;
 
     /**
-     * @param  array<string, mixed> $options   See \Monolog\Handler\PHPConsoleHandler::$options for more details
+     * @param  array<string, mixed> $options   See \MAMonolog\Handler\PHPConsoleHandler::$options for more details
      * @param  Connector|null       $connector Instance of \PhpConsole\Connector class (optional)
      * @throws \RuntimeException
      */

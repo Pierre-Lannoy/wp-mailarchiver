@@ -23,7 +23,7 @@ use MAMonolog\Utils;
  *
  * @author Christophe Coevoet <stof@notk.org>
  *
- * @phpstan-import-type Record from \Monolog\Logger
+ * @phpstan-import-type Record from \MAMonolog\Logger
  */
 class ChromePHPHandler extends AbstractProcessingHandler
 {

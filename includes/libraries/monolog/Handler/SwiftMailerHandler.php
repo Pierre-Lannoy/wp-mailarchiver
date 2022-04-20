@@ -12,6 +12,7 @@
 namespace MAMonolog\Handler;
 
 use MAMonolog\Logger;
+use MAMonolog\Utils;
 use MAMonolog\Formatter\FormatterInterface;
 use MAMonolog\Formatter\LineFormatter;
 use Swift_Message;
@@ -22,7 +23,7 @@ use Swift;
  *
  * @author Gyula Sallai
  *
- * @phpstan-import-type Record from \Monolog\Logger
+ * @phpstan-import-type Record from \MAMonolog\Logger
  */
 class SwiftMailerHandler extends MailHandler
 {
@@ -83,7 +84,8 @@ class SwiftMailerHandler extends MailHandler
         }
 
         if (!$message instanceof Swift_Message) {
-            throw new \InvalidArgumentException('Could not resolve message as instance of Swift_Message or a callable returning it');
+            $record = reset($records);
+            throw new \InvalidArgumentException('Could not resolve message as instance of Swift_Message or a callable returning it' . ($record ? Utils::getRecordMessageForException($record) : ''));
         }
 
         if ($records) {

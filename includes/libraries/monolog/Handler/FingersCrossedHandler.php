@@ -30,13 +30,13 @@ use Psr\Log\LogLevel;
  * warning level.
  *
  * You can find the various activation strategies in the
- * Monolog\Handler\FingersCrossed\ namespace.
+ * MAMonolog\Handler\FingersCrossed\ namespace.
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  *
- * @phpstan-import-type Record from \Monolog\Logger
- * @phpstan-import-type Level from \Monolog\Logger
- * @phpstan-import-type LevelName from \Monolog\Logger
+ * @phpstan-import-type Record from \MAMonolog\Logger
+ * @phpstan-import-type Level from \MAMonolog\Logger
+ * @phpstan-import-type LevelName from \MAMonolog\Logger
  */
 class FingersCrossedHandler extends Handler implements ProcessableHandlerInterface, ResettableInterface, FormattableHandlerInterface
 {
