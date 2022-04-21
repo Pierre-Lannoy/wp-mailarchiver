@@ -11,8 +11,10 @@
 
 namespace Mailarchiver\Plugin\Feature;
 
+use Mailarchiver\Plugin\Feature\PrivacyOptions;
 use Mailarchiver\System\Option;
 use Mailarchiver\Plugin\Feature\Archive;
+use Feather\Icons;
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
@@ -211,6 +213,11 @@ class Archivers extends \WP_List_Table {
 		}
 		$level   = strtolower( EventTypes::$level_names[ $item['level'] ] );
 		$result .= '<span style="margin-bottom: 6px;vertical-align: middle;font-size:10px;display: inline-block;text-transform:uppercase;font-weight: 900;background-color:' . EventTypes::$levels_colors[ $level ][0] . ';color:' . EventTypes::$levels_colors[ $level ][1] . ';border-radius:2px;border: 1px solid ' . EventTypes::$levels_colors[ $level ][1] . ';cursor: default;word-break: break-word;">&nbsp;&nbsp;&nbsp;' . strtolower( Archive::level_name( $item['level'] ) ) . '&nbsp;&nbsp;&nbsp;</span>';
+		foreach ( PrivacyOptions::$options as $option ) {
+			if ( $item['privacy'][$option] ) {
+				$result .= '<img alt="' . PrivacyOptions::$options_names[ $option ] . '" title="' . PrivacyOptions::$options_names[ $option ] . '" style="width:16px;padding-left:6px;padding-top:6px;" src="' . Icons::get_base64( PrivacyOptions::$options_icons[ $option ], 'none', '#9999BB' ) . '" />';
+			}
+		}
 		$result .= '<br/>' . implode( ' ', $list );
 		return $result;
 	}
