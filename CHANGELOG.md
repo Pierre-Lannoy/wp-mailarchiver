@@ -3,6 +3,14 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.0] - Not Yet Released
+
+### Added
+- Compatibility with WordPress 6.1.
+
+### Changed
+- Upgraded Monolog library from version 2.5.0 to version 2.8.0.
+
 ## [2.8.0] - 2022-04-21
 
 ### Added
