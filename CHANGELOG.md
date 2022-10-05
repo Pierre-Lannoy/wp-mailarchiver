@@ -7,11 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - Compatibility with WordPress 6.1.
-- [WPCLI] The result of `wp m-archive` commands are now logged in [DecaLog](https://wordpress.org/plugins/decalog/).
+- [WPCLI] The results of `wp m-archive` commands are now logged in [DecaLog](https://wordpress.org/plugins/decalog/).
 
 ### Changed
 - Upgraded Monolog library from version 2.5.0 to version 2.8.0.
-- [WPCLI] The result of `wp m-archive` commands are now prefixed by the product name.
+- [WPCLI] The results of `wp m-archive` commands are now prefixed by the product name.
 
 ## [2.8.0] - 2022-04-21
 
