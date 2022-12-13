@@ -44,7 +44,7 @@ class Mailarchiver_Public {
 	 * @since 1.0.0
 	 */
 	public function register_styles() {
-		$this->assets->register_style( MAILARCHIVER_ASSETS_ID, MAILARCHIVER_PUBLIC_URL, 'css/mailarchiver.min.css' );
+		//$this->assets->register_style( MAILARCHIVER_ASSETS_ID, MAILARCHIVER_PUBLIC_URL, 'css/mailarchiver.min.css' );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Mailarchiver_Public {
 	 * @since 1.0.0
 	 */
 	public function register_scripts() {
-		$this->assets->register_script( MAILARCHIVER_ASSETS_ID, MAILARCHIVER_PUBLIC_URL, 'js/mailarchiver.min.js', [ 'jquery' ] );
+		//$this->assets->register_script( MAILARCHIVER_ASSETS_ID, MAILARCHIVER_PUBLIC_URL, 'js/mailarchiver.min.js', [ 'jquery' ] );
 	}
 
 }
