@@ -1,5 +1,5 @@
 === MailArchiver ===
-Contributors: PierreLannoy
+Contributors: PierreLannoy, hosterra
 Tags: archive, email, email log, log, mail
 Requires at least: 5.2
 Requires PHP: 7.2
