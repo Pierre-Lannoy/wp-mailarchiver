@@ -14,7 +14,7 @@ namespace MAMonolog\Processor;
 /**
  * Injects memory_get_peak_usage in all records
  *
- * @see MAMonolog\Processor\MemoryProcessor::__construct() for options
+ * @see Monolog\Processor\MemoryProcessor::__construct() for options
  * @author Rob Jensen
  */
 class MemoryPeakUsageProcessor extends MemoryProcessor

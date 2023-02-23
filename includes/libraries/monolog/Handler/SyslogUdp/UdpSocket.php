@@ -12,7 +12,7 @@
 namespace MAMonolog\Handler\SyslogUdp;
 
 use MAMonolog\Utils;
-//use Socket;
+use Socket;
 
 class UdpSocket
 {
@@ -43,7 +43,7 @@ class UdpSocket
 
     public function close(): void
     {
-        if (is_resource($this->socket) /*|| $this->socket instanceof Socket*/) {
+        if (is_resource($this->socket) || $this->socket instanceof Socket) {
             socket_close($this->socket);
             $this->socket = null;
         }
