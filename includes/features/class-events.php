@@ -156,7 +156,7 @@ class Events extends \WP_List_Table {
 		$args['eventid'] = $item['id'];
 		$url             = add_query_arg( $args, admin_url( 'admin.php' ) );
 		$icon            = '<img style="width:18px;float:left;padding-right:6px;" src="' . EventTypes::$icons[ $item['level'] ] . '" />';
-		$name            = '<a href="' . $url . '">' . $item['subject'] . '</a>';
+		$name            = '<a href="' . $url . '">' . mailarchiver_strip_script_tags( $item['subject'], true ) . '</a>';
 		$result          = $icon . $name;
 		return $result;
 	}

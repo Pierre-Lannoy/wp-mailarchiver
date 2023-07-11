@@ -3,6 +3,19 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.11.0] - Not Yet Released
+
+### Added
+- Compatibility with WordPress 6.3.
+- New option in archivers for proactive protection against XSS vulnerabilities.
+
+### Changed
+- Improved view for plain text email bodies.
+- Improved compatibility with Contact Forms plugin.
+
+### Fixed
+- [SEC004] XSS vulnerability / [CVE-2023-3136](https://www.cve.org/CVERecord?id=CVE-2023-3136) (thanks to [Alex Thomas](https://www.wordfence.com/threat-intel/vulnerabilities/researchers/alex-thomas) from [Wordfence](https://www.wordfence.com)).
+
 ## [2.10.1] - 2023-03-02
 
 ### Fixed

@@ -124,7 +124,14 @@ class ArchiverMaintainer {
 					$privacy[] = $i;
 				}
 			}
+			$security = [];
+			foreach ( $logger['security'] as $i => $item ) {
+				if ( $item ) {
+					$security[] = $i;
+				}
+			}
 			$logger['privacy']    = '[' . implode(', ', $privacy ) . ']';
+			$logger['security']   = '[' . implode(', ', $security ) . ']';
 			$logger['processors'] = '[' . implode(', ', $logger['processors'] ) . ']';
 			$configuration        = [];
 			foreach ( $logger['configuration'] as $i => $item ) {

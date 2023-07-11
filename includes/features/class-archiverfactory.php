@@ -130,6 +130,9 @@ class ArchiverFactory {
 											$args[] = (bool) $archiver['privacy'][ $p['value'] ];
 										}
 										break;
+									case 'security':
+										$args[] = (bool) $archiver['security'][ $p['value'] ];
+										break;
 									case 'literal':
 										$args[] = $p['value'];
 										break;
@@ -160,6 +163,9 @@ class ArchiverFactory {
 		$handler  = $this->handler_types->get( $archiver['handler'] );
 		if ( $handler && in_array( 'privacy', $handler['params'], true ) ) {
 			$archiver = $this->privacy_check( $archiver );
+		}
+		if ( $handler && in_array( 'security', $handler['params'], true ) ) {
+			$archiver = $this->security_check( $archiver );
 		}
 		if ( $handler && in_array( 'processors', $handler['params'], true ) ) {
 			$archiver = $this->processor_check( $archiver );
@@ -283,6 +289,24 @@ class ArchiverFactory {
 			$archiver['privacy']['pseudonymization']  = false;
 			$archiver['privacy']['mailanonymization'] = false;
 			$archiver['privacy']['encryption']        = '';
+		}
+		return $archiver;
+	}
+
+	/**
+	 * Check the security part of the archiver.
+	 *
+	 * @param   array $archiver  The archiver definition.
+	 * @return  array   The checked archiver definition.
+	 * @since    2.11.0
+	 */
+	private function security_check( $archiver ) {
+		if ( array_key_exists( 'security', $archiver ) ) {
+			if ( ! array_key_exists( 'xss', $archiver['security'] ) ) {
+				$archiver['security']['xss'] = true;
+			}
+		} else {
+			$archiver['security']['xss'] = true;
 		}
 		return $archiver;
 	}

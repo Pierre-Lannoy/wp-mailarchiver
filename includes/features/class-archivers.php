@@ -12,6 +12,7 @@
 namespace Mailarchiver\Plugin\Feature;
 
 use Mailarchiver\Plugin\Feature\PrivacyOptions;
+use Mailarchiver\Plugin\Feature\SecurityOptions;
 use Mailarchiver\System\Option;
 use Mailarchiver\Plugin\Feature\Archive;
 use Feather\Icons;
@@ -216,6 +217,11 @@ class Archivers extends \WP_List_Table {
 		foreach ( PrivacyOptions::$options as $option ) {
 			if ( $item['privacy'][$option] ) {
 				$result .= '<img alt="' . PrivacyOptions::$options_names[ $option ] . '" title="' . PrivacyOptions::$options_names[ $option ] . '" style="width:16px;padding-left:6px;padding-top:6px;" src="' . Icons::get_base64( PrivacyOptions::$options_icons[ $option ], 'none', '#9999BB' ) . '" />';
+			}
+		}
+		foreach ( SecurityOptions::$options as $option ) {
+			if ( $item['security'][$option] ) {
+				$result .= '<img alt="' . SecurityOptions::$options_names[ $option ] . '" title="' . SecurityOptions::$options_names[ $option ] . '" style="width:16px;padding-left:6px;padding-top:6px;" src="' . Icons::get_base64( SecurityOptions::$options_icons[ $option ], 'none', '#9999BB' ) . '" />';
 			}
 		}
 		$result .= '<br/>' . implode( ' ', $list );

@@ -36,6 +36,14 @@ class MailProcessor implements ProcessorInterface {
 	private $mailanonymization = false;
 
 	/**
+	 * Xss filtering switch.
+	 *
+	 * @since  2.11.0
+	 * @var    boolean    $xss    Is xss filtering activated?
+	 */
+	private $xss = false;
+
+	/**
 	 * Encryption key.
 	 *
 	 * @since  1.0.0
@@ -48,11 +56,13 @@ class MailProcessor implements ProcessorInterface {
 	 *
 	 * @since   1.0.0
 	 * @param   boolean $mailanonymize  Optional. Is mailanonymization activated?
+	 * @param   boolean $xss            Optional. Is xss filtering activated?
 	 * @param   string  $encryption     Optional. Encryption key.
 	 */
-	public function __construct( $mailanonymize = true, $encryption = '' ) {
+	public function __construct( $mailanonymize = true, $xss = true, $encryption = '' ) {
 		$this->mailanonymization = $mailanonymize;
 		$this->encryption        = $encryption;
+		$this->xss               = $xss;
 	}
 
 	/**
@@ -70,6 +80,11 @@ class MailProcessor implements ProcessorInterface {
 				$tos[] = Hash::simple_hash( (string) $to );
 			}
 			$record['context']['to'] = $tos;
+		}
+		if ( $this->xss ) {
+			$record['context']['subject'] = mailarchiver_strip_script_tags( $record['context']['subject'] );
+			$record['context']['body']['raw']  = mailarchiver_strip_script_tags( $record['context']['body']['raw'] );
+			$record['context']['body']['text'] = mailarchiver_strip_script_tags( $record['context']['body']['text'] );
 		}
 		if ( 0 < strlen( $this->encryption ) ) {
 			if ( PwdProtect::is_available() ) {

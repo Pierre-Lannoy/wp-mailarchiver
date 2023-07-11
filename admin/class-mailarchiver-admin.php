@@ -258,6 +258,7 @@ class Mailarchiver_Admin {
 		add_settings_section( 'mailarchiver_archiver_delete_section', null, [ $this, 'archiver_delete_section_callback' ], 'mailarchiver_archiver_delete_section' );
 		add_settings_section( 'mailarchiver_archiver_specific_section', null, [ $this, 'archiver_specific_section_callback' ], 'mailarchiver_archiver_specific_section' );
 		add_settings_section( 'mailarchiver_archiver_privacy_section', esc_html__( 'Privacy options', 'mailarchiver' ), [ $this, 'archiver_privacy_section_callback' ], 'mailarchiver_archiver_privacy_section' );
+		add_settings_section( 'mailarchiver_archiver_security_section', esc_html__( 'Security options', 'mailarchiver' ), [ $this, 'archiver_security_section_callback' ], 'mailarchiver_archiver_security_section' );
 		add_settings_section( 'mailarchiver_archiver_details_section', esc_html__( 'Reported details', 'mailarchiver' ), [ $this, 'archiver_details_section_callback' ], 'mailarchiver_archiver_details_section' );
 	}
 
@@ -573,6 +574,7 @@ class Mailarchiver_Admin {
 					$this->current_archiver['privacy']['obfuscation']       = ( array_key_exists( 'mailarchiver_archiver_privacy_ip', $_POST ) ? true : false );
 					$this->current_archiver['privacy']['pseudonymization']  = ( array_key_exists( 'mailarchiver_archiver_privacy_name', $_POST ) ? true : false );
 					$this->current_archiver['privacy']['mailanonymization'] = ( array_key_exists( 'mailarchiver_archiver_privacy_mail', $_POST ) ? true : false );
+					$this->current_archiver['security']['xss']              = ( array_key_exists( 'mailarchiver_archiver_security_xss', $_POST ) ? true : false );
 					$this->current_archiver['privacy']['encryption']        = ( array_key_exists( 'mailarchiver_archiver_privacy_encryption', $_POST ) ? Secret::set( filter_input( INPUT_POST, 'mailarchiver_archiver_privacy_encryption', FILTER_UNSAFE_RAW ) ) : '' );
 					$this->current_archiver['processors']                   = [];
 					$proc = new ProcessorTypes();
@@ -1122,6 +1124,31 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_encryption' );
+	}
+
+	/**
+	 * Callback for archiver security section.
+	 *
+	 * @since 2.11.0
+	 */
+	public function archiver_security_section_callback() {
+		$form = new Form();
+		add_settings_field(
+			'mailarchiver_archiver_security_xss',
+			__( 'XSS', 'mailarchiver' ),
+			[ $form, 'echo_field_checkbox' ],
+			'mailarchiver_archiver_security_section',
+			'mailarchiver_archiver_security_section',
+			[
+				'text'        => esc_html__( 'Script removal', 'mailarchiver' ),
+				'id'          => 'mailarchiver_archiver_security_xss',
+				'checked'     => $this->current_archiver['security']['xss'],
+				'description' => esc_html__( 'If checked, all scripts will be removed from subject and content fields.', 'mailarchiver' ),
+				'full_width'  => false,
+				'enabled'     => true,
+			]
+		);
+		register_setting( 'mailarchiver_archiver_security_section', 'mailarchiver_archiver_security_xss' );
 	}
 
 	/**

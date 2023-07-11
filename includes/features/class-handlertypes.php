@@ -67,7 +67,7 @@ class HandlerTypes {
 			'name'          => 'Litmus',
 			'help'          => esc_html__( 'A mail copy sent to Litmus service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_litmus_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'box'     => [
 					'type'    => 'string',
@@ -121,7 +121,7 @@ class HandlerTypes {
 			'name'          => 'Email on Acid',
 			'help'          => esc_html__( 'A mail copy sent to Email on Acid service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_eoa_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'box'     => [
 					'type'    => 'string',
@@ -175,7 +175,7 @@ class HandlerTypes {
 			'name'          => 'MailerCheck',
 			'help'          => esc_html__( 'A mail copy sent to MailerCheck service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_mailercheck_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'box'     => [
 					'type'    => 'string',
@@ -216,7 +216,7 @@ class HandlerTypes {
 			'name'          => 'Mail forwarder',
 			'help'          => esc_html__( 'A mail copy sent to an email address.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_mail_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'box'     => [
 					'type'    => 'string',
@@ -255,7 +255,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'Fluentd', 'mailarchiver' ),
 			'help'          => esc_html__( 'An archive sent to a Fluentd collector.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_fluentd_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'host'    => [
 					'type'    => 'string',
@@ -311,7 +311,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'Logentries & insightOps', 'mailarchiver' ),
 			'help'          => esc_html__( 'An archive sent to Logentries & insightOps service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_logentries_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'host'     => [
 					'type'    => 'string',
@@ -380,7 +380,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'Loggly', 'mailarchiver' ),
 			'help'          => esc_html__( 'An archive sent to Solawinds Loggly service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_loggly_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'token' => [
 					'type'    => 'string',
@@ -413,7 +413,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'Syslog', 'mailarchiver' ),
 			'help'          => esc_html__( 'An archive sent to a remote syslogd server.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_syslog_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'host'     => [
 					'type'    => 'string',
@@ -531,7 +531,7 @@ class HandlerTypes {
 			'help'          => esc_html__( 'An archive sent to Grafana Cloud.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_grafana_icon(),
 			'needs'         => [],
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'host'  => [
 					'type'    => 'string',
@@ -629,7 +629,7 @@ class HandlerTypes {
 			'help'          => esc_html__( 'An archive sent to a Loki instance.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_loki_icon(),
 			'needs'         => [],
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'url'   => [
 					'type'    => 'string',
@@ -697,7 +697,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'Pushover', 'mailarchiver' ),
 			'help'          => esc_html__( 'Emails in error signaled to Pushover service.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_pushover_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'token' => [
 					'type'    => 'string',
@@ -781,7 +781,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'Slack', 'mailarchiver' ),
 			'help'          => esc_html__( 'Emails in error signaled through Slack Webhooks.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_slack_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'webhook' => [
 					'type'    => 'string',
@@ -924,7 +924,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'Rotating files', 'mailarchiver' ),
 			'help'          => esc_html__( 'An archive sent to files that are rotated every day and a limited number of files are kept.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_rotatingfiles_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'filename' => [
 					'type'    => 'string',
@@ -985,7 +985,7 @@ class HandlerTypes {
 			'name'          => esc_html__( 'WordPress archiver', 'mailarchiver' ),
 			'help'          => esc_html__( 'An archive stored in your WordPress database and available right in your admin dashboard.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_wordpress_icon(),
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'rotate' => [
 					'type'    => 'integer',
@@ -1053,7 +1053,7 @@ class HandlerTypes {
 			'help'          => esc_html__( 'An archive stored in Elastic Cloud.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_elasticcloud_icon(),
 			'needs'         => [],
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'cloudid' => [
 					'type'    => 'string',
@@ -1138,7 +1138,7 @@ class HandlerTypes {
 			'help'          => esc_html__( 'An archive stored in Elasticsearch.', 'mailarchiver' ),
 			'icon'          => $this->get_base64_elasticsearch_icon(),
 			'needs'         => [],
-			'params'        => [ 'processors', 'privacy' ],
+			'params'        => [ 'processors', 'privacy', 'security' ],
 			'configuration' => [
 				'url'   => [
 					'type'    => 'string',
@@ -1224,7 +1224,7 @@ class HandlerTypes {
 				'help'          => esc_html__( 'An archive stored on a remote Imap server.', 'mailarchiver' ),
 				'icon'          => $this->get_base64_imap_icon(),
 				'needs'         => [],
-				'params'        => [ 'processors', 'privacy' ],
+				'params'        => [ 'processors', 'privacy', 'security' ],
 				'configuration' => [
 					'url'   => [
 						'type'    => 'string',
@@ -1345,7 +1345,7 @@ class HandlerTypes {
 					'help'          => esc_html__( 'An archive stored on GMail via Imap.', 'mailarchiver' ),
 					'icon'          => $this->get_base64_gmail_icon(),
 					'needs'         => [],
-					'params'        => [ 'processors', 'privacy' ],
+					'params'        => [ 'processors', 'privacy', 'security' ],
 					'configuration' => [
 						'user'  => [
 							'type'    => 'string',
@@ -1399,7 +1399,7 @@ class HandlerTypes {
 					'help'          => esc_html__( 'An archive stored on OVH via Imap.', 'mailarchiver' ),
 					'icon'          => $this->get_base64_ovh_icon(),
 					'needs'         => [],
-					'params'        => [ 'processors', 'privacy' ],
+					'params'        => [ 'processors', 'privacy', 'security' ],
 					'configuration' => [
 						'user'  => [
 							'type'    => 'string',
@@ -1453,7 +1453,7 @@ class HandlerTypes {
 					'help'          => esc_html__( 'An archive stored on Gandi Mail via Imap.', 'mailarchiver' ),
 					'icon'          => $this->get_base64_gandi_icon(),
 					'needs'         => [],
-					'params'        => [ 'processors', 'privacy' ],
+					'params'        => [ 'processors', 'privacy', 'security' ],
 					'configuration' => [
 						'user'  => [
 							'type'    => 'string',
@@ -1507,7 +1507,7 @@ class HandlerTypes {
 					'help'          => esc_html__( 'An archive stored on Outlook.Com via Imap.', 'mailarchiver' ),
 					'icon'          => $this->get_base64_microsoft_icon(),
 					'needs'         => [],
-					'params'        => [ 'processors', 'privacy' ],
+					'params'        => [ 'processors', 'privacy', 'security' ],
 					'configuration' => [
 						'user'  => [
 							'type'    => 'string',

@@ -131,10 +131,10 @@ class EventViewer {
 				$content = substr( $content, $start, $length );
 			} else {
 				$content = str_replace( '"', '\"', $content );
-				$content = str_replace( "\r\n", "<br />", $content );
-				$content = str_replace( "\n", "<br />", $content );
-				$content = str_replace( "\r", "<br />", $content );
-				$content = str_replace( "\t", " ", $content );
+				$content = str_replace( "\r\n", "<br>", $content );
+				$content = str_replace( "\n", "<br>", $content );
+				$content = str_replace( "\r", "<br>", $content );
+				$content = str_replace( "\t", "<br>", $content );
 				$content = '<html><body style=\"padding:10px;font-family:\'Lucida Console\', Monaco, monospace;font-size: 14px;background-color:#F1F1F1;\">' . $content . '</body></html>';
 			}
 		} elseif ( 'encrypted' === $body['type'] ) {
@@ -147,15 +147,11 @@ class EventViewer {
 		if ( $is_html ) {
 			$content = str_replace( '\\', '\\\\', $content );
 			$content = str_replace( '"', '\"', $content );
-			$content = str_replace( "\r\n", " ", $content );
-			$content = str_replace( "\n", " ", $content );
-			$content = str_replace( "\r", " ", $content );
-			$content = str_replace( "\t", " ", $content );
 			while ( false !== strpos( $content, '  ' ) ) {
 				$content = str_replace("  ", " ", $content);
 			}
 		}
-		$this->body = $content;
+		$this->body = mailarchiver_strip_script_tags( $content, $is_html );
 	}
 
 	/**
@@ -244,7 +240,7 @@ class EventViewer {
 		echo '<div class="wrap">';
 		if ( isset( $this->event ) ) {
 			$icon = '<img style="width:30px;float:left;padding-right:8px;" src="' . EventTypes::$icons[ $this->event['level'] ] . '" />';
-			$name = $this->event['subject'];
+			$name = mailarchiver_strip_script_tags( $this->event['subject'], true );
 			// phpcs:ignore
 			echo '<h2>' . $icon . $name . '</h2>';
 			settings_errors();

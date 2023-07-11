@@ -71,6 +71,10 @@ class ProcessorTypes {
 					'value' => 'mailanonymization',
 				],
 				[
+					'type'  => 'security',
+					'value' => 'xss',
+				],
+				[
 					'type'  => 'privacy',
 					'value' => 'encryption',
 				],
