@@ -335,7 +335,7 @@ class Sitehealth {
 				'status'      => 'recommended',
 				'badge'       => [
 					'label' => esc_html__( 'Performance', 'mailarchiver' ),
-					'color' => 'orange',
+					'color' => 'gray',
 				],
 				'description' => sprintf( '<p>%s</p>', esc_html__( 'You should consider using shared memory (PHP shmop) to allow inter-process communication.', 'mailarchiver' ) ),
 				'actions'     => '',

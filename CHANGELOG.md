@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Improved view for plain text email bodies.
 - Improved compatibility with Contact Forms plugin.
+- The color for `shmop` test in Site Health is now gray to not worry to much about it (was previously orange).
 
 ### Fixed
 - [SEC004] XSS vulnerability / [CVE-2023-3136](https://www.cve.org/CVERecord?id=CVE-2023-3136) (thanks to [Alex Thomas](https://www.wordfence.com/threat-intel/vulnerabilities/researchers/alex-thomas) from [Wordfence](https://www.wordfence.com)).
