@@ -3,8 +3,8 @@ Contributors: PierreLannoy, hosterra
 Tags: archive, email, email log, log, mail
 Requires at least: 5.2
 Requires PHP: 7.2
-Tested up to: 6.2
-Stable tag: 2.10.1
+Tested up to: 6.3
+Stable tag: 2.11.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
