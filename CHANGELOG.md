@@ -3,6 +3,11 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.12.0] - 2023-10-25
+
+### Added
+- Compatibility with WordPress 6.4.
+
 ## [2.11.0] - 2023-07-12
 
 ### Added
