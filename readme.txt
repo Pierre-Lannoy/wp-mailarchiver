@@ -4,7 +4,7 @@ Tags: archive, email, email log, log, mail
 Requires at least: 6.1
 Requires PHP: 8.1
 Tested up to: 6.5
-Stable tag: 2.13.0
+Stable tag: 2.14.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

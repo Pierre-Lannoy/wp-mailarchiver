@@ -3,7 +3,10 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.14.0] - Not Yet Released
+## [2.14.0] - 2024-03-26
+
+### Added
+- New archiver to store archives in Hosterra Email.
 
 ### Fixed
 - There's some typos in the admin UI.
