@@ -63,15 +63,15 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	/**
 	 * Logs a panic condition. WordPress is unusable.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function emergency( $message, $context = [] ) {
+	public function emergency( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -85,15 +85,16 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	 * Logs a major operating error that undoubtedly affects the operations.
 	 * It requires immediate investigation and corrective treatment.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function alert( $message, $context = [] ) {
+	public function alert( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -107,15 +108,16 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	 * Logs an operating error that undoubtedly affects the operations.
 	 * It requires investigation and corrective treatment.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function critical( $message, $context = [] ) {
+	public function critical( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -129,15 +131,16 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	 * Logs a minor operating error that may affects the operations.
 	 * It requires investigation and preventive treatment.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function error( $message, $context = [] ) {
+	public function error( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -151,15 +154,16 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	 * Logs a significant condition indicating a situation that may lead to an error if recurring or if no action is taken.
 	 * Does not usually affect the operations.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function warning( $message, $context = [] ) {
+	public function warning( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -172,15 +176,16 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	/**
 	 * Logs a normal but significant condition.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function notice( $message, $context = [] ) {
+	public function notice( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -193,15 +198,16 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	/**
 	 * Logs a standard information.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function info( $message, $context = [] ) {
+	public function info( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -215,15 +221,16 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	 * Logs an information for developers and testers.
 	 * Only used for events related to application/system debugging.
 	 *
-	 * @param  string $message The message to log.
-	 * @param  array  $context Optional. The context of the event.
-	 *                         FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                         that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                         element of context will be removed.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function debug( $message, $context = [] ) {
+	public function debug( string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );
@@ -236,16 +243,17 @@ class EventsLogger implements \Psr\Log\LoggerInterface {
 	/**
 	 * Logs an information with an arbitrary level.
 	 *
-	 * @param  \Psr\Log\LogLevel    $level   The level of the message to log.
-	 * @param  string               $message The message to log.
-	 * @param  array                $context Optional. The context of the event.
-	 *                                       FYI, DecaLog has its own context-aware logging system. The only element of context
-	 *                                       that you can pass to DecaLog is a numerical error code ($context['code']). All other
-	 *                                       element of context will be removed.
+	 * @param LogLevel              $level      The level of the message to log.
+	 * @param string|\Stringable    $message    The message to log.
+	 * @param mixed[]               $context    Optional. The context of the event.
+	 *                                          FYI, DecaLog has its own context-aware logging system. The only element
+	 *                                          of context that you can pass to DecaLog is a numerical error code
+	 *                                          ($context['code']). All other element of context will be removed.
+	 *
 	 * @return void
-	 * @since  1.0.0
+	 * @since  4.0.0
 	 */
-	public function log( $level, $message, $context = [] ) {
+	public function log( $level, string|\Stringable $message, array $context = [] ): void {
 		if ( ! is_array( $context ) ) {
 			$context = [ 'code' => 30973 ];
 			$this->debug( 'Wrong method argument: `$context` must be an array.', $context );

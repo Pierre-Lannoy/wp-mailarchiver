@@ -1,7 +1,7 @@
 === MailArchiver ===
 Contributors: PierreLannoy, hosterra
 Tags: archive, email, email log, log, mail
-Requires at least: 6.1
+Requires at least: 6.2
 Requires PHP: 8.1
 Tested up to: 6.5
 Stable tag: 2.14.0

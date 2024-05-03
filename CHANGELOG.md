@@ -3,6 +3,14 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.1] - Not Yet Released
+
+### Breaking Change
+- This plugin now uses PSR3 3.x and DecaLog SDK 4.x so it is only compatible with DecaLog 4.0.0 and higher.
+
+### Changed
+- Minimal required WordPress version is now 6.2.
+
 ## [2.14.0] - 2024-03-26
 
 ### Added
