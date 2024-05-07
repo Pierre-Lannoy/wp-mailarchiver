@@ -39,7 +39,7 @@ class Engine {
 	/**
 	 * Registers a new logger.
 	 *
-	 * @param string $class   The class identifier, must be a value in ['plugin', 'theme'].
+	 * @param string $class   The class identifier, must be a value in ['plugin', 'theme', 'library'].
 	 * @param string $slug    The slug identifier.
 	 * @param string $name    The name of the component that will trigger events.
 	 * @param string $version The version of the component that will trigger events.

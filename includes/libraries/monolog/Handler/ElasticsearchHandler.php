@@ -11,15 +11,15 @@
 
 namespace MAMonolog\Handler;
 
-use Elasticsearch\Client;
-use Elasticsearch\Common\Exceptions\RuntimeException as ElasticsearchRuntimeException;
-use includes\libraries\elastic\elasticsearch\Client as Client8;
-use includes\libraries\elastic\elasticsearch\Exception\InvalidArgumentException as ElasticInvalidArgumentException;
-use includes\libraries\elastic\elasticsearch\Response\Elasticsearch;
-use InvalidArgumentException;
 use MAMonolog\Formatter\ElasticsearchFormatter;
 use MAMonolog\Formatter\FormatterInterface;
 use MAMonolog\Logger;
+use Elastic\Elasticsearch\Client;
+use Elasticsearch\Common\Exceptions\RuntimeException as ElasticsearchRuntimeException;
+use Elastic\Elasticsearch\Client as Client8;
+use Elastic\Elasticsearch\Exception\InvalidArgumentException as ElasticInvalidArgumentException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use InvalidArgumentException;
 use RuntimeException;
 use Throwable;
 

@@ -9,7 +9,7 @@
 
 namespace DecaLog;
 
-if ( ! defined( 'DECALOG_VERSION' )  && version_compare(DECALOG_VERSION, '4.0.0', '<') ) {
+if ( defined( 'DECALOG_VERSION' )  && version_compare(DECALOG_VERSION, '3.11.0', '<') ) {
 
 	/**
 	 * DecaLog PSR-3 logger class. Failsafe for old PSR-3 versions.
@@ -34,7 +34,7 @@ if ( ! defined( 'DECALOG_VERSION' )  && version_compare(DECALOG_VERSION, '4.0.0'
 		/**
 		 * Initialize the class and set its properties.
 		 *
-		 * @param string $class   The class identifier, must be a value in ['plugin', 'theme'].
+		 * @param string $class   The class identifier, must be a value in ['plugin', 'theme', 'library'].
 		 * @param string $name    Optional. The name of the component that will trigger events.
 		 * @param string $version Optional. The version of the component that will trigger events.
 		 * @since 1.0.0
@@ -283,7 +283,7 @@ if ( ! defined( 'DECALOG_VERSION' )  && version_compare(DECALOG_VERSION, '4.0.0'
 		/**
 		 * Initialize the class and set its properties.
 		 *
-		 * @param string $class   The class identifier, must be a value in ['plugin', 'theme'].
+		 * @param string $class   The class identifier, must be a value in ['plugin', 'theme', 'library'].
 		 * @param string $name    Optional. The name of the component that will trigger events.
 		 * @param string $version Optional. The version of the component that will trigger events.
 		 * @since 1.0.0

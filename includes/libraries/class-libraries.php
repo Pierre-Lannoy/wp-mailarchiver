@@ -123,7 +123,7 @@ class Libraries {
 			'name'    => 'DecaLog SDK',
 			'prefix'  => 'DecaLog',
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'decalog-sdk/',
-			'version' => '4.0.0',
+			'version' => '4.1.0',
 			'author'  => 'Pierre Lannoy',
 			'url'     => 'https://github.com/Pierre-Lannoy/wp-decalog-sdk',
 			'license' => 'mit',
@@ -131,11 +131,22 @@ class Libraries {
 		];
 		self::$psr4_libraries['elasticsearch']   = [
 			'name'    => 'Elasticsearch',
-			'prefix'  => 'Elasticsearch',
-			'base'    => MAILARCHIVER_VENDOR_DIR . 'elasticsearch/',
-			'version' => '7.6.1',
+			'prefix'  => 'Elastic\\Elasticsearch',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'elastic/elasticsearch/',
+			'version' => '8.13.0',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Elastic' ),
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Elastic' ),
+			'url'     => 'https://github.com/elastic/elasticsearch-php',
+			'license' => 'apl2',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['elastictransport']   = [
+			'name'    => 'Elastic Transport',
+			'prefix'  => 'Elastic\\Transport',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'elastic/transport/',
+			'version' => '8.8.0',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Elastic' ),
 			'url'     => 'https://github.com/elastic/elasticsearch-php',
 			'license' => 'apl2',
 			'langs'   => 'en',
@@ -144,10 +155,65 @@ class Libraries {
 			'name'    => 'GuzzleHttp',
 			'prefix'  => 'MAGuzzleHttp',
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'guzzlehttp/',
-			'version' => '',
+			'version' => '7.8.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Michael Dowling' ),
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Michael Dowling' ),
 			'url'     => 'https://github.com/elastic/elasticsearch-php',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['httpdiscovery']   = [
+			'name'    => 'HTTPlug Discovery',
+			'prefix'  => 'Http\\Discovery',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/discovery/',
+			'version' => '1.19.4',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'url'     => 'https://github.com/php-http',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['httpclient']   = [
+			'name'    => 'HTTPlug',
+			'prefix'  => 'Http\\Client',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/client/',
+			'version' => '2.4.0',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'url'     => 'https://github.com/php-http',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['httpclientcommon']   = [
+			'name'    => 'HTTP Client Common',
+			'prefix'  => 'Http\\Client\\Common',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/client-common/',
+			'version' => '2.7.1',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'url'     => 'https://github.com/php-http',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['httppromise']   = [
+			'name'    => 'HTTP Promise',
+			'prefix'  => 'Http\\Promise',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/promise/',
+			'version' => '1.3.1',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'url'     => 'https://github.com/php-http',
+			'license' => 'mit',
+			'langs'   => 'en',
+		];
+		self::$psr4_libraries['symfonyoptionsresolver']   = [
+			'name'    => 'Symfony Options Resolver',
+			'prefix'  => 'Symfony\\Component\\OptionsResolver',
+			'base'    => MAILARCHIVER_VENDOR_DIR . 'symfony/OptionsResolver/',
+			'version' => '6.4',
+			// phpcs:ignore
+			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Fabien Potencier' ),
+			'url'     => 'https://github.com/symfony/symfony',
 			'license' => 'mit',
 			'langs'   => 'en',
 		];

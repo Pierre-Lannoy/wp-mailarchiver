@@ -11,13 +11,12 @@
 
 namespace Mailarchiver\Handler;
 
-use Mailarchiver\Formatter\ElasticCloudFormatter;
 use MAMonolog\Logger;
 use MAMonolog\Handler\ElasticsearchHandler;
 use MAMonolog\Handler\HandlerInterface;
 use MAMonolog\Formatter\FormatterInterface;
 use Elasticsearch\Common\Exceptions\RuntimeException as ElasticsearchRuntimeException;
-use Elasticsearch\Client;
+use Elastic\Elasticsearch\Client;
 
 /**
  * Define the Monolog Elastic Cloud handler.
@@ -44,10 +43,9 @@ class ElasticCloudHandler extends ElasticsearchHandler {
 			$index = 'mailarchiver';
 		}
 		$index   = strtolower( str_replace( [ ' ' ], '-', sanitize_text_field( $index ) ) );
-		$client  = \Elasticsearch\ClientBuilder::create()->setElasticCloudId( $cloudid )->setBasicAuthentication( $user, $pass )->build();
+		$client  = \Elastic\Elasticsearch\ClientBuilder::create()->setElasticCloudId( $cloudid )->setBasicAuthentication( $user, $pass )->build();
 		$options = [
 			'index' => $index,
-			'type'  => 'wordpress_mailarchiver',
 		];
 		parent::__construct( $client, $options, $level, $bubble );
 	}
@@ -69,7 +67,6 @@ class ElasticCloudHandler extends ElasticsearchHandler {
 				$params['body'][] = [
 					'index' => [
 						'_index' => $record['_index'],
-						'_type'  => $record['_type'],
 					],
 				];
 				unset( $record['_index'], $record['_type'] );
@@ -93,6 +90,6 @@ class ElasticCloudHandler extends ElasticsearchHandler {
 	 * {@inheritDoc}
 	 */
 	protected function getDefaultFormatter(): FormatterInterface {
-		return new ElasticCloudFormatter( $this->options['index'], $this->options['type'] );
+		return new \Mailarchiver\Formatter\ElasticCloudFormatter( $this->options['index'], $this->options['type'] );
 	}
 }

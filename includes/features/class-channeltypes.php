@@ -39,11 +39,28 @@ class ChannelTypes {
 	public static $channel_names = [];
 
 	/**
+	 * The list of available channels names.
+	 *
+	 * @since  1.0.0
+	 * @var    array    $channel_names_en    Maintains the channels names.
+	 */
+	public static $channel_names_en = [];
+
+	/**
 	 * Initialize the meta class and set its properties.
 	 *
 	 * @since    1.0.0
 	 */
 	public static function init() {
+		self::$channel_names_en['UNKNOWN'] = 'Unknown';
+		self::$channel_names_en['CLI']     = 'Command Line Interface';
+		self::$channel_names_en['CRON']    = 'Cron Job';
+		self::$channel_names_en['AJAX']    = 'Ajax Request';
+		self::$channel_names_en['XMLRPC']  = 'XML-RPC Request';
+		self::$channel_names_en['API']     = 'Rest API Request';
+		self::$channel_names_en['FEED']    = 'Atom/RDF/RSS Feed';
+		self::$channel_names_en['WBACK']   = 'Site Backend';
+		self::$channel_names_en['WFRONT']  = 'Site Frontend';
 		self::$channel_names['UNKNOWN'] = esc_html__( 'Unknown', 'mailarchiver' );
 		self::$channel_names['CLI']     = esc_html__( 'Command Line Interface', 'mailarchiver' );
 		self::$channel_names['CRON']    = esc_html__( 'Cron Job', 'mailarchiver' );

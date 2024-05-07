@@ -1096,7 +1096,7 @@ class HandlerTypes {
 					'show'    => true,
 					'name'    => esc_html__( 'Index', 'mailarchiver' ),
 					'help'    => esc_html__( 'The index name.', 'mailarchiver' ),
-					'default' => 'mailarchiver',
+					'default' => 'logs-mailarchiver',
 					'control' => [
 						'type'    => 'field_input_text',
 						'cast'    => 'string',
@@ -1181,7 +1181,7 @@ class HandlerTypes {
 					'show'    => true,
 					'name'    => esc_html__( 'Index', 'mailarchiver' ),
 					'help'    => esc_html__( 'The index name.', 'mailarchiver' ),
-					'default' => 'mailarchiver',
+					'default' => 'logs-mailarchiver',
 					'control' => [
 						'type'    => 'field_input_text',
 						'cast'    => 'string',
