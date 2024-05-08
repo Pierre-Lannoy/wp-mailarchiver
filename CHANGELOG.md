@@ -3,13 +3,13 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - Not Yet Released
+## [3.0.0] - 2024-05-08
 
 ### Added
 - Full compatibility with Elasticsearch 8.
 
 ### Changed
-- Updated DecaLog SDK from version 3.0.0 to version 4.1.0.
+- [BC] Updated DecaLog SDK from version 3.0.0 to version 4.2.0.
 - Upgraded Monolog library from version 2.9.1 to version 2.9.3.
 - Upgraded GuzzleHttp library from version 7.2.0 to version 7.8.1.
 - Upgraded Elasticsearch library from version 7.6.1 to version 8.13.0.

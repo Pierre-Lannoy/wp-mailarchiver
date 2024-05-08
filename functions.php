@@ -441,28 +441,3 @@ function mailarchiver_strip_script_tags( $text, $remove_breaks = false ) {
 
 	return trim( $text );
 }
-
-
-/**
- * Provide PHP 7.3 compatibility for array_key_last() function.
- */
-if ( ! function_exists( 'array_key_last' ) ) {
-	// phpcs:ignore
-	function array_key_last( array $array ) {
-		if ( ! empty( $array ) ) {
-			return key( array_slice( $array, -1, 1, true ) );
-		}
-	}
-}
-
-/**
- * Provide PHP 7.3 compatibility for array_key_first() function.
- */
-if ( ! function_exists( 'array_key_first' ) ) {
-	// phpcs:ignore
-	function array_key_first( array $arr ) {
-		foreach ( $arr as $key => $unused ) {
-			return $key;
-		}
-	}
-}
