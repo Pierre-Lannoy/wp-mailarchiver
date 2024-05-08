@@ -29,8 +29,6 @@ $trademarks = esc_html__( 'All brands, icons and graphic illustrations are regis
 $brands     = [ 'Automattic', 'Elastic Cloud', 'Email on Acid', 'Fluentd Project', 'Gandi', 'Google', 'Grafana Labs', 'Hosterra', 'Litmus', 'Microsoft', 'OVH', 'Pushover', 'Rapid7', 'Slack', 'Solarwinds', 'The Remote Company' ];
 $official   = sprintf( esc_html__( 'This plugin is not an official software from %s and, as such, is not endorsed or supported by these companies.', 'mailarchiver' ), implode( ', ', $brands ) );
 
-wp_mail( 'pierre@lannoy.fr', 'test d envoi', 'Texte du mail. Texte du mail. Texte du mail. Texte du mail. Texte du mail. Texte du mail. Texte du mail. ');
-
 ?>
 <h2><?php echo esc_html( MAILARCHIVER_PRODUCT_NAME . ' ' . MAILARCHIVER_VERSION ); ?> / <a href="https://perfops.one">PerfOps One</a></h2>
 <?php echo $icon; ?>
