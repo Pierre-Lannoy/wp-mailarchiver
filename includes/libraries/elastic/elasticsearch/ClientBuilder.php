@@ -25,7 +25,6 @@ use Elastic\Transport\Exception\NoAsyncClientException;
 use Elastic\Transport\NodePool\NodePoolInterface;
 use Elastic\Transport\Transport;
 use Elastic\Transport\TransportBuilder;
-use GuzzleHttp\Client as GuzzleHttpClient;
 use Http\Client\HttpAsyncClient;
 use Psr\Http\Client\ClientInterface;
 use Psr\Log\LoggerInterface;

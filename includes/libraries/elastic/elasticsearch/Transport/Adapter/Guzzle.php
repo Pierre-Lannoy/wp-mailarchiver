@@ -15,7 +15,7 @@ declare(strict_types = 1);
 namespace Elastic\Elasticsearch\Transport\Adapter;
 
 use Elastic\Elasticsearch\Transport\RequestOptions;
-use GuzzleHttp\RequestOptions As GuzzleOptions;
+use MAGuzzleHttp\RequestOptions As GuzzleOptions;
 use Psr\Http\Client\ClientInterface;
 
 class Guzzle implements AdapterInterface

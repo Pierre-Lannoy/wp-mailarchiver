@@ -10,7 +10,7 @@
  * Plugin Name:       MailArchiver
  * Plugin URI:        https://perfops.one/mailarchiver
  * Description:       Automatically archive and store all emails sent from your site.
- * Version:           3.0.0
+ * Version:           3.0.1
  * Requires at least: 6.2
  * Requires PHP:      8.1
  * Author:            Pierre Lannoy / PerfOps One

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Client\Common\Plugin;
 
-use GuzzleHttp\Psr7\Utils;
+use MAGuzzleHttp\Psr7\Utils;
 use Http\Client\Common\Exception\CircularRedirectionException;
 use Http\Client\Common\Exception\MultipleRedirectionException;
 use Http\Client\Common\Plugin;

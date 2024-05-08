@@ -450,7 +450,7 @@ final class Transport implements ClientInterface, HttpAsyncClient
     /**
      * Returns the name and the version of the Client HTTP library used
      * Here a list of supported libraries:
-     * gu => guzzlehttp/guzzle
+     * gu => MAGuzzleHttp/guzzle
      * sy => symfony/http-client
      */
     private function getClientLibraryInfo(): array

@@ -2,7 +2,7 @@
 
 namespace Http\Discovery\Strategy;
 
-use MAGuzzleHttp\Client as GuzzleHttp;
+use MAGuzzleHttp\Client as MAGuzzleHttp;
 use MAGuzzleHttp\Promise\Promise;
 use MAGuzzleHttp\Psr7\Request as GuzzleRequest;
 use Http\Adapter\Artax\Client as Artax;
@@ -99,7 +99,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
                 'condition' => [SymfonyPsr18::class, Psr17RequestFactory::class],
             ],
             [
-                'class' => GuzzleHttp::class,
+                'class' => MAGuzzleHttp::class,
                 'condition' => [self::class, 'isGuzzleImplementingPsr18'],
             ],
             [
