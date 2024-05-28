@@ -261,6 +261,7 @@ class DArchiver {
 			restore_error_handler();
 		} catch ( \Throwable $t ) {
 			$result = false;
+			\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( $t->getMessage(), $t->getCode() );
 		} finally {
 			if ( ! $result ) {
 				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( 'Unable to archive an email.' );
@@ -294,6 +295,7 @@ class DArchiver {
 			restore_error_handler();
 		} catch ( \Throwable $t ) {
 			$result = false;
+			\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->warning( $t->getMessage(), $t->getCode() );
 		} finally {
 			if ( ! $result ) {
 				\DecaLog\Engine::eventsLogger( MAILARCHIVER_SLUG )->error( 'Unable to archive an email.' );
