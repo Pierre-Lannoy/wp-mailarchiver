@@ -331,7 +331,7 @@ class Libraries {
 			$items = [];
 			foreach ( $list as $library ) {
 				/* translators: as in the sentence "Product W version X by author Y (license Z)" */
-				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s (%6$s)', 'mailarchiver' ), $library['url'], $library['name'], $library['version'], $library['langs'], $library['author'], $library['license'] );
+				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s (%6$s)', 'mailarchiver' ), $library['url'], $library['name'], 'v' . $library['version'], $library['langs'], $library['author'], $library['license'] );
 			}
 			$result = implode( ', ', $items );
 		}
