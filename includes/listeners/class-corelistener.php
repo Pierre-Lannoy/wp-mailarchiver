@@ -36,7 +36,7 @@ class CoreListener extends AbstractListener {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		global $wp_version;
 		$this->id      = 'wpcore';
-		$this->name    = esc_html__( 'WordPress core', 'mailarchiver' );
+		$this->name    = 'WordPress Core';
 		$this->class   = 'mail';
 		$this->product = 'WordPress';
 		$this->version = $wp_version;

@@ -62,7 +62,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'monolog/',
 			'version' => MAILARCHIVER_MONOLOG_VERSION,
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Jordi Boggiano' ),
+			'author'  => 'Jordi Boggiano',
 			'url'     => 'https://github.com/Seldaek/monolog',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -73,7 +73,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'feather/',
 			'version' => '4.24.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Cole Bemis' ),
+			'author'  => 'Cole Bemis',
 			'url'     => 'https://feathericons.com',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -84,7 +84,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'markdown/',
 			'version' => '1.2.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'mailarchiver' ), 'Carsten Brandt' ),
+			'author'  => 'Carsten Brandt',
 			'url'     => 'https://github.com/cebe/markdown',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -140,7 +140,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'elastic/elasticsearch/',
 			'version' => '8.13.0',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Elastic' ),
+			'author'  => 'Elastic',
 			'url'     => 'https://github.com/elastic/elasticsearch-php',
 			'license' => 'apl2',
 			'langs'   => 'en',
@@ -151,7 +151,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'elastic/transport/',
 			'version' => '8.8.0',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Elastic' ),
+			'author'  => 'Elastic',
 			'url'     => 'https://github.com/elastic/elasticsearch-php',
 			'license' => 'apl2',
 			'langs'   => 'en',
@@ -162,7 +162,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'guzzlehttp/',
 			'version' => '7.8.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Michael Dowling' ),
+			'author'  => 'Michael Dowling',
 			'url'     => 'https://github.com/elastic/elasticsearch-php',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -173,7 +173,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/discovery/',
 			'version' => '1.19.4',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'author'  => 'The PHP HTTP group',
 			'url'     => 'https://github.com/php-http',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -184,7 +184,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/client/',
 			'version' => '2.4.0',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'author'  => 'The PHP HTTP group',
 			'url'     => 'https://github.com/php-http',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -195,7 +195,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/client-common/',
 			'version' => '2.7.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'author'  => 'The PHP HTTP group',
 			'url'     => 'https://github.com/php-http',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -206,7 +206,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'http/promise/',
 			'version' => '1.3.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'The PHP HTTP group' ),
+			'author'  => 'The PHP HTTP group',
 			'url'     => 'https://github.com/php-http',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -217,7 +217,7 @@ class Libraries {
 			'base'    => MAILARCHIVER_VENDOR_DIR . 'symfony/OptionsResolver/',
 			'version' => '6.4',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Fabien Potencier' ),
+			'author'  => 'Fabien Potencier',
 			'url'     => 'https://github.com/symfony/symfony',
 			'license' => 'mit',
 			'langs'   => 'en',
@@ -331,7 +331,7 @@ class Libraries {
 			$items = [];
 			foreach ( $list as $library ) {
 				/* translators: as in the sentence "Product W version X by author Y (license Z)" */
-				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s (%6$s)', 'mailarchiver' ), $library['url'], $library['name'], 'v' . $library['version'], $library['langs'], $library['author'], $library['license'] );
+				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s & contributors (%6$s)', 'mailarchiver' ), $library['url'], $library['name'], 'v' . $library['version'], $library['langs'], $library['author'], $library['license'] );
 			}
 			$result = implode( ', ', $items );
 		}
