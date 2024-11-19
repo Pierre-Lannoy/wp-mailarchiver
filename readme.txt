@@ -14,8 +14,6 @@ Automatically archive all emails sent from your site. Store them in your WordPre
 
 **Automatically archive all emails sent from your site. Store them in your WordPress database or send them to external services.**
 
-> 🎁 Give this plugin a drive test on a free dummy site: [One-Click Test!](https://tastewp.com/new/?pre-installed-plugin-slug=mailarchiver)
-
 **MailArchiver** is a tool that allows you to:
 
 * catch emails sent by WordPress itself or plugins;

@@ -6,9 +6,7 @@
 
 Automatically archive all emails sent from your site. Store them in your WordPress database or send them to external services.
 
-See [WordPress directory page](https://wordpress.org/plugins/mailarchiver/) or [official website](https://perfops.one/mailarchiver). 
-
-> 🎁 Give this plugin a drive test on a free dummy site: [One-Click Test!](https://tastewp.com/new/?pre-installed-plugin-slug=mailarchiver)
+See [WordPress directory page](https://wordpress.org/plugins/mailarchiver/) or [official website](https://perfops.one/mailarchiver).
 
 __MailArchiver__ is a tool that allows you to:
 
