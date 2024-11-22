@@ -186,7 +186,7 @@ class Http {
 	 * @since  1.0.0
 	 */
 	public static function user_agent() {
-		return MAILARCHIVER_PRODUCT_NAME . ' (' . Environment::wordpress_version_id() . '; ' . Environment::plugin_version_id() . '; +' . MAILARCHIVER_PRODUCT_URL . ')';
+		return 'PerfOps One - ' . MAILARCHIVER_PRODUCT_NAME . ' / ' . MAILARCHIVER_VERSION . ' (https://perfops.one/' . MAILARCHIVER_SLUG . ')';
 	}
 
 	/**
