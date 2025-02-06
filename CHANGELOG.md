@@ -3,6 +3,17 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.0] - Not Yet Released
+
+### Added
+- Compatibility with WordPress 6.8.
+
+### Changed
+-
+
+### Fixed
+- Plugin update process may be confused when it founds error in release file.
+
 ## [4.1.0] - 2024-11-22
 
 ### Added
