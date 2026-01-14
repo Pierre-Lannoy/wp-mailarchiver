@@ -138,6 +138,31 @@ abstract class AbstractListener {
 	}
 
 	/**
+	 * Recursively get all "to" email adresses.
+	 *
+	 * @since    4.3.1
+	 */
+	protected function get_all_emails( $a, &$result ) {
+		if ( is_array( $a ) ) {
+			foreach ( $a as $item ) {
+				$this->get_all_emails( $item, $result );
+			}
+		}
+		if ( is_object( $a ) ) {
+			foreach ( (array) $a as $item ) {
+				$this->get_all_emails( $item, $result );
+			}
+		}
+		if ( is_string( $a ) && str_contains( $a, '@' ) ) {
+			if ( preg_match( "/[a-z0-9!#$%&'+\/=?^_{|}~-]+[a-z0-9!#$%&'*+\/.=?^_{|}~-]+@[\p{L}.-]+[\p{L}0-9]+/iu", $a, $matches ) ) {
+				if ( 1 === count( $matches ) ) {
+					$result[] = $matches[0] ;
+				}
+			}
+		}
+	}
+
+	/**
 	 * Sets the listener properties.
 	 *
 	 * @since    1.0.0

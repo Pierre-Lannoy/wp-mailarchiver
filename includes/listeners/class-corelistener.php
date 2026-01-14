@@ -109,27 +109,6 @@ class CoreListener extends AbstractListener {
 	}
 
 	/**
-	 * Recursively get all "to" email adresses.
-	 *
-	 * @since    1.0.0
-	 */
-	private function get_all_emails( $a, &$result ) {
-		if ( is_array( $a ) ) {
-			foreach ( $a as $item ) {
-				$this->get_all_emails( $item, $result );
-			}
-		}
-		if ( is_object( $a ) ) {
-			foreach ( (array) $a as $item ) {
-				$this->get_all_emails( $item, $result );
-			}
-		}
-		if ( is_string( $a ) && false !== strpos( $a, '@' ) ) {
-			$result[] = trim( $a) ;
-		}
-	}
-
-	/**
 	 * "wp_mail" event.
 	 *
 	 * @since    1.0.0

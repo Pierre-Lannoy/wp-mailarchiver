@@ -44,6 +44,29 @@ class Capture {
 	}
 
 	/**
+	 * Normalizes "to" fields.
+	 *
+	 * @param   array  $tos    The tos.
+	 * @return  array  The normalized tos.
+	 * @since    4.4.0
+	 */
+	private static function to( $tos ) {
+		$result = [];
+		if ( 0 < count( $tos ) ) {
+			foreach ( $tos as $to ) {
+				if ( str_contains( $to, '@' ) ) {
+					$result[] = $to;
+				} else {
+					$result[] = '[malformed email address]';
+				}
+			}
+		} else {
+			$result[] = '[malformed email address]';
+		}
+		return $result;
+	}
+
+	/**
 	 * Extract "from" email from headers, fallback to filter if none is found.
 	 *
 	 * @param array|string $headers Mail headers.
@@ -189,6 +212,9 @@ class Capture {
 			$mail['body']['type'] = 'raw';
 			if ( ! array_key_exists( 'from', $mail ) ) {
 				$mail['from'] = self::from( $mail['headers'] );
+			}
+			if ( array_key_exists( 'to', $mail ) ) {
+				$mail['to'] = self::to( $mail['to'] );
 			}
 			$mail['attachments'] = self::attachments( $mail['attachments'] );
 			$mail['headers']     = self::headers( $mail['headers'] );
