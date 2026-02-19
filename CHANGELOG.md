@@ -3,6 +3,14 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.0] - 2026-02-19
+
+### Changed
+- Once an encryption key has been defined for an archiver, it can no longer be modified.
+
+### Fixed
+- [SEC006] Authenticated (Administrator+) Stored XSS vulnerability in the key encryption field / [CVE-2026-2721](https://www.cve.org/CVERecord?id=CVE-2026-2721) (thanks to Ronnachai Chaipha (rxnr) via [Wordfence](https://www.wordfence.com)).
+
 ## [4.4.0] - 2026-01-14
 
 ### Added
