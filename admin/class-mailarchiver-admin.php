@@ -71,6 +71,14 @@ class Mailarchiver_Admin {
 	protected $current_view = null;
 
 	/**
+	 * Password already set "flag".
+	 *
+	 * @since  4.5.0
+	 * @var    string    $password_set    The "flag".
+	 */
+	private $password_set = 'password already set';
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
@@ -575,8 +583,15 @@ class Mailarchiver_Admin {
 					$this->current_archiver['privacy']['pseudonymization']  = ( array_key_exists( 'mailarchiver_archiver_privacy_name', $_POST ) ? true : false );
 					$this->current_archiver['privacy']['mailanonymization'] = ( array_key_exists( 'mailarchiver_archiver_privacy_mail', $_POST ) ? true : false );
 					$this->current_archiver['security']['xss']              = ( array_key_exists( 'mailarchiver_archiver_security_xss', $_POST ) ? true : false );
-					$this->current_archiver['privacy']['encryption']        = ( array_key_exists( 'mailarchiver_archiver_privacy_encryption', $_POST ) ? Secret::set( filter_input( INPUT_POST, 'mailarchiver_archiver_privacy_encryption', FILTER_UNSAFE_RAW ) ) : '' );
-					$this->current_archiver['processors']                   = [];
+					if ( array_key_exists( 'mailarchiver_archiver_privacy_encryption', $_POST ) ) {
+						$key = filter_input( INPUT_POST, 'mailarchiver_archiver_privacy_encryption', FILTER_UNSAFE_RAW );
+						if ( $key !== $this->password_set) {
+							$this->current_archiver['privacy']['encryption'] = Secret::set( $key );
+						}
+					} else {
+						$this->current_archiver['privacy']['encryption'] = '';
+					}
+					$this->current_archiver['processors'] = [];
 					$proc = new ProcessorTypes();
 					foreach ( array_reverse( $proc->get_all() ) as $processor ) {
 						if ( array_key_exists( 'mailarchiver_archiver_details_' . strtolower( $processor['id'] ), $_POST ) ) {
@@ -1103,11 +1118,24 @@ class Mailarchiver_Admin {
 			]
 		);
 		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_mail' );
-		if ( PwdProtect::is_available() ) {
-			$description  = esc_html__( 'Note: this is NOT a strong security feature; it\'s just a simple way to protect privacy in case of data leaks from external services. Think about it as a simple "password protection", with the password stored in plain text in your WordPress database.', 'mailarchiver' );
-			$description .= '<br/>' . esc_html__( 'Encryption used:', 'mailarchiver' ) . ' ' . PwdProtect::get_encryption_details();
+
+
+		if ( '' === $this->current_archiver['privacy']['encryption'] ) {
+			if ( PwdProtect::is_available() ) {
+				$description  = esc_html__( 'Note: this is NOT a strong security feature; it\'s just a simple way to protect privacy in case of data leaks from external services. Think about it as a simple "password protection", with the password stored in plain text in your WordPress database.', 'mailarchiver' );
+				$description .= '<br/>' . esc_html__( 'Encryption used:', 'mailarchiver' ) . ' ' . PwdProtect::get_encryption_details();
+			} else {
+				$description = esc_html__( 'Your server does not have OpenSSL installed. Mail body encryption is unavailable.', 'mailarchiver' );
+			}
+			$description = esc_html__( 'Key used to encrypt mail body: once set, you can\'t change it. Let blank to not encrypt it.', 'mailarchiver' ) . '<br/>' . $description;
+			$enabled = PwdProtect::is_available();
+			$value = PwdProtect::is_available() ? Secret::get( $this->current_archiver['privacy']['encryption'] ) : '';
+			$readonly = false;
 		} else {
-			$description = esc_html__( 'Your server does not have OpenSSL installed. Mail body encryption is unavailable.', 'mailarchiver' );
+			$description = esc_html__( 'The key is already set. You can\'t change it.', 'mailarchiver' );
+			$enabled = true;
+			$readonly = true;
+			$value = $this->password_set;
 		}
 		add_settings_field(
 			'mailarchiver_archiver_privacy_encryption',
@@ -1117,10 +1145,11 @@ class Mailarchiver_Admin {
 			'mailarchiver_archiver_privacy_section',
 			[
 				'id'          => 'mailarchiver_archiver_privacy_encryption',
-				'value'       => PwdProtect::is_available() ? Secret::get( $this->current_archiver['privacy']['encryption'] ) : '',
-				'description' => esc_html__( 'Key used to encrypt mail body. Let blank to not encrypt it.', 'mailarchiver' ) . '<br/>' . $description,
+				'value'       => $value,
+				'description' => $description,
 				'full_width'  => false,
-				'enabled'     => PwdProtect::is_available(),
+				'enabled'     => $enabled,
+				'readonly'    => $readonly,
 			]
 		);
 		register_setting( 'mailarchiver_archiver_privacy_section', 'mailarchiver_archiver_privacy_encryption' );

@@ -113,17 +113,18 @@ class Form {
 	 * @param   string  $value  The string to put in the text field.
 	 * @param   string  $description    Optional. A description to display.
 	 * @param   boolean $full_width     Optional. Is the control full width?
-	 * @param   boolean $enabled     Optional. Is the control enabled?
+	 * @param   boolean $enabled        Optional. Is the control enabled?
+	 * @param   boolean $readonly       Optional. Is the control readonly?
 	 * @return  string The HTML string ready to print.
 	 * @since   1.0.0
 	 */
-	public function field_input_password( $id, $value = '', $description = null, $full_width = true, $enabled = true ) {
+	public function field_input_password( $id, $value = '', $description = null, $full_width = true, $enabled = true, $readonly = false ) {
 		if ( $full_width ) {
 			$width = ' style="width:100%;"';
 		} else {
 			$width = '';
 		}
-		$html = '<input' . ( $enabled ? '' : ' disabled' ) . ' name="' . $id . '" type="password" id="' . $id . '" value="' . $value . '"' . $width . '/>';
+		$html = '<input' . ( $enabled ? '' : ' disabled' ) . ' name="' . $id . '" type="password" id="' . $id . '" value="' . $value . '"' . $width . ' ' . ( $readonly ? 'readonly' : '' ) . '/>';
 		if ( isset( $description ) ) {
 			$html .= '<p class="description">' . $description . '</p>';
 		}
@@ -137,7 +138,7 @@ class Form {
 	 * @since   1.0.0
 	 */
 	public function echo_field_input_password( $args ) {
-		echo $this->field_input_password( $args['id'], $args['value'], $args['description'], $args['full_width'], $args['enabled'] );
+		echo $this->field_input_password( $args['id'], $args['value'], $args['description'], $args['full_width'], $args['enabled'], $args['readonly'] ?? false );
 	}
 
 	/**
