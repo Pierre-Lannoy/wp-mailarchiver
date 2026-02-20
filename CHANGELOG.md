@@ -3,6 +3,12 @@ All notable changes to **MailArchiver** are documented in this *changelog*.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and **MailArchiver** adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.1] - 2026-02-20
+
+### Fixed
+- [SEC007] Authenticated (Admininistrator+) SQL Injection via the `logid` parameter / [CVE-2026-2831](https://www.cve.org/CVERecord?id=CVE-2026-2831) (thanks to Ronnachai Chaipha (rxnr) via [Wordfence](https://www.wordfence.com)).
+
+
 ## [4.5.0] - 2026-02-19
 
 ### Changed
