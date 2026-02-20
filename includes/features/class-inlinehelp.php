@@ -14,6 +14,7 @@ namespace Mailarchiver\Plugin\Feature;
 use Mailarchiver\System\Environment;
 use Mailarchiver\System\L10n;
 use Mailarchiver\System\Role;
+use Mailarchiver\System\UUID;
 
 /**
  * Define the inline help functionality.
@@ -81,6 +82,12 @@ class InlineHelp {
 		}
 		if ( ! ( $this->event_id = filter_input( INPUT_GET, 'eventid', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) ) {
 			$this->event_id = filter_input( INPUT_POST, 'eventid', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		}
+		if ( $this->log_id ) {
+			$this->log_id = UUID::sanitize_v4( $this->log_id );
+		}
+		if ( $this->event_id ) {
+			$this->event_id = (int) $this->event_id ;
 		}
 	}
 
