@@ -1,7 +1,7 @@
 # MailArchiver
 [![version](https://badgen.net/github/release/Pierre-Lannoy/wp-mailarchiver/)](https://wordpress.org/plugins/mailarchiver/)
-[![php](https://badgen.net/badge/php/7.2+/green)](https://wordpress.org/plugins/mailarchiver/)
-[![wordpress](https://badgen.net/badge/wordpress/5.2+/green)](https://wordpress.org/plugins/mailarchiver/)
+[![php](https://badgen.net/badge/php/8.2+/green)](https://wordpress.org/plugins/mailarchiver/)
+[![wordpress](https://badgen.net/badge/wordpress/6.4+/green)](https://wordpress.org/plugins/mailarchiver/)
 [![license](https://badgen.net/github/license/Pierre-Lannoy/wp-mailarchiver/)](/license.txt)
 
 Automatically archive all emails sent from your site. Store them in your WordPress database or send them to external services.
@@ -62,7 +62,3 @@ Alternatively, if you have usage questions, you can open a discussion on the [Wo
 Before submitting an issue or a pull request, please read the [contribution guidelines](CONTRIBUTING.md).
 
 > ⚠️ The `master` branch is the current development state of the plugin. If you want a stable, production-ready version, please pick the last official [release](https://github.com/Pierre-Lannoy/wp-mailarchiver/releases).
-
-## Smoke tests
-[![WP compatibility](https://plugintests.com/plugins/mailarchiver/wp-badge.svg)](https://plugintests.com/plugins/mailarchiver/latest)
-[![PHP compatibility](https://plugintests.com/plugins/mailarchiver/php-badge.svg)](https://plugintests.com/plugins/mailarchiver/latest)
